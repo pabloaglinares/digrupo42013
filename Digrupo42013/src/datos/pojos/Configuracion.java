@@ -6,17 +6,63 @@
 
 package datos.pojos;
 
+import java.util.Date;
+
 /**
- *
+ * Contiene la configuración de la aplicación, datos del usuario y periodo
+ * 
  * @author Andrés Traspuesto Lanza
  */
-public class Usuario {
+public class Configuracion {
 
     private String nombre;
 
     private String apellidos;
-
+    private Date fecha1Intervalo;
+    private Date fecha2Intervalo;
     private int rendimiento;
+
+    /**
+     * Constructor vacío
+     */
+    public Configuracion() {
+        super();
+    }
+    
+    
+    /**
+     * Contructor con todos los parámetros
+     * @param nombre
+     * @param apellidos
+     * @param fecha1Intervalo
+     * @param fecha2Intervalo
+     * @param rendimiento 
+     */
+    public Configuracion(String nombre, String apellidos, Date fecha1Intervalo, Date fecha2Intervalo, int rendimiento) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.fecha1Intervalo = fecha1Intervalo;
+        this.fecha2Intervalo = fecha2Intervalo;
+        this.rendimiento = rendimiento;
+    }
+
+    
+    
+    public Date getFecha1Intervalo() {
+        return fecha1Intervalo;
+    }
+
+    public void setFecha1Intervalo(Date fecha1Intervalo) {
+        this.fecha1Intervalo = fecha1Intervalo;
+    }
+
+    public Date getFecha2Intervalo() {
+        return fecha2Intervalo;
+    }
+
+    public void setFecha2Intervalo(Date fecha2Intervalo) {
+        this.fecha2Intervalo = fecha2Intervalo;
+    }
 
     /**
      * Get the value of rendimiento

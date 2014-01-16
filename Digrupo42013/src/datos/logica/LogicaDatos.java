@@ -5,13 +5,14 @@
  */
 package datos.logica;
 
-import datos.pojos.Usuario;
+import datos.pojos.Configuracion;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Map;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -73,10 +74,12 @@ public enum LogicaDatos {
                     + "PRIMARY KEY(fecha, a_itinerario) "
                     + ")";
             st.executeUpdate(sql);
-            sql = "CREATE TABLE IF NOT EXISTS Usuario( "
-                    + "p_usuario INTEGER PRIMARY KEY, "
+            sql = "CREATE TABLE IF NOT EXISTS Configuracion( "
+                    + "p_configuracion INTEGER PRIMARY KEY, "
                     + "nombre TEXT COLLATE NOCASE, "
                     + "apellidos TEXT COLLATE NOCASE, "
+                    + "fecha1 INTEGER, "
+                    + "fecha2 INTEGER, "
                     + "UNIQUE (nombre, apellidos) ON CONFLICT ABORT "
                     + ")";
             st.executeUpdate(sql);
@@ -89,15 +92,17 @@ public enum LogicaDatos {
      * Devuelve el usuario almacenado en la base de datos
      * @return 
      */
-    public Usuario getUsuario() {
-        Usuario usr = null;
+    public Configuracion getUsuario() {
+        Configuracion usr = null;
         try(Statement st =con.createStatement()) {
-            String sql = "SELECT nombre, apellidos FROM Usuario";
+            String sql = "SELECT nombre, apellidos, fecha1, fecha2 FROM Configuracion";
             ResultSet rs = st.executeQuery(sql);
-            usr = new Usuario();
+            usr = new Configuracion();
             while(rs.next()) {
-                usr.setNombre(rs.getNString("nombre"));
-                usr.setApellidos("apellidos");
+                usr.setNombre(rs.getString("nombre"));
+                usr.setApellidos(rs.getString("apellidos"));
+                usr.setFecha1Intervalo(getDateDeSQLite3(rs.getLong("fecha1")));
+                usr.setFecha2Intervalo(getDateDeSQLite3(rs.getLong("fecha2")));
                 usr.setRendimiento(calculaRendimiento());
                 
             }
@@ -108,27 +113,62 @@ public enum LogicaDatos {
     }
     /**
      * Actualiza los datos del usuario
-     * @param nuevosValores contiene los campos a modificar, donde la clave es el
-     *  nombre del campo y el valor en nuevo contenido que se le quiere asignar
+     * @param usr
      */
-    public void updateUsuario(Map<String,String> nuevosValores) {
-        try(Statement st =con.createStatement()) {
-            StringBuilder sql = new StringBuilder("UPDATE Usuario SET ");
-            for (Map.Entry<String,String> parametro: nuevosValores.entrySet()) {
-                sql.append(parametro.getKey()).append("='").append(parametro.getValue()).append("',");
-            }
-            sql.deleteCharAt(sql.length()-1);
-            sql.append("WHERE p_usuario = 0");
-            st.executeUpdate(sql.toString());
+    public void updateUsuario(Configuracion usr) {
+        String sql = "UPDATE Usuario SET nombre = ?, apellidos = ?, fecha1 = ?, fecha2 = ? WHERE p_usuario = 0";
+        try(PreparedStatement pst =con.prepareStatement(sql)) {
+            pst.setString(1, usr.getNombre());
+            pst.setString(2, usr.getApellidos());
+            pst.setLong(3, getSegundosParaSQLite3(usr.getFecha1Intervalo()));
+            pst.setLong(4, getSegundosParaSQLite3(usr.getFecha2Intervalo()));
+            pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    /**
+     * Inserta el usuario en la base de datos
+     * @param usr 
+     */
+    public void insertUsuario(Configuracion usr) {
+        String sql = "INSERT INTO Usuario (nombre, apellidos, fecha1, fecha2) VALUES(?,?,?,?)";
+        try(PreparedStatement pst =con.prepareStatement(sql)) {
+            pst.setString(1, usr.getNombre());
+            pst.setString(2, usr.getApellidos());
+            pst.setLong(3, getSegundosParaSQLite3(usr.getFecha1Intervalo()));
+            pst.setLong(4, getSegundosParaSQLite3(usr.getFecha2Intervalo()));
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    
+    
     /**                                                  *****************************************   
      * Método que calcula el rendimiento del usuario      **********SIN IMPLEMENTAR**************
      * @return                                             *************************************             
      */
     public int calculaRendimiento() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    /**
+     * Devuelve un objeto Date a partir del tiempo en segundos desde 1/1/1970
+     * almacenado en SQLite3
+     * @param segundos
+     * @return 
+     */
+    private Date getDateDeSQLite3(long segundos) {
+        return new Date(segundos*1000);
+    }
+    /**
+     * Devuelve el tiempo en segundos desde 1/1/1970 a partir de un Date
+     * @param date
+     * @return 
+     */
+    private long getSegundosParaSQLite3(Date date) {
+        return date.getTime()/1000;
     }
 }
