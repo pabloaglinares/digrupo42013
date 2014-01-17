@@ -28,14 +28,14 @@ public class PnlAltaModifItinerarios extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labNombreItinerario = new javax.swing.JLabel();
-        labLocalizacion = new javax.swing.JLabel();
-        labTipoItinerario = new javax.swing.JLabel();
-        labDificultad = new javax.swing.JLabel();
+        labelNombreItinerario = new javax.swing.JLabel();
+        labelLocalizacion = new javax.swing.JLabel();
+        labelTipoItinerario = new javax.swing.JLabel();
+        labelDificultad = new javax.swing.JLabel();
         btVolver = new javax.swing.JButton();
         btGuardar = new javax.swing.JButton();
-        labFechaResolucion = new javax.swing.JLabel();
-        labFoto = new javax.swing.JLabel();
+        labelFechaResolucion = new javax.swing.JLabel();
+        labelFoto = new javax.swing.JLabel();
         tfNombreItinerario = new javax.swing.JTextField();
         tfLocalizacionItinerario = new javax.swing.JTextField();
         cbTipoItineracio = new javax.swing.JComboBox();
@@ -47,21 +47,21 @@ public class PnlAltaModifItinerarios extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(266, 264));
 
-        labNombreItinerario.setText("Nombre:");
+        labelNombreItinerario.setText("Nombre:");
 
-        labLocalizacion.setText("Localización:");
+        labelLocalizacion.setText("Localización:");
 
-        labTipoItinerario.setText("Tipo:");
+        labelTipoItinerario.setText("Tipo:");
 
-        labDificultad.setText("Dificultad:");
+        labelDificultad.setText("Dificultad:");
 
         btVolver.setText("Volver");
 
         btGuardar.setText("Guardar");
 
-        labFechaResolucion.setText("Fecha Resolución:");
+        labelFechaResolucion.setText("Fecha Resolución:");
 
-        labFoto.setText("Foto:");
+        labelFoto.setText("Foto:");
 
         cbTipoItineracio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Via de escalada", "Boulder" }));
 
@@ -81,18 +81,18 @@ public class PnlAltaModifItinerarios extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labFoto)
-                            .addComponent(labFechaResolucion)
+                            .addComponent(labelFoto)
+                            .addComponent(labelFechaResolucion)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
                                 .addComponent(btVolver))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labNombreItinerario)
-                            .addComponent(labLocalizacion)
-                            .addComponent(labTipoItinerario)
-                            .addComponent(labDificultad))))
+                            .addComponent(labelNombreItinerario)
+                            .addComponent(labelLocalizacion)
+                            .addComponent(labelTipoItinerario)
+                            .addComponent(labelDificultad))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -118,28 +118,28 @@ public class PnlAltaModifItinerarios extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labNombreItinerario)
+                            .addComponent(labelNombreItinerario)
                             .addComponent(tfNombreItinerario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(labLocalizacion))
+                        .addComponent(labelLocalizacion))
                     .addComponent(tfLocalizacionItinerario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labTipoItinerario)
+                    .addComponent(labelTipoItinerario)
                     .addComponent(cbTipoItineracio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labDificultad)
+                    .addComponent(labelDificultad)
                     .addComponent(spDificultadNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(spDificultadLetra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(spDificultadMasMenos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labFechaResolucion)
+                    .addComponent(labelFechaResolucion)
                     .addComponent(ftfFechaResolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labFoto)
+                    .addComponent(labelFoto)
                     .addComponent(tfUrlFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -155,12 +155,12 @@ public class PnlAltaModifItinerarios extends javax.swing.JPanel {
     private javax.swing.JButton btVolver;
     private javax.swing.JComboBox cbTipoItineracio;
     private javax.swing.JFormattedTextField ftfFechaResolucion;
-    private javax.swing.JLabel labDificultad;
-    private javax.swing.JLabel labFechaResolucion;
-    private javax.swing.JLabel labFoto;
-    private javax.swing.JLabel labLocalizacion;
-    private javax.swing.JLabel labNombreItinerario;
-    private javax.swing.JLabel labTipoItinerario;
+    private javax.swing.JLabel labelDificultad;
+    private javax.swing.JLabel labelFechaResolucion;
+    private javax.swing.JLabel labelFoto;
+    private javax.swing.JLabel labelLocalizacion;
+    private javax.swing.JLabel labelNombreItinerario;
+    private javax.swing.JLabel labelTipoItinerario;
     private javax.swing.JSpinner spDificultadLetra;
     private javax.swing.JSpinner spDificultadMasMenos;
     private javax.swing.JSpinner spDificultadNumero;

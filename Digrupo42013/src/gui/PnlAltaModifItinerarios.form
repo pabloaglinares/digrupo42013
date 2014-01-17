@@ -26,8 +26,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="labFoto" min="-2" max="-2" attributes="0"/>
-                          <Component id="labFechaResolucion" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelFoto" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelFechaResolucion" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                               <Component id="btVolver" min="-2" max="-2" attributes="0"/>
@@ -37,10 +37,10 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="labNombreItinerario" min="-2" max="-2" attributes="0"/>
-                          <Component id="labLocalizacion" min="-2" max="-2" attributes="0"/>
-                          <Component id="labTipoItinerario" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="labDificultad" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelNombreItinerario" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelLocalizacion" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelTipoItinerario" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelDificultad" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -74,34 +74,34 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="labNombreItinerario" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelNombreItinerario" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfNombreItinerario" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="labLocalizacion" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelLocalizacion" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="tfLocalizacionItinerario" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labTipoItinerario" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelTipoItinerario" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cbTipoItineracio" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labDificultad" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelDificultad" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="spDificultadNumero" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="spDificultadLetra" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="spDificultadMasMenos" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labFechaResolucion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelFechaResolucion" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ftfFechaResolucion" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labFoto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelFoto" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfUrlFoto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -115,22 +115,22 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="labNombreItinerario">
+    <Component class="javax.swing.JLabel" name="labelNombreItinerario">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nombre:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="labLocalizacion">
+    <Component class="javax.swing.JLabel" name="labelLocalizacion">
       <Properties>
         <Property name="text" type="java.lang.String" value="Localizaci&#xf3;n:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="labTipoItinerario">
+    <Component class="javax.swing.JLabel" name="labelTipoItinerario">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tipo:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="labDificultad">
+    <Component class="javax.swing.JLabel" name="labelDificultad">
       <Properties>
         <Property name="text" type="java.lang.String" value="Dificultad:"/>
       </Properties>
@@ -145,12 +145,12 @@
         <Property name="text" type="java.lang.String" value="Guardar"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="labFechaResolucion">
+    <Component class="javax.swing.JLabel" name="labelFechaResolucion">
       <Properties>
         <Property name="text" type="java.lang.String" value="Fecha Resoluci&#xf3;n:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="labFoto">
+    <Component class="javax.swing.JLabel" name="labelFoto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Foto:"/>
       </Properties>
