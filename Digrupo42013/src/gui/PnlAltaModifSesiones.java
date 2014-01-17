@@ -33,13 +33,13 @@ public class PnlAltaModifSesiones extends javax.swing.JPanel {
         labelHoraFin = new javax.swing.JLabel();
         labelTipoSesion = new javax.swing.JLabel();
         labelDescripcion = new javax.swing.JLabel();
-        tfFechaSesion = new javax.swing.JTextField();
         tfHoraComienzo = new javax.swing.JTextField();
         tfHoraFin = new javax.swing.JTextField();
         tfDescripcion = new javax.swing.JTextField();
         cbTipoSesion = new javax.swing.JComboBox();
         btVolver = new javax.swing.JButton();
         btGuardar = new javax.swing.JButton();
+        ftfFechaSesión = new javax.swing.JFormattedTextField();
 
         labelFechaSesion.setText("Fecha Sesión:");
 
@@ -57,6 +57,9 @@ public class PnlAltaModifSesiones extends javax.swing.JPanel {
 
         btGuardar.setText("Guardar");
 
+        ftfFechaSesión.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        ftfFechaSesión.setText("dd-MMM-aa");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,7 +71,7 @@ public class PnlAltaModifSesiones extends javax.swing.JPanel {
                         .addGap(8, 8, 8)
                         .addComponent(labelFechaSesion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfFechaSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ftfFechaSesión))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelHoraComienzo)
@@ -85,7 +88,7 @@ public class PnlAltaModifSesiones extends javax.swing.JPanel {
                         .addComponent(btVolver)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btGuardar)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,7 +96,7 @@ public class PnlAltaModifSesiones extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelFechaSesion)
-                    .addComponent(tfFechaSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ftfFechaSesión, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelHoraComienzo)
@@ -123,13 +126,13 @@ public class PnlAltaModifSesiones extends javax.swing.JPanel {
     private javax.swing.JButton btGuardar;
     private javax.swing.JButton btVolver;
     private javax.swing.JComboBox cbTipoSesion;
+    private javax.swing.JFormattedTextField ftfFechaSesión;
     private javax.swing.JLabel labelDescripcion;
     private javax.swing.JLabel labelFechaSesion;
     private javax.swing.JLabel labelHoraComienzo;
     private javax.swing.JLabel labelHoraFin;
     private javax.swing.JLabel labelTipoSesion;
     private javax.swing.JTextField tfDescripcion;
-    private javax.swing.JTextField tfFechaSesion;
     private javax.swing.JTextField tfHoraComienzo;
     private javax.swing.JTextField tfHoraFin;
     // End of variables declaration//GEN-END:variables
