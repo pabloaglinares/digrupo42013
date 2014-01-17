@@ -25,6 +25,7 @@ public enum LogicaDatos {
 
     INSTANCE;
     private Connection con;
+    
     /**
      * Constructor del singleton encargado de la lógica de interacción con la 
      * base de datos
