@@ -6,6 +6,7 @@
 
 package datos.pojos;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Date;
  * 
  * @author Andrés Traspuesto Lanza
  */
-public class Configuracion {
+public class Configuracion implements Serializable{
 
     private String nombre;
 

@@ -5,11 +5,14 @@
  */
 package datos.pojos;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Contiene los datos de la sesión de entrenamiento.
  * <ul>
+ * <li>pSesion (int): clave primaria de la sesión en la base de datos, solo
+ * toma valor mayor que cero cuando ya ha sido almacenado en la BD</li>
  * <li>fecha_hora1 (Date): fecha y hora a la que se inicia la sesión</li>
  * <li>fecha_hora2 (Date): fecha y hora a la que termina la sesión</li>
  * <li>descripcion (String): descripción de la sesión</li>
@@ -19,7 +22,7 @@ import java.util.Date;
  *
  * @author Andrés Traspuesto Lanza
  */
-public class Sesion {
+public class Sesion implements Serializable{
 
     /**
      * Tipos posibles de sesiones de entrenamiento

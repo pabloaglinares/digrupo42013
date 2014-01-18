@@ -6,7 +6,13 @@
 package datos.logica;
 
 import datos.pojos.Configuracion;
+import datos.pojos.Itinerario;
 import datos.pojos.Sesion;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -88,12 +94,26 @@ public enum LogicaDatos {
                     + "UNIQUE (nombre, apellidos) ON CONFLICT ABORT "
                     + ")";
             st.executeUpdate(sql);
+            sql = "INSERT INTO TipoSesion SET nombre = ";
+            st.executeUpdate(sql+"'Físico'");
+            st.executeUpdate(sql+"'Rocódromo'");
+            st.executeUpdate(sql+"'Roca'");
 
         } catch (SQLException ex) {
             Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //Creo el directorio para almacenar las imágenes si no existe
+        File path = new File("imagenes");
+        if (!path.exists()) {
+            path.mkdir();
+        }
     }
 
+    /*
+     ========================================================================
+     ............................SELECTS.....................................
+     ========================================================================
+     */
     /**
      * Devuelve el usuario almacenado en la base de datos
      *
@@ -118,9 +138,11 @@ public enum LogicaDatos {
         }
         return usr;
     }
+
     /**
      * Devuelve todas las sesiones almacenadas en una lista
-     * @return 
+     *
+     * @return
      */
     public List<Sesion> getAllSesion() {
         List<Sesion> sesiones = new ArrayList<>();
@@ -133,10 +155,13 @@ public enum LogicaDatos {
         }
         return sesiones;
     }
+
     /**
-     * Devuelve una lista de las sesiones de entrenamiento de una fecha determinada
+     * Devuelve una lista de las sesiones de entrenamiento de una fecha
+     * determinada
+     *
      * @param fecha
-     * @return 
+     * @return
      */
     public List<Sesion> getSesionByFecha(Date fecha) {
         List<Sesion> sesiones = new ArrayList<>();
@@ -151,12 +176,14 @@ public enum LogicaDatos {
         }
         return sesiones;
     }
+
     /**
-     * Devuelve una lista de las sesiones de entrenamiento de un periodo de tiempo
-     * determinado por las fecha parámetro
+     * Devuelve una lista de las sesiones de entrenamiento de un periodo de
+     * tiempo determinado por las fecha parámetro
+     *
      * @param fecha1 primera fecha incluida en el intervalo de tiempo
      * @param fecha2 última fecha incluida en el intervalo de tiempo
-     * @return 
+     * @return
      */
     public List<Sesion> getSesionBetweenFechas(Date fecha1, Date fecha2) {
         List<Sesion> sesiones = new ArrayList<>();
@@ -173,10 +200,12 @@ public enum LogicaDatos {
         }
         return sesiones;
     }
+
     /**
      * Devuelve todas las sesiones de un determinado tipo
+     *
      * @param tipo
-     * @return 
+     * @return
      */
     public List<Sesion> getSesionByTipo(Sesion.TipoSesion tipo) {
         List<Sesion> sesiones = new ArrayList<>();
@@ -191,7 +220,12 @@ public enum LogicaDatos {
         }
         return sesiones;
     }
-    
+    /*
+     ========================================================================
+     ............................UPDATES.....................................
+     ========================================================================
+     */
+
     /**
      * Actualiza los datos del usuario
      *
@@ -204,6 +238,50 @@ public enum LogicaDatos {
     }
 
     /**
+     * Modifica la sesion en la base de datos
+     *
+     * @param sesion
+     */
+    public void updateSesion(Sesion sesion) {
+        String sql = "UPDATE Sesion SET fecha_inicio = ?, fecha_fin = ?, a_tipo = ?,"
+                + " descripcion = ? WHERE p_sesion = ?";
+        executeUpdateOnSesion(sql, sesion);
+    }
+    /**
+     * Modifica los datos del itinerario para que concuerden con los contenidos
+     * por el Itinerario pasado como parámetro, el segundo parámetro especifica que
+     * es lo que se quiere actualizar del itinerario
+     * @param itinerario
+     * @param tipo 
+     * @param img contiene el archivo de imagen que quiere asociarse al itinerario,
+     *  si no se quiere modificar la imagen debe ser null
+     */
+    public void updateItinerario(Itinerario itinerario, ModItinerario tipo, File img) {
+        switch (tipo) {
+            case SOLO_IMAGEN:
+                updateImagenItinerario(itinerario, img);
+                break;
+            case SOLO_FECHAS:
+                updateFechasItinerario(itinerario);
+                break;
+            case SOLO_NOMBRE_Y_DIFICULTAD:
+                updateNombreYDificultad(itinerario);
+                break;
+            default:
+                updateFechasItinerario(itinerario);
+                updateImagenItinerario(itinerario, img);
+                updateNombreYDificultad(itinerario);
+        }
+        
+    }
+    
+    
+    /*
+     ========================================================================
+     ............................INSERTS.....................................
+     ========================================================================
+     */
+    /**
      * Inserta la configuracion en la base de datos
      *
      * @param usr
@@ -213,29 +291,106 @@ public enum LogicaDatos {
                 + "VALUES(?,?,?,?)";
         executeUpdateOnConfiguracion(sql, usr);
     }
+
     /**
      * Inserta la Sesion en la base de datos
-     * @param sesion 
+     *
+     * @param sesion
      */
     public void insertSesion(Sesion sesion) {
         String sql = "INSERT INTO Sesion (fecha_inicio, fecha_fin, a_tipo, descripcion)"
                 + " VALUES(?,?,?,?)";
         executeUpdateOnSesion(sql, sesion);
     }
+
     /**
-     * Modifica la sesion en la base de datos
-     * @param sesion 
+     * Inserta un itinerario en la base de datos
+     *
+     * @param itinerario
      */
-    public void updateSesion(Sesion sesion) {
-        String sql = "UPDATE Sesion SET fecha_inicio = ?, fecha_fin = ?, a_tipo = ?,"
-                + " descripcion = ? WHERE p_sesion = ?";
-        executeUpdateOnSesion(sql, sesion);
+    public void insertItinerario(Itinerario itinerario) {
+        String sql = "INSERT INTO Itinerario (nombre, dificultad, imagen)"
+                + " VALUES(?,?,?)";
+        File imgFile;
+        if (itinerario.getPathImagen() != null) {
+            imgFile = getFileImagen(itinerario.getPathImagen());
+        } else {
+            imgFile = new File("imagenes/sinImagen.jpg");
+        }
+        try (PreparedStatement pst = con.prepareStatement(sql)) {
+            pst.setString(1, itinerario.getNombre());
+            pst.setString(2, itinerario.getDifucultad());
+            pst.setString(3, imgFile.getName());
+            pst.executeUpdate();
+            itinerario.setpItinerario(getLastItinerario());
+            //Si hay fecha de resolución del itinerario la almaceno
+            if (!itinerario.getFechasResolucion().isEmpty()) {
+                insertaFechaItinerario(itinerario, itinerario.getFechasResolucion().get(0));
+            }
+            if (itinerario.getPathImagen() != null) {
+                guardaArchivoImagen(itinerario.getPathImagen(), imgFile);
+            }
+            itinerario.setPathImagen(imgFile);
+        } catch (SQLException ex) {
+            Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
+
+    /**
+     * Inserta una fecha de resolución en el itinerario
+     * @param itinerario
+     * @param fecha 
+     */
+    public void insertaFechaItinerario(Itinerario itinerario, Date fecha) {
+        String sql = "INSERT INTO FechaItinerario (a_itinerario, fecha) "
+                + "VALUES (?,?)";
+        try (PreparedStatement pst = con.prepareStatement(sql)) {
+            pst.setInt(1, itinerario.getpItinerario());
+            pst.setLong(2, getSegundosParaSQLite3(fecha));
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /*
+     ========================================================================
+     ....................MÉTODOS PRIVADOS AUXILIARES.........................
+     ========================================================================
+     */
+    /**
+     * Modifica las fechas en las que se ha resuelto el itinerario, NO DEBE USARSE
+     * PARA AÑADIR UNA FECHA DE RESOLUCIÓN, para eso se usa insertaFechaItinerario
+     * @param itinerario 
+     */
+    private void updateFechasItinerario(Itinerario itinerario) {
+        String sql = "DELETE FROM Itinerario WHERE a_itinerario = ?";
+        try (PreparedStatement pst = con.prepareStatement(sql)) {
+            pst.setInt(1, itinerario.getpItinerario());
+            pst.executeUpdate();
+            insertAllFechasItinerario(itinerario);
+        } catch (SQLException ex) {
+            Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    /**
+     * Inserta todas las fechas de resolución del itinerario en la tabla
+     * FechaItinerario
+     * @param itinerario 
+     */
+    private void insertAllFechasItinerario(Itinerario itinerario) {
+        for (Date fecha: itinerario.getFechasResolucion()) {
+            insertaFechaItinerario(itinerario, fecha);
+        }
+    }
+
     /**
      * Se encarga de hacer insert o update, en función del sql en la tabla
      * Configuracion
+     *
      * @param sql
-     * @param usr 
+     * @param usr
      */
     private void executeUpdateOnConfiguracion(String sql, Configuracion usr) {
         try (PreparedStatement pst = con.prepareStatement(sql)) {
@@ -261,18 +416,22 @@ public enum LogicaDatos {
             pst.setLong(2, getSegundosParaSQLite3(sesion.getFecha_hora2()));
             pst.setInt(3, sesion.getTipo().ordinal());
             pst.setString(4, sesion.getDescripcion());
-            if (sesion.getpSesion() > 0)pst.setInt(5, sesion.getpSesion());
+            if (sesion.getpSesion() > 0) {
+                pst.setInt(5, sesion.getpSesion());
+            }
             pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
-     * Método que se encarga de cargar una lista con obejetos Sesion creados a 
+     * Método que se encarga de cargar una lista con obejetos Sesion creados a
      * partir de un ResultSet
+     *
      * @param rs
      * @param sesiones
-     * @throws SQLException 
+     * @throws SQLException
      */
     private void cargaListaSesiones(ResultSet rs, List<Sesion> sesiones) throws SQLException {
         Sesion sesion;
@@ -286,11 +445,12 @@ public enum LogicaDatos {
             sesiones.add(sesion);
         }
     }
+
     /**
      ******************************************
      * **********SIN IMPLEMENTAR**************
-     * ************************************* 
-     * 
+     * *************************************
+     *
      * Método que calcula el rendimiento del usuario
      *
      * @return
@@ -319,4 +479,95 @@ public enum LogicaDatos {
     private long getSegundosParaSQLite3(Date date) {
         return date.getTime() / 1000;
     }
+
+    /**
+     * Encuentra un nombre que no exista para guardar la imagen
+     *
+     * @param pathImagen
+     * @return
+     */
+    private File getFileImagen(File pathImagen) {
+        File aux = new File("imagenes" + File.separatorChar + "_0" + pathImagen.getName());
+        int i = 1;
+        while (aux.exists()) {
+            aux = new File("imagenes" + File.separatorChar + "_" + (i++) + pathImagen.getName());
+        }
+        return aux;
+    }
+    /**
+     * Devuelve el p_itinerario del último itinerario registrado
+     * @return 
+     */
+    private int getLastItinerario() {
+        String sql = "SELECT max(p_itinerario) as m from Itinerario";
+        int  max = Integer.MIN_VALUE;
+        try(Statement st = con.createStatement()) {
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) max = rs.getInt("m");
+        } catch (SQLException ex) {
+            Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return max;
+    }
+
+    
+    /**
+     * Actualiza el nombre y la dificultad de un itinerario dado
+     * @param itinerario 
+     */
+    private void updateNombreYDificultad(Itinerario itinerario) {
+        String sql = "UPDATE Itinerario SET nombre = ?, dificultad = ? "
+                + "WHERE p_itinerario = ?";
+        try (PreparedStatement pst = con.prepareStatement(sql)) {
+            pst.setString(1, itinerario.getNombre());
+            pst.setString(2, itinerario.getDifucultad());
+            pst.setInt(3, itinerario.getpItinerario());
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    /**
+     * Actualiza la imagen asociada al itinerario
+     * @param itinerario
+     * @param newImg 
+     */
+    private void updateImagenItinerario(Itinerario itinerario, File newImg) {
+        if(!itinerario.getPathImagen().getName().equals("sinImagen.jpg"))itinerario.getPathImagen().delete();
+        File img = getFileImagen(newImg);
+        String sql = "UPDATE Itinerario SET imagen = ? WHERE p_itinerario = ?";
+        try (PreparedStatement pst = con.prepareStatement(sql)) {
+            pst.setString(1, img.getName());
+            pst.setInt(2, itinerario.getpItinerario());
+            pst.executeUpdate();
+            guardaArchivoImagen(newImg, img);
+            itinerario.setPathImagen(img);
+        } catch (SQLException ex) {
+            Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    /**
+     * Guarda una copia del archivo de origen src en el destino dst
+     * @param src
+     * @param dst 
+     */
+    private void guardaArchivoImagen(File src, File dst) {
+        try(FileInputStream fis = new FileInputStream(src); 
+                FileOutputStream fos = new FileOutputStream(dst)){
+            byte[] buffer = new byte[1024];
+            int leido;
+            while((leido = fis.read(buffer)) > 0) {
+                fos.write(buffer, 0, leido);
+            }
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+    }
+    
+    
 }
