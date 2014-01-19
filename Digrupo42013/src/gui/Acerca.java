@@ -39,7 +39,7 @@ public class Acerca extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        buttonAceptar = new javax.swing.JButton();
+        btAceptar = new javax.swing.JButton();
 
         setTitle("Acerca...");
 
@@ -57,10 +57,10 @@ public class Acerca extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Gema Toyos");
 
-        buttonAceptar.setText("Aceptar");
-        buttonAceptar.addActionListener(new java.awt.event.ActionListener() {
+        btAceptar.setText("Aceptar");
+        btAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAceptarActionPerformed(evt);
+                btAceptarActionPerformed(evt);
             }
         });
 
@@ -86,7 +86,7 @@ public class Acerca extends javax.swing.JInternalFrame {
                 .addContainerGap(44, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(buttonAceptar)
+                .addComponent(btAceptar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -107,20 +107,20 @@ public class Acerca extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
-                .addComponent(buttonAceptar)
+                .addComponent(btAceptar)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAceptarActionPerformed
+    private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptarActionPerformed
         this.hide();
-    }//GEN-LAST:event_buttonAceptarActionPerformed
+    }//GEN-LAST:event_btAceptarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonAceptar;
+    private javax.swing.JButton btAceptar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
