@@ -34,10 +34,13 @@ public class Itinerario implements Serializable {
 
     private String nombre;
 
+    private String localizacion;
+    
     private String difucultad;
 
     private File pathImagen;
 
+    
     private final List<Date> fechasResolucion = new ArrayList<>();
     /**
      * Constructor vacío
@@ -49,11 +52,13 @@ public class Itinerario implements Serializable {
     /**
      * Constructor con parámetros, 
      * @param nombre
+     * @param localizacion
      * @param difucultad
      * @param pathImagen 
      */
-    public Itinerario(String nombre, String difucultad, File pathImagen) {
+    public Itinerario(String nombre, String localizacion, String difucultad, File pathImagen) {
         this.nombre = nombre;
+        this.localizacion = localizacion;
         this.difucultad = difucultad;
         this.pathImagen = pathImagen;
     }
@@ -80,6 +85,20 @@ public class Itinerario implements Serializable {
      */
     public List<Date> getFechasResolucion() {
         return Collections.unmodifiableList(fechasResolucion);
+    }
+    /**
+     * Devuelve la localización
+     * @return 
+     */
+    public String getLocalizacion() {
+        return localizacion;
+    }
+    /**
+     * Asigna la localización
+     * @param localizacion 
+     */
+    public void setLocalizacion(String localizacion) {
+        this.localizacion = localizacion;
     }
 
     

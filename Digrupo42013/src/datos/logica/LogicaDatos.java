@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package datos.logica;
 
 import datos.pojos.Configuracion;
@@ -73,9 +69,11 @@ public enum LogicaDatos {
             st.executeUpdate(sql);
             sql = "CREATE TABLE IF NOT EXISTS Itinerario ( "
                     + "p_itinerario INTEGER PRIMARY KEY, "
-                    + "nombre TEXT, "
+                    + "nombre TEXT COLLATE NOCASE, "
+                    + "localizacion TEXT COLLATE NOCASE, "
                     + "dificultad TEXT, "
-                    + "imagen TEXT "
+                    + "imagen TEXT,"
+                    + " UNIQUE (nombre, localizacion) ON CONFLICT ABORT "
                     + ")";
             st.executeUpdate(sql);
             sql = "CREATE TABLE IF NOT EXISTS FechaItinerario ( "
@@ -94,10 +92,10 @@ public enum LogicaDatos {
                     + "UNIQUE (nombre, apellidos) ON CONFLICT ABORT "
                     + ")";
             st.executeUpdate(sql);
-            sql = "INSERT INTO TipoSesion SET nombre = ";
-            st.executeUpdate(sql+"'Físico'");
-            st.executeUpdate(sql+"'Rocódromo'");
-            st.executeUpdate(sql+"'Roca'");
+            sql = "INSERT OR IGNORE INTO TipoSesion (tipo) VALUES ( ";
+            st.executeUpdate(sql+"'Físico')");
+            st.executeUpdate(sql+"'Rocódromo')");
+            st.executeUpdate(sql+"'Roca')");
 
         } catch (SQLException ex) {
             Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
@@ -157,16 +155,17 @@ public enum LogicaDatos {
     }
 
     /**
-     * Devuelve una lista de las sesiones de entrenamiento de una fecha
-     * determinada
+     * Devuelve una lista de las sesiones de entrenamiento que cumplan la condición
+     * impuesta por la fecha pasada como parámetro y el comparador
      *
      * @param fecha
+     * @param cmp
      * @return
      */
-    public List<Sesion> getSesionByFecha(Date fecha) {
+    public List<Sesion> getSesionByFecha(Date fecha, Comparador cmp) {
         List<Sesion> sesiones = new ArrayList<>();
         String sql = "SELECT fecha_inicio, fecha_fin, a_tipo, p_sesion, descripcion "
-                + "FROM Sesion WHERE  date(fecha_inicio,'unixepoch') = date(?,'unixepoch');";
+                + "FROM Sesion WHERE  date(fecha_inicio,'unixepoch') "+cmp+" date(?,'unixepoch');";
         try (PreparedStatement st = con.prepareStatement(sql)) {
             st.setLong(1, getSegundosParaSQLite3(fecha));
             ResultSet rs = st.executeQuery();
@@ -220,11 +219,82 @@ public enum LogicaDatos {
         }
         return sesiones;
     }
+    /**
+     * Devuelve todos los itinerarios contenidos en la BD en un List
+     * @return 
+     */
+    public List<Itinerario> getAllItinerario() {
+        String sql = "SELECT p_itinerario, nombre, localizacion, dificultad, imagen FROM Itinerario";
+        List<Itinerario> itinerarios = new ArrayList<>();
+        try(Statement st = con.createStatement()) {
+            ResultSet rs = st.executeQuery(sql);
+            cargaItinerarios(rs, itinerarios);
+        } catch (SQLException ex) {
+            Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return itinerarios;
+        
+    }
+    /**
+     * Devuelve todos los resultados comparando las fechas de resolución, según
+     * el operador lógico almacenado en el comparador, con la fecha pasada como
+     * parámetro.
+     * determinada fecha.
+     * @param fecha
+     * @param cmp
+     * @return 
+     */
+    public List<Itinerario> getItinerariosByFecha(Date fecha, Comparador cmp) {
+        List<Itinerario> itinerarios = new ArrayList<>();
+        String sql = "SELECT DISTINCT p_itinerario, nombre, localizacion, dificultad, imagen "
+                + "FROM Itinerario WHERE p_itinerario IN "
+                + "(SELECT a_itinerario FROM FechaItinerario "
+                + "WHERE date(fecha,'unixepoch')"+cmp+" date(?,'unixepoch'))";
+        try(PreparedStatement st = con.prepareStatement(sql)) {
+            st.setLong(1, getSegundosParaSQLite3(fecha));
+            ResultSet rs = st.executeQuery();
+            cargaItinerarios(rs, itinerarios);
+        } catch (SQLException ex) {
+            Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return itinerarios;
+    }
+    public List<Itinerario> getItinerariosByFechaRange(Date fecha1, Date fecha2) {
+        List<Itinerario> itinerarios = new ArrayList<>();
+        String sql = "SELECT DISTINCT p_itinerario, nombre, localizacion, dificultad, imagen "
+                + "FROM Itinerario WHERE p_itinerario IN "
+                + "(SELECT a_itinerario FROM FechaItinerario "
+                + "WHERE date(fecha,'unixepoch') BETWEEN date(?,'unixepoch') AND date(?,'unixepoch'))";
+        try(PreparedStatement st = con.prepareStatement(sql)) {
+            st.setLong(1, getSegundosParaSQLite3(fecha1));
+            st.setLong(2, getSegundosParaSQLite3(fecha2));
+            ResultSet rs = st.executeQuery();
+            cargaItinerarios(rs, itinerarios);
+        } catch (SQLException ex) {
+            Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return itinerarios;
+    }
+    public List<Itinerario> getItinerariosByDificultad(String dificultad) {
+        List<Itinerario> itinerarios = new ArrayList<>();
+        String sql = "SELECT DISTINCT p_itinerario, nombre, localizacion, dificultad, imagen "
+                + "FROM Itinerario WHERE p_itinerario IN "
+                + "(SELECT a_itinerario FROM FechaItinerario "
+                + "WHERE date(fecha,'unixepoch') BETWEEN date(?,'unixepoch') AND date(?,'unixepoch'))";
+        try(PreparedStatement st = con.prepareStatement(sql)) {
+            ResultSet rs = st.executeQuery();
+            cargaItinerarios(rs, itinerarios);
+        } catch (SQLException ex) {
+            Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return itinerarios;
+    }
     /*
      ========================================================================
      ............................UPDATES.....................................
      ========================================================================
      */
+    
 
     /**
      * Actualiza los datos del usuario
@@ -264,7 +334,7 @@ public enum LogicaDatos {
             case SOLO_FECHAS:
                 updateFechasItinerario(itinerario);
                 break;
-            case SOLO_NOMBRE_Y_DIFICULTAD:
+            case SOLO_NOMBRE_LOCALIZACION_DIFICULTAD:
                 updateNombreYDificultad(itinerario);
                 break;
             default:
@@ -309,8 +379,8 @@ public enum LogicaDatos {
      * @param itinerario
      */
     public void insertItinerario(Itinerario itinerario) {
-        String sql = "INSERT INTO Itinerario (nombre, dificultad, imagen)"
-                + " VALUES(?,?,?)";
+        String sql = "INSERT INTO Itinerario (nombre, localizacion, dificultad, imagen)"
+                + " VALUES(?,?,?,?)";
         File imgFile;
         if (itinerario.getPathImagen() != null) {
             imgFile = getFileImagen(itinerario.getPathImagen());
@@ -319,8 +389,9 @@ public enum LogicaDatos {
         }
         try (PreparedStatement pst = con.prepareStatement(sql)) {
             pst.setString(1, itinerario.getNombre());
-            pst.setString(2, itinerario.getDifucultad());
-            pst.setString(3, imgFile.getName());
+            pst.setString(2, itinerario.getLocalizacion());
+            pst.setString(3, itinerario.getDifucultad());
+            pst.setString(4, imgFile.getName());
             pst.executeUpdate();
             itinerario.setpItinerario(getLastItinerario());
             //Si hay fecha de resolución del itinerario la almaceno
@@ -446,19 +517,7 @@ public enum LogicaDatos {
         }
     }
 
-    /**
-     ******************************************
-     * **********SIN IMPLEMENTAR**************
-     * *************************************
-     *
-     * Método que calcula el rendimiento del usuario
-     *
-     * @return
-     */
-    public int calculaRendimiento() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+   
     /**
      * Devuelve un objeto Date a partir del tiempo en segundos desde 1/1/1970
      * almacenado en SQLite3
@@ -516,12 +575,13 @@ public enum LogicaDatos {
      * @param itinerario 
      */
     private void updateNombreYDificultad(Itinerario itinerario) {
-        String sql = "UPDATE Itinerario SET nombre = ?, dificultad = ? "
+        String sql = "UPDATE Itinerario SET nombre = ?, dificultad = ?, localizacion = ? "
                 + "WHERE p_itinerario = ?";
         try (PreparedStatement pst = con.prepareStatement(sql)) {
             pst.setString(1, itinerario.getNombre());
             pst.setString(2, itinerario.getDifucultad());
-            pst.setInt(3, itinerario.getpItinerario());
+            pst.setString(3, itinerario.getLocalizacion());
+            pst.setInt(4, itinerario.getpItinerario());
             pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
@@ -568,6 +628,77 @@ public enum LogicaDatos {
             
         }
     }
+    /**
+     * Carga en el itinerario todas las fechas en las que ha sido resuelto
+     * @param itinerario 
+     */
+    private void cargaFechasItinerario(Itinerario itinerario) {
+        String sql = "SELECT fecha FROM FechaItinerario WHERE a_itinerario = ?";
+        try (PreparedStatement pst = con.prepareStatement(sql)) {
+            pst.setInt(1, itinerario.getpItinerario());
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                itinerario.addFechaResolucion(getDateDeSQLite3(rs.getLong("fecha")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
-    
+    /**
+     * Se encarga de cargar los Itinerarios contenidos en el ResultSet dentro
+     * de la lista de itinerarios
+     * @param rs
+     * @param itinerarios
+     * @throws SQLException 
+     */
+    private void cargaItinerarios(ResultSet rs, List<Itinerario> itinerarios) throws SQLException {
+        Itinerario itinerario;
+        while (rs.next()) {
+            itinerario = new Itinerario();
+            itinerario.setNombre(rs.getString("nombre"));
+            itinerario.setLocalizacion(rs.getString("localizacion"));
+            itinerario.setDifucultad(rs.getString("dificultad"));
+            itinerario.setpItinerario(rs.getInt("p_itinerario"));
+            itinerario.setPathImagen(new File("imagenes"+File.separatorChar+rs.getString("imagen")));
+            cargaFechasItinerario(itinerario);
+            itinerarios.add(itinerario);
+        }
+    }
+     /**
+     ******************************************
+     * **********SIN IMPLEMENTAR**************
+     * *************************************
+     *
+     * Método que calcula el rendimiento del usuario
+     *
+     * @return
+     */
+    public float calculaRendimiento() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    /**
+     * Calcula los puntos debidos a las horas acumuladas por sesiones de 
+     * entrenamiento
+     * @param cfg
+     * @return 
+     */
+    private float calcPtonPorSesiones(Configuracion cfg) {
+        float ptos = 0F;
+        String sql = "SELECT SUM(fecha_fin-fecha_inicio)/3600 AS horas"
+                + "FROM Sesion "
+                + "WHERE date(fecha_inicio,'unixepoch') "
+                + "BETWEEN date(?,'unixepoch') AND date(?,'unixepoch')";
+        try(PreparedStatement pst = con.prepareStatement(sql)) {
+            pst.setLong(1, getSegundosParaSQLite3(cfg.getFecha1Intervalo()));
+            pst.setLong(2, getSegundosParaSQLite3(cfg.getFecha2Intervalo()));
+            ResultSet rs = pst.executeQuery();
+            rs.next();
+            ptos = rs.getInt("horas")*0.5F;
+            ptos = ptos > 5?  5 : ptos;
+        } catch (SQLException ex) {
+            Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ptos;
+    }
 }
