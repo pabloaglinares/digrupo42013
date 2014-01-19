@@ -10,13 +10,17 @@ package gui;
  *
  * @author David
  */
-public class PnlAltaModifSesiones extends javax.swing.JPanel {
+public class AltaSesion extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form PanelAltaModifSesiones
+     * Creates new form AltaSesion
      */
-    public PnlAltaModifSesiones() {
+    public AltaSesion() {
         initComponents();
+        this.setIconifiable(true);
+        this.setResizable(true);
+        this.setClosable(true);
+        this.setMaximizable(true);
     }
 
     /**
@@ -29,17 +33,19 @@ public class PnlAltaModifSesiones extends javax.swing.JPanel {
     private void initComponents() {
 
         labelFechaSesion = new javax.swing.JLabel();
-        labelHoraComienzo = new javax.swing.JLabel();
-        labelHoraFin = new javax.swing.JLabel();
-        labelTipoSesion = new javax.swing.JLabel();
-        labelDescripcion = new javax.swing.JLabel();
         tfFechaSesion = new javax.swing.JTextField();
+        labelHoraComienzo = new javax.swing.JLabel();
         tfHoraComienzo = new javax.swing.JTextField();
+        labelHoraFin = new javax.swing.JLabel();
         tfHoraFin = new javax.swing.JTextField();
-        tfDescripcion = new javax.swing.JTextField();
+        labelTipoSesion = new javax.swing.JLabel();
         cbTipoSesion = new javax.swing.JComboBox();
+        labelDescripcion = new javax.swing.JLabel();
+        tfDescripcion = new javax.swing.JTextField();
         btVolver = new javax.swing.JButton();
         btGuardar = new javax.swing.JButton();
+
+        setTitle("Alta/Modif Sesiones");
 
         labelFechaSesion.setText("Fecha Sesión:");
 
@@ -49,48 +55,45 @@ public class PnlAltaModifSesiones extends javax.swing.JPanel {
 
         labelTipoSesion.setText("Tipo Sesión:");
 
-        labelDescripcion.setText("Descripción:");
-
         cbTipoSesion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Físico", "Rocódromo", "Roca" }));
+
+        labelDescripcion.setText("Descripción:");
 
         btVolver.setText("Volver");
 
         btGuardar.setText("Guardar");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(61, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(labelFechaSesion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfFechaSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btVolver)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btGuardar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelHoraComienzo)
+                            .addComponent(labelFechaSesion, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelHoraComienzo, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(labelHoraFin, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(labelTipoSesion, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(labelDescripcion, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfDescripcion)
+                            .addComponent(cbTipoSesion, 0, 141, Short.MAX_VALUE)
                             .addComponent(tfHoraFin)
                             .addComponent(tfHoraComienzo)
-                            .addComponent(cbTipoSesion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btVolver)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btGuardar)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                            .addComponent(tfFechaSesion))))
+                .addGap(47, 47, 47))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelFechaSesion)
                     .addComponent(tfFechaSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -106,16 +109,18 @@ public class PnlAltaModifSesiones extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelTipoSesion)
                     .addComponent(cbTipoSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelDescripcion)
                     .addComponent(tfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btVolver)
-                    .addComponent(btGuardar))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(btGuardar)
+                    .addComponent(btVolver))
+                .addGap(35, 35, 35))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
