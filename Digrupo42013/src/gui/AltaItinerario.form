@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
     <Property name="title" type="java.lang.String" value="Alta/Modif Itinerarios"/>
   </Properties>
@@ -22,97 +22,87 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="labelFechaResolucion" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelFoto" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelDificultad" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelTipoItinerario" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="labelLocalizacion" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="labelNombreItinerario" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelTipoItinerario" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelDificultad" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="spDificultadNumero" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Component id="spDificultadLetra" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Component id="spDificultadMasMenos" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="tfLocalizacionItinerario" min="-2" pref="149" max="-2" attributes="0"/>
-                          <Component id="tfNombreItinerario" min="-2" pref="149" max="-2" attributes="0"/>
-                          <Component id="cbTipoItineracio" alignment="0" min="-2" pref="149" max="-2" attributes="0"/>
+                          <Component id="dtfFechaResolucion" linkSize="1" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
+                          <Component id="tfUrlFoto" linkSize="1" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                          <Component id="cbTipoItineracio" linkSize="1" alignment="0" min="-2" pref="149" max="-2" attributes="0"/>
+                          <Component id="tfLocalizacionItinerario" linkSize="1" alignment="0" min="-2" pref="149" max="-2" attributes="0"/>
+                          <Component id="tfNombreItinerario" linkSize="1" alignment="0" min="-2" pref="149" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btVolver" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelFechaResolucion" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelFoto" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="tfUrlFoto" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="ftfFechaResolucion" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
-                              <Component id="btGuardar" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="btVolver" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btGuardar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="labelNombreItinerario" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfNombreItinerario" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfNombreItinerario" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="labelLocalizacion" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfLocalizacionItinerario" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="tfLocalizacionItinerario" linkSize="2" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="labelTipoItinerario" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbTipoItineracio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbTipoItineracio" linkSize="2" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="labelDificultad" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="spDificultadNumero" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="spDificultadLetra" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="spDificultadMasMenos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spDificultadNumero" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spDificultadLetra" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spDificultadMasMenos" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="labelFechaResolucion" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="ftfFechaResolucion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="dtfFechaResolucion" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="tfUrlFoto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfUrlFoto" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="labelFoto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btVolver" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btVolver" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="24" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -188,14 +178,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="tfUrlFoto">
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="ftfFechaResolucion">
-      <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format subtype="0" type="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="dd-MMM-aa"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btVolver">
       <Properties>
         <Property name="text" type="java.lang.String" value="Volver"/>
@@ -204,6 +186,11 @@
     <Component class="javax.swing.JButton" name="btGuardar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Guardar"/>
+      </Properties>
+    </Component>
+    <Component class="calendario.DateTextField" name="dtfFechaResolucion">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="dateTextField1"/>
       </Properties>
     </Component>
   </SubComponents>
