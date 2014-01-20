@@ -27,7 +27,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         this.setResizable(true);
         this.setClosable(true);
         this.setMaximizable(true);
-        setCampos();
+        //setCampos();
     }
 
     /**
