@@ -113,6 +113,15 @@ public enum LogicaDatos {
      ========================================================================
      */
     /**
+     * Método que calcula el rendimiento del usuario
+     *
+     * @return
+     */
+    public float calculaRendimiento() {
+        return calcPtosPorSesiones()+calcPtosPorItinerario();
+    }
+    
+    /**
      * Devuelve el usuario almacenado en la base de datos
      *
      * @return
@@ -128,7 +137,7 @@ public enum LogicaDatos {
                 usr.setApellidos(rs.getString("apellidos"));
                 usr.setFecha1Intervalo(getDateDeSQLite3(rs.getLong("fecha1")));
                 usr.setFecha2Intervalo(getDateDeSQLite3(rs.getLong("fecha2")));
-                usr.setRendimiento(calculaRendimiento());
+               // usr.setRendimiento(calculaRendimiento());
 
             }
         } catch (SQLException ex) {
@@ -665,40 +674,51 @@ public enum LogicaDatos {
             itinerarios.add(itinerario);
         }
     }
-     /**
-     ******************************************
-     * **********SIN IMPLEMENTAR**************
-     * *************************************
-     *
-     * Método que calcula el rendimiento del usuario
-     *
-     * @return
-     */
-    public float calculaRendimiento() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     /**
      * Calcula los puntos debidos a las horas acumuladas por sesiones de 
      * entrenamiento
      * @param cfg
      * @return 
      */
-    private float calcPtonPorSesiones(Configuracion cfg) {
-        float ptos = 0F;
-        String sql = "SELECT SUM(fecha_fin-fecha_inicio)/3600 AS horas"
-                + "FROM Sesion "
-                + "WHERE date(fecha_inicio,'unixepoch') "
-                + "BETWEEN date(?,'unixepoch') AND date(?,'unixepoch')";
+    private float calcPtosPorSesiones() {
+        String sql = "SELECT SUM(fecha_fin-fecha_inicio)/3600 "
+                + "FROM Sesion WHERE DATE(fecha_inicio,'unixepoch') BETWEEN "
+                + "DATE((SELECT fecha1 FROM configuracion WHERE p_configuracion = 1),'unixepoch') "
+                + "AND DATE((SELECT fecha2 FROM configuracion WHERE p_configuracion = 1),'unixepoch')";
+        float weight = 0.5F;
+        return getPoints(sql,weight);
+    }
+
+    /**
+     * Calcula los puntos debidos al número medio de itinerarios resuelto por semana
+     * @return 
+     */
+    private float calcPtosPorItinerario() {
+        String sql = "SELECT AVG(nIte) FROM (SELECT COUNT(*) AS nIte FROM FechaItinerario "
+                +"WHERE DATE(fecha,'unixepoch') BETWEEN "
+                + "DATE((SELECT fecha1 FROM configuracion WHERE p_configuracion = 1),'unixepoch') "
+                + "AND DATE((SELECT fecha2 FROM configuracion WHERE p_configuracion = 1),'unixepoch')"
+                + " GROUP BY STRFTIME('%W', fecha))";
+        float weight = 0.25F;
+        return getPoints(sql,weight);
+    }
+    /**
+     * Calcula los puntos correspondientes al valor devuelto por la consulta
+     * @param sql
+     * @param weight
+     * @return 
+     */
+    private float getPoints(String sql, float weight) {
+         float ptos = 0F;
         try(PreparedStatement pst = con.prepareStatement(sql)) {
-            pst.setLong(1, getSegundosParaSQLite3(cfg.getFecha1Intervalo()));
-            pst.setLong(2, getSegundosParaSQLite3(cfg.getFecha2Intervalo()));
             ResultSet rs = pst.executeQuery();
             rs.next();
-            ptos = rs.getInt("horas")*0.5F;
+            ptos = rs.getInt(1)*weight;
             ptos = ptos > 5?  5 : ptos;
         } catch (SQLException ex) {
             Logger.getLogger(LogicaDatos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ptos;
     }
+
 }
