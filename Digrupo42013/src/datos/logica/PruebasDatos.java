@@ -6,6 +6,7 @@
 
 package datos.logica;
 
+import datos.pojos.Configuracion;
 import datos.pojos.Itinerario;
 import datos.pojos.Sesion;
 import java.io.File;
@@ -27,10 +28,21 @@ public class PruebasDatos {
         
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         LogicaDatos logica = LogicaDatos.INSTANCE;
-        pruebaSesion(sdf, logica);
-        pruebaItinerario(sdf, logica);
+//        pruebaConfig(sdf, logica);
+        
+        
+//        pruebaSesion(sdf, logica);
+//        pruebaItinerario(sdf, logica);
+        System.out.println(logica.calculaRendimiento());
     }
-
+    static void pruebaConfig(SimpleDateFormat sdf, LogicaDatos logica) throws ParseException {
+        Configuracion cfg = new Configuracion();
+        cfg.setApellidos("Perez");
+        cfg.setNombre("Juan");
+        cfg.setFecha1Intervalo(sdf.parse("12/02/1980 12:35"));
+        cfg.setFecha2Intervalo(sdf.parse("12/02/1999 12:35"));
+        logica.insertConfiguracion(cfg);
+    }
     private static void pruebaSesion(SimpleDateFormat sdf, LogicaDatos logica) throws ParseException {
         Sesion sesion = new Sesion();
         sesion.setDescripcion("algo descriptivo1");
@@ -55,6 +67,7 @@ public class PruebasDatos {
         itinerario.setDifucultad("6c");
         itinerario.addFechaResolucion(sdf.parse("1/2/1989 12:00"));
         logica.insertItinerario(itinerario);
+        itinerario = new Itinerario();
         itinerario.setNombre("Curavacas Vía Ferrata");
         itinerario.setPathImagen(new File("curavacas.jpg"));
         itinerario.setDifucultad("3");
