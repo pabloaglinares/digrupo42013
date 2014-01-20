@@ -23,11 +23,12 @@ public class AltaSesion extends javax.swing.JInternalFrame {
      */
     public AltaSesion() {
         initComponents();
+        setCampos();
         this.setIconifiable(true);
         this.setResizable(true);
         this.setClosable(true);
         this.setMaximizable(true);
-        //setCampos();
+        
     }
 
     /**
@@ -74,6 +75,11 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         });
 
         btGuardar.setText("Guardar");
+        btGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btGuardarActionPerformed(evt);
+            }
+        });
 
         dtfFechaSesion.setText("dateTextField1");
 
@@ -145,6 +151,11 @@ public class AltaSesion extends javax.swing.JInternalFrame {
     private void btVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolverActionPerformed
         this.hide();
     }//GEN-LAST:event_btVolverActionPerformed
+
+    private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btGuardarActionPerformed
 
     //metodo que rellena los campos
     private void setCampos() {
