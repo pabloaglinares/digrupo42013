@@ -60,6 +60,11 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         labelDescripcion.setText("Descripción:");
 
         btVolver.setText("Volver");
+        btVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVolverActionPerformed(evt);
+            }
+        });
 
         btGuardar.setText("Guardar");
 
@@ -122,6 +127,10 @@ public class AltaSesion extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolverActionPerformed
+        this.hide();
+    }//GEN-LAST:event_btVolverActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

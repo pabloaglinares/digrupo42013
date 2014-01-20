@@ -73,6 +73,11 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         ftfFechaResolucion.setText("dd-MMM-aa");
 
         btVolver.setText("Volver");
+        btVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVolverActionPerformed(evt);
+            }
+        });
 
         btGuardar.setText("Guardar");
 
@@ -129,7 +134,7 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
                     .addComponent(labelLocalizacion)
                     .addComponent(tfLocalizacionItinerario, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelTipoItinerario)
                     .addComponent(cbTipoItineracio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -155,6 +160,10 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolverActionPerformed
+        this.hide();
+    }//GEN-LAST:event_btVolverActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
