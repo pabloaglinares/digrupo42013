@@ -62,8 +62,8 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Escalador");
         setIconImage(getIconImage());
-        setMinimumSize(new java.awt.Dimension(600, 450));
-        setPreferredSize(new java.awt.Dimension(600, 450));
+        setMinimumSize(new java.awt.Dimension(600, 500));
+        setPreferredSize(new java.awt.Dimension(600, 500));
 
         dpEscritorio.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -93,7 +93,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(dpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lRendimiento)
                     .addComponent(jLabel1))
-                .addContainerGap(360, Short.MAX_VALUE))
+                .addContainerGap(416, Short.MAX_VALUE))
         );
         dpEscritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpEscritorio.setLayer(lRendimiento, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -280,7 +280,10 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_miEditarActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        // TODO add your handling code here:
+        Informes informes = new Informes();
+        dpEscritorio.add(informes);
+        informes.show();
+               
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
