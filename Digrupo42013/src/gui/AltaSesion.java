@@ -6,14 +6,6 @@
 
 package gui;
 
-import datos.logica.LogicaDatos;
-import datos.pojos.Sesion;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author David

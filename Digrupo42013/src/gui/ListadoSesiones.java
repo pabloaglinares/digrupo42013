@@ -5,11 +5,6 @@
  */
 package gui;
 
-import java.awt.Dimension;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
 public class ListadoSesiones extends javax.swing.JInternalFrame {
 
     /**
