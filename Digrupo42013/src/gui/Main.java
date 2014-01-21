@@ -95,6 +95,7 @@ public class Main extends javax.swing.JFrame {
         dpEscritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpEscritorio.setLayer(lRendimiento, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        mItinerarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/itinerario.png"))); // NOI18N
         mItinerarios.setText("Itinerarios");
 
         miAltaItinerario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
@@ -119,6 +120,7 @@ public class Main extends javax.swing.JFrame {
 
         menu.add(mItinerarios);
 
+        mSesiones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/sesion.png"))); // NOI18N
         mSesiones.setText("Sesiones");
 
         miAltaSesion.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
