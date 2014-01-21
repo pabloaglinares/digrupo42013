@@ -72,6 +72,11 @@ public class Main extends javax.swing.JFrame {
         mItinerarios.add(miAltaItinerario);
 
         miListadoItinerarios.setText("Listado Itinerarios...");
+        miListadoItinerarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miListadoItinerariosActionPerformed(evt);
+            }
+        });
         mItinerarios.add(miListadoItinerarios);
 
         menu.add(mItinerarios);
@@ -87,6 +92,11 @@ public class Main extends javax.swing.JFrame {
         mSesiones.add(miAltaSesion);
 
         miListadoSesiones.setText("Listado Sesiones...");
+        miListadoSesiones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miListadoSesionesActionPerformed(evt);
+            }
+        });
         mSesiones.add(miListadoSesiones);
 
         menu.add(mSesiones);
@@ -166,6 +176,20 @@ public class Main extends javax.swing.JFrame {
         dpEscritorio.add(acerca);
         acerca.show();
     }//GEN-LAST:event_miAcercaActionPerformed
+
+    private void miListadoItinerariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListadoItinerariosActionPerformed
+        // TODO add your handling code here:
+        ListadoItinerarios listado = new ListadoItinerarios();
+        dpEscritorio.add(listado);
+        listado.show();
+    }//GEN-LAST:event_miListadoItinerariosActionPerformed
+
+    private void miListadoSesionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListadoSesionesActionPerformed
+        // TODO add your handling code here:
+        ListadoSesiones listadosesiones = new ListadoSesiones();
+        dpEscritorio.add(listadosesiones);
+        listadosesiones.show();
+    }//GEN-LAST:event_miListadoSesionesActionPerformed
 
     /**
      * @param args the command line arguments
