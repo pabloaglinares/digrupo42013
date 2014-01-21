@@ -51,7 +51,9 @@ public class Main extends javax.swing.JFrame {
         miAltaSesion = new javax.swing.JMenuItem();
         miListadoSesiones = new javax.swing.JMenuItem();
         mInformes = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
         mConfiguracion = new javax.swing.JMenu();
+        miEditar = new javax.swing.JMenuItem();
         mAyuda = new javax.swing.JMenu();
         miAyuda = new javax.swing.JMenuItem();
         miAcerca = new javax.swing.JMenuItem();
@@ -148,10 +150,33 @@ public class Main extends javax.swing.JFrame {
 
         mInformes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/informe.png"))); // NOI18N
         mInformes.setText("Informes");
+
+        jMenuItem6.setText("Crear Informes...");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        mInformes.add(jMenuItem6);
+
         menu.add(mInformes);
 
         mConfiguracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/herramientas.png"))); // NOI18N
         mConfiguracion.setText("Configuracion");
+        mConfiguracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mConfiguracionActionPerformed(evt);
+            }
+        });
+
+        miEditar.setText("Editar escalador...");
+        miEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miEditarActionPerformed(evt);
+            }
+        });
+        mConfiguracion.add(miEditar);
+
         menu.add(mConfiguracion);
 
         mAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ayuda1.png"))); // NOI18N
@@ -244,6 +269,20 @@ public class Main extends javax.swing.JFrame {
         listadosesiones.show();
     }//GEN-LAST:event_miListadoSesionesActionPerformed
 
+    private void mConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConfiguracionActionPerformed
+        
+    }//GEN-LAST:event_mConfiguracionActionPerformed
+
+    private void miEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEditarActionPerformed
+        Configuracion config = new Configuracion();
+        dpEscritorio.add(config);
+        config.show();
+    }//GEN-LAST:event_miEditarActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -282,6 +321,7 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane dpEscritorio;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JLabel lRendimiento;
     private javax.swing.JMenu mAyuda;
     private javax.swing.JMenu mConfiguracion;
@@ -293,6 +333,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem miAltaItinerario;
     private javax.swing.JMenuItem miAltaSesion;
     private javax.swing.JMenuItem miAyuda;
+    private javax.swing.JMenuItem miEditar;
     private javax.swing.JMenuItem miListadoItinerarios;
     private javax.swing.JMenuItem miListadoSesiones;
     private javax.swing.JMenuItem miSalir;
