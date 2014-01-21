@@ -58,6 +58,8 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         dtfFechaSesion = new calendario.DateTextField();
 
         setTitle("Alta/Modif Sesiones");
+        setMinimumSize(new java.awt.Dimension(300, 300));
+        setPreferredSize(new java.awt.Dimension(300, 300));
 
         labelFechaSesion.setText("Fecha Sesión:");
 
@@ -92,27 +94,28 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelDescripcion, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelTipoSesion, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelHoraFin, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelHoraComienzo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelFechaSesion, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btVolver)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btGuardar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelDescripcion, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelTipoSesion, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelHoraFin, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelHoraComienzo, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelFechaSesion, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dtfFechaSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tfHoraComienzo)
                             .addComponent(tfHoraFin)
                             .addComponent(cbTipoSesion, 0, 141, Short.MAX_VALUE)
-                            .addComponent(tfDescripcion))))
-                .addGap(23, 23, 23))
+                            .addComponent(tfDescripcion))
+                        .addContainerGap(23, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btGuardar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btVolver)
+                        .addContainerGap())))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbTipoSesion, dtfFechaSesion, tfDescripcion, tfHoraComienzo, tfHoraFin});
@@ -120,7 +123,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelFechaSesion)
                     .addComponent(dtfFechaSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -140,11 +143,11 @@ public class AltaSesion extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelDescripcion)
                     .addComponent(tfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btGuardar)
                     .addComponent(btVolver))
-                .addGap(23, 23, 23))
+                .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbTipoSesion, dtfFechaSesion, tfDescripcion, tfHoraComienzo, tfHoraFin});
