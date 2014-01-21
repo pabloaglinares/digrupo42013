@@ -70,11 +70,13 @@ public class Main extends javax.swing.JFrame {
         );
         dpEscritorioLayout.setVerticalGroup(
             dpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 402, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
 
         mItinerarios.setText("Itinerarios");
 
+        miAltaItinerario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        miAltaItinerario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/add.png"))); // NOI18N
         miAltaItinerario.setText("Alta Itinerario...");
         miAltaItinerario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +85,8 @@ public class Main extends javax.swing.JFrame {
         });
         mItinerarios.add(miAltaItinerario);
 
+        miListadoItinerarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        miListadoItinerarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/lista.png"))); // NOI18N
         miListadoItinerarios.setText("Listado Itinerarios...");
         miListadoItinerarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,6 +99,8 @@ public class Main extends javax.swing.JFrame {
 
         mSesiones.setText("Sesiones");
 
+        miAltaSesion.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        miAltaSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/add.png"))); // NOI18N
         miAltaSesion.setText("Alta Sesión...");
         miAltaSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +109,8 @@ public class Main extends javax.swing.JFrame {
         });
         mSesiones.add(miAltaSesion);
 
+        miListadoSesiones.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        miListadoSesiones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/lista.png"))); // NOI18N
         miListadoSesiones.setText("Listado Sesiones...");
         miListadoSesiones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,15 +121,19 @@ public class Main extends javax.swing.JFrame {
 
         menu.add(mSesiones);
 
+        mInformes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/informe.png"))); // NOI18N
         mInformes.setText("Informes");
         menu.add(mInformes);
 
+        mConfiguracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/herramientas.png"))); // NOI18N
         mConfiguracion.setText("Configuracion");
         menu.add(mConfiguracion);
 
         mAyuda.setIcon(new javax.swing.ImageIcon("C:\\Users\\HarleyQuinn\\Desktop\\PROYECTO GRUPO\\digrupo42013\\Digrupo42013\\src\\resources\\ayuda1.png")); // NOI18N
         mAyuda.setText("Ayuda");
 
+        miAyuda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        miAyuda.setIcon(new javax.swing.ImageIcon("C:\\Users\\HarleyQuinn\\Desktop\\PROYECTO GRUPO\\digrupo42013\\Digrupo42013\\src\\resources\\ayuda2.png")); // NOI18N
         miAyuda.setText("Ayuda...");
         miAyuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,6 +142,7 @@ public class Main extends javax.swing.JFrame {
         });
         mAyuda.add(miAyuda);
 
+        miAcerca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/acerca.png"))); // NOI18N
         miAcerca.setText("Acerca...");
         miAcerca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +151,8 @@ public class Main extends javax.swing.JFrame {
         });
         mAyuda.add(miAcerca);
 
+        miSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.CTRL_MASK));
+        miSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cerrar.png"))); // NOI18N
         miSalir.setText("Salir");
         miSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
