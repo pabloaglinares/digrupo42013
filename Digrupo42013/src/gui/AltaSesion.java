@@ -6,10 +6,13 @@
 
 package gui;
 
+import datos.logica.LogicaDatos;
 import datos.pojos.Sesion;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,16 +21,17 @@ import java.util.Date;
 public class AltaSesion extends javax.swing.JInternalFrame {
 
     private Sesion sesion;
+    
     /**
      * Creates new form AltaSesion
      */
     public AltaSesion() {
         initComponents();
-        setCampos();
         this.setIconifiable(true);
         this.setResizable(true);
         this.setClosable(true);
         this.setMaximizable(true);
+        setCampos();
         
     }
 
@@ -154,7 +158,8 @@ public class AltaSesion extends javax.swing.JInternalFrame {
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
         // TODO add your handling code here:
-        
+  
+                                                   
     }//GEN-LAST:event_btGuardarActionPerformed
 
     //metodo que rellena los campos
