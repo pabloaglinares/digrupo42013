@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class AltaSesion extends javax.swing.JInternalFrame {
 
-    private Sesion sesion;
+    
     
     /**
      * Creates new form AltaSesion
@@ -31,7 +31,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         this.setResizable(true);
         this.setClosable(true);
         this.setMaximizable(true);
-        setCampos();
+        
         
     }
 
@@ -162,44 +162,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
                                                    
     }//GEN-LAST:event_btGuardarActionPerformed
 
-    //metodo que rellena los campos
-    private void setCampos() {
-        dtfFechaSesion.setText(String.valueOf(sesion.getFecha_hora1()));
-        tfHoraComienzo.setText(String.valueOf(sesion.getFecha_hora1()));
-        tfHoraFin.setText(String.valueOf(sesion.getFecha_hora2()));
-        cbTipoSesion.setSelectedItem(sesion.getTipo());
-        tfDescripcion.setText(sesion.getDescripcion());
-        
-    }
-
-    private Sesion getCampos() {
-        SimpleDateFormat formatoFechaSesion = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat formatoHoraComienzo = new SimpleDateFormat("HH:mm:ss");
-        SimpleDateFormat formatoHoraFin = new SimpleDateFormat("HH:mm:ss");
-        //Añadir a la fecha
-        String srFechaSesion = dtfFechaSesion.getText().trim();
-        Date fechasesion = null;
-        String srhoracomienzo = tfHoraComienzo.getText().trim();
-        Date horacomienzo = null;
-        String srhorafin = tfHoraFin.getText();
-        Date horafin = null;
-        try {
-            fechasesion = formatoFechaSesion.parse(srFechaSesion);
-            horacomienzo = formatoHoraComienzo.parse(srhoracomienzo);
-            horafin = formatoHoraFin.parse(srhorafin);
-        } catch (ParseException ex) {
-
-            ex.printStackTrace();
-        }
-        sesion.setFecha_hora1(fechasesion);
-        sesion.setFecha_hora1(horacomienzo);
-        sesion.setFecha_hora2(horafin);
-        sesion.setTipo((Sesion.TipoSesion) cbTipoSesion.getSelectedItem());
-        sesion.setDescripcion(tfDescripcion.getText().trim());
-
-        return sesion;
-    }
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btGuardar;
     private javax.swing.JButton btVolver;
