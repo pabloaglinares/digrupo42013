@@ -6,6 +6,9 @@
 
 package gui;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+
 /**
  *
  * @author Gemo
@@ -17,6 +20,14 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+    }
+    
+    
+    @Override
+    public Image getIconImage() {
+            Image retValue = Toolkit.getDefaultToolkit().
+            getImage(ClassLoader.getSystemResource("resources/escalador_peq.png"));
+            return retValue;
     }
 
     /**
@@ -45,6 +56,7 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Escalador");
+        setIconImage(getIconImage());
         setMinimumSize(new java.awt.Dimension(600, 450));
         setPreferredSize(new java.awt.Dimension(600, 450));
 
@@ -58,7 +70,7 @@ public class Main extends javax.swing.JFrame {
         );
         dpEscritorioLayout.setVerticalGroup(
             dpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 444, Short.MAX_VALUE)
+            .addGap(0, 402, Short.MAX_VALUE)
         );
 
         mItinerarios.setText("Itinerarios");
@@ -107,6 +119,7 @@ public class Main extends javax.swing.JFrame {
         mConfiguracion.setText("Configuracion");
         menu.add(mConfiguracion);
 
+        mAyuda.setIcon(new javax.swing.ImageIcon("C:\\Users\\HarleyQuinn\\Desktop\\PROYECTO GRUPO\\digrupo42013\\Digrupo42013\\src\\resources\\ayuda1.png")); // NOI18N
         mAyuda.setText("Ayuda");
 
         miAyuda.setText("Ayuda...");
