@@ -154,11 +154,11 @@ public class Main extends javax.swing.JFrame {
         mConfiguracion.setText("Configuracion");
         menu.add(mConfiguracion);
 
-        mAyuda.setIcon(new javax.swing.ImageIcon("C:\\Users\\HarleyQuinn\\Desktop\\PROYECTO GRUPO\\digrupo42013\\Digrupo42013\\src\\resources\\ayuda1.png")); // NOI18N
+        mAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ayuda1.png"))); // NOI18N
         mAyuda.setText("Ayuda");
 
         miAyuda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        miAyuda.setIcon(new javax.swing.ImageIcon("C:\\Users\\HarleyQuinn\\Desktop\\PROYECTO GRUPO\\digrupo42013\\Digrupo42013\\src\\resources\\ayuda2.png")); // NOI18N
+        miAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ayuda2.png"))); // NOI18N
         miAyuda.setText("Ayuda...");
         miAyuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
