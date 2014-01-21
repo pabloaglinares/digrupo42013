@@ -40,6 +40,8 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         dpEscritorio = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
+        lRendimiento = new javax.swing.JLabel();
         menu = new javax.swing.JMenuBar();
         mItinerarios = new javax.swing.JMenu();
         miAltaItinerario = new javax.swing.JMenuItem();
@@ -62,16 +64,36 @@ public class Main extends javax.swing.JFrame {
 
         dpEscritorio.setBackground(new java.awt.Color(204, 204, 204));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Rendimiento:");
+
+        lRendimiento.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lRendimiento.setForeground(new java.awt.Color(255, 255, 255));
+        lRendimiento.setText("0");
+
         javax.swing.GroupLayout dpEscritorioLayout = new javax.swing.GroupLayout(dpEscritorio);
         dpEscritorio.setLayout(dpEscritorioLayout);
         dpEscritorioLayout.setHorizontalGroup(
             dpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpEscritorioLayout.createSequentialGroup()
+                .addContainerGap(408, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lRendimiento)
+                .addContainerGap())
         );
         dpEscritorioLayout.setVerticalGroup(
             dpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(dpEscritorioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lRendimiento)
+                    .addComponent(jLabel1))
+                .addContainerGap(360, Short.MAX_VALUE))
         );
+        dpEscritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dpEscritorio.setLayer(lRendimiento, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         mItinerarios.setText("Itinerarios");
 
@@ -256,6 +278,8 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane dpEscritorio;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lRendimiento;
     private javax.swing.JMenu mAyuda;
     private javax.swing.JMenu mConfiguracion;
     private javax.swing.JMenu mInformes;
