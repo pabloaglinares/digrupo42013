@@ -1,8 +1,8 @@
-package datos.logica.daos;
+package datos.daos;
 
-import datos.logica.Comparador;
-import datos.logica.ModItinerario;
-import datos.logica.UtilesBD;
+import datos.Comparador;
+import datos.ModItinerario;
+import datos.UtilesBD;
 import datos.pojos.Itinerario;
 import java.io.File;
 import java.sql.PreparedStatement;

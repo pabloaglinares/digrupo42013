@@ -1,8 +1,8 @@
 
 
-package datos.logica.daos;
+package datos.daos;
 
-import datos.logica.UtilesBD;
+import datos.UtilesBD;
 import datos.pojos.Configuracion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -1,5 +1,5 @@
 
-package datos.logica;
+package datos;
 
 /**
  * Define los operadores lógicos.

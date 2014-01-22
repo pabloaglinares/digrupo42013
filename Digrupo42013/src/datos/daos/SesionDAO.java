@@ -1,8 +1,8 @@
 
-package datos.logica.daos;
+package datos.daos;
 
-import datos.logica.Comparador;
-import datos.logica.UtilesBD;
+import datos.Comparador;
+import datos.UtilesBD;
 import datos.pojos.Sesion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

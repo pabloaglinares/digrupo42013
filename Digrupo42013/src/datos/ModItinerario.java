@@ -1,5 +1,5 @@
 
-package datos.logica;
+package datos;
 
 /**
  * Representa el tipo de modificación realizada en un itinerario. Esta puede

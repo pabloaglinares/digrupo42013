@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package datos.logica;
+package datos;
 
-import datos.logica.daos.ConfiguracionDAO;
-import datos.logica.daos.ItinerarioDAO;
-import datos.logica.daos.SesionDAO;
+import datos.daos.ConfiguracionDAO;
+import datos.daos.ItinerarioDAO;
+import datos.daos.SesionDAO;
 import datos.pojos.Configuracion;
 import datos.pojos.Itinerario;
 import datos.pojos.Sesion;

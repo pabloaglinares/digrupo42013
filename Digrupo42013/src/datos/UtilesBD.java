@@ -1,4 +1,4 @@
-package datos.logica;
+package datos;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,14 +16,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Singleton que contiene los métodos comunes para trabajar con la base de datos
- *
+ * Singleton que contiene los métodos comunes para trabajar con la base de datos,
+ * así como aquellos cuya finalidad no es recuperar o insertar objetos Itinerario, Sesion
+ * o Configuracion en la BD.
+ * 
  * @author Andrés Traspuesto Lanza
  */
 public enum UtilesBD {
 
     INSTANCE;
-    private Connection connection;
+    private Connection connection; //conexión con la base de datos
 
     /**
      * Constructor del singleton encargado de la lógica de interacción con la
