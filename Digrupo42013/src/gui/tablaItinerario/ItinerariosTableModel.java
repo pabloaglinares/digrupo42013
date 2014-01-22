@@ -8,7 +8,8 @@ import javax.swing.table.AbstractTableModel;
 
 
 /**
- *
+ * TableModel específico para contener objetos Itinerario, encargandose de mapear
+ * dichos objetos  colocando cada atributo en la columna correspondiente
  * @author Andrés Traspuesto Lanza
  */
 public class ItinerariosTableModel extends AbstractTableModel {
@@ -75,7 +76,12 @@ public class ItinerariosTableModel extends AbstractTableModel {
 
         return clase;
     }
-
+    /**
+     * Devuelve el objeto contenido en la celda indicada por los parámetros
+     * @param rowIndex
+     * @param columnIndex
+     * @return 
+     */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Object obj = null;
@@ -99,7 +105,12 @@ public class ItinerariosTableModel extends AbstractTableModel {
         }
         return obj;
     }
-
+    /**
+     * Se sobreescribe para evitar que las celdas sean editables
+     * @param rowIndex
+     * @param columnIndex
+     * @return 
+     */
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return false;

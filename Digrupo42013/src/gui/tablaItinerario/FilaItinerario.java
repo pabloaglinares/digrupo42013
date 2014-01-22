@@ -12,7 +12,7 @@ import javax.swing.JButton;
  */
 public class FilaItinerario {
     
-    private Itinerario itinerario;
+    private Itinerario itinerario;//Itinerario contenido en la fila
     private final JButton btnEliminar = new JButton("Borrar");
     private final JButton btnEditar = new JButton("Editar");
 

@@ -15,7 +15,9 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 
 /**
- *
+ * Tabla específica para contener sesiones, con la particularidad de que cada
+ * fila además de la sesión contiene 2 botones uno para modificar y otro para
+ * eliminar la sesión de dicha fila.
  * @author Andrés Traspuesto Lanza
  */
 public class TablaSesiones extends JTable {
@@ -40,7 +42,7 @@ public class TablaSesiones extends JTable {
         del.addListener(new ButtonListener() {
 
             @Override
-            public void doSomething() {
+            public void handleActionOnCellButton() {
                 int row = TablaSesiones.this.getSelectedRow();
                 TablaSesiones.this.model.deleteSesion(row);
             }

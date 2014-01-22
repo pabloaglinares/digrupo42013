@@ -11,7 +11,9 @@ import java.util.List;
 
 
 /**
- * Tabla que muestra los itinerarios
+ * Tabla específica para contener Itinerarios, con la particularidad de que cada
+ * fila además del Itinerario contiene 2 botones uno para modificar y otro para
+ * eliminar el Itinerario de dicha fila.
  * @author Andrés Traspuesto Lanza
  */
 public class TablaItinerarios extends JTable {
@@ -36,7 +38,7 @@ public class TablaItinerarios extends JTable {
         del.addListener(new ButtonListener() {
 
             @Override
-            public void doSomething() {
+            public void handleActionOnCellButton() {
                 int row = TablaItinerarios.this.getSelectedRow();
                 TablaItinerarios.this.model.deleteItinerario(row);
             }

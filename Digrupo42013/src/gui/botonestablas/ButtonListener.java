@@ -1,16 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 package gui.botonestablas;
 
 /**
- *
+ * Interfaz que debe implementar el encargado de manejar eventos sobre los botones
+ * de las tablas
  * @author Andrés Traspuesto Lanza
  */
 public interface ButtonListener {
-    public void doSomething();
+    public void handleActionOnCellButton();
 
 }

@@ -11,7 +11,7 @@ import javax.swing.JButton;
  * @author Andrés Traspuesto Lanza
  */
 public class FilaSesion {
-    private Sesion sesion;
+    private Sesion sesion;//Sesion contenida en la fila
     private final JButton btnEliminar = new JButton("Borrar");
     private final JButton btnEditar = new JButton("Editar");
 
