@@ -5,6 +5,12 @@
  */
 package gui;
 
+import java.io.File;
+import java.net.URL;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
+import javax.swing.JOptionPane;
+
 
 public class ListadoItinerarios extends javax.swing.JInternalFrame {
 
@@ -18,12 +24,32 @@ public class ListadoItinerarios extends javax.swing.JInternalFrame {
         this.setResizable(true);
         this.setClosable(true);
         this.setMaximizable(true);
+        mostrarAyuda();
         dtfFecha1.setVisible(false);
         dtfFecha2.setVisible(false);
         labelFecha1.setVisible(false);
         labelFecha2.setVisible(false);
         tbListado.setVisible(false);
         
+    }
+    public void mostrarAyuda() {
+        try {
+            // Carga el fichero de ayuda
+            File fichero = new File("help/help_set.hs");
+            URL hsURL = fichero.toURI().toURL();
+            // Crea el HelpSet y el HelpBroker
+            HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+            HelpBroker hb = helpset.createHelpBroker();
+            // Pone ayuda a F1 al pulsarlo.
+            hb.enableHelpKey(this.getRootPane(),"listadoitinerarios", helpset);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Se ha producido un error "
+                    + "intentando mostrar la ayuda.\n" + e.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE, null);
+            e.printStackTrace();
+
+        }
     }
 
     /**
