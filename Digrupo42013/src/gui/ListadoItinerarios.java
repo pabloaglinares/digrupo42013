@@ -24,7 +24,7 @@ public class ListadoItinerarios extends javax.swing.JInternalFrame {
         this.setResizable(true);
         this.setClosable(true);
         this.setMaximizable(true);
-        mostrarAyuda();
+        
         dtfFecha1.setVisible(false);
         dtfFecha2.setVisible(false);
         labelFecha1.setVisible(false);
@@ -32,25 +32,7 @@ public class ListadoItinerarios extends javax.swing.JInternalFrame {
         tbListado.setVisible(false);
         
     }
-    public void mostrarAyuda() {
-        try {
-            // Carga el fichero de ayuda
-            File fichero = new File("help/help_set.hs");
-            URL hsURL = fichero.toURI().toURL();
-            // Crea el HelpSet y el HelpBroker
-            HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
-            HelpBroker hb = helpset.createHelpBroker();
-            // Pone ayuda a F1 al pulsarlo.
-            hb.enableHelpKey(this.getRootPane(),"listadoitinerarios", helpset);
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Se ha producido un error "
-                    + "intentando mostrar la ayuda.\n" + e.getMessage(), "Error",
-                    JOptionPane.ERROR_MESSAGE, null);
-            e.printStackTrace();
-
-        }
-    }
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,8 +55,8 @@ public class ListadoItinerarios extends javax.swing.JInternalFrame {
         tbListado = new gui.tablaItinerario.TablaItinerarios();
 
         setTitle("Listado itinerarios");
-        setMinimumSize(new java.awt.Dimension(575, 300));
-        setPreferredSize(new java.awt.Dimension(575, 300));
+        setMinimumSize(new java.awt.Dimension(575, 380));
+        setPreferredSize(new java.awt.Dimension(575, 380));
 
         cbListadoItinerarios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos", "Dificultad", "Rango de fechas", "Fecha" }));
         cbListadoItinerarios.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +139,7 @@ public class ListadoItinerarios extends javax.swing.JInternalFrame {
                     .addComponent(dtfFecha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 57, Short.MAX_VALUE)
                 .addComponent(btVolver)
                 .addContainerGap())
         );

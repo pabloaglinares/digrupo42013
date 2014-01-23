@@ -29,29 +29,11 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         this.setResizable(true);
         this.setClosable(true);
         this.setMaximizable(true);
-        mostrarAyuda();
+        
         
         
     }
-    public void mostrarAyuda() {
-        try {
-            // Carga el fichero de ayuda
-            File fichero = new File("help/help_set.hs");
-            URL hsURL = fichero.toURI().toURL();
-            // Crea el HelpSet y el HelpBroker
-            HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
-            HelpBroker hb = helpset.createHelpBroker();
-            // Pone ayuda a F1 al pulsarlo.
-            hb.enableHelpKey(this.getRootPane(),"altasesion", helpset);
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Se ha producido un error "
-                    + "intentando mostrar la ayuda.\n" + e.getMessage(), "Error",
-                    JOptionPane.ERROR_MESSAGE, null);
-            e.printStackTrace();
-
-        }
-    }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,6 +44,9 @@ public class AltaSesion extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dateTextFieldBeanInfo1 = new calendario.DateTextFieldBeanInfo();
+        dateTextFieldBeanInfo2 = new calendario.DateTextFieldBeanInfo();
+        datePropertyEditorSupport1 = new calendario.DatePropertyEditorSupport();
         labelFechaSesion = new javax.swing.JLabel();
         labelHoraComienzo = new javax.swing.JLabel();
         tfHoraComienzo = new javax.swing.JTextField();
@@ -73,7 +58,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         tfDescripcion = new javax.swing.JTextField();
         btVolver = new javax.swing.JButton();
         btGuardar = new javax.swing.JButton();
-        dtfFechaSesion = new calendario.DateTextField();
+        dateTextField1 = new calendario.DateTextField();
 
         setTitle("Alta/Modif Sesiones");
         setMinimumSize(new java.awt.Dimension(300, 335));
@@ -105,7 +90,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
             }
         });
 
-        dtfFechaSesion.setText("dateTextField1");
+        dateTextField1.setText("dateTextField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,28 +108,31 @@ public class AltaSesion extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dtfFechaSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tfHoraComienzo)
                             .addComponent(tfHoraFin)
                             .addComponent(cbTipoSesion, 0, 141, Short.MAX_VALUE)
                             .addComponent(tfDescripcion))
-                        .addContainerGap(23, Short.MAX_VALUE))
+                        .addGap(0, 13, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btGuardar)
                         .addGap(18, 18, 18)
-                        .addComponent(btVolver)
-                        .addContainerGap())))
+                        .addComponent(btVolver))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(dateTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbTipoSesion, dtfFechaSesion, tfDescripcion, tfHoraComienzo, tfHoraFin});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbTipoSesion, tfDescripcion, tfHoraComienzo, tfHoraFin});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
+                .addContainerGap(45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelFechaSesion)
-                    .addComponent(dtfFechaSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dateTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelHoraComienzo)
@@ -161,14 +149,14 @@ public class AltaSesion extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelDescripcion)
                     .addComponent(tfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btGuardar)
                     .addComponent(btVolver))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbTipoSesion, dtfFechaSesion, tfDescripcion, tfHoraComienzo, tfHoraFin});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbTipoSesion, tfDescripcion, tfHoraComienzo, tfHoraFin});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -188,7 +176,10 @@ public class AltaSesion extends javax.swing.JInternalFrame {
     private javax.swing.JButton btGuardar;
     private javax.swing.JButton btVolver;
     private javax.swing.JComboBox cbTipoSesion;
-    private calendario.DateTextField dtfFechaSesion;
+    private calendario.DatePropertyEditorSupport datePropertyEditorSupport1;
+    private calendario.DateTextField dateTextField1;
+    private calendario.DateTextFieldBeanInfo dateTextFieldBeanInfo1;
+    private calendario.DateTextFieldBeanInfo dateTextFieldBeanInfo2;
     private javax.swing.JLabel labelDescripcion;
     private javax.swing.JLabel labelFechaSesion;
     private javax.swing.JLabel labelHoraComienzo;

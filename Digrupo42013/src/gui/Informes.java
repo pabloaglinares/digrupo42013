@@ -6,10 +6,7 @@
 
 package gui;
 
-import java.io.File;
-import java.net.URL;
-import javax.help.HelpBroker;
-import javax.help.HelpSet;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -23,37 +20,22 @@ public class Informes extends javax.swing.JInternalFrame {
      */
     public Informes() {
         initComponents();
-        mostrarAyuda();
+        
+        this.setIconifiable(true);   
+        this.setResizable(true);  
+        this.setClosable(true);   
+        this.setMaximizable(true);
+       
         lRight1.setVisible(false);
-        lRight2.setVisible(false);
-        lRight3.setVisible(false);
+       
         lRight4.setVisible(false);
-        lRight5.setVisible(false);
-        lRight6.setVisible(false);
-        lRight7.setVisible(false);
-        lRight8.setVisible(false);
+        
+     
+        
         lRight9.setVisible(false);
     }
     
-    public void mostrarAyuda() {
-        try {
-            // Carga el fichero de ayuda
-            File fichero = new File("help/help_set.hs");
-            URL hsURL = fichero.toURI().toURL();
-            // Crea el HelpSet y el HelpBroker
-            HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
-            HelpBroker hb = helpset.createHelpBroker();
-            // Pone ayuda a F1 al pulsarlo.
-            hb.enableHelpKey(this.getRootPane(),"informes", helpset);
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Se ha producido un error "
-                    + "intentando mostrar la ayuda.\n" + e.getMessage(), "Error",
-                    JOptionPane.ERROR_MESSAGE, null);
-            e.printStackTrace();
-
-        }
-    }
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,25 +47,22 @@ public class Informes extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         grupo = new javax.swing.ButtonGroup();
+        tfFechaInicio3 = new javax.swing.JTextField();
         pSesionesFecha = new javax.swing.JTabbedPane();
         pItinerariosFecha = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        tfFechaInicio1 = new javax.swing.JTextField();
-        tfFechaFin1 = new javax.swing.JTextField();
         btVolver1 = new javax.swing.JButton();
         btCrear2 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        lRight5 = new javax.swing.JLabel();
-        lRight6 = new javax.swing.JLabel();
+        dateTextField1 = new calendario.DateTextField();
+        dateTextField2 = new calendario.DateTextField();
         jPanel2 = new javax.swing.JPanel();
         btVolver2 = new javax.swing.JButton();
         btCrear1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        tfFechaInicio2 = new javax.swing.JTextField();
-        tfFechaFin2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        lRight7 = new javax.swing.JLabel();
-        lRight8 = new javax.swing.JLabel();
+        dateTextField3 = new calendario.DateTextField();
+        dateTextField4 = new calendario.DateTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         cbMes = new javax.swing.JComboBox();
@@ -98,12 +77,10 @@ public class Informes extends javax.swing.JInternalFrame {
         btVolver4 = new javax.swing.JButton();
         btCrear3 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        tfFechaTipo1 = new javax.swing.JTextField();
-        tfFechaTipo2 = new javax.swing.JTextField();
         lRight1 = new javax.swing.JLabel();
-        lRight3 = new javax.swing.JLabel();
-        lRight2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        dateTextField5 = new calendario.DateTextField();
+        dateTextField6 = new calendario.DateTextField();
         jPanel5 = new javax.swing.JPanel();
         btVolver5 = new javax.swing.JButton();
         btCrear5 = new javax.swing.JButton();
@@ -114,26 +91,15 @@ public class Informes extends javax.swing.JInternalFrame {
         rbMenos = new javax.swing.JRadioButton();
         lRight9 = new javax.swing.JLabel();
 
+        tfFechaInicio3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfFechaInicio2KeyTyped(evt);
+            }
+        });
+
         setTitle("Crear informes");
 
         jLabel3.setText("Fecha inicio:");
-
-        tfFechaInicio1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfFechaInicio1ActionPerformed(evt);
-            }
-        });
-        tfFechaInicio1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfFechaInicio1KeyTyped(evt);
-            }
-        });
-
-        tfFechaFin1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfFechaFin1KeyTyped(evt);
-            }
-        });
 
         btVolver1.setText("Volver");
         btVolver1.addActionListener(new java.awt.event.ActionListener() {
@@ -151,34 +117,30 @@ public class Informes extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Fecha fin:");
 
-        lRight5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/right.png"))); // NOI18N
+        dateTextField1.setText("dateTextField1");
 
-        lRight6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/right.png"))); // NOI18N
+        dateTextField2.setText("dateTextField2");
 
         javax.swing.GroupLayout pItinerariosFechaLayout = new javax.swing.GroupLayout(pItinerariosFecha);
         pItinerariosFecha.setLayout(pItinerariosFechaLayout);
         pItinerariosFechaLayout.setHorizontalGroup(
             pItinerariosFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pItinerariosFechaLayout.createSequentialGroup()
-                .addContainerGap(199, Short.MAX_VALUE)
-                .addComponent(btCrear2)
-                .addGap(18, 18, 18)
-                .addComponent(btVolver1)
-                .addContainerGap())
             .addGroup(pItinerariosFechaLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
                 .addGroup(pItinerariosFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addGroup(pItinerariosFechaLayout.createSequentialGroup()
-                        .addComponent(tfFechaFin1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pItinerariosFechaLayout.createSequentialGroup()
+                        .addContainerGap(199, Short.MAX_VALUE)
+                        .addComponent(btCrear2)
                         .addGap(18, 18, 18)
-                        .addComponent(lRight6))
-                    .addComponent(jLabel3)
+                        .addComponent(btVolver1))
                     .addGroup(pItinerariosFechaLayout.createSequentialGroup()
-                        .addComponent(tfFechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lRight5)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(58, 58, 58)
+                        .addGroup(pItinerariosFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel3)
+                            .addComponent(dateTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 259, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         pItinerariosFechaLayout.setVerticalGroup(
             pItinerariosFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,16 +148,12 @@ public class Informes extends javax.swing.JInternalFrame {
                 .addGap(60, 60, 60)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pItinerariosFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lRight5)
-                    .addComponent(tfFechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(dateTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pItinerariosFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfFechaFin1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lRight6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addComponent(dateTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addGroup(pItinerariosFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVolver1)
                     .addComponent(btCrear2))
@@ -220,48 +178,32 @@ public class Informes extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Fecha inicio:");
 
-        tfFechaInicio2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfFechaInicio2KeyTyped(evt);
-            }
-        });
-
-        tfFechaFin2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfFechaFin2KeyTyped(evt);
-            }
-        });
-
         jLabel4.setText("Fecha fin:");
 
-        lRight7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/right.png"))); // NOI18N
+        dateTextField3.setText("dateTextField3");
 
-        lRight8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/right.png"))); // NOI18N
+        dateTextField4.setText("dateTextField4");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(199, Short.MAX_VALUE)
-                .addComponent(btCrear1)
-                .addGap(18, 18, 18)
-                .addComponent(btVolver2)
-                .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel1)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfFechaInicio2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfFechaFin2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(199, Short.MAX_VALUE)
+                        .addComponent(btCrear1)
                         .addGap(18, 18, 18)
+                        .addComponent(btVolver2))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lRight7)
-                            .addComponent(lRight8))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1)
+                            .addComponent(dateTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,16 +211,12 @@ public class Informes extends javax.swing.JInternalFrame {
                 .addGap(60, 60, 60)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfFechaInicio2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lRight7))
+                .addComponent(dateTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lRight8)
-                    .addComponent(tfFechaFin2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addComponent(dateTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVolver2)
                     .addComponent(btCrear1))
@@ -384,47 +322,30 @@ public class Informes extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Fecha inicio:");
 
-        tfFechaTipo1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfFechaTipo1KeyTyped(evt);
-            }
-        });
-
-        tfFechaTipo2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfFechaTipo2ActionPerformed(evt);
-            }
-        });
-        tfFechaTipo2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfFechaTipo2KeyTyped(evt);
-            }
-        });
-
         lRight1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/right.png"))); // NOI18N
 
-        lRight3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/right.png"))); // NOI18N
-
-        lRight2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/right.png"))); // NOI18N
-
         jLabel10.setText("Fecha fin:");
+
+        dateTextField5.setText("dateTextField5");
+
+        dateTextField6.setText("dateTextField6");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btCrear3)
+                .addGap(18, 18, 18)
+                .addComponent(btVolver4)
+                .addContainerGap())
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dateTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfFechaTipo2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfFechaTipo1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lRight3)
-                            .addComponent(lRight2)))
                     .addComponent(jLabel7)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(cbTipoSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -432,12 +353,6 @@ public class Informes extends javax.swing.JInternalFrame {
                         .addComponent(lRight1))
                     .addComponent(jLabel8))
                 .addContainerGap(189, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btCrear3)
-                .addGap(18, 18, 18)
-                .addComponent(btVolver4)
-                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,18 +365,13 @@ public class Informes extends javax.swing.JInternalFrame {
                     .addComponent(cbTipoSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
+                .addGap(11, 11, 11)
+                .addComponent(dateTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfFechaTipo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lRight2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfFechaTipo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lRight3))
-                .addGap(0, 34, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dateTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVolver4)
                     .addComponent(btCrear3))
@@ -579,17 +489,9 @@ public class Informes extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfFechaInicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfFechaInicio1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfFechaInicio1ActionPerformed
-
     private void btVolver3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolver3ActionPerformed
         this.hide();
     }//GEN-LAST:event_btVolver3ActionPerformed
-
-    private void tfFechaTipo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfFechaTipo2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfFechaTipo2ActionPerformed
 
     private void cbTipoSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoSesionActionPerformed
         if (cbTipoSesion.getSelectedItem() == "Roca" || cbTipoSesion.getSelectedItem() == "Físico" || cbTipoSesion.getSelectedItem() == "Rocódromo"){
@@ -604,7 +506,7 @@ public class Informes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btVolver4ActionPerformed
 
     private void btCrear3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrear3ActionPerformed
-        if (lRight1.isVisible() && lRight2.isVisible() && lRight3.isVisible()){
+        if (lRight1.isVisible()){
             
             //Introducir aquí el código para generar informes
             
@@ -614,22 +516,6 @@ public class Informes extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
         }
     }//GEN-LAST:event_btCrear3ActionPerformed
-
-    private void tfFechaTipo1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfFechaTipo1KeyTyped
-        if (!"".equals(tfFechaTipo1.getText())){
-            lRight2.setVisible(true);
-        } else {
-            lRight2.setVisible(false);
-        }
-    }//GEN-LAST:event_tfFechaTipo1KeyTyped
-
-    private void tfFechaTipo2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfFechaTipo2KeyTyped
-        if (!"".equals(tfFechaTipo2.getText())){
-            lRight3.setVisible(true);
-        } else {
-            lRight3.setVisible(false);
-        }
-    }//GEN-LAST:event_tfFechaTipo2KeyTyped
 
     private void tfAnnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfAnnoKeyTyped
          if (!"".equals(tfAnno.getText())){
@@ -651,32 +537,11 @@ public class Informes extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void tfFechaInicio1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfFechaInicio1KeyTyped
-        if (!"".equals(tfFechaInicio1.getText())){
-            lRight5.setVisible(true);
-        } else {
-            lRight5.setVisible(false);
-        }
-    }//GEN-LAST:event_tfFechaInicio1KeyTyped
-
-    private void tfFechaFin1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfFechaFin1KeyTyped
-         if (!"".equals(tfFechaFin1.getText())){
-            lRight6.setVisible(true);
-        } else {
-            lRight6.setVisible(false);
-        }
-    }//GEN-LAST:event_tfFechaFin1KeyTyped
-
     private void btCrear2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrear2ActionPerformed
-         if (lRight5.isVisible() && lRight6.isVisible()){
-            
+      
             //Introducir aquí el código para generar informes
             
             this.hide();
-            
-        } else {
-            JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
-        }
     }//GEN-LAST:event_btCrear2ActionPerformed
 
     private void btVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolver1ActionPerformed
@@ -687,32 +552,11 @@ public class Informes extends javax.swing.JInternalFrame {
         this.hide();
     }//GEN-LAST:event_btVolver2ActionPerformed
 
-    private void tfFechaInicio2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfFechaInicio2KeyTyped
-         if (!"".equals(tfFechaInicio2.getText())){
-            lRight7.setVisible(true);
-        } else {
-            lRight7.setVisible(false);
-        }
-    }//GEN-LAST:event_tfFechaInicio2KeyTyped
-
-    private void tfFechaFin2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfFechaFin2KeyTyped
-         if (!"".equals(tfFechaFin2.getText())){
-            lRight8.setVisible(true);
-        } else {
-            lRight8.setVisible(false);
-        }
-    }//GEN-LAST:event_tfFechaFin2KeyTyped
-
     private void btCrear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrear1ActionPerformed
-        if (lRight7.isVisible() && lRight8.isVisible()){
             
             //Introducir aquí el código para generar informes
             
             this.hide();
-            
-        } else {
-            JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
-        }
     }//GEN-LAST:event_btCrear1ActionPerformed
 
     private void btVolver5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolver5ActionPerformed
@@ -747,6 +591,10 @@ public class Informes extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cbDificultad1ActionPerformed
 
+    private void tfFechaInicio2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfFechaInicio2KeyTyped
+       
+    }//GEN-LAST:event_tfFechaInicio2KeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCrear1;
@@ -762,6 +610,12 @@ public class Informes extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cbDificultad2;
     private javax.swing.JComboBox cbMes;
     private javax.swing.JComboBox cbTipoSesion;
+    private calendario.DateTextField dateTextField1;
+    private calendario.DateTextField dateTextField2;
+    private calendario.DateTextField dateTextField3;
+    private calendario.DateTextField dateTextField4;
+    private calendario.DateTextField dateTextField5;
+    private calendario.DateTextField dateTextField6;
     private javax.swing.ButtonGroup grupo;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -779,24 +633,13 @@ public class Informes extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lRight1;
-    private javax.swing.JLabel lRight2;
-    private javax.swing.JLabel lRight3;
     private javax.swing.JLabel lRight4;
-    private javax.swing.JLabel lRight5;
-    private javax.swing.JLabel lRight6;
-    private javax.swing.JLabel lRight7;
-    private javax.swing.JLabel lRight8;
     private javax.swing.JLabel lRight9;
     private javax.swing.JPanel pItinerariosFecha;
     private javax.swing.JTabbedPane pSesionesFecha;
     private javax.swing.JRadioButton rbMas;
     private javax.swing.JRadioButton rbMenos;
     private javax.swing.JTextField tfAnno;
-    private javax.swing.JTextField tfFechaFin1;
-    private javax.swing.JTextField tfFechaFin2;
-    private javax.swing.JTextField tfFechaInicio1;
-    private javax.swing.JTextField tfFechaInicio2;
-    private javax.swing.JTextField tfFechaTipo1;
-    private javax.swing.JTextField tfFechaTipo2;
+    private javax.swing.JTextField tfFechaInicio3;
     // End of variables declaration//GEN-END:variables
 }
