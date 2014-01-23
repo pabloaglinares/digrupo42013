@@ -15,7 +15,6 @@ import datos.pojos.Sesion;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,22 +44,24 @@ public class PruebasDatos {
         cfg.setFecha1Intervalo(sdf.parse("12/02/1980 12:35"));
         cfg.setFecha2Intervalo(sdf.parse("12/02/1999 12:35"));
         ConfiguracionDAO.CONFIGURACION_DAO.insertConfiguracion(cfg);
+        Configuracion cfg2 = ConfiguracionDAO.CONFIGURACION_DAO.getConfiguracion();
+        System.out.println(cfg2.getNombre()+" "+sdf.format(cfg2.getFecha1Intervalo()));
     }
     private static void pruebaSesion(SimpleDateFormat sdf, UtilesBD logica) throws ParseException {
-        Sesion sesion = new Sesion();
-        sesion.setDescripcion("algo descriptivo1");
-        sesion.setTipo(Sesion.TipoSesion.ROCA);
-        sesion.setFecha_hora1(sdf.parse("12/02/1989 12:35"));
-        sesion.setFecha_hora2(sdf.parse("12/02/1989 14:35"));
-        SesionDAO.SESION_DAO.insertSesion(sesion);
-        sesion.setDescripcion("algo descriptivo2");
-        sesion.setTipo(Sesion.TipoSesion.ROCA);
-        sesion.setFecha_hora1(sdf.parse("13/02/1989 12:35"));
-        sesion.setFecha_hora2(sdf.parse("13/02/1989 14:35"));
-        SesionDAO.SESION_DAO.insertSesion(sesion);
-        List<Sesion> sesiones = SesionDAO.SESION_DAO.getSesionBetweenFechas(sdf.parse("1/02/1989 23:35"),sdf.parse("27/02/1989 23:35"));
-        for (Sesion ses: sesiones) System.out.println(ses.getDescripcion());
-        sesiones = SesionDAO.SESION_DAO.getSesionByFecha(sdf.parse("12/02/1989 12:35"), Comparador.NE);
+//        Sesion sesion = new Sesion();
+//        sesion.setDescripcion("algo descriptivo1");
+//        sesion.setTipo(Sesion.TipoSesion.ROCA);
+//        sesion.setFecha_hora1(sdf.parse("12/02/1989 12:35"));
+//        sesion.setFecha_hora2(sdf.parse("12/02/1989 14:35"));
+//        SesionDAO.SESION_DAO.insertSesion(sesion);
+//        sesion.setDescripcion("algo descriptivo2");
+//        sesion.setTipo(Sesion.TipoSesion.ROCA);
+//        sesion.setFecha_hora1(sdf.parse("13/02/1989 12:35"));
+//        sesion.setFecha_hora2(sdf.parse("13/02/1989 14:35"));
+//        SesionDAO.SESION_DAO.insertSesion(sesion);
+        List<Sesion> sesiones = SesionDAO.SESION_DAO.getAllSesion();
+        for (Sesion ses: sesiones) System.out.println(ses.getDescripcion()+" "+sdf.format(ses.getFecha_hora1()));
+        sesiones = SesionDAO.SESION_DAO.getSesionByFecha(sdf.parse("12/02/1989 12:35"), Comparador.E);
         for (Sesion ses: sesiones) System.out.println(ses.getDescripcion());
     }
     private static void pruebaItinerario(SimpleDateFormat sdf, UtilesBD logica) throws ParseException {

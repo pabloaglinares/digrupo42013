@@ -63,9 +63,9 @@ public enum ItinerarioDAO {
         String sql = "SELECT DISTINCT p_itinerario, nombre, localizacion, dificultad, imagen "
                 + "FROM Itinerario WHERE p_itinerario IN "
                 + "(SELECT a_itinerario FROM FechaItinerario "
-                + "WHERE date(fecha,'unixepoch')" + cmp + " date(?,'unixepoch'))";
+                + "WHERE fecha" + cmp + " ?)";
         try (PreparedStatement st = utiles.getConnection().prepareStatement(sql)) {
-            st.setLong(1, utiles.getSegundosParaSQLite3(fecha));
+            st.setString(1,utiles.getDateForHSQLDB(fecha));
             ResultSet rs = st.executeQuery();
             cargaItinerarios(rs, itinerarios);
         } catch (SQLException ex) {
@@ -79,10 +79,10 @@ public enum ItinerarioDAO {
         String sql = "SELECT DISTINCT p_itinerario, nombre, localizacion, dificultad, imagen "
                 + "FROM Itinerario WHERE p_itinerario IN "
                 + "(SELECT a_itinerario FROM FechaItinerario "
-                + "WHERE date(fecha,'unixepoch') BETWEEN date(?,'unixepoch') AND date(?,'unixepoch'))";
+                + "WHERE fecha BETWEEN ? AND ?)";
         try (PreparedStatement st = utiles.getConnection().prepareStatement(sql)) {
-            st.setLong(1, utiles.getSegundosParaSQLite3(fecha1));
-            st.setLong(2, utiles.getSegundosParaSQLite3(fecha2));
+            st.setString(1,utiles.getDateForHSQLDB(fecha1));
+            st.setString(2,utiles.getDateForHSQLDB(fecha2));
             ResultSet rs = st.executeQuery();
             cargaItinerarios(rs, itinerarios);
         } catch (SQLException ex) {
@@ -94,10 +94,9 @@ public enum ItinerarioDAO {
     public List<Itinerario> getItinerariosByDificultad(String dificultad) {
         List<Itinerario> itinerarios = new ArrayList<>();
         String sql = "SELECT DISTINCT p_itinerario, nombre, localizacion, dificultad, imagen "
-                + "FROM Itinerario WHERE p_itinerario IN "
-                + "(SELECT a_itinerario FROM FechaItinerario "
-                + "WHERE date(fecha,'unixepoch') BETWEEN date(?,'unixepoch') AND date(?,'unixepoch'))";
+                + "FROM Itinerario WHERE dificultad = ?";
         try (PreparedStatement st = utiles.getConnection().prepareStatement(sql)) {
+            st.setString(1, dificultad);
             ResultSet rs = st.executeQuery();
             cargaItinerarios(rs, itinerarios);
         } catch (SQLException ex) {
@@ -137,6 +136,7 @@ public enum ItinerarioDAO {
                 updateImagenItinerario(itinerario, img);
                 updateNombreYDificultad(itinerario);
         }
+        utiles.saveData();
 
     }
 
@@ -177,7 +177,7 @@ public enum ItinerarioDAO {
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        utiles.saveData();
     }
 
     /**
@@ -191,7 +191,7 @@ public enum ItinerarioDAO {
                 + "VALUES (?,?)";
         try (PreparedStatement pst = utiles.getConnection().prepareStatement(sql)) {
             pst.setInt(1, itinerario.getpItinerario());
-            pst.setLong(2, utiles.getSegundosParaSQLite3(fecha));
+            pst.setString(2,utiles.getDateForHSQLDB(fecha));
             pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
@@ -231,6 +231,7 @@ public enum ItinerarioDAO {
         for (Date fecha : itinerario.getFechasResolucion()) {
             insertaFechaItinerario(itinerario, fecha);
         }
+        utiles.saveData();
     }
 
     /**
@@ -273,6 +274,7 @@ public enum ItinerarioDAO {
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        utiles.saveData();
 
     }
 
@@ -287,7 +289,7 @@ public enum ItinerarioDAO {
             pst.setInt(1, itinerario.getpItinerario());
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                itinerario.addFechaResolucion(utiles.getDateDeSQLite3(rs.getLong("fecha")));
+                itinerario.addFechaResolucion(rs.getDate("fecha"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
@@ -333,5 +335,6 @@ public enum ItinerarioDAO {
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        utiles.saveData();
     }
 }

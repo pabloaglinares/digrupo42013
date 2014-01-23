@@ -11,21 +11,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Singleton que contiene los métodos comunes para trabajar con la base de datos,
- * así como aquellos cuya finalidad no es recuperar o insertar objetos Itinerario, Sesion
- * o Configuracion en la BD.
- * 
+ * Singleton que contiene los métodos comunes para trabajar con la base de
+ * datos, así como aquellos cuya finalidad no es recuperar o insertar objetos
+ * Itinerario, Sesion o Configuracion en la BD.
+ *
  * @author Andrés Traspuesto Lanza
  */
 public enum UtilesBD {
 
     INSTANCE;
     private Connection connection; //conexión con la base de datos
+    
+    private final static SimpleDateFormat sdfYMD_hms = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private final static SimpleDateFormat sdfYMD = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
      * Constructor del singleton encargado de la lógica de interacción con la
@@ -33,9 +37,17 @@ public enum UtilesBD {
      */
     UtilesBD() {
         try {
-            Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:entrenoBD");
-            createTables();
+            Class.forName("org.hsqldb.jdbcDriver");
+            if (new File("db"+File.separatorChar+ "escalador.db.script").exists()) {
+                //Si la base de datos ya existe conecta
+                connection = DriverManager.getConnection("jdbc:hsqldb:file:db" + File.separatorChar + "escalador.db;ifexists=true;shutdown=true","sa","");
+                
+            } else {
+                //Si la base de datos no existe la crea
+                connection = DriverManager.getConnection("jdbc:hsqldb:file:db" + File.separatorChar + "escalador.db;shutdown=true","sa","");
+                createTables();
+                
+            }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -47,6 +59,11 @@ public enum UtilesBD {
      * @return
      */
     public Connection getConnection() {
+        try {
+            connection = DriverManager.getConnection("jdbc:hsqldb:file:db" + File.separatorChar + "escalador.db;ifexists=true;shutdown=true","sa","");
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return connection;
     }
 
@@ -55,51 +72,52 @@ public enum UtilesBD {
      */
     public void createTables() {
         try (Statement st = connection.createStatement()) {
-            st.executeUpdate("PRAGMA foreign_keys = ON");
-            String sql = "CREATE TABLE IF NOT EXISTS TipoSesion( "
-                    + "p_tipo INTEGER PRIMARY KEY, "
-                    + "tipo TEXT COLLATE NOCASE, UNIQUE(tipo)ON CONFLICT ABORT "
+            String sql = "CREATE TABLE TipoSesion(\n"
+                    + "p_tipo INTEGER IDENTITY,\n"
+                    + "tipo VARCHAR(12), \n"
+                    + "UNIQUE(tipo)\n"
                     + ")";
             st.executeUpdate(sql);
-            sql = "CREATE TABLE IF NOT EXISTS Sesion ( "
-                    + "p_sesion INTEGER PRIMARY KEY, "
-                    + "fecha_inicio INTEGER, "
-                    + "fecha_fin INTEGER, "
-                    + "descripcion TEXT, "
-                    + "a_tipo INTEGER, "
-                    + "FOREIGN KEY(a_tipo) REFERENCES TipoSesion(p_tipo), "
-                    + "UNIQUE (fecha_inicio, fecha_fin) ON CONFLICT ABORT "
+            sql = "CREATE TABLE Sesion (\n"
+                    + "p_sesion INTEGER IDENTITY,\n"
+                    + "fh_inicio DATETIME,\n"
+                    + "fh_fin DATETIME,\n"
+                    + "descripcion VARCHAR(200),\n"
+                    + "a_tipo INTEGER,\n"
+                    + "FOREIGN KEY(a_tipo) REFERENCES TipoSesion(p_tipo),\n"
+                    + "UNIQUE (fh_inicio, fh_fin)\n"
                     + ")";
             st.executeUpdate(sql);
-            sql = "CREATE TABLE IF NOT EXISTS Itinerario ( "
-                    + "p_itinerario INTEGER PRIMARY KEY, "
-                    + "nombre TEXT COLLATE NOCASE, "
-                    + "localizacion TEXT COLLATE NOCASE, "
-                    + "dificultad TEXT, "
-                    + "imagen TEXT,"
-                    + " UNIQUE (nombre, localizacion) ON CONFLICT ABORT "
+            sql = "CREATE TABLE Itinerario (\n"
+                    + "p_itinerario INTEGER IDENTITY,\n"
+                    + "nombre VARCHAR(150),\n"
+                    + "localizacion VARCHAR(200),\n"
+                    + "dificultad VARCHAR(10),\n"
+                    + "imagen VARCHAR(200),\n"
+                    + "UNIQUE (nombre, localizacion) \n"
                     + ")";
             st.executeUpdate(sql);
-            sql = "CREATE TABLE IF NOT EXISTS FechaItinerario ( "
-                    + "fecha INTEGER, "
-                    + "a_itinerario INTEGER, "
-                    + "FOREIGN KEY(a_itinerario) REFERENCES Itinerario(p_itinerario), "
-                    + "PRIMARY KEY(fecha, a_itinerario) "
+            sql = "CREATE TABLE FechaItinerario (\n"
+                    + "fecha DATE,\n"
+                    + "a_itinerario INTEGER,\n"
+                    + "FOREIGN KEY(a_itinerario) REFERENCES Itinerario(p_itinerario),\n"
+                    + "PRIMARY KEY(fecha, a_itinerario)\n"
                     + ")";
             st.executeUpdate(sql);
-            sql = "CREATE TABLE IF NOT EXISTS Configuracion( "
-                    + "p_configuracion INTEGER PRIMARY KEY, "
-                    + "nombre TEXT COLLATE NOCASE, "
-                    + "apellidos TEXT COLLATE NOCASE, "
-                    + "fecha1 INTEGER, "
-                    + "fecha2 INTEGER, "
-                    + "UNIQUE (nombre, apellidos) ON CONFLICT ABORT "
+            sql = "CREATE TABLE Configuracion(\n"
+                    + "p_configuracion INTEGER IDENTITY,\n"
+                    + "nombre VARCHAR(50),\n"
+                    + "apellidos VARCHAR(100),\n"
+                    + "fecha1 DATE,\n"
+                    + "fecha2 DATE,\n"
+                    + "UNIQUE (nombre, apellidos)\n"
                     + ")";
             st.executeUpdate(sql);
-            sql = "INSERT OR IGNORE INTO TipoSesion (tipo) VALUES ( ";
+            sql = "INSERT INTO TipoSesion (tipo) VALUES ( ";
             st.executeUpdate(sql + "'Físico')");
             st.executeUpdate(sql + "'Rocódromo')");
             st.executeUpdate(sql + "'Roca')");
+            st.execute("shutdown");
 
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
@@ -110,7 +128,13 @@ public enum UtilesBD {
             path.mkdir();
         }
     }
-
+    public void saveData() {
+        try {
+            connection.createStatement().execute("shutdown");
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * Método que calcula el rendimiento del usuario
      *
@@ -127,18 +151,28 @@ public enum UtilesBD {
      * @param segundos
      * @return
      */
-    public Date getDateDeSQLite3(long segundos) {
+    public Date getDateDeHSQLDB(long segundos) {
         return new Date(segundos * 1000);
     }
 
     /**
-     * Devuelve el tiempo en segundos desde 1/1/1970 a partir de un Date
+     * Devuelve l literal correspondiente a la fecha indicada en formato
+     * año-mes-dia horas:minutos:segundos
      *
      * @param date
      * @return
      */
-    public long getSegundosParaSQLite3(Date date) {
-        return date.getTime() / 1000;
+    public String getDateTimeForHSQLDB(Date date) {
+        return sdfYMD_hms.format(date);
+    }
+    /**
+     * Devuelve el literal correspondiente a la fecha indicada en formato
+     * año-mes-dia
+     * @param date
+     * @return 
+     */
+    public String getDateForHSQLDB(Date date) {
+        return sdfYMD.format(date);
     }
 
     /**
@@ -187,10 +221,10 @@ public enum UtilesBD {
      * @return
      */
     private float calcPtosPorSesiones() {
-        String sql = "SELECT SUM(fecha_fin-fecha_inicio)/3600 "
-                + "FROM Sesion WHERE DATE(fecha_inicio,'unixepoch') BETWEEN "
-                + "DATE((SELECT fecha1 FROM configuracion WHERE p_configuracion = 1),'unixepoch') "
-                + "AND DATE((SELECT fecha2 FROM configuracion WHERE p_configuracion = 1),'unixepoch')";
+        String sql = "SELECT SUM(fh_fin-fh_inicio)/3600 "
+                + "FROM Sesion WHERE fh_inicio BETWEEN "
+                + "(SELECT fecha1 FROM configuracion WHERE p_configuracion = 1) "
+                + "AND (SELECT fecha2 FROM configuracion WHERE p_configuracion = 1)";
         float weight = 0.5F;
         return getPoints(sql, weight);
     }
@@ -203,10 +237,10 @@ public enum UtilesBD {
      */
     private float calcPtosPorItinerario() {
         String sql = "SELECT AVG(nIte) FROM (SELECT COUNT(*) AS nIte FROM FechaItinerario "
-                + "WHERE DATE(fecha,'unixepoch') BETWEEN "
-                + "DATE((SELECT fecha1 FROM configuracion WHERE p_configuracion = 1),'unixepoch') "
-                + "AND DATE((SELECT fecha2 FROM configuracion WHERE p_configuracion = 1),'unixepoch')"
-                + " GROUP BY STRFTIME('%W', fecha))";
+                + "WHERE fecha BETWEEN "
+                + "(SELECT fecha1 FROM configuracion WHERE p_configuracion = 1) "
+                + "AND (SELECT fecha2 FROM configuracion WHERE p_configuracion = 1)"
+                + " GROUP BY WEEK(fecha))";
         float weight = 0.25F;
         return getPoints(sql, weight);
     }

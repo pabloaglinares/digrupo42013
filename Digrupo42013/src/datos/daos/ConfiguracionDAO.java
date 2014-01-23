@@ -4,6 +4,7 @@ package datos.daos;
 
 import datos.UtilesBD;
 import datos.pojos.Configuracion;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,8 +41,8 @@ public enum ConfiguracionDAO {
             while (rs.next()) {
                 usr.setNombre(rs.getString("nombre"));
                 usr.setApellidos(rs.getString("apellidos"));
-                usr.setFecha1Intervalo(utiles.getDateDeSQLite3(rs.getLong("fecha1")));
-                usr.setFecha2Intervalo(utiles.getDateDeSQLite3(rs.getLong("fecha2")));
+                usr.setFecha1Intervalo(rs.getDate("fecha1"));
+                usr.setFecha2Intervalo(rs.getDate("fecha2"));
 
             }
         } catch (SQLException ex) {
@@ -81,8 +82,9 @@ public enum ConfiguracionDAO {
      */
     public void insertConfiguracion(Configuracion usr) {
         String sql = "INSERT INTO Configuracion (nombre, apellidos, fecha1, fecha2) "
-                + "VALUES(?,?,?,?)";
+                + "VALUES(?, ?, ?, ?)";
         executeUpdateOnConfiguracion(sql, usr);
+        
     }
     /*
      ========================================================================
@@ -99,15 +101,17 @@ public enum ConfiguracionDAO {
      * @param usr
      */
     private void executeUpdateOnConfiguracion(String sql, Configuracion usr) {
-        try (PreparedStatement pst = utiles.getConnection().prepareStatement(sql)) {
+        Connection connection = utiles.getConnection();
+        try (PreparedStatement pst = connection.prepareStatement(sql)) {
             pst.setString(1, usr.getNombre());
             pst.setString(2, usr.getApellidos());
-            pst.setLong(3, utiles.getSegundosParaSQLite3(usr.getFecha1Intervalo()));
-            pst.setLong(4, utiles.getSegundosParaSQLite3(usr.getFecha2Intervalo()));
+            pst.setString(3, utiles.getDateForHSQLDB(usr.getFecha1Intervalo()));
+            pst.setString(4, utiles.getDateForHSQLDB(usr.getFecha2Intervalo()));
             pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        utiles.saveData();
     }
 
 }
