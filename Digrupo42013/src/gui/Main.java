@@ -8,6 +8,11 @@ package gui;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
+import java.net.URL;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,6 +34,27 @@ public class Main extends javax.swing.JFrame {
             Image retValue = Toolkit.getDefaultToolkit().
             getImage(ClassLoader.getSystemResource("resources/escalador_peq.png"));
             return retValue;
+    }
+    
+     public void mostrarAyuda() {
+        try {
+            // Carga el fichero de ayuda
+            File fichero = new File("help/help_set.hs");
+            URL hsURL = fichero.toURI().toURL();
+            // Crea el HelpSet y el HelpBroker
+            HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+            HelpBroker hb = helpset.createHelpBroker();
+            // Pone ayuda a item de menu al pulsarlo.
+            hb.enableHelpOnButton(miAyuda, "portada", helpset);
+            hb.enableHelpKey(this.getRootPane(),"portada", helpset);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Se ha producido un error "
+                    + "intentando mostrar la ayuda.\n" + e.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE, null);
+            e.printStackTrace();
+
+        }
     }
 
     /**
@@ -231,6 +257,7 @@ public class Main extends javax.swing.JFrame {
 
     private void miAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAyudaActionPerformed
         // TODO add your handling code here:
+        mostrarAyuda();
     }//GEN-LAST:event_miAyudaActionPerformed
 
     private void miSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSalirActionPerformed

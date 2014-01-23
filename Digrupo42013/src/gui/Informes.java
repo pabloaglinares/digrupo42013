@@ -6,6 +6,10 @@
 
 package gui;
 
+import java.io.File;
+import java.net.URL;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,7 +23,7 @@ public class Informes extends javax.swing.JInternalFrame {
      */
     public Informes() {
         initComponents();
-        
+        mostrarAyuda();
         lRight1.setVisible(false);
         lRight2.setVisible(false);
         lRight3.setVisible(false);
@@ -29,6 +33,26 @@ public class Informes extends javax.swing.JInternalFrame {
         lRight7.setVisible(false);
         lRight8.setVisible(false);
         lRight9.setVisible(false);
+    }
+    
+    public void mostrarAyuda() {
+        try {
+            // Carga el fichero de ayuda
+            File fichero = new File("help/help_set.hs");
+            URL hsURL = fichero.toURI().toURL();
+            // Crea el HelpSet y el HelpBroker
+            HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+            HelpBroker hb = helpset.createHelpBroker();
+            // Pone ayuda a F1 al pulsarlo.
+            hb.enableHelpKey(this.getRootPane(),"informes", helpset);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Se ha producido un error "
+                    + "intentando mostrar la ayuda.\n" + e.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE, null);
+            e.printStackTrace();
+
+        }
     }
 
     /**
