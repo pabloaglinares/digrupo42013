@@ -98,7 +98,7 @@ public enum UtilesBD {
                     + ")";
             st.executeUpdate(sql);
             sql = "CREATE TABLE FechaItinerario (\n"
-                    + "fecha DATE,\n"
+                    + "fecha DATETIME,\n"
                     + "a_itinerario INTEGER,\n"
                     + "FOREIGN KEY(a_itinerario) REFERENCES Itinerario(p_itinerario),\n"
                     + "PRIMARY KEY(fecha, a_itinerario)\n"
@@ -108,8 +108,8 @@ public enum UtilesBD {
                     + "p_configuracion INTEGER IDENTITY,\n"
                     + "nombre VARCHAR(50),\n"
                     + "apellidos VARCHAR(100),\n"
-                    + "fecha1 DATE,\n"
-                    + "fecha2 DATE,\n"
+                    + "fecha1 DATETIME,\n"
+                    + "fecha2 DATETIME,\n"
                     + "UNIQUE (nombre, apellidos)\n"
                     + ")";
             st.executeUpdate(sql);
@@ -221,11 +221,12 @@ public enum UtilesBD {
      * @return
      */
     private float calcPtosPorSesiones() {
-        String sql = "SELECT SUM(fh_fin-fh_inicio)/3600 "
+        String sql = "SELECT SUM(datediff('ss', fh_inicio,fh_fin))/3600 "
                 + "FROM Sesion WHERE fh_inicio BETWEEN "
-                + "(SELECT fecha1 FROM configuracion WHERE p_configuracion = 1) "
-                + "AND (SELECT fecha2 FROM configuracion WHERE p_configuracion = 1)";
+                + "(SELECT fecha1 FROM configuracion WHERE p_configuracion = 0) "
+                + "AND (SELECT fecha2 FROM configuracion WHERE p_configuracion = 0)";
         float weight = 0.5F;
+                System.out.println("sesiones");
         return getPoints(sql, weight);
     }
 
@@ -236,13 +237,30 @@ public enum UtilesBD {
      * @return
      */
     private float calcPtosPorItinerario() {
-        String sql = "SELECT AVG(nIte) FROM (SELECT COUNT(*) AS nIte FROM FechaItinerario "
-                + "WHERE fecha BETWEEN "
-                + "(SELECT fecha1 FROM configuracion WHERE p_configuracion = 1) "
-                + "AND (SELECT fecha2 FROM configuracion WHERE p_configuracion = 1)"
-                + " GROUP BY WEEK(fecha))";
-        float weight = 0.25F;
-        return getPoints(sql, weight);
+        String sql ="SELECT count(*) from FechaItinerario";
+        float num = calcFloat(sql);
+        sql ="SELECT (WEEK(fecha2) - WEEK(fecha1)) AS nWeek FROM Configuracion";
+        num /= calcFloat(sql);
+        num *= 0.25F;
+        num = num > 5? 5 : num;
+        return num;
+    }
+    /**
+     * Devuelve un float a partir de una consulta sql que solo puede devolver
+     * un único resultado que será numérico
+     * @param sql
+     * @return 
+     */
+    private float calcFloat(String sql) {
+        float n = 0;
+        try (PreparedStatement pst = connection.prepareStatement(sql)) {
+            ResultSet rs = pst.executeQuery();
+            rs.next();
+            n = rs.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return n;
     }
 
     /**
@@ -257,7 +275,7 @@ public enum UtilesBD {
         try (PreparedStatement pst = connection.prepareStatement(sql)) {
             ResultSet rs = pst.executeQuery();
             rs.next();
-            ptos = rs.getInt(1) * weight;
+            ptos = rs.getFloat(1) * weight;
             ptos = ptos > 5 ? 5 : ptos;
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);

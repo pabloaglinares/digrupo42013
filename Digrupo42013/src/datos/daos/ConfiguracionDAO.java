@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,8 +42,8 @@ public enum ConfiguracionDAO {
             while (rs.next()) {
                 usr.setNombre(rs.getString("nombre"));
                 usr.setApellidos(rs.getString("apellidos"));
-                usr.setFecha1Intervalo(rs.getDate("fecha1"));
-                usr.setFecha2Intervalo(rs.getDate("fecha2"));
+                usr.setFecha1Intervalo(rs.getTimestamp("fecha1"));
+                usr.setFecha2Intervalo(rs.getTimestamp("fecha2"));
 
             }
         } catch (SQLException ex) {
@@ -105,8 +106,8 @@ public enum ConfiguracionDAO {
         try (PreparedStatement pst = connection.prepareStatement(sql)) {
             pst.setString(1, usr.getNombre());
             pst.setString(2, usr.getApellidos());
-            pst.setString(3, utiles.getDateForHSQLDB(usr.getFecha1Intervalo()));
-            pst.setString(4, utiles.getDateForHSQLDB(usr.getFecha2Intervalo()));
+            pst.setTimestamp(3, new Timestamp(usr.getFecha1Intervalo().getTime()));
+            pst.setTimestamp(4, new Timestamp(usr.getFecha2Intervalo().getTime()));
             pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);

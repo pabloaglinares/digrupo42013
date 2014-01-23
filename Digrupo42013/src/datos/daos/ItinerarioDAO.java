@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -65,7 +66,7 @@ public enum ItinerarioDAO {
                 + "(SELECT a_itinerario FROM FechaItinerario "
                 + "WHERE fecha" + cmp + " ?)";
         try (PreparedStatement st = utiles.getConnection().prepareStatement(sql)) {
-            st.setString(1,utiles.getDateForHSQLDB(fecha));
+            st.setTimestamp(1,new Timestamp(fecha.getTime()));
             ResultSet rs = st.executeQuery();
             cargaItinerarios(rs, itinerarios);
         } catch (SQLException ex) {
@@ -81,8 +82,8 @@ public enum ItinerarioDAO {
                 + "(SELECT a_itinerario FROM FechaItinerario "
                 + "WHERE fecha BETWEEN ? AND ?)";
         try (PreparedStatement st = utiles.getConnection().prepareStatement(sql)) {
-            st.setString(1,utiles.getDateForHSQLDB(fecha1));
-            st.setString(2,utiles.getDateForHSQLDB(fecha2));
+            st.setTimestamp(1,new Timestamp(fecha1.getTime()));
+            st.setTimestamp(2,new Timestamp(fecha2.getTime()));
             ResultSet rs = st.executeQuery();
             cargaItinerarios(rs, itinerarios);
         } catch (SQLException ex) {
@@ -191,7 +192,7 @@ public enum ItinerarioDAO {
                 + "VALUES (?,?)";
         try (PreparedStatement pst = utiles.getConnection().prepareStatement(sql)) {
             pst.setInt(1, itinerario.getpItinerario());
-            pst.setString(2,utiles.getDateForHSQLDB(fecha));
+            pst.setTimestamp(2,new Timestamp(fecha.getTime()));
             pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
@@ -289,7 +290,7 @@ public enum ItinerarioDAO {
             pst.setInt(1, itinerario.getpItinerario());
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                itinerario.addFechaResolucion(rs.getDate("fecha"));
+                itinerario.addFechaResolucion(rs.getTimestamp("fecha"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);

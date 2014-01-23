@@ -159,7 +159,7 @@ public enum SesionDAO {
         Connection connection = utiles.getConnection();
         try (PreparedStatement pst = connection.prepareStatement(sql)) {
             pst.setTimestamp(1, new Timestamp(sesion.getFecha_hora1().getTime()));
-            pst.setTimestamp(2, new Timestamp(sesion.getFecha_hora1().getTime()));
+            pst.setTimestamp(2, new Timestamp(sesion.getFecha_hora2().getTime()));
             pst.setInt(3, sesion.getTipo().ordinal());
             pst.setString(4, sesion.getDescripcion());
             if (sesion.getpSesion() > 0) {
