@@ -1,9 +1,0 @@
-﻿<index version="1.0">
-		<indexitem text="Menu principal" target="portada"/>
-		<indexitem text="Alta/modifica Itinerario" target="altaitinerario"/>
-		<indexitem text="Listado Itinerario" target="listadoitinerario"/>
-		<indexitem text="Alta/modifica Sesiones" target="altasesiones"/>	
-		<indexitem text="Listado Sesiones" target="listadosesiones"/>
-		<indexitem text="Generación Informes" target="informes"/>
-        <indexitem text="Configuración" target="configuracion"/>
-</index>
