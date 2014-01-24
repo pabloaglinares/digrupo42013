@@ -1,0 +1,11 @@
+﻿<toc version="1.0">
+	<tocitem text="Menú principal" target="portada">
+				<tocitem text="Informes" target="informes"/>
+                <tocitem text="Gestión de productos" target="gestion_productos"/>
+                <tocitem text="Gestión de clientes" target="gestion_clientes"/>
+                <tocitem text="Ventas" target="ventas">
+				</tocitem>
+	<!-- De aquí cuelgan las ayudas de los botones del menú principal: 
+	ventas, clientes, productos, etc.-->
+	</tocitem>
+</toc>
