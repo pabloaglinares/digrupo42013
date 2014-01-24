@@ -7,9 +7,11 @@
 package gui.tablasesion;
 
 import datos.daos.SesionDAO;
+import datos.pojos.Sesion;
 import gui.botonestablas.ButtonCellEditor;
 import gui.botonestablas.ButtonListener;
 import gui.botonestablas.ButtonRender;
+import gui.botonestablas.Fila;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
@@ -24,16 +26,15 @@ import javax.swing.JTable;
 public class TablaSesiones extends JTable {
 
     private ButtonListener handleOnModificar; //Clase que se encarga de manejar el click sobre el botón de editar
-    private ButtonListener handleOnB; //Clase que se encarga de manejar el click sobre el botón de editar
     private SesionTableModel model; 
     private final String[] cabecera = {"Fecha", "Hora inicio", "Hora fin", "Descripción","Dificultad", "Borrar", "Editar"};
-    private List<FilaSesion> filas = new ArrayList<>();
+    private List<Fila<Sesion>> filas = new ArrayList<>();
     /**
      * Devuelve un objeto tabla
      */
     public TablaSesiones() {
         
-        model = new SesionTableModel(cabecera, filas, this);
+        model = new SesionTableModel(cabecera, filas);
 
         this.setModel(model);
         //Determino quién debe encargarse de mostrar las celdas con botones

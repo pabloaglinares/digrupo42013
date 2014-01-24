@@ -23,27 +23,27 @@ public enum CheckCampo {
     /**
      * Para comprobar el campo de nombre del usuario
      */
-    NOMBRE_CONFIGURACION("(\\w|\\s){1,50}"),
+    NOMBRE_CONFIGURACION(".{1,50}"),
     /**
      * Para comprobar el campo de apellido del usuario
      */
-    APELLIDOS("(\\w|\\s){1,100}"),
+    APELLIDOS(".{1,100}"),
     /**
      * Para comprobar el campo de nombre del itinerario
      */
-    NOMBRE_ITINERARIO("(\\w|\\s){1,150}"),
+    NOMBRE_ITINERARIO(".{1,150}"),
     /**
      * Para comprobar el campo de localización del itinerario
      */
-    LOCALIZACION("(\\w|\\s){1,200}"),
+    LOCALIZACION(".{1,200}"),
     /**
      * Para comprobar el campo de imágen del itinerario
      */
-    IMAGEN("(\\w|\\s){1,200}"),
+    IMAGEN(".{1,200}"),
     /**
      * Para comprobar el campo de descripción de la sesión
      */
-    DESCRIPCION("(\\w|\\s){1,200}");
+    DESCRIPCION(".{1,200}");
             
     private String patron;
 

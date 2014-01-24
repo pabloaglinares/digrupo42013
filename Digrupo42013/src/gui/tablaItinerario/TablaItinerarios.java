@@ -1,9 +1,11 @@
 package gui.tablaItinerario;
 
 
+import datos.pojos.Itinerario;
 import gui.botonestablas.ButtonCellEditor;
 import gui.botonestablas.ButtonListener;
 import gui.botonestablas.ButtonRender;
+import gui.botonestablas.Fila;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ public class TablaItinerarios extends JTable {
     private ButtonListener handleOnModificar; //Clase que se encarga de manejar el click sobre el botón de editar
     private ItinerariosTableModel model; 
     private final String[] cabecera = {"Nombre", "Localización", "Dificultad", "Borrar", "Editar"};
-    private List<FilaItinerario> filas = new ArrayList<>();
+    private List<Fila<Itinerario>> filas = new ArrayList<>();
     /**
      * Devuelve un objeto tabla
      */

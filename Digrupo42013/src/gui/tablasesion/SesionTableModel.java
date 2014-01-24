@@ -1,6 +1,7 @@
 package gui.tablasesion;
 
 import datos.pojos.Sesion;
+import gui.botonestablas.Fila;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import javax.swing.table.AbstractTableModel;
 public class SesionTableModel extends AbstractTableModel {
     private final static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private final static SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
-    private TablaSesiones tabla;
+   // private TablaSesiones tabla;
     /**
      * Nombre de las columnas.
      */
@@ -23,7 +24,7 @@ public class SesionTableModel extends AbstractTableModel {
     /**
      * Datos.
      */
-    private List<FilaSesion> filas = new ArrayList<>();
+    private List<Fila<Sesion>> filas = new ArrayList<>();
 
     /**
      * Constructor.
@@ -31,19 +32,12 @@ public class SesionTableModel extends AbstractTableModel {
      * @param columnNames Nombres de las columnas
      * @param filas
      */
-    public SesionTableModel(String[] columnNames, List<FilaSesion> filas, TablaSesiones tabla) {
+    public SesionTableModel(String[] columnNames, List<Fila<Sesion>> filas) {
         this.cabecera = columnNames;
         this.filas = filas;
-        this.tabla = tabla;
     }
 
-    public TablaSesiones getTabla() {
-        return tabla;
-    }
-
-    public void setTabla(TablaSesiones tabla) {
-        this.tabla = tabla;
-    }
+   
     
     /**
      * Devuelve el nombre de la columna
@@ -88,19 +82,19 @@ public class SesionTableModel extends AbstractTableModel {
         Object obj = null;
         switch (columnIndex) {
             case 0:
-                obj = sdf.format(filas.get(rowIndex).getSesion().getFecha_hora1());
+                obj = sdf.format(filas.get(rowIndex).getElemento().getFecha_hora1());
                 break;
             case 1:
-                obj = sdf2.format(filas.get(rowIndex).getSesion().getFecha_hora1());
+                obj = sdf2.format(filas.get(rowIndex).getElemento().getFecha_hora1());
                 break;
             case 2:
-                obj = sdf2.format(filas.get(rowIndex).getSesion().getFecha_hora2());
+                obj = sdf2.format(filas.get(rowIndex).getElemento().getFecha_hora2());
                 break;
             case 3:
-                obj = filas.get(rowIndex).getSesion().getTipo().getNombre();
+                obj = filas.get(rowIndex).getElemento().getTipo().getNombre();
                 break;
             case 4:
-                obj = filas.get(rowIndex).getSesion().getDescripcion();
+                obj = filas.get(rowIndex).getElemento().getDescripcion();
                 break;
             case 5:
                 obj = filas.get(rowIndex).getBtnEliminar();
@@ -131,7 +125,7 @@ public class SesionTableModel extends AbstractTableModel {
     }
 
     /**
-     * Evita que se puedan editar las celdas
+     * Se sobreescribe para que se pueda hacer click en los botones
      *
      * @param rowIndex
      * @param columnIndex
@@ -159,7 +153,7 @@ public class SesionTableModel extends AbstractTableModel {
      * @return
      */
     public Sesion getSesion(int row) {
-        return filas.get(row).getSesion();
+        return filas.get(row).getElemento();
     }
 
     /**
@@ -168,7 +162,7 @@ public class SesionTableModel extends AbstractTableModel {
      * @param s
      */
     public void addSesion(Sesion s) {
-        filas.add(new FilaSesion(s));
+        filas.add(new Fila(s));
         fireTableDataChanged();
     }
 
@@ -180,7 +174,7 @@ public class SesionTableModel extends AbstractTableModel {
     public void setSesion(List<Sesion> sesiones) {
         filas = new ArrayList<>();
         for (Sesion s : sesiones) {
-            filas.add(new FilaSesion(s));
+            filas.add(new Fila(s));
         }
         fireTableDataChanged();
     }
@@ -192,8 +186,8 @@ public class SesionTableModel extends AbstractTableModel {
      */
     public List<Sesion> getSesions() {
         List<Sesion> sesiones = new ArrayList<>();
-        for (FilaSesion fs : filas) {
-            sesiones.add(fs.getSesion());
+        for (Fila<Sesion> fs : filas) {
+            sesiones.add(fs.getElemento());
         }
         return sesiones;
     }

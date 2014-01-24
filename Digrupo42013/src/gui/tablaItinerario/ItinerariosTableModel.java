@@ -2,6 +2,7 @@ package gui.tablaItinerario;
 
 
 import datos.pojos.Itinerario;
+import gui.botonestablas.Fila;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -22,7 +23,7 @@ public class ItinerariosTableModel extends AbstractTableModel {
     /**
      * Datos.
      */
-    private List<FilaItinerario> filas = new ArrayList<>();
+    private List<Fila<Itinerario>> filas = new ArrayList<>();
 
     /**
      * Constructor.
@@ -30,7 +31,7 @@ public class ItinerariosTableModel extends AbstractTableModel {
      * @param columnNames Nombres de las columnas
      * @param filas
      */
-    public ItinerariosTableModel(String[] columnNames, List<FilaItinerario> filas) {
+    public ItinerariosTableModel(String[] columnNames, List<Fila<Itinerario>> filas) {
         this.cabecera = columnNames;
         this.filas = filas;
     }
@@ -87,13 +88,13 @@ public class ItinerariosTableModel extends AbstractTableModel {
         Object obj = null;
         switch (columnIndex) {
             case 0:
-                obj = filas.get(rowIndex).getItinerario().getNombre();
+                obj = filas.get(rowIndex).getElemento().getNombre();
                 break;
             case 1:
-                obj = filas.get(rowIndex).getItinerario().getLocalizacion();
+                obj = filas.get(rowIndex).getElemento().getLocalizacion();
                 break;
             case 2:
-                obj = filas.get(rowIndex).getItinerario().getDifucultad();
+                obj = filas.get(rowIndex).getElemento().getDifucultad();
                 break;
             case 3:
                 obj = filas.get(rowIndex).getBtnEliminar();
@@ -106,14 +107,14 @@ public class ItinerariosTableModel extends AbstractTableModel {
         return obj;
     }
     /**
-     * Se sobreescribe para evitar que las celdas sean editables
+     * Se sobreescribe para que puedan llegar los click a los botones
      * @param rowIndex
      * @param columnIndex
      * @return 
      */
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return false;
+        return true;
     }
 
     /**
@@ -131,14 +132,14 @@ public class ItinerariosTableModel extends AbstractTableModel {
      * @return 
      */
     public Itinerario getItinerario(int row) {
-        return filas.get(row).getItinerario();
+        return filas.get(row).getElemento();
     }
     /**
      * Añade el itinerario al final de la tabla
      * @param it 
      */
     public void addItinerario(Itinerario it) {
-        filas.add(new FilaItinerario(it));
+        filas.add(new Fila<>(it));
         fireTableDataChanged();
     }
     /**
@@ -148,7 +149,7 @@ public class ItinerariosTableModel extends AbstractTableModel {
     public void setItinerarios(List<Itinerario> its) {
         filas = new ArrayList<>();
         for(Itinerario it: its) {
-            filas.add(new FilaItinerario(it));
+            filas.add(new Fila<>(it));
         }
         fireTableDataChanged();
     }
@@ -158,8 +159,8 @@ public class ItinerariosTableModel extends AbstractTableModel {
      */
     public List<Itinerario> getItinerarios() {
         List<Itinerario> its = new ArrayList<>();
-        for(FilaItinerario fit: filas) {
-            its.add(fit.getItinerario());
+        for(Fila<Itinerario> fit: filas) {
+            its.add(fit.getElemento());
         }
         return its;
     }
