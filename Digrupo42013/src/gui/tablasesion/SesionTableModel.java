@@ -13,9 +13,9 @@ import javax.swing.table.AbstractTableModel;
  * @author Andrés Traspuesto Lanza
  */
 public class SesionTableModel extends AbstractTableModel {
-
     private final static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private final static SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
+    private TablaSesiones tabla;
     /**
      * Nombre de las columnas.
      */
@@ -31,11 +31,20 @@ public class SesionTableModel extends AbstractTableModel {
      * @param columnNames Nombres de las columnas
      * @param filas
      */
-    public SesionTableModel(String[] columnNames, List<FilaSesion> filas) {
+    public SesionTableModel(String[] columnNames, List<FilaSesion> filas, TablaSesiones tabla) {
         this.cabecera = columnNames;
         this.filas = filas;
+        this.tabla = tabla;
     }
 
+    public TablaSesiones getTabla() {
+        return tabla;
+    }
+
+    public void setTabla(TablaSesiones tabla) {
+        this.tabla = tabla;
+    }
+    
     /**
      * Devuelve el nombre de la columna
      *
@@ -130,7 +139,7 @@ public class SesionTableModel extends AbstractTableModel {
      */
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return false;
+        return true;
     }
 
     /**

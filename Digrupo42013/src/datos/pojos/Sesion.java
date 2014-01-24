@@ -46,6 +46,12 @@ public class Sesion implements Serializable{
             return nombre;
         }
 
+        @Override
+        public String toString() {
+            return nombre;
+        }
+        
+
     }
     private Date fecha_hora1;
 

@@ -5,14 +5,10 @@
  */
 package gui;
 
-import java.io.File;
-import java.net.URL;
-import javax.help.HelpBroker;
-import javax.help.HelpSet;
-import javax.swing.JOptionPane;
+import enlace_datos_gui.BridgeSesion;
 
 public class ListadoSesiones extends javax.swing.JInternalFrame {
-
+    private BridgeSesion bridge = BridgeSesion.BRIDGE;
     /**
      * Creates new form Itinerarios
      */
@@ -30,6 +26,9 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
         dtfFecha1.setVisible(false);
         dtfFecha2.setVisible(false);
         cbTipoSesion.setVisible(false);
+        //Añado la tabla al bridge para que al insertar o modificar sesions se actualice la tabla
+        bridge.addTablaSesiones(tbListado);
+        bridge.loadAllSesion();
     }
     
    
@@ -124,7 +123,7 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
                             .addComponent(labelFecha2)
                             .addComponent(dtfFecha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btVolver)

@@ -28,6 +28,26 @@ public enum SesionDAO {
     
      /*
      ========================================================================
+     ............................DELETES.....................................
+     ========================================================================
+     */
+     /**
+      * Elimina la Sesion pasada como parámetro de la bd
+      * @param sesion 
+      */
+    public void deleteSesion(Sesion sesion) {
+        String sql = "DELETE FROM Sesion WHERE p_sesion = ?";
+        try (PreparedStatement st = utiles.getConnection().prepareStatement(sql)) {
+            st.setInt(1, sesion.getpSesion());
+            st.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        utiles.saveData();
+    }
+    
+     /*
+     ========================================================================
      ............................SELECTS.....................................
      ========================================================================
      */

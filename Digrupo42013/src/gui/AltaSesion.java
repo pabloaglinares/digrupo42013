@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package gui;
 
-import java.io.File;
-import java.net.URL;
-import javax.help.HelpBroker;
-import javax.help.HelpSet;
-import javax.swing.JOptionPane;
+import datos.pojos.Sesion;
+import enlace_datos_gui.BridgeSesion;
+import enlace_datos_gui.CheckCampo;
+import java.util.Arrays;
+import java.util.Date;
 
 /**
  *
@@ -18,8 +17,19 @@ import javax.swing.JOptionPane;
  */
 public class AltaSesion extends javax.swing.JInternalFrame {
 
-    
-    
+    /**
+     * Este array almacena el estado de los campos, que será true si el
+     * contenido es válido. La correspondencia con cada campo es la siguiente: 
+     * <ul>
+     * <li>0 tfHoraComienzo</li>
+     * <li>1 tfHoraFin</li>
+     * <li>2 tfDescripcion</li>
+     * </ul>
+     *   
+     */
+    private boolean[] camposCorrectos = {false, false, false};
+    private BridgeSesion bridge = BridgeSesion.BRIDGE;
+
     /**
      * Creates new form AltaSesion
      */
@@ -29,11 +39,8 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         this.setResizable(true);
         this.setClosable(true);
         this.setMaximizable(true);
-        
-        
-        
+
     }
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,7 +65,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         tfDescripcion = new javax.swing.JTextField();
         btVolver = new javax.swing.JButton();
         btGuardar = new javax.swing.JButton();
-        dateTextField1 = new calendario.DateTextField();
+        dtfFecha = new calendario.DateTextField();
 
         setTitle("Alta/Modif Sesiones");
         setMinimumSize(new java.awt.Dimension(300, 335));
@@ -68,13 +75,31 @@ public class AltaSesion extends javax.swing.JInternalFrame {
 
         labelHoraComienzo.setText("Hora Comienzo:");
 
+        tfHoraComienzo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfHoraComienzoKeyReleased(evt);
+            }
+        });
+
         labelHoraFin.setText("Hora Fin:");
+
+        tfHoraFin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfHoraFinKeyReleased(evt);
+            }
+        });
 
         labelTipoSesion.setText("Tipo Sesión:");
 
-        cbTipoSesion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Físico", "Rocódromo", "Roca" }));
+        cbTipoSesion.setModel(new javax.swing.DefaultComboBoxModel(Sesion.TipoSesion.values()));
 
         labelDescripcion.setText("Descripción:");
+
+        tfDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfDescripcionKeyReleased(evt);
+            }
+        });
 
         btVolver.setText("Volver");
         btVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -89,15 +114,16 @@ public class AltaSesion extends javax.swing.JInternalFrame {
                 btGuardarActionPerformed(evt);
             }
         });
+        btGuardar.setEnabled(false);
 
-        dateTextField1.setText("dateTextField1");
+        dtfFecha.setText("dateTextField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelDescripcion, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelTipoSesion, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -106,21 +132,19 @@ public class AltaSesion extends javax.swing.JInternalFrame {
                     .addComponent(labelFechaSesion, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfHoraComienzo)
-                            .addComponent(tfHoraFin)
-                            .addComponent(cbTipoSesion, 0, 141, Short.MAX_VALUE)
-                            .addComponent(tfDescripcion))
-                        .addGap(0, 13, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btGuardar)
                         .addGap(18, 18, 18)
                         .addComponent(btVolver))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(dateTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfHoraComienzo)
+                            .addComponent(tfHoraFin)
+                            .addComponent(cbTipoSesion, 0, 141, Short.MAX_VALUE)
+                            .addComponent(tfDescripcion)
+                            .addComponent(dtfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 3, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -132,7 +156,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
                 .addContainerGap(45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelFechaSesion)
-                    .addComponent(dateTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dtfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelHoraComienzo)
@@ -166,20 +190,57 @@ public class AltaSesion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btVolverActionPerformed
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-        // TODO add your handling code here:
-  
-                                                   
-    }//GEN-LAST:event_btGuardarActionPerformed
+        bridge.saveSesion(dtfFecha.getDate(), tfHoraComienzo.getText(), 
+                tfHoraFin.getText(), Sesion.TipoSesion.ROCA, tfDescripcion.getText());
+        cleanAll();
 
-   
+
+    }//GEN-LAST:event_btGuardarActionPerformed
+    /**
+     * maneja los eventos key released en el elemento tfHoraComienzo
+     *
+     * @param evt
+     */
+    private void tfHoraComienzoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfHoraComienzoKeyReleased
+        camposCorrectos[0] = CheckCampo.HORA_MINUTO.isCampoOk(tfHoraComienzo.getText());
+        btGuardar.setEnabled(CheckCampo.allOk(camposCorrectos));
+    }//GEN-LAST:event_tfHoraComienzoKeyReleased
+
+   /**
+     * Maneja los eventos key released en el elemento tfHoraFin
+     *
+     * @param evt
+     */
+    private void tfHoraFinKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfHoraFinKeyReleased
+        camposCorrectos[1] = CheckCampo.HORA_MINUTO.isCampoOk(tfHoraFin.getText());
+        btGuardar.setEnabled(CheckCampo.allOk(camposCorrectos));
+    }//GEN-LAST:event_tfHoraFinKeyReleased
+    /**
+     * Maneja los eventos key released en el elemento tfDescripcion
+     *
+     * @param evt
+     */
+    private void tfDescripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDescripcionKeyReleased
+        camposCorrectos[2] = CheckCampo.DESCRIPCION.isCampoOk(tfDescripcion.getText());
+        btGuardar.setEnabled(CheckCampo.allOk(camposCorrectos));
+    }//GEN-LAST:event_tfDescripcionKeyReleased
+    private void cleanAll() {
+        Arrays.fill(camposCorrectos,0, camposCorrectos.length, false);
+        tfHoraComienzo.setText("");
+        tfHoraFin.setText("");
+        tfDescripcion.setText("");
+        cbTipoSesion.setSelectedIndex(0);
+        dtfFecha.setDate(new Date());
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btGuardar;
     private javax.swing.JButton btVolver;
     private javax.swing.JComboBox cbTipoSesion;
     private calendario.DatePropertyEditorSupport datePropertyEditorSupport1;
-    private calendario.DateTextField dateTextField1;
     private calendario.DateTextFieldBeanInfo dateTextFieldBeanInfo1;
     private calendario.DateTextFieldBeanInfo dateTextFieldBeanInfo2;
+    private calendario.DateTextField dtfFecha;
     private javax.swing.JLabel labelDescripcion;
     private javax.swing.JLabel labelFechaSesion;
     private javax.swing.JLabel labelHoraComienzo;

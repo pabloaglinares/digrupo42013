@@ -6,6 +6,7 @@
 
 package gui.tablasesion;
 
+import datos.daos.SesionDAO;
 import gui.botonestablas.ButtonCellEditor;
 import gui.botonestablas.ButtonListener;
 import gui.botonestablas.ButtonRender;
@@ -23,6 +24,7 @@ import javax.swing.JTable;
 public class TablaSesiones extends JTable {
 
     private ButtonListener handleOnModificar; //Clase que se encarga de manejar el click sobre el botón de editar
+    private ButtonListener handleOnB; //Clase que se encarga de manejar el click sobre el botón de editar
     private SesionTableModel model; 
     private final String[] cabecera = {"Fecha", "Hora inicio", "Hora fin", "Descripción","Dificultad", "Borrar", "Editar"};
     private List<FilaSesion> filas = new ArrayList<>();
@@ -31,7 +33,7 @@ public class TablaSesiones extends JTable {
      */
     public TablaSesiones() {
         
-        model = new SesionTableModel(cabecera, filas);
+        model = new SesionTableModel(cabecera, filas, this);
 
         this.setModel(model);
         //Determino quién debe encargarse de mostrar las celdas con botones
@@ -44,6 +46,9 @@ public class TablaSesiones extends JTable {
             @Override
             public void handleActionOnCellButton() {
                 int row = TablaSesiones.this.getSelectedRow();
+                //Borro la sesion de la BD
+                SesionDAO.SESION_DAO.deleteSesion(TablaSesiones.this.model.getSesion(row));
+                //Borro la sesion de la tabla
                 TablaSesiones.this.model.deleteSesion(row);
             }
         });
