@@ -17,6 +17,19 @@ import java.util.GregorianCalendar;
 public enum BridgeSesion {
     BRIDGE;
     private TablaSesiones tablaSesiones;
+    private SesionDAO dao = SesionDAO.SESION_DAO;
+    private int currentTab = 0;
+    private Date date1;
+    private Date date2;
+    private Sesion.TipoSesion tipo;
+    /**
+     * Asigna la pestaña actual
+     * @param currentTab
+     */
+    public void setCurrentTab(int currentTab) {
+        this.currentTab = currentTab;
+    }
+    
     
     /**
      * Añade un objeto TablaSesiones para que sea actualizado si se producen 
@@ -53,14 +66,49 @@ public enum BridgeSesion {
         Date fh_2 = setTimeInDate(horaFin, fecha);
         Sesion s = new Sesion(fecha, fecha, descripcion, tipo);
         SesionDAO.SESION_DAO.insertSesion(s);
-        if (tablaSesiones != null) ((SesionTableModel)tablaSesiones.getModel()).addSesion(s);
+        loadSesionProperly();
         
+    }
+    /**
+     * Se encarga de decidir con que sesiones hay que cargar la tabla en función
+     * de la pestaña en la que se encuentra la pantalla de listado
+     */
+    private void loadSesionProperly() {
+        switch (currentTab) {
+            case 0:
+                loadAllSesion();
+                break;
+            case 1:
+                loadByRange(date1, date2);
+                break;
+            case 2:
+                loadByTipo(tipo);
+                break;
+        }
     }
     /**
      * Carga en la tabla todas las sesiones contenidas en la base de datos
      */
     public void loadAllSesion() {
-        if (tablaSesiones != null) ((SesionTableModel)tablaSesiones.getModel()).setSesion(SesionDAO.SESION_DAO.getAllSesion());
+        if (tablaSesiones != null) ((SesionTableModel)tablaSesiones.getModel()).setSesion(dao.getAllSesion());
+    }
+    /**
+     * Carga en la tabla las sesiones cuyas fechas están entre date1 y date 2
+     * @param date1
+     * @param date2 
+     */
+    public void loadByRange(Date date1, Date date2) {
+        if(tablaSesiones != null && date1.before(date2)) {
+            this.date1 = date1;
+            this.date2 = date2;
+            ((SesionTableModel)tablaSesiones.getModel()).setSesion(dao.getSesionBetweenFechas(date1, date2));
+        }
+    }
+    public void loadByTipo(Sesion.TipoSesion tipo) {
+        if(tablaSesiones != null && tipo != null) {
+            this.tipo = tipo;
+            ((SesionTableModel)tablaSesiones.getModel()).setSesion(dao.getSesionByTipo(tipo));
+        }
     }
     /**
      * Devuelve un objeto date tras ajustar las horas y los minutos
