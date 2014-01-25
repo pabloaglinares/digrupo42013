@@ -6,12 +6,16 @@
 
 package gui;
 
+import gui.main.ImagenFondo;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
 import javax.help.HelpBroker;
 import javax.help.HelpSet;
+import javax.imageio.ImageIO;
+import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,15 +23,23 @@ import javax.swing.JOptionPane;
  * @author Gemo
  */
 public class Main extends javax.swing.JFrame {
+    
+    
+   
 
     /**
      * Creates new form Main
      */
     public Main() {
-        initComponents();
-        setLocationRelativeTo(null);
         
+        
+        initComponents();
+        dpEscritorio.setBorder(new ImagenFondo());
+        setLocationRelativeTo(null);
+       
     }
+    
+  
     
     
     @Override
@@ -314,10 +326,15 @@ public class Main extends javax.swing.JFrame {
                
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+   
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+        
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
