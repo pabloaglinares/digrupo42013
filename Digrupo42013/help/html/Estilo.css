@@ -1,0 +1,72 @@
+﻿/*Estilo base*/
+
+body{background-color: rgb(255,255,255);
+Font-Family: Segoe UI,Times New Roman, Arial;
+Font-size: 14px;
+letter-spacing: 2px;
+}
+
+/*Estilo de titulo principal*/
+h1{background-color: rgb(200,200,200);
+/*margin-top: 10px;*/
+/*margin-bottom: 14px;*/
+Font-size: 18px;
+color: rgb(256,256,256);
+font-weight: bold;
+text-transform: uppercase;
+letter-spacing: 2px;
+text-align: center;
+padding: 3px;
+}
+
+/*Estilos de subtitulos*/
+
+h3{background-color: rgb(230,230,230);
+margin-bottom: 7px;
+Font-size: 15px;
+color: rgb(70,70,70);
+font-weight: bold;
+letter-spacing: 2px;
+text-align: left;
+padding: 2px;
+}
+
+h3.type2{background-color: rgb(180,180,180);
+margin-bottom: 7px;
+Font-size: 15px;
+color: rgb(70,70,70);
+font-weight: bold;
+letter-spacing: 2px;
+text-align: left;
+padding: 2px;
+}
+
+/*Estilo parrafos (hereda de base)*/
+p{text-indent: 15px;
+padding: 5px;
+text-align: justify;
+} 
+
+/*Estilo opcional*/
+strong.rojo{font-weight: bold;
+color: rgb(170,7,7);
+}
+
+strong.oro{font-weight: bold;
+color: rgb(220,170,7);
+}
+
+strong.verde{font-weight: bold;
+color: rgb(7,170,7);
+}
+
+/*Otros*/
+/*Crea un rectangulo*/
+div.destacado{background: rgb(240,240,240);
+margin: 5px;
+padding: 5px;}
+
+div.centrar{text-align: center;}
+
+li{padding: 7px;
+text-align: justify;}

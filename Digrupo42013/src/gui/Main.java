@@ -258,7 +258,7 @@ public class Main extends javax.swing.JFrame {
 
     private void miAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAyudaActionPerformed
         // TODO add your handling code here:
-        //mostrarAyuda();
+      mostrarAyuda();
     }//GEN-LAST:event_miAyudaActionPerformed
 
     private void miSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSalirActionPerformed
