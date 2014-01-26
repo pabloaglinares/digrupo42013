@@ -6,18 +6,25 @@
 
 package gui;
 
+import enlace_datos_gui.BridgeItinerario;
+import enlace_datos_gui.CheckCampo;
 import java.io.File;
-import java.net.URL;
-import javax.help.HelpBroker;
-import javax.help.HelpSet;
-import javax.swing.JOptionPane;
+import java.util.Arrays;
+import java.util.Date;
+import javax.swing.JFileChooser;
 
 /**
  *
  * @author David
  */
 public class AltaItinerario extends javax.swing.JInternalFrame {
-
+    private BridgeItinerario bridge = BridgeItinerario.BRIDGE;
+    /**
+     * El elmento 0 contiene true si el campo nombre es válido,
+     * el elemento 1 contiene true si la localización es válida
+     */
+    private boolean[] camposOk = new boolean[2];
+    private File imagen = new File("imagenes/sinImagen.jpeg"); 
     /**
      * Creates new form AltaItinerario
      */
@@ -50,19 +57,31 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         spDificultadLetra = new javax.swing.JSpinner();
         spDificultadMasMenos = new javax.swing.JSpinner();
         labelFechaResolucion = new javax.swing.JLabel();
-        labelFoto = new javax.swing.JLabel();
-        tfUrlFoto = new javax.swing.JTextField();
         btVolver = new javax.swing.JButton();
         btGuardar = new javax.swing.JButton();
         dateTextField1 = new calendario.DateTextField();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        edpImagen = new javax.swing.JEditorPane();
 
         setTitle("Alta/Modif Itinerarios");
         setMinimumSize(new java.awt.Dimension(300, 335));
-        setPreferredSize(new java.awt.Dimension(300, 335));
 
         labelNombreItinerario.setText("Nombre:");
 
+        tfNombreItinerario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfNombreItinerarioKeyReleased(evt);
+            }
+        });
+
         labelLocalizacion.setText("Localización:");
+
+        tfLocalizacionItinerario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfLocalizacionItinerarioKeyReleased(evt);
+            }
+        });
 
         labelTipoItinerario.setText("Tipo:");
 
@@ -76,8 +95,6 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
 
         labelFechaResolucion.setText("Fecha Resolución:");
 
-        labelFoto.setText("Foto:");
-
         btVolver.setText("Volver");
         btVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,85 +103,118 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         });
 
         btGuardar.setText("Guardar");
+        btGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btGuardarActionPerformed(evt);
+            }
+        });
 
         dateTextField1.setText("dateTextField1");
+
+        jButton1.setText("Seleccionar imagen");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        edpImagen.setEditable(false);
+        edpImagen.setContentType("text/html"); // NOI18N
+        edpImagen.setText("<html>"
+            + "<head></head>"
+            + "<body >"
+            + "<img src = file:"+imagen.getAbsolutePath()+"  height=\"188\" width=\"188\"/>"
+            + "</body>\n</html>\n");
+        edpImagen.setMaximumSize(new java.awt.Dimension(200, 200));
+        edpImagen.setMinimumSize(new java.awt.Dimension(200, 200));
+        edpImagen.setPreferredSize(new java.awt.Dimension(200, 200));
+        jScrollPane2.setViewportView(edpImagen);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(20, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelFechaResolucion, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelFoto, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelDificultad, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelTipoItinerario, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelLocalizacion, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelNombreItinerario, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(spDificultadNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(spDificultadLetra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(spDificultadMasMenos))
-                            .addComponent(tfUrlFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbTipoItineracio, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfLocalizacionItinerario, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfNombreItinerario, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 14, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btGuardar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btVolver)))
-                .addContainerGap())
+                        .addGap(43, 43, 43)
+                        .addComponent(btVolver))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelFechaResolucion, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(labelDificultad, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(labelTipoItinerario, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(labelLocalizacion, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(labelNombreItinerario, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                    .addComponent(cbTipoItineracio, 0, 149, Short.MAX_VALUE)
+                                    .addComponent(tfLocalizacionItinerario, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                                    .addComponent(tfNombreItinerario, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dateTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(132, 132, 132)
+                                .addComponent(spDificultadNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spDificultadLetra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(spDificultadMasMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(13, 13, 13)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbTipoItineracio, tfLocalizacionItinerario, tfNombreItinerario, tfUrlFoto});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbTipoItineracio, tfLocalizacionItinerario, tfNombreItinerario});
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {spDificultadLetra, spDificultadMasMenos, spDificultadNumero});
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btGuardar, btVolver});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelNombreItinerario)
-                    .addComponent(tfNombreItinerario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelLocalizacion)
-                    .addComponent(tfLocalizacionItinerario, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelTipoItinerario)
-                    .addComponent(cbTipoItineracio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelDificultad)
-                    .addComponent(spDificultadNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spDificultadLetra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spDificultadMasMenos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelFechaResolucion)
-                    .addComponent(dateTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfUrlFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelFoto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelNombreItinerario)
+                            .addComponent(tfNombreItinerario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelLocalizacion)
+                            .addComponent(tfLocalizacionItinerario, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelTipoItinerario)
+                            .addComponent(cbTipoItineracio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelDificultad)
+                            .addComponent(spDificultadLetra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spDificultadMasMenos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spDificultadNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelFechaResolucion)
+                            .addComponent(dateTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVolver)
                     .addComponent(btGuardar))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbTipoItineracio, spDificultadLetra, spDificultadMasMenos, spDificultadNumero, tfLocalizacionItinerario, tfNombreItinerario, tfUrlFoto});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbTipoItineracio, spDificultadLetra, spDificultadMasMenos, spDificultadNumero, tfLocalizacionItinerario, tfNombreItinerario});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -173,15 +223,51 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         this.hide();
     }//GEN-LAST:event_btVolverActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JFileChooser fc = new JFileChooser();
+        int res = fc.showOpenDialog(this);
+        if (res == JFileChooser.APPROVE_OPTION) {
+            imagen = fc.getSelectedFile();
+            recargaImagen();
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void recargaImagen() {
+        edpImagen.setText("<html >"
+                + "<head></head>"
+                + "<body>"
+                + "<img src = file:"+imagen.getAbsolutePath()+"  height=\"188\" width=\"188\"/>"
+                + "</body>\n</html>\n");
+    }
+
+    private void tfNombreItinerarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNombreItinerarioKeyReleased
+        camposOk[0] = CheckCampo.NOMBRE_ITINERARIO.isCampoOk(tfNombreItinerario.getText());
+        btGuardar.setEnabled(CheckCampo.allOk(camposOk));
+    }//GEN-LAST:event_tfNombreItinerarioKeyReleased
+
+    private void tfLocalizacionItinerarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfLocalizacionItinerarioKeyReleased
+        camposOk[1] = CheckCampo.LOCALIZACION.isCampoOk(tfNombreItinerario.getText());
+        btGuardar.setEnabled(CheckCampo.allOk(camposOk));
+    }//GEN-LAST:event_tfLocalizacionItinerarioKeyReleased
+
+    private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
+        String dificultad = spDificultadNumero.getValue().toString().trim()+ spDificultadLetra.getValue().toString().trim() + spDificultadMasMenos.getValue().toString().trim();
+        bridge.saveItinerario(tfNombreItinerario.getText(), tfLocalizacionItinerario.getText(), dificultad, imagen,dateTextField1.getDate());
+        cleanAll();
+    }//GEN-LAST:event_btGuardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btGuardar;
     private javax.swing.JButton btVolver;
     private javax.swing.JComboBox cbTipoItineracio;
     private calendario.DateTextField dateTextField1;
+    private javax.swing.JEditorPane edpImagen;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelDificultad;
     private javax.swing.JLabel labelFechaResolucion;
-    private javax.swing.JLabel labelFoto;
     private javax.swing.JLabel labelLocalizacion;
     private javax.swing.JLabel labelNombreItinerario;
     private javax.swing.JLabel labelTipoItinerario;
@@ -190,6 +276,15 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
     private javax.swing.JSpinner spDificultadNumero;
     private javax.swing.JTextField tfLocalizacionItinerario;
     private javax.swing.JTextField tfNombreItinerario;
-    private javax.swing.JTextField tfUrlFoto;
     // End of variables declaration//GEN-END:variables
+
+    private void cleanAll() {
+        Arrays.fill(camposOk, false);
+        imagen = new File("imagenes/sinImagen.jpeg"); 
+        recargaImagen();
+        tfLocalizacionItinerario.setText("");
+        tfNombreItinerario.setText("");
+        dateTextField1.setDate(new Date());
+        cbTipoItineracio.setSelectedIndex(0);
+    }
 }

@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * Este singleton es un bridge que enlaza la capa gráfica con la de datos
+ * Este singleton es un bridge que enlaza la capa gráfica con la de datos Sesion
  * @author Andrés Traspuesto Lanza
  */
 public enum BridgeSesion {

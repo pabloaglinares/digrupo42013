@@ -101,8 +101,7 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Escalador");
         setIconImage(getIconImage());
-        setMinimumSize(new java.awt.Dimension(600, 500));
-        setPreferredSize(new java.awt.Dimension(600, 500));
+        setMinimumSize(new java.awt.Dimension(800, 600));
 
         dpEscritorio.setBackground(new java.awt.Color(204, 204, 204));
 

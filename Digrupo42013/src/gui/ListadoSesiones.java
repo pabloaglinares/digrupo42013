@@ -20,13 +20,6 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
         this.setResizable(true);
         this.setClosable(true);
         this.setMaximizable(true);
-        
-//        labelTipoSesion.setVisible(false);
-//        labelFecha1.setVisible(false);
-//        labelFecha2.setVisible(false);
-//        dtfFecha1.setVisible(false);
-//        dtfFecha2.setVisible(false);
-//        cbTipoSesion.setVisible(false);
         //Añado la tabla al bridge para que al insertar o modificar sesions se actualice la tabla
         bridge.addTablaSesiones(tbListado);
         bridge.loadAllSesion();
@@ -55,6 +48,23 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
         setTitle("Listado sesiones");
         setMinimumSize(new java.awt.Dimension(575, 380));
         setPreferredSize(new java.awt.Dimension(575, 380));
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         btVolver.setText("Volver");
         btVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -135,6 +145,10 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
                 bridge.loadByTipo(pnlTipoSesion.getTipoSesion());
         }
     }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        bridge.delTablaSesiones();
+    }//GEN-LAST:event_formInternalFrameClosing
     /**
      * @param args the command line arguments
      */

@@ -4,6 +4,7 @@ import datos.Comparador;
 import datos.ModItinerario;
 import datos.UtilesBD;
 import datos.pojos.Itinerario;
+import datos.pojos.Sesion;
 import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +27,47 @@ public enum ItinerarioDAO {
 
     ITINERARIO_DAO;
     private UtilesBD utiles = UtilesBD.INSTANCE;
-
+  /*
+     ========================================================================
+     ............................DELETES.....................................
+     ========================================================================
+     */
+     /**
+      * Elimina el itinerario pasado como parámetro de la bd
+      * @param itinerario 
+      */
+    public void deleteItinerario(Itinerario itinerario) {
+        String sql = "DELETE FROM Itinerario WHERE p_itinerario = ?";
+        try (PreparedStatement st = utiles.getConnection().prepareStatement(sql)) {
+            st.setInt(1, itinerario.getpItinerario());
+            st.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        deleteAllFechaOfItinerario(itinerario);
+        utiles.saveData();
+    }
+    public void deleteFechaItinerario(Itinerario itinerario, Date fecha) {
+        String sql = "DELETE FROM FechaItinerario WHERE a_itinerario = ? AND fecha = ?";
+        try (PreparedStatement st = utiles.getConnection().prepareStatement(sql)) {
+            st.setInt(1, itinerario.getpItinerario());
+            st.setTimestamp(2, new Timestamp(fecha.getTime()));
+            st.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        utiles.saveData();
+    }
+    public void deleteAllFechaOfItinerario(Itinerario itinerario) {
+        String sql = "DELETE FROM FechaItinerario WHERE a_itinerario = ?";
+        try (PreparedStatement st = utiles.getConnection().prepareStatement(sql)) {
+            st.setInt(1, itinerario.getpItinerario());
+            st.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        utiles.saveData();
+    }
     /*
      ========================================================================
      ............................SELECTS.....................................

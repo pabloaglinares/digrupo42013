@@ -100,7 +100,7 @@ public enum UtilesBD {
             sql = "CREATE TABLE FechaItinerario (\n"
                     + "fecha DATETIME,\n"
                     + "a_itinerario INTEGER,\n"
-                    + "FOREIGN KEY(a_itinerario) REFERENCES Itinerario(p_itinerario),\n"
+                    + "FOREIGN KEY(a_itinerario) REFERENCES Itinerario(p_itinerario) ON DELETE CASCADE,\n"
                     + "PRIMARY KEY(fecha, a_itinerario)\n"
                     + ")";
             st.executeUpdate(sql);
@@ -129,6 +129,7 @@ public enum UtilesBD {
         }
     }
     public void saveData() {
+        getConnection();
         try {
             connection.createStatement().execute("shutdown");
         } catch (SQLException ex) {

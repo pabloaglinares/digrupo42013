@@ -1,7 +1,9 @@
 package gui.tablaItinerario;
 
 
+import datos.daos.ItinerarioDAO;
 import datos.pojos.Itinerario;
+import enlace_datos_gui.BridgeSesion;
 import gui.botonestablas.ButtonCellEditor;
 import gui.botonestablas.ButtonListener;
 import gui.botonestablas.ButtonRender;
@@ -42,6 +44,7 @@ public class TablaItinerarios extends JTable {
             @Override
             public void handleActionOnCellButton() {
                 int row = TablaItinerarios.this.getSelectedRow();
+                ItinerarioDAO.ITINERARIO_DAO.deleteItinerario(TablaItinerarios.this.model.getItinerario(row));
                 TablaItinerarios.this.model.deleteItinerario(row);
             }
         });
