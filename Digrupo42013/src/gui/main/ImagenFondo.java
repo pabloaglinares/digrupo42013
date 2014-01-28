@@ -6,15 +6,12 @@
 
 package gui.main;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.border.Border;
 
@@ -30,7 +27,7 @@ public class ImagenFondo implements Border{
         try {
             URL imagePath = new URL(getClass().getResource("/resources/fondo.jpg").toString());
             back = ImageIO.read(imagePath);
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             
         }
     }

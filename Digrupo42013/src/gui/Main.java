@@ -9,13 +9,12 @@ package gui;
 import gui.main.ImagenFondo;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import javax.help.HelpBroker;
 import javax.help.HelpSet;
-import javax.imageio.ImageIO;
-import javax.swing.JDesktopPane;
+import javax.help.HelpSetException;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,6 +35,7 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         dpEscritorio.setBorder(new ImagenFondo());
         setLocationRelativeTo(null);
+        enlazarLaAyuda();
        
     }
     
@@ -49,7 +49,7 @@ public class Main extends javax.swing.JFrame {
             return retValue;
     }
     
-     public void mostrarAyuda() {
+     public void enlazarLaAyuda() {
         try {
             // Carga el fichero de ayuda
             File fichero = new File("help/help_set.hs");
@@ -61,11 +61,10 @@ public class Main extends javax.swing.JFrame {
             hb.enableHelpOnButton(miAyuda, "portada", helpset);
             hb.enableHelpKey(this.getRootPane(),"portada", helpset);
             
-        } catch (Exception e) {
+        } catch (IllegalArgumentException | MalformedURLException | HelpSetException e) {
             JOptionPane.showMessageDialog(this, "Se ha producido un error "
                     + "intentando mostrar la ayuda.\n" + e.getMessage(), "Error",
                     JOptionPane.ERROR_MESSAGE, null);
-            e.printStackTrace();
 
         }
     }
@@ -223,11 +222,6 @@ public class Main extends javax.swing.JFrame {
         miAyuda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         miAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ayuda2.png"))); // NOI18N
         miAyuda.setText("Ayuda...");
-        miAyuda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miAyudaActionPerformed(evt);
-            }
-        });
         mAyuda.add(miAyuda);
 
         miAcerca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/acerca.png"))); // NOI18N
@@ -266,11 +260,6 @@ public class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void miAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAyudaActionPerformed
-        // TODO add your handling code here:
-      mostrarAyuda();
-    }//GEN-LAST:event_miAyudaActionPerformed
 
     private void miSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSalirActionPerformed
         System.exit(0);

@@ -114,7 +114,7 @@ public class ItinerariosTableModel extends AbstractTableModel {
      */
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return true;
+        return columnIndex > 2;
     }
 
     /**
