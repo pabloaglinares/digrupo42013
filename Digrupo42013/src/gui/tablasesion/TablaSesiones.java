@@ -27,7 +27,7 @@ public class TablaSesiones extends JTable {
 
     private ButtonListener handleOnModificar; //Clase que se encarga de manejar el click sobre el botón de editar
     private SesionTableModel model; 
-    private final String[] cabecera = {"Fecha", "Hora inicio", "Hora fin", "Dificultad", "Descripción", "Borrar", "Editar"};
+    private final String[] cabecera = {"Fecha", "Hora inicio", "Hora fin", "Tipo", "Descripción", "Borrar", "Editar"};
     private List<Fila<Sesion>> filas = new ArrayList<>();
     /**
      * Devuelve un objeto tabla

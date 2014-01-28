@@ -6,6 +6,7 @@ import datos.daos.SesionDAO;
 import datos.pojos.Sesion;
 import gui.tablasesion.SesionTableModel;
 import gui.tablasesion.TablaSesiones;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -64,7 +65,8 @@ public enum BridgeSesion {
     public void saveSesion(Date fecha, String horaInicio, String horaFin, Sesion.TipoSesion tipo, String descripcion) {
         Date fh_1 = setTimeInDate(horaInicio, fecha);
         Date fh_2 = setTimeInDate(horaFin, fecha);
-        Sesion s = new Sesion(fecha, fecha, descripcion, tipo);
+        System.out.println(tipo.toString());
+        Sesion s = new Sesion(fh_1, fh_2, descripcion, tipo);
         SesionDAO.SESION_DAO.insertSesion(s);
         loadSesionProperly();
         
@@ -122,6 +124,8 @@ public enum BridgeSesion {
         String[] h_m = time.split(":");
         cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(h_m[0]));
         cal.set(Calendar.MINUTE, Integer.parseInt(h_m[1]));
+//       SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+//        System.out.println(sdf.format(cal.getTime()));
         return cal.getTime();
     }
     

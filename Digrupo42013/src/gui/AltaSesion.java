@@ -191,7 +191,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
         bridge.saveSesion(dtfFecha.getDate(), tfHoraComienzo.getText(), 
-                tfHoraFin.getText(), Sesion.TipoSesion.ROCA, tfDescripcion.getText());
+                tfHoraFin.getText(), (Sesion.TipoSesion)cbTipoSesion.getSelectedItem(), tfDescripcion.getText());
         cleanAll();
 
 
