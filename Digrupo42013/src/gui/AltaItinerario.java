@@ -89,9 +89,11 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
 
         labelDificultad.setText("Dificultad:");
 
+        spDificultadNumero.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+
         spDificultadLetra.setModel(new javax.swing.SpinnerListModel(new String[] {"a", "b", "c"}));
 
-        spDificultadMasMenos.setModel(new javax.swing.SpinnerListModel(new String[] {" -", "+"}));
+        spDificultadMasMenos.setModel(new javax.swing.SpinnerListModel(new String[] {" -", "+", " "}));
 
         labelFechaResolucion.setText("Fecha Resolución:");
 
