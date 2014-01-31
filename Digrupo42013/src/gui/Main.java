@@ -112,11 +112,11 @@ public final class Main extends javax.swing.JFrame {
         dpEscritorio.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel1.setForeground(new java.awt.Color(102, 51, 0));
         jLabel1.setText("Rendimiento:");
 
         lRendimiento.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lRendimiento.setForeground(new java.awt.Color(254, 254, 254));
+        lRendimiento.setForeground(new java.awt.Color(102, 51, 0));
         lRendimiento.setText("0");
 
         javax.swing.GroupLayout dpEscritorioLayout = new javax.swing.GroupLayout(dpEscritorio);
