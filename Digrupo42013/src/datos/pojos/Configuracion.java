@@ -21,7 +21,6 @@ public class Configuracion implements Serializable{
     private String apellidos;
     private Date fecha1Intervalo;
     private Date fecha2Intervalo;
-    private float rendimiento;
 
     /**
      * Constructor vacío
@@ -61,24 +60,6 @@ public class Configuracion implements Serializable{
 
     public void setFecha2Intervalo(Date fecha2Intervalo) {
         this.fecha2Intervalo = fecha2Intervalo;
-    }
-
-    /**
-     * Get the value of rendimiento
-     *
-     * @return the value of rendimiento
-     */
-    public float getRendimiento() {
-        return rendimiento;
-    }
-
-    /**
-     * Set the value of rendimiento
-     *
-     * @param rendimiento new value of rendimiento
-     */
-    public void setRendimiento(float rendimiento) {
-        this.rendimiento = rendimiento;
     }
 
     /**

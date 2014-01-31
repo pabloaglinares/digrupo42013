@@ -14,6 +14,7 @@ import java.util.Date;
  */
 public enum BridgeItinerario {
     BRIDGE;
+    private BridgeRendimiento bridgeRendimiento = BridgeRendimiento.RENDIMIENTO;
     private TablaItinerarios tabla;
     private ItinerarioDAO dao = ItinerarioDAO.ITINERARIO_DAO;
     private int currentTab = 0;
@@ -58,6 +59,7 @@ public enum BridgeItinerario {
         it.addFechaResolucion(date);
         dao.insertItinerario(it);
         loadItinerarioProperly(it);
+        bridgeRendimiento.setRendimiento();
         
     }
     /**

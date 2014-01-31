@@ -6,6 +6,9 @@
 
 package gui;
 
+import datos.UtilesBD;
+import enlace_datos_gui.BridgeRendimiento;
+import enlace_datos_gui.BridgeSesion;
 import gui.main.ImagenFondo;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -15,14 +18,16 @@ import java.net.URL;
 import javax.help.HelpBroker;
 import javax.help.HelpSet;
 import javax.help.HelpSetException;
+import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Gemo
  */
-public class Main extends javax.swing.JFrame {
-    
+public final class Main extends javax.swing.JFrame {
+    private final BridgeRendimiento bridgeRendimiento = BridgeRendimiento.RENDIMIENTO;
+    private final BridgeSesion bridgeSesion = BridgeSesion.BRIDGE;
     
    
 
@@ -30,13 +35,18 @@ public class Main extends javax.swing.JFrame {
      * Creates new form Main
      */
     public Main() {
-        
-        
         initComponents();
         dpEscritorio.setBorder(new ImagenFondo());
         setLocationRelativeTo(null);
         enlazarLaAyuda();
+        bridgeRendimiento.setLblRendimiento(lRendimiento);
+        bridgeRendimiento.setRendimiento();//Asigna el rendimiento
+        bridgeSesion.setMain(Main.this);
        
+    }
+
+    public JDesktopPane getDpEscritorio() {
+        return dpEscritorio;
     }
     
   
@@ -105,11 +115,11 @@ public class Main extends javax.swing.JFrame {
         dpEscritorio.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setText("Rendimiento:");
 
         lRendimiento.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lRendimiento.setForeground(new java.awt.Color(255, 255, 255));
+        lRendimiento.setForeground(new java.awt.Color(254, 254, 254));
         lRendimiento.setText("0");
 
         javax.swing.GroupLayout dpEscritorioLayout = new javax.swing.GroupLayout(dpEscritorio);
@@ -272,9 +282,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_miAltaItinerarioActionPerformed
 
     private void miAltaSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAltaSesionActionPerformed
-        AltaSesion alta = new AltaSesion();
-        dpEscritorio.add(alta);
-        alta.show();
+        bridgeSesion.openToInsertNewSesion();
+        
     }//GEN-LAST:event_miAltaSesionActionPerformed
 
     private void miAcercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAcercaActionPerformed

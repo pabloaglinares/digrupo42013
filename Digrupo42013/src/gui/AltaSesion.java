@@ -5,11 +5,14 @@
  */
 package gui;
 
+import calendario.DateTextField;
 import datos.pojos.Sesion;
 import enlace_datos_gui.BridgeSesion;
 import enlace_datos_gui.CheckCampo;
 import java.util.Arrays;
 import java.util.Date;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
 
 /**
  *
@@ -29,7 +32,8 @@ public class AltaSesion extends javax.swing.JInternalFrame {
      */
     private boolean[] camposCorrectos = {false, false, false};
     private BridgeSesion bridge = BridgeSesion.BRIDGE;
-
+     //true si la ventana está abierta en modo alta, false en modo editar
+    private volatile boolean modoAlta;
     /**
      * Creates new form AltaSesion
      */
@@ -39,7 +43,36 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         this.setResizable(true);
         this.setClosable(true);
         this.setMaximizable(true);
+        this.checkAll();
+    }
 
+    public boolean isModoAlta() {
+        return modoAlta;
+    }
+
+    public void setModoAlta(boolean modoAlta) {
+        this.modoAlta = modoAlta;
+    }
+
+    
+    public JComboBox getCbTipoSesion() {
+        return cbTipoSesion;
+    }
+
+    public DateTextField getDtfFecha() {
+        return dtfFecha;
+    }
+
+    public JTextField getTfDescripcion() {
+        return tfDescripcion;
+    }
+
+    public JTextField getTfHoraComienzo() {
+        return tfHoraComienzo;
+    }
+
+    public JTextField getTfHoraFin() {
+        return tfHoraFin;
     }
 
     /**
@@ -190,9 +223,12 @@ public class AltaSesion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btVolverActionPerformed
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-        bridge.saveSesion(dtfFecha.getDate(), tfHoraComienzo.getText(), 
-                tfHoraFin.getText(), (Sesion.TipoSesion)cbTipoSesion.getSelectedItem(), tfDescripcion.getText());
-        cleanAll();
+        bridge.saveSesion();
+        if(modoAlta){
+            cleanAll();
+        } else {
+            this.hide();
+        }
 
 
     }//GEN-LAST:event_btGuardarActionPerformed
@@ -205,7 +241,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         camposCorrectos[0] = CheckCampo.HORA_MINUTO.isCampoOk(tfHoraComienzo.getText());
         btGuardar.setEnabled(CheckCampo.allOk(camposCorrectos));
     }//GEN-LAST:event_tfHoraComienzoKeyReleased
-
+   
    /**
      * Maneja los eventos key released en el elemento tfHoraFin
      *
@@ -231,6 +267,15 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         tfDescripcion.setText("");
         cbTipoSesion.setSelectedIndex(0);
         dtfFecha.setDate(new Date());
+    }
+    /**
+     * Comprueba si todos los campos son correctos
+     */
+    public void checkAll(){
+        camposCorrectos[0] = CheckCampo.HORA_MINUTO.isCampoOk(tfHoraComienzo.getText());
+        camposCorrectos[1] = CheckCampo.HORA_MINUTO.isCampoOk(tfHoraFin.getText());
+        camposCorrectos[2] = CheckCampo.DESCRIPCION.isCampoOk(tfDescripcion.getText());
+        btGuardar.setEnabled(CheckCampo.allOk(camposCorrectos));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,7 +1,6 @@
 
 package enlace_datos_gui;
 
-import datos.UtilesBD;
 import datos.daos.ConfiguracionDAO;
 import datos.pojos.Configuracion;
 import gui.AltaConfiguracion;
@@ -13,6 +12,7 @@ import gui.AltaConfiguracion;
 public enum BridgeConfiguracion {
     CONFIGURACION;
     private final ConfiguracionDAO dao = ConfiguracionDAO.CONFIGURACION_DAO;
+    private BridgeRendimiento bridgeRendimiento = BridgeRendimiento.RENDIMIENTO;
     private AltaConfiguracion alta;
 
     public void setAlta(AltaConfiguracion alta) {
@@ -23,10 +23,10 @@ public enum BridgeConfiguracion {
      * Guarda la configuración a partir del contenido de los campos
      */
     public void saveConfiguracion() {
-        float rendimiento = UtilesBD.INSTANCE.calculaRendimiento();
         dao.insertConfiguracion(new Configuracion(alta.getTfNombre().getText(), 
                 alta.getTfApellidos().getText(), alta.getDtfFecha1().getDate(), 
                 alta.getDtfFecha2().getDate()));
+        bridgeRendimiento.setRendimiento();
     }
     
     /**

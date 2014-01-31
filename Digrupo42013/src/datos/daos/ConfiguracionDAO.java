@@ -21,7 +21,7 @@ public enum ConfiguracionDAO {
 
     CONFIGURACION_DAO;
     private UtilesBD utiles = UtilesBD.INSTANCE;
-
+    
     /*
      ========================================================================
      ............................SELECTS.....................................

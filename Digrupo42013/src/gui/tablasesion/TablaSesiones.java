@@ -8,6 +8,7 @@ package gui.tablasesion;
 
 import datos.daos.SesionDAO;
 import datos.pojos.Sesion;
+import enlace_datos_gui.BridgeSesion;
 import gui.botonestablas.ButtonCellEditor;
 import gui.botonestablas.ButtonListener;
 import gui.botonestablas.ButtonRender;
@@ -29,6 +30,7 @@ public class TablaSesiones extends JTable {
     private SesionTableModel model; 
     private final String[] cabecera = {"Fecha", "Hora inicio", "Hora fin", "Tipo", "Descripción", "Borrar", "Editar"};
     private List<Fila<Sesion>> filas = new ArrayList<>();
+    private final BridgeSesion bridge = BridgeSesion.BRIDGE;
     /**
      * Devuelve un objeto tabla
      */
@@ -56,11 +58,16 @@ public class TablaSesiones extends JTable {
         this.getColumn("Borrar").setCellEditor(del);
         
         //Determino la acción que debe realizarse al pulsar en editar
-        if (handleOnModificar != null) {
             ButtonCellEditor mod = new ButtonCellEditor("Editar");
-            mod.addListener(handleOnModificar);
+            mod.addListener(new ButtonListener() {
+
+                @Override
+                public void handleActionOnCellButton() {
+                    int row = TablaSesiones.this.getSelectedRow();
+                    bridge.openToModifySesion(TablaSesiones.this.model.getSesion(row));
+                }
+            });
             this.getColumn("Editar").setCellEditor(mod);
-        }
 
     }
 
