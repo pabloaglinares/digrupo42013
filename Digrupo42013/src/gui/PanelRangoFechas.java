@@ -21,12 +21,15 @@ import javax.swing.JOptionPane;
  * @author Andrés Traspuesto Lanza
  */
 public class PanelRangoFechas extends javax.swing.JPanel {
-    private final BridgeSesion bridge = BridgeSesion.BRIDGE;
     /**
      * Creates new form PanelRangoFechas
      */
     public PanelRangoFechas() {
         initComponents();
+    }
+    public void addCambioFechaListener(CambioFechaListener listener) {
+        dtfFecha1.addCambioFechaListener(listener);
+        dtfFecha2.addCambioFechaListener(listener);
     }
 
     /**
@@ -46,18 +49,8 @@ public class PanelRangoFechas extends javax.swing.JPanel {
         labelFecha1.setText("Primer día:");
 
         dtfFecha1.setText("21/01/2014");
-        dtfFecha1.addCambioFechaListener(new CambioFechaListener(){
-            public void onCambioFecha(){
-                bridge.loadByRange(dtfFecha1.getDate(), dtfFecha2.getDate());
-            }
-        });
 
         dtfFecha2.setText("21/01/2014");
-        dtfFecha2.addCambioFechaListener(new CambioFechaListener() {
-            public void onCambioFecha(){
-                bridge.loadByRange(dtfFecha1.getDate(), dtfFecha2.getDate());
-            }
-        });
 
         labelFecha2.setText("Último día:");
 

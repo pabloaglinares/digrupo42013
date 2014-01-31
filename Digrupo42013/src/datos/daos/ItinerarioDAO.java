@@ -47,6 +47,11 @@ public enum ItinerarioDAO {
         deleteAllFechaOfItinerario(itinerario);
         utiles.saveData();
     }
+    /**
+     * Borra una fecha del itinerario
+     * @param itinerario
+     * @param fecha 
+     */
     public void deleteFechaItinerario(Itinerario itinerario, Date fecha) {
         String sql = "DELETE FROM FechaItinerario WHERE a_itinerario = ? AND fecha = ?";
         try (PreparedStatement st = utiles.getConnection().prepareStatement(sql)) {
@@ -58,6 +63,10 @@ public enum ItinerarioDAO {
         }
         utiles.saveData();
     }
+    /**
+     * Borra todas las fechas del itinerario
+     * @param itinerario 
+     */
     public void deleteAllFechaOfItinerario(Itinerario itinerario) {
         String sql = "DELETE FROM FechaItinerario WHERE a_itinerario = ?";
         try (PreparedStatement st = utiles.getConnection().prepareStatement(sql)) {
@@ -115,7 +124,12 @@ public enum ItinerarioDAO {
         }
         return itinerarios;
     }
-
+    /**
+     * Devuelve todos los itinerarios resueltos entre las fechas indicadas
+     * @param fecha1
+     * @param fecha2
+     * @return 
+     */
     public List<Itinerario> getItinerariosByFechaRange(Date fecha1, Date fecha2) {
         List<Itinerario> itinerarios = new ArrayList<>();
         String sql = "SELECT DISTINCT p_itinerario, nombre, localizacion, dificultad, imagen "
@@ -132,7 +146,11 @@ public enum ItinerarioDAO {
         }
         return itinerarios;
     }
-
+    /**
+     * Devuelve todos los itinerarios de la dificultad indicada
+     * @param dificultad
+     * @return 
+     */
     public List<Itinerario> getItinerariosByDificultad(String dificultad) {
         List<Itinerario> itinerarios = new ArrayList<>();
         String sql = "SELECT DISTINCT p_itinerario, nombre, localizacion, dificultad, imagen "

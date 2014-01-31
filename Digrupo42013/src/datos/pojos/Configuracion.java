@@ -39,7 +39,7 @@ public class Configuracion implements Serializable{
      * @param fecha2Intervalo
      * @param rendimiento 
      */
-    public Configuracion(String nombre, String apellidos, Date fecha1Intervalo, Date fecha2Intervalo, int rendimiento) {
+    public Configuracion(String nombre, String apellidos, Date fecha1Intervalo, Date fecha2Intervalo, float rendimiento) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.fecha1Intervalo = fecha1Intervalo;

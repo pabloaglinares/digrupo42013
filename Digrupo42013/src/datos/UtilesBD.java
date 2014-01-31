@@ -27,7 +27,7 @@ public enum UtilesBD {
 
     INSTANCE;
     private Connection connection; //conexión con la base de datos
-    
+
     private final static SimpleDateFormat sdfYMD_hms = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private final static SimpleDateFormat sdfYMD = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -38,15 +38,15 @@ public enum UtilesBD {
     UtilesBD() {
         try {
             Class.forName("org.hsqldb.jdbcDriver");
-            if (new File("db"+File.separatorChar+ "escalador.db.script").exists()) {
+            if (new File("db" + File.separatorChar + "escalador.db.script").exists()) {
                 //Si la base de datos ya existe conecta
-                connection = DriverManager.getConnection("jdbc:hsqldb:file:db" + File.separatorChar + "escalador.db;ifexists=true;shutdown=true","sa","");
-                
+                connection = DriverManager.getConnection("jdbc:hsqldb:file:db" + File.separatorChar + "escalador.db;ifexists=true;shutdown=true", "sa", "");
+
             } else {
                 //Si la base de datos no existe la crea
-                connection = DriverManager.getConnection("jdbc:hsqldb:file:db" + File.separatorChar + "escalador.db;shutdown=true","sa","");
+                connection = DriverManager.getConnection("jdbc:hsqldb:file:db" + File.separatorChar + "escalador.db;shutdown=true", "sa", "");
                 createTables();
-                
+
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
@@ -60,7 +60,7 @@ public enum UtilesBD {
      */
     public Connection getConnection() {
         try {
-            connection = DriverManager.getConnection("jdbc:hsqldb:file:db" + File.separatorChar + "escalador.db;ifexists=true;shutdown=true","sa","");
+            connection = DriverManager.getConnection("jdbc:hsqldb:file:db" + File.separatorChar + "escalador.db;ifexists=true;shutdown=true", "sa", "");
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -128,6 +128,10 @@ public enum UtilesBD {
             path.mkdir();
         }
     }
+
+    /**
+     * Se encarga de salvar el contenido en memoria de la BD en el archivo de BD
+     */
     public void saveData() {
         getConnection();
         try {
@@ -136,6 +140,7 @@ public enum UtilesBD {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * Método que calcula el rendimiento del usuario
      *
@@ -166,11 +171,13 @@ public enum UtilesBD {
     public String getDateTimeForHSQLDB(Date date) {
         return sdfYMD_hms.format(date);
     }
+
     /**
      * Devuelve el literal correspondiente a la fecha indicada en formato
      * año-mes-dia
+     *
      * @param date
-     * @return 
+     * @return
      */
     public String getDateForHSQLDB(Date date) {
         return sdfYMD.format(date);
@@ -183,10 +190,15 @@ public enum UtilesBD {
      * @return
      */
     public File getFileImagen(File pathImagen) {
-        File aux = new File("imagenes" + File.separatorChar + "_0" + pathImagen.getName());
-        int i = 1;
-        while (aux.exists()) {
-            aux = new File("imagenes" + File.separatorChar + "_" + (i++) + pathImagen.getName());
+        File aux;
+        if (pathImagen.equals(new File("imagenes/sinImagen.jpeg"))) {
+            aux = pathImagen;
+        } else {
+            aux = new File("imagenes" + File.separatorChar + "_0" + pathImagen.getName());
+            int i = 1;
+            while (aux.exists()) {
+                aux = new File("imagenes" + File.separatorChar + "_" + (i++) + pathImagen.getName());
+            }
         }
         return aux;
     }
@@ -198,19 +210,21 @@ public enum UtilesBD {
      * @param dst
      */
     public void guardaArchivoImagen(File src, File dst) {
-        try (FileInputStream fis = new FileInputStream(src);
-                FileOutputStream fos = new FileOutputStream(dst)) {
-            byte[] buffer = new byte[1024];
-            int leido;
-            while ((leido = fis.read(buffer)) > 0) {
-                fos.write(buffer, 0, leido);
+        if (!src.equals(new File("imagenes/sinImagen.jpeg"))) { //Solo guarda la imagen si se ha seleccionado una
+            try (FileInputStream fis = new FileInputStream(src);
+                    FileOutputStream fos = new FileOutputStream(dst)) {
+                byte[] buffer = new byte[1024];
+                int leido;
+                while ((leido = fis.read(buffer)) > 0) {
+                    fos.write(buffer, 0, leido);
+                }
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
+
             }
-
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
-
         }
     }
 
@@ -227,7 +241,7 @@ public enum UtilesBD {
                 + "(SELECT fecha1 FROM configuracion WHERE p_configuracion = 0) "
                 + "AND (SELECT fecha2 FROM configuracion WHERE p_configuracion = 0)";
         float weight = 0.5F;
-                System.out.println("sesiones");
+        System.out.println("sesiones");
         return getPoints(sql, weight);
     }
 
@@ -238,19 +252,21 @@ public enum UtilesBD {
      * @return
      */
     private float calcPtosPorItinerario() {
-        String sql ="SELECT count(*) from FechaItinerario";
+        String sql = "SELECT count(*) from FechaItinerario";
         float num = calcFloat(sql);
-        sql ="SELECT (WEEK(fecha2) - WEEK(fecha1)) AS nWeek FROM Configuracion";
+        sql = "SELECT (WEEK(fecha2) - WEEK(fecha1)) AS nWeek FROM Configuracion";
         num /= calcFloat(sql);
         num *= 0.25F;
-        num = num > 5? 5 : num;
+        num = num > 5 ? 5 : num;
         return num;
     }
+
     /**
-     * Devuelve un float a partir de una consulta sql que solo puede devolver
-     * un único resultado que será numérico
+     * Devuelve un float a partir de una consulta sql que solo puede devolver un
+     * único resultado que será numérico
+     *
      * @param sql
-     * @return 
+     * @return
      */
     private float calcFloat(String sql) {
         float n = 0;

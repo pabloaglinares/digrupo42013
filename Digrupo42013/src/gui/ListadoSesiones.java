@@ -5,11 +5,14 @@
  */
 package gui;
 
+import calendario.CambioFechaListener;
 import enlace_datos_gui.BridgeSesion;
 import javax.swing.JTabbedPane;
 
 public class ListadoSesiones extends javax.swing.JInternalFrame {
+
     private BridgeSesion bridge = BridgeSesion.BRIDGE;
+
     /**
      * Creates new form Itinerarios
      */
@@ -24,8 +27,6 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
         bridge.addTablaSesiones(tbListado);
         bridge.loadAllSesion();
     }
-    
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,23 +49,6 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
         setTitle("Listado sesiones");
         setMinimumSize(new java.awt.Dimension(575, 380));
         setPreferredSize(new java.awt.Dimension(575, 380));
-        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameClosing(evt);
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
-        });
 
         btVolver.setText("Volver");
         btVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -94,6 +78,13 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
         );
 
         jTabbedPane1.addTab("Listar todas", pnlVacio);
+
+        pnlRangoFechas.addCambioFechaListener(new CambioFechaListener(){
+            @Override
+            public void onCambioFecha() {
+                bridge.loadByRange(pnlRangoFechas.getFecha1(), pnlRangoFechas.getFecha2());
+            }
+        });
         jTabbedPane1.addTab("Listar por fecha", pnlRangoFechas);
         jTabbedPane1.addTab("Listar por tipo", pnlTipoSesion);
 
@@ -125,12 +116,19 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Acción ejecutada al pulsar en volver
+     * @param evt 
+     */
     private void btVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolverActionPerformed
         // TODO add your handling code here:
         this.hide();
     }//GEN-LAST:event_btVolverActionPerformed
-
+    /**
+     * Al cambiar de pestaña se aplica el filtro adecuado a los datos de la
+     * tabla
+     * @param evt 
+     */
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         JTabbedPane tab = (JTabbedPane) evt.getSource();
         bridge.setCurrentTab(tab.getSelectedIndex());
@@ -146,10 +144,7 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
-    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        bridge.delTablaSesiones();
-    }//GEN-LAST:event_formInternalFrameClosing
-    /**
+   /**
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables

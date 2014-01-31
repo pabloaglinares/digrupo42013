@@ -54,17 +54,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="21/01/2014"/>
       </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dtfFecha1.addCambioFechaListener(new CambioFechaListener(){&#xa;public void onCambioFecha(){&#xa;bridge.loadByRange(dtfFecha1.getDate(), dtfFecha2.getDate());&#xa;}&#xa;});"/>
-      </AuxValues>
     </Component>
     <Component class="calendario.DateTextField" name="dtfFecha2">
       <Properties>
         <Property name="text" type="java.lang.String" value="21/01/2014"/>
       </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dtfFecha2.addCambioFechaListener(new CambioFechaListener() {&#xa;public void onCambioFecha(){&#xa;bridge.loadByRange(dtfFecha1.getDate(), dtfFecha2.getDate());&#xa;}&#xa;});"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="labelFecha2">
       <Properties>

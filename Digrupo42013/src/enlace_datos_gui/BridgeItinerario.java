@@ -45,6 +45,14 @@ public enum BridgeItinerario {
     public void delTablaItinerarios() {
         this.tabla = null;
     }
+    /**
+     * Guarda el itinerario en la base de datos
+     * @param nombre
+     * @param localizacion
+     * @param difucultad
+     * @param pathImagen
+     * @param date 
+     */
     public void saveItinerario(String nombre,String localizacion, String difucultad, File pathImagen, Date date ) {
         Itinerario it = new Itinerario(nombre, localizacion, difucultad, pathImagen);
         it.addFechaResolucion(date);
@@ -52,22 +60,32 @@ public enum BridgeItinerario {
         loadItinerarioProperly(it);
         
     }
-
+    /**
+     * Obtiene los itinerarios que resulten convenientes en función del filtro
+     * aplicado a la tabla
+     * @param it 
+     */
     private void loadItinerarioProperly(Itinerario it) {
         switch (currentTab) {
             case 0:
-                loadAllSesion();
+                loadAllItinerario();
                 break;
             case 1:
                 loadByRange(date1, date2);
                 break;
         }
     }
-
-    public void loadAllSesion() {
+    /**
+     * Carga todos los itinerarios en la tabla
+     */
+    public void loadAllItinerario() {
         if(tabla != null) ((ItinerariosTableModel)tabla.getModel()).setItinerarios(dao.getAllItinerario());
     }
-
+    /**
+     * Carga en la tabla los itinerarios resueltos entre las fechas
+     * @param date1
+     * @param date2 
+     */
     public void loadByRange(Date date1, Date date2) {
         this.date1 = date1;
         this.date2 = date2;

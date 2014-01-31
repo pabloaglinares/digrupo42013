@@ -1,5 +1,3 @@
-
-
 package datos.daos;
 
 import datos.UtilesBD;
@@ -14,20 +12,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Singleton que se encarga de hacer de intermediario entre la base de datos y 
+ * Singleton que se encarga de hacer de intermediario entre la base de datos y
  * la aplicación para trabajar con objetos configuración.
+ *
  * @author Andrés Traspuesto Lanza
  */
 public enum ConfiguracionDAO {
+
     CONFIGURACION_DAO;
     private UtilesBD utiles = UtilesBD.INSTANCE;
-    
+
     /*
      ========================================================================
      ............................SELECTS.....................................
      ========================================================================
      */
-    
     /**
      * Devuelve el usuario almacenado en la base de datos
      *
@@ -51,15 +50,12 @@ public enum ConfiguracionDAO {
         }
         return usr;
     }
-    
-    
+
     /*
      ========================================================================
      ............................UPDATES.....................................
      ========================================================================
      */
-    
-
     /**
      * Actualiza los datos del usuario
      *
@@ -70,7 +66,7 @@ public enum ConfiguracionDAO {
                 + "fecha1 = ?, fecha2 = ? WHERE p_usuario = 0";
         executeUpdateOnConfiguracion(sql, usr);
     }
-    
+
     /*
      ========================================================================
      ............................INSERTS.....................................
@@ -82,18 +78,30 @@ public enum ConfiguracionDAO {
      * @param usr
      */
     public void insertConfiguracion(Configuracion usr) {
-        String sql = "INSERT INTO Configuracion (nombre, apellidos, fecha1, fecha2) "
-                + "VALUES(?, ?, ?, ?)";
-        executeUpdateOnConfiguracion(sql, usr);
-        
+        String sql = "SELECT p_configuracion FROM Configuracion";
+        Connection con = utiles.getConnection();
+        boolean existe = false;
+        try (PreparedStatement pst = con.prepareStatement(sql)) {
+            ResultSet res = pst.executeQuery();
+            res.next();
+            existe = res.getInt("p_configuracion") == 0;
+        } catch (SQLException ex) {
+            Logger.getLogger(ConfiguracionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (existe) {
+            updateConfiguracion(usr);
+        } else {
+            sql = "INSERT INTO Configuracion (nombre, apellidos, fecha1, fecha2) "
+                    + "VALUES(?, ?, ?, ?)";
+            executeUpdateOnConfiguracion(sql, usr);
+        }
     }
     /*
      ========================================================================
      ....................MÉTODOS PRIVADOS AUXILIARES.........................
      ========================================================================
      */
-    
-    
+
     /**
      * Se encarga de hacer insert o update, en función del sql en la tabla
      * Configuracion

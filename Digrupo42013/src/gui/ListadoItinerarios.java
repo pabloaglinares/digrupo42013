@@ -5,9 +5,9 @@
  */
 package gui;
 
+import calendario.CambioFechaListener;
 import enlace_datos_gui.BridgeItinerario;
 import javax.swing.JTabbedPane;
-import javax.swing.event.InternalFrameListener;
 
 
 public class ListadoItinerarios extends javax.swing.JInternalFrame {
@@ -24,7 +24,7 @@ private BridgeItinerario bridge = BridgeItinerario.BRIDGE;
         this.setMaximizable(true);
         
         bridge.addTablaItinerario(tbListado);
-        bridge.loadAllSesion();
+        bridge.loadAllItinerario();
         
     }
 
@@ -49,23 +49,6 @@ private BridgeItinerario bridge = BridgeItinerario.BRIDGE;
         setResizable(true);
         setTitle("Listado itinerarios");
         setMinimumSize(new java.awt.Dimension(575, 380));
-        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameClosing(evt);
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
-        });
 
         btVolver.setText("Volver");
         btVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +78,13 @@ private BridgeItinerario bridge = BridgeItinerario.BRIDGE;
         );
 
         tbpFiltroBusqueda.addTab("Ver todos", pnlVacio);
+
+        pnlRangoFechas.addCambioFechaListener(new CambioFechaListener(){
+            @Override
+            public void onCambioFecha() {
+                bridge.loadByRange(pnlRangoFechas.getFecha1(), pnlRangoFechas.getFecha2());
+            }
+        });
         tbpFiltroBusqueda.addTab("Ver por fecha", pnlRangoFechas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -129,21 +119,20 @@ private BridgeItinerario bridge = BridgeItinerario.BRIDGE;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Acción generada al puslar sobre volver
+     * @param evt 
+     */
     private void btVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolverActionPerformed
          this.hide();
     }//GEN-LAST:event_btVolverActionPerformed
-
-    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        bridge.delTablaItinerarios();
-    }//GEN-LAST:event_formInternalFrameClosing
-
+    
     private void tbpFiltroBusquedaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tbpFiltroBusquedaStateChanged
         JTabbedPane tab = (JTabbedPane) evt.getSource();
         bridge.setCurrentTab(tab.getSelectedIndex());
         switch (tab.getSelectedIndex()) {
             case 0:
-                bridge.loadAllSesion();
+                bridge.loadAllItinerario();
                 break;
             case 1:
                 bridge.loadByRange(pnlRangoFechas.getFecha1(), pnlRangoFechas.getFecha2());
