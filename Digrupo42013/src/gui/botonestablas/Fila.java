@@ -1,6 +1,7 @@
 package gui.botonestablas;
 
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 
@@ -12,12 +13,18 @@ import javax.swing.JButton;
  */
 public class Fila<T> {
     
+    
+    
     private T elemento;//Itinerario contenido en la fila
     private final static JButton btnEliminar = new JButton("Borrar");
     private final static JButton btnEditar = new JButton("Editar");
+    
+    
+    
 
     public Fila(T elemento) {
         this.elemento = elemento;
+        
     }
     
     /**
