@@ -93,6 +93,7 @@ public enum UtilesBD {
                     + "nombre VARCHAR(150),\n"
                     + "localizacion VARCHAR(200),\n"
                     + "dificultad VARCHAR(10),\n"
+                    + "tipo VARCHAR(8),"
                     + "imagen VARCHAR(200),\n"
                     + "UNIQUE (nombre, localizacion) \n"
                     + ")";
@@ -241,7 +242,6 @@ public enum UtilesBD {
                 + "(SELECT fecha1 FROM configuracion WHERE p_configuracion = 0) "
                 + "AND (SELECT fecha2 FROM configuracion WHERE p_configuracion = 0)";
         float weight = 0.5F;
-        System.out.println("sesiones");
         return getPoints(sql, weight);
     }
 
@@ -255,7 +255,8 @@ public enum UtilesBD {
         String sql = "SELECT count(*) from FechaItinerario";
         float num = calcFloat(sql);
         sql = "SELECT (WEEK(fecha2) - WEEK(fecha1)) AS nWeek FROM Configuracion";
-        num /= calcFloat(sql);
+        float n2 = calcFloat(sql);
+        num = n2 != 0? num/n2: 0;
         num *= 0.25F;
         num = num > 5 ? 5 : num;
         return num;
@@ -269,7 +270,8 @@ public enum UtilesBD {
      * @return
      */
     private float calcFloat(String sql) {
-        float n = 0;
+        float n = 0F;
+        getConnection();
         try (PreparedStatement pst = connection.prepareStatement(sql)) {
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
@@ -290,6 +292,7 @@ public enum UtilesBD {
      */
     private float getPoints(String sql, float weight) {
         float ptos = 0F;
+        getConnection();
         try (PreparedStatement pst = connection.prepareStatement(sql)) {
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {

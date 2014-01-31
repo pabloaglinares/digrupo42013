@@ -88,7 +88,7 @@ public enum ItinerarioDAO {
      * @return
      */
     public List<Itinerario> getAllItinerario() {
-        String sql = "SELECT p_itinerario, nombre, localizacion, dificultad, imagen FROM Itinerario";
+        String sql = "SELECT p_itinerario, nombre, localizacion, tipo, dificultad, imagen FROM Itinerario";
         List<Itinerario> itinerarios = new ArrayList<>();
         try (Statement st = utiles.getConnection().createStatement()) {
             ResultSet rs = st.executeQuery(sql);
@@ -111,7 +111,7 @@ public enum ItinerarioDAO {
      */
     public List<Itinerario> getItinerariosByFecha(Date fecha, Comparador cmp) {
         List<Itinerario> itinerarios = new ArrayList<>();
-        String sql = "SELECT DISTINCT p_itinerario, nombre, localizacion, dificultad, imagen "
+        String sql = "SELECT DISTINCT p_itinerario, nombre, localizacion, tipo, dificultad, imagen "
                 + "FROM Itinerario WHERE p_itinerario IN "
                 + "(SELECT a_itinerario FROM FechaItinerario "
                 + "WHERE fecha" + cmp + " ?)";
@@ -132,7 +132,7 @@ public enum ItinerarioDAO {
      */
     public List<Itinerario> getItinerariosByFechaRange(Date fecha1, Date fecha2) {
         List<Itinerario> itinerarios = new ArrayList<>();
-        String sql = "SELECT DISTINCT p_itinerario, nombre, localizacion, dificultad, imagen "
+        String sql = "SELECT DISTINCT p_itinerario, nombre, localizacion, tipo, dificultad, imagen "
                 + "FROM Itinerario WHERE p_itinerario IN "
                 + "(SELECT a_itinerario FROM FechaItinerario "
                 + "WHERE fecha BETWEEN ? AND ?)";
@@ -153,7 +153,7 @@ public enum ItinerarioDAO {
      */
     public List<Itinerario> getItinerariosByDificultad(String dificultad) {
         List<Itinerario> itinerarios = new ArrayList<>();
-        String sql = "SELECT DISTINCT p_itinerario, nombre, localizacion, dificultad, imagen "
+        String sql = "SELECT DISTINCT p_itinerario, nombre, localizacion, tipo, dificultad, imagen "
                 + "FROM Itinerario WHERE dificultad = ?";
         try (PreparedStatement st = utiles.getConnection().prepareStatement(sql)) {
             st.setString(1, dificultad);
@@ -211,7 +211,7 @@ public enum ItinerarioDAO {
      * @param itinerario
      */
     public void insertItinerario(Itinerario itinerario) {
-        String sql = "INSERT INTO Itinerario (nombre, localizacion, dificultad, imagen)"
+        String sql = "INSERT INTO Itinerario (nombre, localizacion, tipo, dificultad, imagen)"
                 + " VALUES(?,?,?,?)";
         File imgFile;
         if (itinerario.getPathImagen() != null) {
@@ -222,8 +222,9 @@ public enum ItinerarioDAO {
         try (PreparedStatement pst = utiles.getConnection().prepareStatement(sql)) {
             pst.setString(1, itinerario.getNombre());
             pst.setString(2, itinerario.getLocalizacion());
-            pst.setString(3, itinerario.getDifucultad());
-            pst.setString(4, imgFile.getName());
+            pst.setString(3, itinerario.getTipo());
+            pst.setString(4, itinerario.getDifucultad());
+            pst.setString(5, imgFile.getName());
             pst.executeUpdate();
             itinerario.setpItinerario(getLastItinerario());
             //Si hay fecha de resolución del itinerario la almaceno
@@ -271,7 +272,7 @@ public enum ItinerarioDAO {
      * @param itinerario
      */
     private void updateFechasItinerario(Itinerario itinerario) {
-        String sql = "DELETE FROM Itinerario WHERE a_itinerario = ?";
+        String sql = "DELETE FROM FechaItinerario WHERE a_itinerario = ?";
         try (PreparedStatement pst = utiles.getConnection().prepareStatement(sql)) {
             pst.setInt(1, itinerario.getpItinerario());
             pst.executeUpdate();
@@ -370,6 +371,7 @@ public enum ItinerarioDAO {
             itinerario = new Itinerario();
             itinerario.setNombre(rs.getString("nombre"));
             itinerario.setLocalizacion(rs.getString("localizacion"));
+            itinerario.setTipo(rs.getString("tipo"));
             itinerario.setDifucultad(rs.getString("dificultad"));
             itinerario.setpItinerario(rs.getInt("p_itinerario"));
             itinerario.setPathImagen(new File("imagenes" + File.separatorChar + rs.getString("imagen")));
@@ -384,13 +386,14 @@ public enum ItinerarioDAO {
      * @param itinerario
      */
     private void updateNombreYDificultad(Itinerario itinerario) {
-        String sql = "UPDATE Itinerario SET nombre = ?, dificultad = ?, localizacion = ? "
+        String sql = "UPDATE Itinerario SET nombre = ?, tipo = ?, dificultad = ?, localizacion = ? "
                 + "WHERE p_itinerario = ?";
         try (PreparedStatement pst = utiles.getConnection().prepareStatement(sql)) {
             pst.setString(1, itinerario.getNombre());
-            pst.setString(2, itinerario.getDifucultad());
-            pst.setString(3, itinerario.getLocalizacion());
-            pst.setInt(4, itinerario.getpItinerario());
+            pst.setString(2, itinerario.getTipo());
+            pst.setString(3, itinerario.getDifucultad());
+            pst.setString(4, itinerario.getLocalizacion());
+            pst.setInt(5, itinerario.getpItinerario());
             pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
