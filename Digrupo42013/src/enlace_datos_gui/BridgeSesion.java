@@ -3,6 +3,7 @@ package enlace_datos_gui;
 import datos.daos.SesionDAO;
 import datos.pojos.Sesion;
 import gui.AltaSesion;
+import gui.ListadoSesiones;
 import gui.Main;
 import gui.tablasesion.SesionTableModel;
 import gui.tablasesion.TablaSesiones;
@@ -110,7 +111,17 @@ public enum BridgeSesion {
         alta.setModoAlta(false);
         alta.checkAll();
     }
-
+    /**
+     * Muestra la pantalla de listado de sesiones
+     */
+    public void openListadoSesiones() {
+        ListadoSesiones listadosesiones = new ListadoSesiones();
+        main.getDpEscritorio().add(listadosesiones);
+        listadosesiones.show();
+    }
+    /**
+     * Muestra la pantalla de altas
+     */
     private void showAlta() {
         if (alta == null) {
             alta = new AltaSesion();

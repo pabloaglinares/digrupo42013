@@ -1,7 +1,7 @@
 package gui.tablasesion;
 
 import datos.pojos.Sesion;
-import gui.botonestablas.Fila;
+import gui.botonestablas.WraperFila;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class SesionTableModel extends AbstractTableModel {
     /**
      * Datos.
      */
-    private List<Fila<Sesion>> filas = new ArrayList<>();
+    private List<WraperFila<Sesion>> filas = new ArrayList<>();
 
     /**
      * Constructor.
@@ -32,7 +32,7 @@ public class SesionTableModel extends AbstractTableModel {
      * @param columnNames Nombres de las columnas
      * @param filas
      */
-    public SesionTableModel(String[] columnNames, List<Fila<Sesion>> filas) {
+    public SesionTableModel(String[] columnNames, List<WraperFila<Sesion>> filas) {
         this.cabecera = columnNames;
         this.filas = filas;
     }
@@ -162,7 +162,7 @@ public class SesionTableModel extends AbstractTableModel {
      * @param s
      */
     public void addSesion(Sesion s) {
-        filas.add(new Fila(s));
+        filas.add(new WraperFila(s));
         fireTableDataChanged();
     }
 
@@ -174,7 +174,7 @@ public class SesionTableModel extends AbstractTableModel {
     public void setSesion(List<Sesion> sesiones) {
         filas = new ArrayList<>();
         for (Sesion s : sesiones) {
-            filas.add(new Fila(s));
+            filas.add(new WraperFila(s));
         }
         fireTableDataChanged();
     }
@@ -186,7 +186,7 @@ public class SesionTableModel extends AbstractTableModel {
      */
     public List<Sesion> getSesions() {
         List<Sesion> sesiones = new ArrayList<>();
-        for (Fila<Sesion> fs : filas) {
+        for (WraperFila<Sesion> fs : filas) {
             sesiones.add(fs.getElemento());
         }
         return sesiones;

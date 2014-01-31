@@ -2,7 +2,7 @@ package gui.tablaItinerario;
 
 
 import datos.pojos.Itinerario;
-import gui.botonestablas.Fila;
+import gui.botonestablas.WraperFila;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -23,7 +23,7 @@ public class ItinerariosTableModel extends AbstractTableModel {
     /**
      * Datos.
      */
-    private List<Fila<Itinerario>> filas = new ArrayList<>();
+    private List<WraperFila<Itinerario>> filas = new ArrayList<>();
 
     /**
      * Constructor.
@@ -31,7 +31,7 @@ public class ItinerariosTableModel extends AbstractTableModel {
      * @param columnNames Nombres de las columnas
      * @param filas
      */
-    public ItinerariosTableModel(String[] columnNames, List<Fila<Itinerario>> filas) {
+    public ItinerariosTableModel(String[] columnNames, List<WraperFila<Itinerario>> filas) {
         this.cabecera = columnNames;
         this.filas = filas;
     }
@@ -139,7 +139,7 @@ public class ItinerariosTableModel extends AbstractTableModel {
      * @param it 
      */
     public void addItinerario(Itinerario it) {
-        filas.add(new Fila<>(it));
+        filas.add(new WraperFila<>(it));
         fireTableDataChanged();
     }
     /**
@@ -149,7 +149,7 @@ public class ItinerariosTableModel extends AbstractTableModel {
     public void setItinerarios(List<Itinerario> its) {
         filas = new ArrayList<>();
         for(Itinerario it: its) {
-            filas.add(new Fila<>(it));
+            filas.add(new WraperFila<>(it));
         }
         fireTableDataChanged();
     }
@@ -159,7 +159,7 @@ public class ItinerariosTableModel extends AbstractTableModel {
      */
     public List<Itinerario> getItinerarios() {
         List<Itinerario> its = new ArrayList<>();
-        for(Fila<Itinerario> fit: filas) {
+        for(WraperFila<Itinerario> fit: filas) {
             its.add(fit.getElemento());
         }
         return its;

@@ -10,13 +10,16 @@ import javax.swing.JButton;
  * @author Andrés Traspuesto Lanza
  * @param <T>
  */
-public class Fila<T> {
+public class WraperFila<T> {
     
     private T elemento;//Itinerario contenido en la fila
     private final static JButton btnEliminar = new JButton("Borrar");
     private final static JButton btnEditar = new JButton("Editar");
-
-    public Fila(T elemento) {
+    static{
+        btnEliminar.setToolTipText("Eliminar el elemento correspondiente a la fila de este botón");
+        btnEditar.setToolTipText("Editar el elemento correspondiente a la fila de este botón");
+    }
+    public WraperFila(T elemento) {
         this.elemento = elemento;
     }
     

@@ -27,6 +27,9 @@ public enum BridgeRendimiento {
     public void setLblRendimiento(JLabel lblRendimiento) {
         this.lblRendimiento = lblRendimiento;
     }
+    /**
+     * Escribe el rendimiento en el label correspondiente
+     */
     public void setRendimiento() {
         lblRendimiento.setText(String.format("%.2f", utiles.calculaRendimiento()));
     }

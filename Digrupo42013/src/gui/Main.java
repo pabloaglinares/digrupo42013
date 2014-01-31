@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package gui;
 
 import datos.UtilesBD;
@@ -26,10 +25,11 @@ import javax.swing.JOptionPane;
  * @author Gemo
  */
 public final class Main extends javax.swing.JFrame {
+
+    UtilesBD utiles = UtilesBD.INSTANCE;
+
     private final BridgeRendimiento bridgeRendimiento = BridgeRendimiento.RENDIMIENTO;
     private final BridgeSesion bridgeSesion = BridgeSesion.BRIDGE;
-    
-   
 
     /**
      * Creates new form Main
@@ -42,24 +42,21 @@ public final class Main extends javax.swing.JFrame {
         bridgeRendimiento.setLblRendimiento(lRendimiento);
         bridgeRendimiento.setRendimiento();//Asigna el rendimiento
         bridgeSesion.setMain(Main.this);
-       
+
     }
 
     public JDesktopPane getDpEscritorio() {
         return dpEscritorio;
     }
-    
-  
-    
-    
+
     @Override
     public Image getIconImage() {
-            Image retValue = Toolkit.getDefaultToolkit().
-            getImage(ClassLoader.getSystemResource("resources/escalador_peq.png"));
-            return retValue;
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("resources/escalador_peq.png"));
+        return retValue;
     }
-    
-     public void enlazarLaAyuda() {
+
+    public void enlazarLaAyuda() {
         try {
             // Carga el fichero de ayuda
             File fichero = new File("help/help_set.hs");
@@ -69,8 +66,8 @@ public final class Main extends javax.swing.JFrame {
             HelpBroker hb = helpset.createHelpBroker();
             // Pone ayuda a item de menu al pulsarlo.
             hb.enableHelpOnButton(miAyuda, "portada", helpset);
-            hb.enableHelpKey(this.getRootPane(),"portada", helpset);
-            
+            hb.enableHelpKey(this.getRootPane(), "portada", helpset);
+
         } catch (IllegalArgumentException | MalformedURLException | HelpSetException e) {
             JOptionPane.showMessageDialog(this, "Se ha producido un error "
                     + "intentando mostrar la ayuda.\n" + e.getMessage(), "Error",
@@ -276,14 +273,12 @@ public final class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_miSalirActionPerformed
 
     private void miAltaItinerarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAltaItinerarioActionPerformed
-        AltaItinerario alta = new AltaItinerario();
-        dpEscritorio.add(alta);
-        alta.show();
+
     }//GEN-LAST:event_miAltaItinerarioActionPerformed
 
     private void miAltaSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAltaSesionActionPerformed
         bridgeSesion.openToInsertNewSesion();
-        
+
     }//GEN-LAST:event_miAltaSesionActionPerformed
 
     private void miAcercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAcercaActionPerformed
@@ -293,21 +288,17 @@ public final class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_miAcercaActionPerformed
 
     private void miListadoItinerariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListadoItinerariosActionPerformed
-        // TODO add your handling code here:
         ListadoItinerarios listado = new ListadoItinerarios();
         dpEscritorio.add(listado);
         listado.show();
     }//GEN-LAST:event_miListadoItinerariosActionPerformed
 
     private void miListadoSesionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListadoSesionesActionPerformed
-        // TODO add your handling code here:
-        ListadoSesiones listadosesiones = new ListadoSesiones();
-        dpEscritorio.add(listadosesiones);
-        listadosesiones.show();
+        bridgeSesion.openListadoSesiones();
     }//GEN-LAST:event_miListadoSesionesActionPerformed
 
     private void mConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConfiguracionActionPerformed
-        
+
     }//GEN-LAST:event_mConfiguracionActionPerformed
 
     private void miEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEditarActionPerformed
@@ -320,18 +311,14 @@ public final class Main extends javax.swing.JFrame {
         Informes informes = new Informes();
         dpEscritorio.add(informes);
         informes.show();
-               
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
-   
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-        
-        
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

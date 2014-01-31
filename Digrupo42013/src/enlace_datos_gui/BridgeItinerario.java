@@ -1,8 +1,11 @@
 
 package enlace_datos_gui;
 
+import datos.ModItinerario;
 import datos.daos.ItinerarioDAO;
 import datos.pojos.Itinerario;
+import gui.AltaItinerario;
+import gui.Main;
 import gui.tablaItinerario.ItinerariosTableModel;
 import gui.tablaItinerario.TablaItinerarios;
 import java.io.File;
@@ -14,13 +17,50 @@ import java.util.Date;
  */
 public enum BridgeItinerario {
     BRIDGE;
+    private AltaItinerario alta;
+    private Main main;
     private BridgeRendimiento bridgeRendimiento = BridgeRendimiento.RENDIMIENTO;
     private TablaItinerarios tabla;
     private ItinerarioDAO dao = ItinerarioDAO.ITINERARIO_DAO;
     private int currentTab = 0;
     private Date date1;
     private Date date2;
+    private int pItinerario;
     
+    public void openForInsertNewITinerario() {
+        showAlta();
+        alta.checkAll();
+        alta.setModoAlta(true);
+    }
+    
+    public void opneForUpdateItinerario(Itinerario iti) {
+        showAlta();
+        alta.getTfNombreItinerario().setText(iti.getNombre());
+        alta.getTfLocalizacion().setText(iti.getLocalizacion());
+        alta.getCbTipoItineracio().setSelectedItem(iti.getTipo());
+    }
+
+    public String[] getDificultyGroups(String dificultad) {
+        String[] groups = new String[3];
+        return groups;
+    }
+    private void showAlta() {
+        alta = new AltaItinerario();
+        main.getDpEscritorio().add(alta);
+        alta.show();
+    }
+
+    public void setMain(Main main) {
+        this.main = main;
+    }
+    
+    
+    public void setAlta(AltaItinerario alta) {
+        this.alta = alta;
+    }
+    public void setDateModified(){
+        alta.getCamposModificados()[5] = true;
+    }
     /**
      * Asigna la pestaña actual
      * @param currentTab
@@ -48,19 +88,44 @@ public enum BridgeItinerario {
     }
     /**
      * Guarda el itinerario en la base de datos
-     * @param nombre
-     * @param localizacion
-     * @param difucultad
-     * @param pathImagen
-     * @param date 
      */
-    public void saveItinerario(String nombre,String localizacion, String difucultad, File pathImagen, Date date ) {
-        Itinerario it = new Itinerario(nombre, localizacion, difucultad, pathImagen);
-        it.addFechaResolucion(date);
-        dao.insertItinerario(it);
-        loadItinerarioProperly(it);
+    public void saveItinerario() {
+        String dificultad = ""+alta.getSpDificultadNumero().getValue() + alta.getSpDificultadLetra().getValue()+
+                alta.getSpDificultadMasMenos().getValue();
+        Itinerario it = new Itinerario(alta.getTfNombreItinerario().getText(),
+                alta.getTfLocalizacion().getText(), alta.getCbTipoItineracio().getSelectedItem().toString(), dificultad, alta.getImagen());
+        it.addAllFechas(alta.getTblFechas().getModel().getAllDates());
+        if(alta.isModoAlta()){
+            dao.insertItinerario(it);
+            loadItinerarioProperly(it);
+        } else {
+            it.setpItinerario(pItinerario);
+            dao.updateItinerario(it, getTypeOfMod(), alta.getImagen());
+        }
         bridgeRendimiento.setRendimiento();
         
+    }
+    /**
+     * Determina el tipo de actualización que se debe realizar sobre la BD
+     * <ul>
+     * <li>0: nombre</li>
+     * <li>1: localizacion</li>
+     * <li>2: tipo</li>
+     * <li>3: dificultad</li>
+     * <li>4: fechas</li>
+     * <li>5: imagen</li>
+     * </ul>
+     */
+    private ModItinerario getTypeOfMod() {
+        boolean[] mods = alta.getCamposModificados();
+        if((mods[0]||mods[1]||mods[2]||mods[3]) && (mods[4] || mods[5])) {
+            return ModItinerario.TOTAL;
+        } else if(mods[0]||mods[1]||mods[2]||mods[3]) {
+            return ModItinerario.SOLO_NOMBRE_LOCALIZACION_DIFICULTAD;
+        } else if(mods[4]) {
+            return ModItinerario.SOLO_FECHAS;
+        }
+        return ModItinerario.SOLO_IMAGEN;
     }
     /**
      * Obtiene los itinerarios que resulten convenientes en función del filtro
