@@ -4,30 +4,42 @@ package enlace_datos_gui;
 import datos.UtilesBD;
 import datos.daos.ConfiguracionDAO;
 import datos.pojos.Configuracion;
-import java.util.Date;
+import gui.AltaConfiguracion;
 
 /**
  *
  * @author Andrés Traspuesto Lanza
  */
-public class BridgeConfiguracion {
+public enum BridgeConfiguracion {
+    CONFIGURACION;
     private final ConfiguracionDAO dao = ConfiguracionDAO.CONFIGURACION_DAO;
-    /**
-     * Guarda la configuración pasada por parámetros
-     * @param nombre
-     * @param apellidos
-     * @param fecha1Intervalo 
-     * @param fecha2Intervalo 
-     */
-    public void saveConfiguracion(String nombre, String apellidos, Date fecha1Intervalo, Date fecha2Intervalo) {
-        float rendimiento = UtilesBD.INSTANCE.calculaRendimiento();
-        dao.insertConfiguracion(new Configuracion(nombre, apellidos, fecha1Intervalo, fecha2Intervalo, rendimiento));
+    private AltaConfiguracion alta;
+
+    public void setAlta(AltaConfiguracion alta) {
+        this.alta = alta;
     }
+    
     /**
-     * Devuelve la configuración almacenada en la BD
-     * @return 
+     * Guarda la configuración a partir del contenido de los campos
      */
-    public Configuracion getConfiguracion() {
-        return dao.getConfiguracion();
+    public void saveConfiguracion() {
+        float rendimiento = UtilesBD.INSTANCE.calculaRendimiento();
+        dao.insertConfiguracion(new Configuracion(alta.getTfNombre().getText(), 
+                alta.getTfApellidos().getText(), alta.getDtfFecha1().getDate(), 
+                alta.getDtfFecha2().getDate()));
+    }
+    
+    /**
+     * Carga en la pantalla de alta de la configuración los datos actuales
+     * en caso de que estén guardados
+     */
+    public void loadConfiguracion() {
+        Configuracion cfg = dao.getConfiguracion();
+        if (cfg != null) {
+            alta.getDtfFecha1().setDate(cfg.getFecha1Intervalo());
+            alta.getDtfFecha2().setDate(cfg.getFecha2Intervalo());
+            alta.getTfNombre().setText(cfg.getNombre());
+            alta.getTfApellidos().setText(cfg.getApellidos());
+        }
     }
 }

@@ -302,7 +302,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_mConfiguracionActionPerformed
 
     private void miEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEditarActionPerformed
-        Configuracion config = new Configuracion();
+        AltaConfiguracion config = new AltaConfiguracion();
         dpEscritorio.add(config);
         config.show();
     }//GEN-LAST:event_miEditarActionPerformed

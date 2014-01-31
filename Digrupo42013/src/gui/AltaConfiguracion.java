@@ -6,28 +6,60 @@
 
 package gui;
 
-import java.io.File;
-import java.net.URL;
-import javax.help.HelpBroker;
-import javax.help.HelpSet;
-import javax.swing.JOptionPane;
+import calendario.DateTextField;
+import enlace_datos_gui.BridgeConfiguracion;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Gemo
  */
-public class Configuracion extends javax.swing.JInternalFrame {
-
+public class AltaConfiguracion extends javax.swing.JInternalFrame {
+private final BridgeConfiguracion bridge = BridgeConfiguracion.CONFIGURACION;
     /**
      * Creates new form Configuracion
      */
-    public Configuracion() {
+    public AltaConfiguracion() {
         initComponents();
         this.setIconifiable(true);   
         this.setResizable(true);  
         this.setClosable(true);   
         this.setMaximizable(true);
+        bridge.setAlta(AltaConfiguracion.this);
+        bridge.loadConfiguracion();
         
+    }
+
+    public DateTextField getDtfFecha1() {
+        return dtfFecha1;
+    }
+
+    public void setDtfFecha1(DateTextField dtfFecha1) {
+        this.dtfFecha1 = dtfFecha1;
+    }
+
+    public DateTextField getDtfFecha2() {
+        return dtfFecha2;
+    }
+
+    public void setDtfFecha2(DateTextField dtfFecha2) {
+        this.dtfFecha2 = dtfFecha2;
+    }
+
+    public JTextField getTfApellidos() {
+        return tfApellidos;
+    }
+
+    public void setTfApellidos(JTextField tfApellidos) {
+        this.tfApellidos = tfApellidos;
+    }
+
+    public JTextField getTfNombre() {
+        return tfNombre;
+    }
+
+    public void setTfNombre(JTextField tfNombre) {
+        this.tfNombre = tfNombre;
     }
     
 
@@ -43,12 +75,12 @@ public class Configuracion extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        tfNombre = new javax.swing.JTextField();
+        tfApellidos = new javax.swing.JTextField();
         btAceptar = new javax.swing.JButton();
         btCancelar = new javax.swing.JButton();
-        dateTextField1 = new calendario.DateTextField();
-        dateTextField2 = new calendario.DateTextField();
+        dtfFecha1 = new calendario.DateTextField();
+        dtfFecha2 = new calendario.DateTextField();
         jLabel5 = new javax.swing.JLabel();
 
         setTitle("Configuración del escalador");
@@ -73,9 +105,9 @@ public class Configuracion extends javax.swing.JInternalFrame {
             }
         });
 
-        dateTextField1.setText("dateTextField1");
+        dtfFecha1.setText("dateTextField1");
 
-        dateTextField2.setText("dateTextField2");
+        dtfFecha2.setText("dateTextField2");
 
         jLabel5.setText("-");
 
@@ -86,22 +118,21 @@ public class Configuracion extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(91, 91, 91)
                             .addComponent(btCancelar))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                            .addComponent(jTextField4))
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel1)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(dateTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dtfFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(dateTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(dtfFecha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tfApellidos)
+                        .addComponent(tfNombre))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btAceptar)
                         .addGap(104, 104, 104)))
@@ -110,32 +141,33 @@ public class Configuracion extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
+                .addContainerGap(43, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dateTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dtfFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dtfFecha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btAceptar)
                     .addComponent(btCancelar))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptarActionPerformed
+        bridge.saveConfiguracion();
         this.hide();
     }//GEN-LAST:event_btAceptarActionPerformed
 
@@ -147,13 +179,13 @@ public class Configuracion extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAceptar;
     private javax.swing.JButton btCancelar;
-    private calendario.DateTextField dateTextField1;
-    private calendario.DateTextField dateTextField2;
+    private calendario.DateTextField dtfFecha1;
+    private calendario.DateTextField dtfFecha2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField tfApellidos;
+    private javax.swing.JTextField tfNombre;
     // End of variables declaration//GEN-END:variables
 }

@@ -37,13 +37,15 @@ public enum ConfiguracionDAO {
         try (Statement st = utiles.getConnection().createStatement()) {
             String sql = "SELECT nombre, apellidos, fecha1, fecha2 FROM Configuracion";
             ResultSet rs = st.executeQuery(sql);
-            usr = new Configuracion();
-            while (rs.next()) {
-                usr.setNombre(rs.getString("nombre"));
-                usr.setApellidos(rs.getString("apellidos"));
-                usr.setFecha1Intervalo(rs.getTimestamp("fecha1"));
-                usr.setFecha2Intervalo(rs.getTimestamp("fecha2"));
+            if (rs.next()) {
+                usr = new Configuracion();
+                do {
+                    usr.setNombre(rs.getString("nombre"));
+                    usr.setApellidos(rs.getString("apellidos"));
+                    usr.setFecha1Intervalo(rs.getTimestamp("fecha1"));
+                    usr.setFecha2Intervalo(rs.getTimestamp("fecha2"));
 
+                } while (rs.next());
             }
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,7 +65,7 @@ public enum ConfiguracionDAO {
      */
     public void updateConfiguracion(Configuracion usr) {
         String sql = "UPDATE Configuracion SET nombre = ?, apellidos = ?, "
-                + "fecha1 = ?, fecha2 = ? WHERE p_usuario = 0";
+                + "fecha1 = ?, fecha2 = ? WHERE p_configuracion = 0";
         executeUpdateOnConfiguracion(sql, usr);
     }
 
@@ -83,8 +85,7 @@ public enum ConfiguracionDAO {
         boolean existe = false;
         try (PreparedStatement pst = con.prepareStatement(sql)) {
             ResultSet res = pst.executeQuery();
-            res.next();
-            existe = res.getInt("p_configuracion") == 0;
+            existe = res.next();
         } catch (SQLException ex) {
             Logger.getLogger(ConfiguracionDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -95,6 +96,7 @@ public enum ConfiguracionDAO {
                     + "VALUES(?, ?, ?, ?)";
             executeUpdateOnConfiguracion(sql, usr);
         }
+        utiles.saveData();
     }
     /*
      ========================================================================

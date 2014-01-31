@@ -272,8 +272,9 @@ public enum UtilesBD {
         float n = 0;
         try (PreparedStatement pst = connection.prepareStatement(sql)) {
             ResultSet rs = pst.executeQuery();
-            rs.next();
-            n = rs.getInt(1);
+            if (rs.next()) {
+                n = rs.getInt(1);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -291,9 +292,10 @@ public enum UtilesBD {
         float ptos = 0F;
         try (PreparedStatement pst = connection.prepareStatement(sql)) {
             ResultSet rs = pst.executeQuery();
-            rs.next();
-            ptos = rs.getFloat(1) * weight;
-            ptos = ptos > 5 ? 5 : ptos;
+            if (rs.next()) {
+                ptos = rs.getFloat(1) * weight;
+                ptos = ptos > 5 ? 5 : ptos;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
         }
