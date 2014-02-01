@@ -103,6 +103,23 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         setTitle("Alta/Modif Sesiones");
         setMinimumSize(new java.awt.Dimension(300, 335));
         setPreferredSize(new java.awt.Dimension(300, 335));
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         labelFechaSesion.setText("Fecha Sesión:");
 
@@ -156,7 +173,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelDescripcion, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelTipoSesion, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -177,7 +194,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
                             .addComponent(cbTipoSesion, 0, 141, Short.MAX_VALUE)
                             .addComponent(tfDescripcion)
                             .addComponent(dtfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 3, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -219,7 +236,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolverActionPerformed
-        this.hide();
+        this.dispose();
     }//GEN-LAST:event_btVolverActionPerformed
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
@@ -227,7 +244,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         if(modoAlta){
             cleanAll();
         } else {
-            this.hide();
+            this.dispose();
         }
 
 
@@ -260,6 +277,10 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         camposCorrectos[2] = CheckCampo.DESCRIPCION.isCampoOk(tfDescripcion.getText());
         btGuardar.setEnabled(CheckCampo.allOk(camposCorrectos));
     }//GEN-LAST:event_tfDescripcionKeyReleased
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        bridge.closeAlta();
+    }//GEN-LAST:event_formInternalFrameClosed
     private void cleanAll() {
         Arrays.fill(camposCorrectos,0, camposCorrectos.length, false);
         tfHoraComienzo.setText("");

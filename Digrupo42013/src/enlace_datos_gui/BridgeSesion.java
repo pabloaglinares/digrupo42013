@@ -129,6 +129,9 @@ public enum BridgeSesion {
         }
         alta.show();
     }
+    public void closeAlta() {
+        alta = null;
+    }
 
     /**
      * Se encarga de decidir con que sesiones hay que cargar la tabla en función

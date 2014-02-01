@@ -27,15 +27,17 @@ public enum ItinerarioDAO {
 
     ITINERARIO_DAO;
     private UtilesBD utiles = UtilesBD.INSTANCE;
-  /*
+    /*
      ========================================================================
      ............................DELETES.....................................
      ========================================================================
      */
-     /**
-      * Elimina el itinerario pasado como parámetro de la bd
-      * @param itinerario 
-      */
+
+    /**
+     * Elimina el itinerario pasado como parámetro de la bd
+     *
+     * @param itinerario
+     */
     public void deleteItinerario(Itinerario itinerario) {
         String sql = "DELETE FROM Itinerario WHERE p_itinerario = ?";
         try (PreparedStatement st = utiles.getConnection().prepareStatement(sql)) {
@@ -47,10 +49,12 @@ public enum ItinerarioDAO {
         deleteAllFechaOfItinerario(itinerario);
         utiles.saveData();
     }
+
     /**
      * Borra una fecha del itinerario
+     *
      * @param itinerario
-     * @param fecha 
+     * @param fecha
      */
     public void deleteFechaItinerario(Itinerario itinerario, Date fecha) {
         String sql = "DELETE FROM FechaItinerario WHERE a_itinerario = ? AND fecha = ?";
@@ -63,9 +67,11 @@ public enum ItinerarioDAO {
         }
         utiles.saveData();
     }
+
     /**
      * Borra todas las fechas del itinerario
-     * @param itinerario 
+     *
+     * @param itinerario
      */
     public void deleteAllFechaOfItinerario(Itinerario itinerario) {
         String sql = "DELETE FROM FechaItinerario WHERE a_itinerario = ?";
@@ -82,6 +88,7 @@ public enum ItinerarioDAO {
      ............................SELECTS.....................................
      ========================================================================
      */
+
     /**
      * Devuelve todos los itinerarios contenidos en la BD en un List
      *
@@ -116,7 +123,7 @@ public enum ItinerarioDAO {
                 + "(SELECT a_itinerario FROM FechaItinerario "
                 + "WHERE fecha" + cmp + " ?)";
         try (PreparedStatement st = utiles.getConnection().prepareStatement(sql)) {
-            st.setTimestamp(1,new Timestamp(fecha.getTime()));
+            st.setTimestamp(1, new Timestamp(fecha.getTime()));
             ResultSet rs = st.executeQuery();
             cargaItinerarios(rs, itinerarios);
         } catch (SQLException ex) {
@@ -124,11 +131,13 @@ public enum ItinerarioDAO {
         }
         return itinerarios;
     }
+
     /**
      * Devuelve todos los itinerarios resueltos entre las fechas indicadas
+     *
      * @param fecha1
      * @param fecha2
-     * @return 
+     * @return
      */
     public List<Itinerario> getItinerariosByFechaRange(Date fecha1, Date fecha2) {
         List<Itinerario> itinerarios = new ArrayList<>();
@@ -137,8 +146,8 @@ public enum ItinerarioDAO {
                 + "(SELECT a_itinerario FROM FechaItinerario "
                 + "WHERE fecha BETWEEN ? AND ?)";
         try (PreparedStatement st = utiles.getConnection().prepareStatement(sql)) {
-            st.setTimestamp(1,new Timestamp(fecha1.getTime()));
-            st.setTimestamp(2,new Timestamp(fecha2.getTime()));
+            st.setTimestamp(1, new Timestamp(fecha1.getTime()));
+            st.setTimestamp(2, new Timestamp(fecha2.getTime()));
             ResultSet rs = st.executeQuery();
             cargaItinerarios(rs, itinerarios);
         } catch (SQLException ex) {
@@ -146,10 +155,12 @@ public enum ItinerarioDAO {
         }
         return itinerarios;
     }
+
     /**
      * Devuelve todos los itinerarios de la dificultad indicada
+     *
      * @param dificultad
-     * @return 
+     * @return
      */
     public List<Itinerario> getItinerariosByDificultad(String dificultad) {
         List<Itinerario> itinerarios = new ArrayList<>();
@@ -212,7 +223,7 @@ public enum ItinerarioDAO {
      */
     public void insertItinerario(Itinerario itinerario) {
         String sql = "INSERT INTO Itinerario (nombre, localizacion, tipo, dificultad, imagen)"
-                + " VALUES(?,?,?,?)";
+                + " VALUES(?,?,?,?,?)";
         File imgFile;
         if (itinerario.getPathImagen() != null) {
             imgFile = utiles.getFileImagen(itinerario.getPathImagen());
@@ -252,7 +263,7 @@ public enum ItinerarioDAO {
                 + "VALUES (?,?)";
         try (PreparedStatement pst = utiles.getConnection().prepareStatement(sql)) {
             pst.setInt(1, itinerario.getpItinerario());
-            pst.setTimestamp(2,new Timestamp(fecha.getTime()));
+            pst.setTimestamp(2, new Timestamp(fecha.getTime()));
             pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
@@ -321,22 +332,23 @@ public enum ItinerarioDAO {
      * @param newImg
      */
     private void updateImagenItinerario(Itinerario itinerario, File newImg) {
-        if (!itinerario.getPathImagen().getName().equals("sinImagen.jpg")) {
-            itinerario.getPathImagen().delete();
+        if (!itinerario.getPathImagen().equals(newImg)) {
+            if (!itinerario.getPathImagen().getName().equals("sinImagen.jpg")) {
+                itinerario.getPathImagen().delete();
+            }
+            File img = utiles.getFileImagen(newImg);
+            String sql = "UPDATE Itinerario SET imagen = ? WHERE p_itinerario = ?";
+            try (PreparedStatement pst = utiles.getConnection().prepareStatement(sql)) {
+                pst.setString(1, img.getName());
+                pst.setInt(2, itinerario.getpItinerario());
+                pst.executeUpdate();
+                utiles.guardaArchivoImagen(newImg, img);
+                itinerario.setPathImagen(img);
+            } catch (SQLException ex) {
+                Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            utiles.saveData();
         }
-        File img = utiles.getFileImagen(newImg);
-        String sql = "UPDATE Itinerario SET imagen = ? WHERE p_itinerario = ?";
-        try (PreparedStatement pst = utiles.getConnection().prepareStatement(sql)) {
-            pst.setString(1, img.getName());
-            pst.setInt(2, itinerario.getpItinerario());
-            pst.executeUpdate();
-            utiles.guardaArchivoImagen(newImg, img);
-            itinerario.setPathImagen(img);
-        } catch (SQLException ex) {
-            Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        utiles.saveData();
-
     }
 
     /**

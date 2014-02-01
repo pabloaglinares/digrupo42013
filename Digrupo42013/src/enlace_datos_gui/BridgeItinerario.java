@@ -10,6 +10,8 @@ import gui.tablaItinerario.ItinerariosTableModel;
 import gui.tablaItinerario.TablaItinerarios;
 import java.io.File;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Este singleton es un bridge que enlaza la capa gráfica con la de datos Itinerario
@@ -38,10 +40,26 @@ public enum BridgeItinerario {
         alta.getTfNombreItinerario().setText(iti.getNombre());
         alta.getTfLocalizacion().setText(iti.getLocalizacion());
         alta.getCbTipoItineracio().setSelectedItem(iti.getTipo());
+        String[] difs = getDificultyGroups(iti.getDifucultad());
+        alta.getSpDificultadNumero().setValue(Integer.parseInt(difs[0]));
+        alta.getSpDificultadLetra().setValue(difs[1]);
+        if(difs[2].equals("+"))alta.getSpDificultadMasMenos().setValue(difs[2]);
+        alta.getTblFechas().getModel().setDates(iti.getFechasResolucion());
+        alta.setImagen(iti.getPathImagen());
+        pItinerario = iti.getpItinerario();
     }
 
     public String[] getDificultyGroups(String dificultad) {
         String[] groups = new String[3];
+        Pattern pattern = Pattern.compile("\\d+");
+        Matcher matcher = pattern.matcher(dificultad);
+        if(matcher.find()) groups[0] = matcher.group();
+        pattern = Pattern.compile("[abc]");
+        matcher = pattern.matcher(dificultad);
+        if(matcher.find()) groups[1] = matcher.group();
+        pattern = Pattern.compile("\\+|-");
+        matcher = pattern.matcher(dificultad);
+        if(matcher.find()) groups[2] = matcher.group();
         return groups;
     }
     private void showAlta() {
@@ -49,7 +67,9 @@ public enum BridgeItinerario {
         main.getDpEscritorio().add(alta);
         alta.show();
     }
-
+    public void closeAlta() {
+        alta = null;
+    }
     public void setMain(Main main) {
         this.main = main;
     }
@@ -100,7 +120,8 @@ public enum BridgeItinerario {
             loadItinerarioProperly(it);
         } else {
             it.setpItinerario(pItinerario);
-            dao.updateItinerario(it, getTypeOfMod(), alta.getImagen());
+//            dao.updateItinerario(it, getTypeOfMod(), alta.getImagen());
+            dao.updateItinerario(it, ModItinerario.TOTAL, alta.getImagen());
         }
         bridgeRendimiento.setRendimiento();
         

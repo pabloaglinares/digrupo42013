@@ -110,7 +110,7 @@ public class Itinerario implements Serializable {
      * @return the value of fechasResolucion
      */
     public List<Date> getFechasResolucion() {
-        return Collections.unmodifiableList(fechasResolucion);
+        return fechasResolucion;
     }
 
     /**

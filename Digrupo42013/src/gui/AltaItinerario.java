@@ -8,7 +8,6 @@ package gui;
 import calendario.DateTextField;
 import enlace_datos_gui.BridgeItinerario;
 import enlace_datos_gui.CheckCampo;
-import gui.tablaFechas.FechasTableModel;
 import gui.tablaFechas.TablaFechas;
 import java.io.File;
 import java.util.ArrayList;
@@ -86,7 +85,24 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setPreferredSize(new java.awt.Dimension(760, 450));
+        setPreferredSize(new java.awt.Dimension(760, 460));
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         btnLoadImg.setText("Seleccionar imagen");
         btnLoadImg.addActionListener(new java.awt.event.ActionListener() {
@@ -299,11 +315,11 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVolver)
                     .addComponent(btGuardar))
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -337,6 +353,7 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
 
     public void setImagen(File imagen) {
         this.imagen = imagen;
+        recargaImagen();
     }
 
     public DateTextField getDtfNewDate() {
@@ -402,7 +419,6 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
     public void setCamposModificados(boolean[] camposModificados) {
         this.camposModificados = camposModificados;
     }
-    
 
     /**
      * Redibuja la imagen
@@ -439,13 +455,16 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         btGuardar.setEnabled(CheckCampo.allOk(camposOk));
     }
     private void btVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolverActionPerformed
-        this.hide();
+        this.dispose();
     }//GEN-LAST:event_btVolverActionPerformed
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-        String dificultad = spDificultadNumero.getValue().toString().trim() + spDificultadLetra.getValue().toString().trim() + spDificultadMasMenos.getValue().toString().trim();
         bridge.saveItinerario();
-        cleanAll();
+        if (modoAlta) {
+            cleanAll();
+        } else {
+            this.dispose();
+        }
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void tfNombreItinerarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNombreItinerarioKeyReleased
@@ -480,6 +499,10 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
     private void spDificultadMasMenosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spDificultadMasMenosStateChanged
         camposModificados[3] = true;
     }//GEN-LAST:event_spDificultadMasMenosStateChanged
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        bridge.closeAlta();
+    }//GEN-LAST:event_formInternalFrameClosed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

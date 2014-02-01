@@ -6,6 +6,7 @@
 package gui;
 
 import datos.UtilesBD;
+import enlace_datos_gui.BridgeItinerario;
 import enlace_datos_gui.BridgeRendimiento;
 import enlace_datos_gui.BridgeSesion;
 import gui.main.ImagenFondo;
@@ -30,6 +31,7 @@ public final class Main extends javax.swing.JFrame {
 
     private final BridgeRendimiento bridgeRendimiento = BridgeRendimiento.RENDIMIENTO;
     private final BridgeSesion bridgeSesion = BridgeSesion.BRIDGE;
+    private final BridgeItinerario bridgeItinerario = BridgeItinerario.BRIDGE;
 
     /**
      * Creates new form Main
@@ -42,6 +44,7 @@ public final class Main extends javax.swing.JFrame {
         bridgeRendimiento.setLblRendimiento(lRendimiento);
         bridgeRendimiento.setRendimiento();//Asigna el rendimiento
         bridgeSesion.setMain(Main.this);
+        bridgeItinerario.setMain(Main.this);
 
     }
 
@@ -273,7 +276,7 @@ public final class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_miSalirActionPerformed
 
     private void miAltaItinerarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAltaItinerarioActionPerformed
-
+        bridgeItinerario.openForInsertNewITinerario();
     }//GEN-LAST:event_miAltaItinerarioActionPerformed
 
     private void miAltaSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAltaSesionActionPerformed

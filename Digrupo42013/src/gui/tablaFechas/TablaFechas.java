@@ -32,7 +32,7 @@ public class TablaFechas extends JTable{
         model = new FechasTableModel(cabeceras, filas);
         this.setModel(model);
         //Determino quién debe encargarse de mostrar las celdas con botones
-        this.setDefaultRenderer(JButton.class, new ButtonRender());
+        this.setDefaultRenderer(JButton.class, new ButtonRender("resources/borrar.png"));
         
         //Determino la acción que debe realizarse al pulsar en borrar
         ButtonCellEditor del = new ButtonCellEditor("Borrar");
