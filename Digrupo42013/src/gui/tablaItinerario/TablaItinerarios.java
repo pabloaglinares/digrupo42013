@@ -1,16 +1,11 @@
 package gui.tablaItinerario;
 
 import datos.daos.ItinerarioDAO;
-import datos.daos.SesionDAO;
 import datos.pojos.Itinerario;
 import enlace_datos_gui.BridgeItinerario;
-import gui.botonestablas.ButtonCellEditor;
-import gui.botonestablas.ButtonListener;
 import gui.botonestablas.ButtonRender;
 import gui.botonestablas.WraperFila;
-import gui.tablasesion.TablaSesiones;
 import java.awt.event.MouseEvent;
-import javax.swing.JButton;
 import javax.swing.JTable;
 import java.util.ArrayList;
 import java.util.List;
