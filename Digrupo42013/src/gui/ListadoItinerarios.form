@@ -78,7 +78,7 @@
       <SubComponents>
         <Component class="gui.tablaItinerario.TablaItinerarios" name="tbListado">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tbListado.setRowHeight(25);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tbListado.setRowHeight(25);&#xa;tbListado.getColumnModel().getColumn(2).setMaxWidth(100);&#xa;tbListado.getColumnModel().getColumn(3).setMaxWidth(30);&#xa;tbListado.getColumnModel().getColumn(4).setMaxWidth(30);"/>
           </AuxValues>
         </Component>
       </SubComponents>

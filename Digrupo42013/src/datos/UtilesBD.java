@@ -192,7 +192,7 @@ public enum UtilesBD {
      */
     public File getFileImagen(File pathImagen) {
         File aux;
-        if (pathImagen.equals(new File("imagenes/sinImagen.jpeg"))) {
+        if (pathImagen.equals(new File("imagenes/sinImagen.jpg"))) {
             aux = pathImagen;
         } else {
             aux = new File("imagenes" + File.separatorChar + "_0" + pathImagen.getName());
@@ -211,7 +211,7 @@ public enum UtilesBD {
      * @param dst
      */
     public void guardaArchivoImagen(File src, File dst) {
-        if (!src.equals(new File("imagenes/sinImagen.jpeg"))) { //Solo guarda la imagen si se ha seleccionado una
+        if (!src.equals(new File("imagenes/sinImagen.jpg"))) { //Solo guarda la imagen si se ha seleccionado una
             try (FileInputStream fis = new FileInputStream(src);
                     FileOutputStream fos = new FileOutputStream(dst)) {
                 byte[] buffer = new byte[1024];

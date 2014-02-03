@@ -8,7 +8,6 @@ package datos.pojos;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -56,6 +55,7 @@ public class Itinerario implements Serializable {
      *
      * @param nombre
      * @param localizacion
+     * @param tipo
      * @param difucultad
      * @param pathImagen
      */

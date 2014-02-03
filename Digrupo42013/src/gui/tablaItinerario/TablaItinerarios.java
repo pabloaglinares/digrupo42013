@@ -1,16 +1,20 @@
 package gui.tablaItinerario;
 
 import datos.daos.ItinerarioDAO;
+import datos.daos.SesionDAO;
 import datos.pojos.Itinerario;
 import enlace_datos_gui.BridgeItinerario;
 import gui.botonestablas.ButtonCellEditor;
 import gui.botonestablas.ButtonListener;
 import gui.botonestablas.ButtonRender;
 import gui.botonestablas.WraperFila;
+import gui.tablasesion.TablaSesiones;
+import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.event.MouseInputAdapter;
 
 /**
  * Tabla específica para contener Itinerarios, con la particularidad de que cada
@@ -21,11 +25,10 @@ import java.util.List;
  */
 public class TablaItinerarios extends JTable {
 
-    private ButtonListener handleOnModificar; //Clase que se encarga de manejar el click sobre el botón de editar
     private ItinerariosTableModel model;
-    private final String[] cabecera = {"Nombre", "Localización", "Dificultad", "Borrar", "Editar"};
+    private final String[] cabecera = {"Nombre", "Localización", "Dificultad", null, null};
     private List<WraperFila<Itinerario>> filas = new ArrayList<>();
-
+    private final BridgeItinerario bridge = BridgeItinerario.BRIDGE;
     /**
      * Devuelve un objeto tabla
      */
@@ -35,33 +38,26 @@ public class TablaItinerarios extends JTable {
 
         this.setModel(model);
         //Determino quién debe encargarse de mostrar las celdas con botones
-        this.setDefaultRenderer(JButton.class, new ButtonRender("resources/borrar.png"));
-
-        //Determino la acción que debe realizarse al pulsar en borrar
-        ButtonCellEditor del = new ButtonCellEditor("Borrar");
-        del.addListener(new ButtonListener() {
-
+        getColumnModel().getColumn(3).setCellRenderer(new ButtonRender("imagenes/borrar.png"));
+        getColumnModel().getColumn(4).setCellRenderer(new ButtonRender("imagenes/editar.png"));
+        this.addMouseListener(new MouseInputAdapter() {
             @Override
-            public void handleActionOnCellButton() {
+            public void mouseClicked(MouseEvent e) {
                 int row = TablaItinerarios.this.getSelectedRow();
-                ItinerarioDAO.ITINERARIO_DAO.deleteItinerario(TablaItinerarios.this.model.getItinerario(row));
-                TablaItinerarios.this.model.deleteItinerario(row);
+                int col = TablaItinerarios.this.getSelectedColumn();
+                switch (col) {
+                    case 3: //Si se ha pinchado en el botón borrar
+                        ItinerarioDAO.ITINERARIO_DAO.deleteItinerario(TablaItinerarios.this.model.getItinerario(row));
+                        TablaItinerarios.this.model.deleteItinerario(row);
+                        break;
+                    case 4: //Si se ha pinchado en editar
+                        bridge.opneForUpdateItinerario(TablaItinerarios.this.model.getItinerario(row));
+                        break;
+                    default:
+                    //aquí va mostrar la pantalla de detalles
+                }
             }
         });
-        this.getColumn("Borrar").setCellEditor(del);
-
-        //Determino la acción que debe realizarse al pulsar en editar
-        ButtonCellEditor mod = new ButtonCellEditor("Editar");
-        mod.addListener(new ButtonListener() {
-
-            @Override
-            public void handleActionOnCellButton() {
-                int row = TablaItinerarios.this.getSelectedRow();
-                BridgeItinerario.BRIDGE.opneForUpdateItinerario(TablaItinerarios.this.model.getItinerario(row));
-            }
-        });
-        this.getColumn("Editar").setCellEditor(mod);
-
     }
 
 }

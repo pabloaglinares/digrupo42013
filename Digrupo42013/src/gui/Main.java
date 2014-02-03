@@ -10,6 +10,7 @@ import enlace_datos_gui.BridgeItinerario;
 import enlace_datos_gui.BridgeRendimiento;
 import enlace_datos_gui.BridgeSesion;
 import gui.main.ImagenFondo;
+import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
@@ -19,6 +20,7 @@ import javax.help.HelpBroker;
 import javax.help.HelpSet;
 import javax.help.HelpSetException;
 import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,6 +41,7 @@ public final class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         dpEscritorio.setBorder(new ImagenFondo());
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         enlazarLaAyuda();
         bridgeRendimiento.setLblRendimiento(lRendimiento);

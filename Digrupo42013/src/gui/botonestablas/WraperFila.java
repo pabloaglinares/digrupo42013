@@ -1,30 +1,31 @@
 package gui.botonestablas;
 
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-
 /**
  * Wraper de objetos genéricos que permite mostrarlos en una tabla con botones
  * de editar y eliminar
+ *
  * @author Andrés Traspuesto Lanza
  * @param <T>
  */
 public class WraperFila<T> {
-    
+
     private T elemento;//Itinerario contenido en la fila
     private final static JButton btnEliminar = new JButton("Borrar");
     private final static JButton btnEditar = new JButton("Editar");
-    static{
+
+    static {
         btnEliminar.setToolTipText("Eliminar el elemento correspondiente a la fila de este botón");
         btnEditar.setToolTipText("Editar el elemento correspondiente a la fila de este botón");
     }
+
     public WraperFila(T elemento) {
         this.elemento = elemento;
     }
-    
+
     /**
      * Get the value of elemento
      *
@@ -50,6 +51,5 @@ public class WraperFila<T> {
     public JButton getBtnEditar() {
         return btnEditar;
     }
-    
 
 }

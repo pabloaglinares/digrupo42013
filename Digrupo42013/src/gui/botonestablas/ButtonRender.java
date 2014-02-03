@@ -11,29 +11,21 @@ import javax.swing.table.TableCellRenderer;
  *
  * @author Andrés Traspuesto Lanza
  */
-public class ButtonRender implements TableCellRenderer {
+public class ButtonRender extends JButton implements TableCellRenderer{
     private String img;
 
     public ButtonRender(String img) {
         this.img = img;
+        setIcon(new ImageIcon(img));
+        setBorderPainted(false);
+        setContentAreaFilled(false);
+        setOpaque(true);
     }
     
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
             int row, int column) {
-        if (value instanceof JButton) {
-            JButton btn = (JButton) value;
-            switch(btn.getText()){
-                case "Borrar":
-                    btn.setIcon(new ImageIcon("resources/borrar.png"));
-                    break;
-                case "Editar":
-                    break;
-            }
-            return btn;
-        }
-
-        return null;
+        return this;
 
     }
 

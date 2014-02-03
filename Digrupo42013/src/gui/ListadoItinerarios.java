@@ -58,6 +58,9 @@ private BridgeItinerario bridge = BridgeItinerario.BRIDGE;
         });
 
         tbListado.setRowHeight(25);
+        tbListado.getColumnModel().getColumn(2).setMaxWidth(100);
+        tbListado.getColumnModel().getColumn(3).setMaxWidth(30);
+        tbListado.getColumnModel().getColumn(4).setMaxWidth(30);
         jScrollPane2.setViewportView(tbListado);
 
         tbpFiltroBusqueda.addChangeListener(new javax.swing.event.ChangeListener() {

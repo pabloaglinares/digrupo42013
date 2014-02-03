@@ -7,6 +7,7 @@ package gui;
 
 import calendario.CambioFechaListener;
 import enlace_datos_gui.BridgeSesion;
+import gui.tablasesion.SesionTableModel;
 import javax.swing.JTabbedPane;
 
 public class ListadoSesiones extends javax.swing.JInternalFrame {
@@ -48,7 +49,7 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Listado sesiones");
         setMinimumSize(new java.awt.Dimension(575, 380));
-        setPreferredSize(new java.awt.Dimension(575, 380));
+        setPreferredSize(new java.awt.Dimension(700, 380));
 
         btVolver.setText("Volver");
         btVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -57,7 +58,23 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
             }
         });
 
-        tbListado.setRowHeight(25);
+        /*
+        tbListado.setModel(null);
+        */
+        tbListado.setRowHeight(30);
+        tbListado.getColumnModel().getColumn(0).setMaxWidth(100);
+        tbListado.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tbListado.getColumnModel().getColumn(1).setMaxWidth(100);
+        tbListado.getColumnModel().getColumn(1).setPreferredWidth(100);
+        tbListado.getColumnModel().getColumn(2).setMaxWidth(75);
+        tbListado.getColumnModel().getColumn(2).setPreferredWidth(75);
+        tbListado.getColumnModel().getColumn(3).setMaxWidth(75);
+        tbListado.getColumnModel().getColumn(3).setPreferredWidth(75);
+        tbListado.getColumnModel().getColumn(4).setPreferredWidth(150);
+        tbListado.getColumnModel().getColumn(5).setMaxWidth(35);
+        tbListado.getColumnModel().getColumn(5).setPreferredWidth(35);
+        tbListado.getColumnModel().getColumn(6).setMaxWidth(35);
+        tbListado.getColumnModel().getColumn(6).setPreferredWidth(35);
         jScrollPane2.setViewportView(tbListado);
 
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {

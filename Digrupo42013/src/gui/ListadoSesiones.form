@@ -8,7 +8,7 @@
       <Dimension value="[575, 380]"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[575, 380]"/>
+      <Dimension value="[700, 380]"/>
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -74,8 +74,22 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Component class="gui.tablasesion.TablaSesiones" name="tbListado">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="*/">
+              <Connection code="null" type="code"/>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0"/>
+            </Property>
+            <Property name="rowHeight" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="tbListado.getColumnModel().getColumn(0).setMaxWidth(100);&#xa;tbListado.getColumnModel().getColumn(0).setPreferredWidth(100);&#xa;tbListado.getColumnModel().getColumn(1).setMaxWidth(100);&#xa;tbListado.getColumnModel().getColumn(1).setPreferredWidth(100);&#xa;tbListado.getColumnModel().getColumn(2).setMaxWidth(75);&#xa;tbListado.getColumnModel().getColumn(2).setPreferredWidth(75);&#xa;tbListado.getColumnModel().getColumn(3).setMaxWidth(75);&#xa;tbListado.getColumnModel().getColumn(3).setPreferredWidth(75);&#xa;tbListado.getColumnModel().getColumn(4).setPreferredWidth(150);&#xa;tbListado.getColumnModel().getColumn(5).setMaxWidth(35);&#xa;tbListado.getColumnModel().getColumn(5).setPreferredWidth(35);&#xa;tbListado.getColumnModel().getColumn(6).setMaxWidth(35);&#xa;tbListado.getColumnModel().getColumn(6).setPreferredWidth(35);">
+              <Connection code="30" type="code"/>
+            </Property>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+            </Property>
+          </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tbListado.setRowHeight(25);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="/*"/>
           </AuxValues>
         </Component>
       </SubComponents>

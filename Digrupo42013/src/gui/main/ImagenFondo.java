@@ -36,9 +36,11 @@ public class ImagenFondo implements Border{
 
     @Override
     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-        int x0 = x+ (width-back.getWidth())/2;
-        int y0 = y+ (height-back.getHeight())/2;
-        g.drawImage(back,x0,y0,null);
+        //He modificado esto para que al maximizar la aplicación se ajuste el fondo al tamaño de la ventana
+//        int x0 = x+ (width-back.getWidth())/2;
+//        int y0 = y+ (height-back.getHeight())/2;
+//        g.drawImage(back,x0,y0,null);
+        g.drawImage(back,0,0,c.getWidth(),c.getHeight(),null);
     }
 
     @Override

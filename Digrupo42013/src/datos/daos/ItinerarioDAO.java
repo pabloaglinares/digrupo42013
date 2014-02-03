@@ -4,7 +4,6 @@ import datos.Comparador;
 import datos.ModItinerario;
 import datos.UtilesBD;
 import datos.pojos.Itinerario;
-import datos.pojos.Sesion;
 import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

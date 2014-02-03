@@ -133,7 +133,7 @@ public class SesionTableModel extends AbstractTableModel {
      */
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex > 4;
+        return false;
     }
 
     /**

@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractCellEditor;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -18,7 +19,7 @@ public class ButtonCellEditor extends AbstractCellEditor implements TableCellEdi
     private Component currentValue; //componente en edición
     private final String accion; //nombre de la acción que ejecuta
     private ButtonListener listener; //encargado de manejar la acción sobre el botón
-    private JButton button = null;
+    private JButton btn = null;
 
     /**
      * Devuelve un objeto ButtonCellEditor
@@ -52,19 +53,21 @@ public class ButtonCellEditor extends AbstractCellEditor implements TableCellEdi
     @Override
     public Component getTableCellEditorComponent(final JTable table, Object value, boolean isSelected, final int row, int column) {
         if (value instanceof JButton) {
-            button = (JButton) value;
-            button.setAction(new AbstractAction(accion) {
-
+            btn = (JButton) value;
+            
+            btn.setAction(new AbstractAction(accion) {
+                
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (listener != null) {
                         listener.handleActionOnCellButton();
                     }
+                    
                 }
             });
         }
-        currentValue = button;
-        return button;
+        currentValue = btn;
+        return btn;
     }
     /**
      * Devuelve el componente actual

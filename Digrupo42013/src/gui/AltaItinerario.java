@@ -31,7 +31,7 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
      * contiene true si la localización es válida
      */
     private boolean[] camposOk = new boolean[2];
-    private File imagen = new File("imagenes/sinImagen.jpeg");
+    private File imagen = new File("imagenes/sinImagen.jpg");
     /**
      * <ul>
      * <li>0: nombre</li>
@@ -247,6 +247,9 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
             }
         });
 
+        tblFechas.setRowHeight(30);
+        tblFechas.getColumnModel().getColumn(1).setMaxWidth(30);
+        tblFechas.getColumnModel().getColumn(2).setMaxWidth(30);
         jScrollPane3.setViewportView(tblFechas);
 
         dtfNewDate.setText("dateTextField1");
@@ -436,7 +439,7 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
      */
     private void cleanAll() {
         Arrays.fill(camposOk, false);
-        imagen = new File("imagenes/sinImagen.jpeg");
+        imagen = new File("imagenes/sinImagen.jpg");
         recargaImagen();
         tfLocalizacion.setText("");
         tfNombreItinerario.setText("");
