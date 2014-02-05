@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="consulta3" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="78b9b4ad-3758-4f73-8b5a-34b3929b254f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="anio" class="java.sql.Timestamp">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="mes" class="java.sql.Timestamp">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select count(week(s.fh_inicio))as semana,year(s.fh_inicio)as year, sum(hour(s.fh_fin)-hour(s.fh_inicio))as totalhoras
+,month(s.fh_inicio) as mes
+from sesion s
+where year(s.fh_inicio)=year($P{anio}) and month(s.fh_inicio)=month($P{mes})
+group by week(s.fh_inicio)
+order by week(s.fh_inicio) DESC]]>
+	</queryString>
+	<field name="SEMANA" class="java.lang.Integer"/>
+	<field name="YEAR" class="java.lang.Integer"/>
+	<field name="TOTALHORAS" class="java.math.BigDecimal"/>
+	<field name="MES" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="44" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="42" width="555" height="1" uuid="1c64405c-93a2-4f29-81a0-58728b3cf69e"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="20" width="555" height="20" uuid="69b3e945-ff65-403f-9c0a-aad41d60fb90"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20" uuid="4d8f7df6-538e-4d58-97f5-499b9fe53c44"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gráfico de entrenamiento semanal por horas  del:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="290" y="20" width="53" height="20" uuid="b3b8c142-f2dd-4aac-82c6-4d89275edf36"/>
+				<textFieldExpression><![CDATA[$F{YEAR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="221" y="20" width="45" height="20" uuid="4951a799-2a2e-492e-9558-13d2509b1b94"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{MES}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<summary>
+		<band height="139" splitType="Stretch">
+			<lineChart>
+				<chart>
+					<reportElement x="0" y="13" width="555" height="116" uuid="6c436861-158b-4a31-aea4-a933069b9508"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Entrenamiento Semanal"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{SEMANA}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{TOTALHORAS}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+		</band>
+	</summary>
+</jasperReport>
