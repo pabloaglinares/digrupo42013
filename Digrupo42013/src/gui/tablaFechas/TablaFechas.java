@@ -10,6 +10,7 @@ import enlace_datos_gui.BridgeItinerario;
 import gui.botonestablas.ButtonRender;
 import gui.botonestablas.WraperFila;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,8 +31,11 @@ public class TablaFechas extends JTable{
         model = new FechasTableModel(cabeceras, filas);
         this.setModel(model);
         //Determino quién debe encargarse de mostrar las celdas con botones
-        getColumnModel().getColumn(1).setCellRenderer(new ButtonRender("imagenes/borrar.png"));
-        getColumnModel().getColumn(2).setCellRenderer(new ButtonRender("imagenes/editar.png"));
+        URL borrar = getClass().getClassLoader().getResource("resources/borrar.png");
+        URL editar = getClass().getClassLoader().getResource("resources/editar.png");
+        //Determino quién debe encargarse de mostrar las celdas con botones
+        getColumnModel().getColumn(1).setCellRenderer(new ButtonRender(borrar.getFile()));
+        getColumnModel().getColumn(2).setCellRenderer(new ButtonRender(editar.getFile()));
         this.addMouseListener(new MouseInputAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
