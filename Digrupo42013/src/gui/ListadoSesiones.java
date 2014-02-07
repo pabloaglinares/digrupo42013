@@ -39,49 +39,31 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         btVolver = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tbListado = new gui.tablasesion.TablaSesiones();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         pnlVacio = new javax.swing.JPanel();
-        pnlRangoFechas = new gui.PanelRangoFechas();
-        pnlTipoSesion = new gui.PanelTipoSesion();
 
         setResizable(true);
         setTitle("Listado sesiones");
+        setToolTipText("Borde de la ventana con titulo \"listado sesiones\"");
         setMinimumSize(new java.awt.Dimension(575, 380));
         setPreferredSize(new java.awt.Dimension(700, 380));
 
         btVolver.setText("Volver");
+        btVolver.setToolTipText("Boton volver");
         btVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btVolverActionPerformed(evt);
             }
         });
 
-        /*
-        tbListado.setModel(null);
-        */
-        tbListado.setRowHeight(30);
-        tbListado.getColumnModel().getColumn(0).setMaxWidth(100);
-        tbListado.getColumnModel().getColumn(0).setPreferredWidth(100);
-        tbListado.getColumnModel().getColumn(1).setMaxWidth(100);
-        tbListado.getColumnModel().getColumn(1).setPreferredWidth(100);
-        tbListado.getColumnModel().getColumn(2).setMaxWidth(75);
-        tbListado.getColumnModel().getColumn(2).setPreferredWidth(75);
-        tbListado.getColumnModel().getColumn(3).setMaxWidth(75);
-        tbListado.getColumnModel().getColumn(3).setPreferredWidth(75);
-        tbListado.getColumnModel().getColumn(4).setPreferredWidth(150);
-        tbListado.getColumnModel().getColumn(5).setMaxWidth(35);
-        tbListado.getColumnModel().getColumn(5).setPreferredWidth(35);
-        tbListado.getColumnModel().getColumn(6).setMaxWidth(35);
-        tbListado.getColumnModel().getColumn(6).setPreferredWidth(35);
-        jScrollPane2.setViewportView(tbListado);
-
+        jTabbedPane1.setToolTipText("JTabbedPane con el titulo \"listar todas\" ");
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jTabbedPane1StateChanged(evt);
             }
         });
+
+        pnlVacio.setToolTipText("jPanel donde se listaran todas las sesiones");
 
         javax.swing.GroupLayout pnlVacioLayout = new javax.swing.GroupLayout(pnlVacio);
         pnlVacio.setLayout(pnlVacioLayout);
@@ -96,15 +78,6 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Listar todas", pnlVacio);
 
-        pnlRangoFechas.addCambioFechaListener(new CambioFechaListener(){
-            @Override
-            public void onCambioFecha() {
-                bridge.loadByRange(pnlRangoFechas.getFecha1(), pnlRangoFechas.getFecha2());
-            }
-        });
-        jTabbedPane1.addTab("Listar por fecha", pnlRangoFechas);
-        jTabbedPane1.addTab("Listar por tipo", pnlTipoSesion);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,10 +86,8 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btVolver)
-                    .addComponent(jScrollPane2))
+                .addContainerGap(598, Short.MAX_VALUE)
+                .addComponent(btVolver)
                 .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
@@ -124,9 +95,7 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
                 .addComponent(btVolver)
                 .addGap(18, 18, 18))
         );
@@ -166,11 +135,7 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btVolver;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private gui.PanelRangoFechas pnlRangoFechas;
-    private gui.PanelTipoSesion pnlTipoSesion;
     private javax.swing.JPanel pnlVacio;
-    private gui.tablasesion.TablaSesiones tbListado;
     // End of variables declaration//GEN-END:variables
 }

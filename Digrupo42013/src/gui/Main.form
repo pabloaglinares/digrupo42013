@@ -10,6 +10,7 @@
               <Image iconType="3" name="/resources/itinerario.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Itinerarios"/>
+            <Property name="toolTipText" type="java.lang.String" value="Pesta&#xf1;a con el texto &quot;itinerarios&quot; su shortcut &quot;Ctrl+Alt+A&quot;"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="miAltaItinerario">
@@ -21,6 +22,7 @@
                   <Image iconType="3" name="/resources/add.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Alta Itinerario..."/>
+                <Property name="toolTipText" type="java.lang.String" value="Pesta&#xf1;a con el texto &quot;alta itinerario&quot;"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAltaItinerarioActionPerformed"/>
@@ -35,6 +37,7 @@
                   <Image iconType="3" name="/resources/lista.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Listado Itinerarios..."/>
+                <Property name="toolTipText" type="java.lang.String" value="Pesta&#xf1;a con el texto &quot;lista itinerarios&quot; y su shortcut &quot;Ctrl+Alt+L&quot;"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miListadoItinerariosActionPerformed"/>
@@ -48,6 +51,7 @@
               <Image iconType="3" name="/resources/sesion.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Sesiones"/>
+            <Property name="toolTipText" type="java.lang.String" value="Pesta&#xf1;a con el texto &quot;sesiones&quot; su shortcut &quot;ctrl+M&#xe1;yus+A&quot;"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="miAltaSesion">
@@ -59,6 +63,7 @@
                   <Image iconType="3" name="/resources/add.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Alta Sesi&#xf3;n..."/>
+                <Property name="toolTipText" type="java.lang.String" value="Pesta&#xf1;a con el texto &quot;alta sesion&quot;"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAltaSesionActionPerformed"/>
@@ -73,6 +78,7 @@
                   <Image iconType="3" name="/resources/lista.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Listado Sesiones..."/>
+                <Property name="toolTipText" type="java.lang.String" value="Pesta&#xf1;a con el texto &quot;listado sesiones&quot; su shortcut &quot;Ctrl+M&#xe1;yus+L"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miListadoSesionesActionPerformed"/>
@@ -86,11 +92,13 @@
               <Image iconType="3" name="/resources/informe.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Informes"/>
+            <Property name="toolTipText" type="java.lang.String" value="Pesta&#xf1;a con el texto &quot;informes"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear Informes..."/>
+                <Property name="toolTipText" type="java.lang.String" value="Pesta&#xf1;a con el texto &quot;crear informes&quot;"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem6ActionPerformed"/>
@@ -104,6 +112,7 @@
               <Image iconType="3" name="/resources/herramientas.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Configuracion"/>
+            <Property name="toolTipText" type="java.lang.String" value="Pesta&#xf1;a con el texto &quot;configuracion&quot;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mConfiguracionActionPerformed"/>
@@ -112,6 +121,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="miEditar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Editar escalador..."/>
+                <Property name="toolTipText" type="java.lang.String" value="Pesta&#xf1;a con el texto &quot;editar escalador&quot;"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miEditarActionPerformed"/>
@@ -125,6 +135,7 @@
               <Image iconType="3" name="/resources/ayuda1.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Ayuda"/>
+            <Property name="toolTipText" type="java.lang.String" value="Pesta&#xf1;a con el texto &quot;ayuda&quot;"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="miAyuda">
@@ -136,6 +147,7 @@
                   <Image iconType="3" name="/resources/ayuda2.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ayuda..."/>
+                <Property name="toolTipText" type="java.lang.String" value="Pesta&#xf1;a con el texto &quot;ayuda&quot; y que se puede acceder tambien presionando &quot;f1&quot;"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miAcerca">
@@ -144,6 +156,7 @@
                   <Image iconType="3" name="/resources/acerca.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Acerca..."/>
+                <Property name="toolTipText" type="java.lang.String" value="Pesta&#xf1;a con el texto &quot;acerca...&quot;"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAcercaActionPerformed"/>
@@ -158,6 +171,7 @@
                   <Image iconType="3" name="/resources/cerrar.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Salir"/>
+                <Property name="toolTipText" type="java.lang.String" value="Pesta&#xf1;a con el texto &quot;salir&quot; y su shortcut &quot;ctrl+f4&quot;"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miSalirActionPerformed"/>
@@ -250,6 +264,7 @@
               <Color blue="0" green="33" red="66" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Rendimiento:"/>
+            <Property name="toolTipText" type="java.lang.String" value="label con el texto &quot;rendimiento&quot;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lRendimiento">
@@ -261,6 +276,7 @@
               <Color blue="0" green="33" red="66" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="0"/>
+            <Property name="toolTipText" type="java.lang.String" value="Label para el valor numerico del rendimiento"/>
           </Properties>
         </Component>
       </SubComponents>

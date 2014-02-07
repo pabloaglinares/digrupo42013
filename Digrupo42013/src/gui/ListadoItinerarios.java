@@ -40,34 +40,30 @@ private BridgeItinerario bridge = BridgeItinerario.BRIDGE;
     private void initComponents() {
 
         btVolver = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tbListado = new gui.tablaItinerario.TablaItinerarios();
         tbpFiltroBusqueda = new javax.swing.JTabbedPane();
         pnlVacio = new javax.swing.JPanel();
-        pnlRangoFechas = new gui.PanelRangoFechas();
 
         setResizable(true);
         setTitle("Listado itinerarios");
+        setToolTipText("Borde de la ventana con el titulo \"listado itinerarios\"");
         setMinimumSize(new java.awt.Dimension(575, 380));
 
         btVolver.setText("Volver");
+        btVolver.setToolTipText("Boton volver");
         btVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btVolverActionPerformed(evt);
             }
         });
 
-        tbListado.setRowHeight(25);
-        tbListado.getColumnModel().getColumn(2).setMaxWidth(100);
-        tbListado.getColumnModel().getColumn(3).setMaxWidth(30);
-        tbListado.getColumnModel().getColumn(4).setMaxWidth(30);
-        jScrollPane2.setViewportView(tbListado);
-
+        tbpFiltroBusqueda.setToolTipText("JTabbedPane con el titulo \"ver todos\"");
         tbpFiltroBusqueda.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 tbpFiltroBusquedaStateChanged(evt);
             }
         });
+
+        pnlVacio.setToolTipText("Jpanel donde se listaran todas las sesiones");
 
         javax.swing.GroupLayout pnlVacioLayout = new javax.swing.GroupLayout(pnlVacio);
         pnlVacio.setLayout(pnlVacioLayout);
@@ -82,14 +78,6 @@ private BridgeItinerario bridge = BridgeItinerario.BRIDGE;
 
         tbpFiltroBusqueda.addTab("Ver todos", pnlVacio);
 
-        pnlRangoFechas.addCambioFechaListener(new CambioFechaListener(){
-            @Override
-            public void onCambioFecha() {
-                bridge.loadByRange(pnlRangoFechas.getFecha1(), pnlRangoFechas.getFecha2());
-            }
-        });
-        tbpFiltroBusqueda.addTab("Ver por fecha", pnlRangoFechas);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,13 +87,8 @@ private BridgeItinerario bridge = BridgeItinerario.BRIDGE;
                 .addComponent(tbpFiltroBusqueda)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btVolver))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jScrollPane2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btVolver)
                 .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
@@ -113,9 +96,7 @@ private BridgeItinerario bridge = BridgeItinerario.BRIDGE;
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tbpFiltroBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
                 .addComponent(btVolver)
                 .addGap(20, 20, 20))
         );
@@ -149,10 +130,7 @@ private BridgeItinerario bridge = BridgeItinerario.BRIDGE;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btVolver;
-    private javax.swing.JScrollPane jScrollPane2;
-    private gui.PanelRangoFechas pnlRangoFechas;
     private javax.swing.JPanel pnlVacio;
-    private gui.tablaItinerario.TablaItinerarios tbListado;
     private javax.swing.JTabbedPane tbpFiltroBusqueda;
     // End of variables declaration//GEN-END:variables
 }

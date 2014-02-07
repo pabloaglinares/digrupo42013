@@ -58,7 +58,10 @@ order by i.dificultad;]]>
 		</band>
 	</title>
 	<detail>
-		<band height="173" splitType="Stretch">
+		<band height="18" splitType="Stretch"/>
+	</detail>
+	<summary>
+		<band height="190" splitType="Stretch">
 			<lineChart>
 				<chart>
 					<reportElement x="0" y="0" width="555" height="173" uuid="2ab4f123-bddf-4a5d-b01c-7556d24ded91"/>
@@ -84,14 +87,5 @@ order by i.dificultad;]]>
 				</linePlot>
 			</lineChart>
 		</band>
-	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
 	</summary>
 </jasperReport>
