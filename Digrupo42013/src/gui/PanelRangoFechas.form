@@ -48,6 +48,7 @@
     <Component class="javax.swing.JLabel" name="labelFecha1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Primer d&#xed;a:"/>
+        <Property name="toolTipText" type="java.lang.String" value="label con el texto &quot;primer dia&quot;"/>
       </Properties>
     </Component>
     <Component class="calendario.DateTextField" name="dtfFecha1">
@@ -63,6 +64,7 @@
     <Component class="javax.swing.JLabel" name="labelFecha2">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xda;ltimo d&#xed;a:"/>
+        <Property name="toolTipText" type="java.lang.String" value="label con el texto &quot;&#xfa;ltimo dia&quot;"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -42,22 +42,31 @@ public class Acerca extends javax.swing.JInternalFrame {
         btAceptar = new javax.swing.JButton();
 
         setTitle("Acerca...");
+        setToolTipText("Borde con el titulo de la ventana");
 
         jLabel1.setText("PRÁCTICA DE GRUPO DE DISEÑO DE INTERFACES");
+        jLabel1.setToolTipText("label titulo");
 
         jLabel2.setText("v 1.0");
+        jLabel2.setToolTipText("label version");
 
         jLabel3.setText("Andrés Traspuesto");
+        jLabel3.setToolTipText("Label nombre");
 
         jLabel4.setText("Benjamín Pérez");
+        jLabel4.setToolTipText("Label nombre");
 
         jLabel5.setText("David Santín");
+        jLabel5.setToolTipText("Label nombre");
 
         jLabel6.setText("Álvaro Bedia");
+        jLabel6.setToolTipText("Label nombre");
 
         jLabel7.setText("Gema Toyos");
+        jLabel7.setToolTipText("Label nombre");
 
         btAceptar.setText("Aceptar");
+        btAceptar.setToolTipText("Boton Aceptar");
         btAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAceptarActionPerformed(evt);

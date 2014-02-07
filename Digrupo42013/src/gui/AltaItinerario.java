@@ -78,13 +78,12 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         tfLocalizacion = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnAddDate = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tblFechas = new gui.tablaFechas.TablaFechas();
         dtfNewDate = new calendario.DateTextField();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+        setToolTipText("Borde con el titulo de la ventana");
         setPreferredSize(new java.awt.Dimension(760, 460));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -105,6 +104,7 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         });
 
         btnLoadImg.setText("Seleccionar imagen");
+        btnLoadImg.setToolTipText("boton para seleccionar una imagen");
         btnLoadImg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoadImgActionPerformed(evt);
@@ -112,6 +112,7 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         });
 
         btVolver.setText("Volver");
+        btVolver.setToolTipText("Boton volver");
         btVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btVolverActionPerformed(evt);
@@ -119,6 +120,7 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         });
 
         btGuardar.setText("Guardar");
+        btGuardar.setToolTipText("Boton guardar");
         btGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btGuardarActionPerformed(evt);
@@ -129,14 +131,17 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         edpImagen.setContentType("text/html"); // NOI18N
         edpImagen.setText("");
         recargaImagen();
+        edpImagen.setToolTipText("cuadro para añadir una imagen");
         edpImagen.setMaximumSize(new java.awt.Dimension(324, 324));
         edpImagen.setMinimumSize(new java.awt.Dimension(324, 324));
         edpImagen.setPreferredSize(new java.awt.Dimension(324, 324));
         jScrollPane2.setViewportView(edpImagen);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del Itinerario", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.darkGray));
+        jPanel1.setToolTipText("Caja que contiene los datos del itinerario");
 
         spDificultadNumero.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        spDificultadNumero.setToolTipText("Spinner numerico para asignar la dificultad");
         spDificultadNumero.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spDificultadNumeroStateChanged(evt);
@@ -144,7 +149,9 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         });
 
         labelNombreItinerario.setText("Nombre:");
+        labelNombreItinerario.setToolTipText("Label con el nombre");
 
+        tfNombreItinerario.setToolTipText("Campo de texto para el nombre del itinerario");
         tfNombreItinerario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tfNombreItinerarioKeyReleased(evt);
@@ -152,8 +159,10 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         });
 
         labelTipoItinerario.setText("Tipo:");
+        labelTipoItinerario.setToolTipText("label tipo");
 
         spDificultadMasMenos.setModel(new javax.swing.SpinnerListModel(new String[] {" -", "+", " "}));
+        spDificultadMasMenos.setToolTipText("Spinner para añadir +  o -");
         spDificultadMasMenos.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spDificultadMasMenosStateChanged(evt);
@@ -161,6 +170,7 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         });
 
         spDificultadLetra.setModel(new javax.swing.SpinnerListModel(new String[] {"a", "b", "c"}));
+        spDificultadLetra.setToolTipText("Spinner alfabetico para asignar la dificultad");
         spDificultadLetra.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spDificultadLetraStateChanged(evt);
@@ -168,16 +178,20 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         });
 
         labelLocalizacion.setText("Localización:");
+        labelLocalizacion.setToolTipText("label con la localizacion");
 
         labelDificultad.setText("Dificultad:");
+        labelDificultad.setToolTipText("label de dificultad");
 
         cbTipoItineracio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Via de escalada", "Boulder" }));
+        cbTipoItineracio.setToolTipText("Combobox con los tipos");
         cbTipoItineracio.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbTipoItineracioItemStateChanged(evt);
             }
         });
 
+        tfLocalizacion.setToolTipText("campo de texto para la localizacion del itinerario");
         tfLocalizacion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tfLocalizacionKeyReleased(evt);
@@ -239,18 +253,15 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbTipoItineracio, tfLocalizacion, tfNombreItinerario});
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fechas de resolución", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.darkGray));
+        jPanel2.setToolTipText("caja con las fechas de resolucion");
 
         btnAddDate.setText("Añadir fecha");
+        btnAddDate.setToolTipText("boton para añadir una fecha");
         btnAddDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddDateActionPerformed(evt);
             }
         });
-
-        tblFechas.setRowHeight(30);
-        tblFechas.getColumnModel().getColumn(1).setMaxWidth(30);
-        tblFechas.getColumnModel().getColumn(2).setMaxWidth(30);
-        jScrollPane3.setViewportView(tblFechas);
 
         dtfNewDate.setText("dateTextField1");
 
@@ -260,14 +271,9 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(dtfNewDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAddDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(dtfNewDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAddDate, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -276,9 +282,7 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddDate)
                     .addComponent(dtfNewDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -519,7 +523,6 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel labelDificultad;
     private javax.swing.JLabel labelLocalizacion;
     private javax.swing.JLabel labelNombreItinerario;
@@ -527,7 +530,6 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
     private javax.swing.JSpinner spDificultadLetra;
     private javax.swing.JSpinner spDificultadMasMenos;
     private javax.swing.JSpinner spDificultadNumero;
-    private gui.tablaFechas.TablaFechas tblFechas;
     private javax.swing.JTextField tfLocalizacion;
     private javax.swing.JTextField tfNombreItinerario;
     // End of variables declaration//GEN-END:variables
