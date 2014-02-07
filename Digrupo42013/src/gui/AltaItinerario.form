@@ -5,7 +5,6 @@
     <Property name="closable" type="boolean" value="true"/>
     <Property name="iconifiable" type="boolean" value="true"/>
     <Property name="maximizable" type="boolean" value="true"/>
-    <Property name="toolTipText" type="java.lang.String" value="Borde con el titulo de la ventana"/>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[760, 460]"/>
     </Property>
@@ -85,7 +84,6 @@
     <Component class="javax.swing.JButton" name="btnLoadImg">
       <Properties>
         <Property name="text" type="java.lang.String" value="Seleccionar imagen"/>
-        <Property name="toolTipText" type="java.lang.String" value="boton para seleccionar una imagen"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoadImgActionPerformed"/>
@@ -94,7 +92,6 @@
     <Component class="javax.swing.JButton" name="btVolver">
       <Properties>
         <Property name="text" type="java.lang.String" value="Volver"/>
-        <Property name="toolTipText" type="java.lang.String" value="Boton volver"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVolverActionPerformed"/>
@@ -103,7 +100,6 @@
     <Component class="javax.swing.JButton" name="btGuardar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Guardar"/>
-        <Property name="toolTipText" type="java.lang.String" value="Boton guardar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btGuardarActionPerformed"/>
@@ -123,7 +119,6 @@
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="recargaImagen();">
               <Connection code="&quot;&quot;" type="code"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="cuadro para a&#xf1;adir una imagen"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[324, 324]"/>
             </Property>
@@ -146,7 +141,6 @@
             </TitledBorder>
           </Border>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Caja que contiene los datos del itinerario"/>
       </Properties>
 
       <Layout>
@@ -215,7 +209,6 @@
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Spinner numerico para asignar la dificultad"/>
           </Properties>
           <Events>
             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spDificultadNumeroStateChanged"/>
@@ -224,13 +217,9 @@
         <Component class="javax.swing.JLabel" name="labelNombreItinerario">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nombre:"/>
-            <Property name="toolTipText" type="java.lang.String" value="Label con el nombre"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tfNombreItinerario">
-          <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Campo de texto para el nombre del itinerario"/>
-          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfNombreItinerarioKeyReleased"/>
           </Events>
@@ -238,7 +227,6 @@
         <Component class="javax.swing.JLabel" name="labelTipoItinerario">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tipo:"/>
-            <Property name="toolTipText" type="java.lang.String" value="label tipo"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="spDificultadMasMenos">
@@ -250,7 +238,6 @@
                 <ListItem value=" "/>
               </SpinnerModel>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Spinner para a&#xf1;adir +  o -"/>
           </Properties>
           <Events>
             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spDificultadMasMenosStateChanged"/>
@@ -265,7 +252,6 @@
                 <ListItem value="c"/>
               </SpinnerModel>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Spinner alfabetico para asignar la dificultad"/>
           </Properties>
           <Events>
             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spDificultadLetraStateChanged"/>
@@ -274,13 +260,11 @@
         <Component class="javax.swing.JLabel" name="labelLocalizacion">
           <Properties>
             <Property name="text" type="java.lang.String" value="Localizaci&#xf3;n:"/>
-            <Property name="toolTipText" type="java.lang.String" value="label con la localizacion"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelDificultad">
           <Properties>
             <Property name="text" type="java.lang.String" value="Dificultad:"/>
-            <Property name="toolTipText" type="java.lang.String" value="label de dificultad"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbTipoItineracio">
@@ -291,16 +275,12 @@
                 <StringItem index="1" value="Boulder"/>
               </StringArray>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Combobox con los tipos"/>
           </Properties>
           <Events>
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbTipoItineracioItemStateChanged"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="tfLocalizacion">
-          <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="campo de texto para la localizacion del itinerario"/>
-          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfLocalizacionKeyReleased"/>
           </Events>
@@ -316,7 +296,6 @@
             </TitledBorder>
           </Border>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="caja con las fechas de resolucion"/>
       </Properties>
 
       <Layout>
@@ -324,9 +303,17 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="dtfNewDate" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnAddDate" pref="239" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jScrollPane3" min="-2" pref="307" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="dtfNewDate" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnAddDate" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -338,7 +325,9 @@
                       <Component id="btnAddDate" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="dtfNewDate" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="122" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jScrollPane3" min="-2" pref="100" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -347,12 +336,25 @@
         <Component class="javax.swing.JButton" name="btnAddDate">
           <Properties>
             <Property name="text" type="java.lang.String" value="A&#xf1;adir fecha"/>
-            <Property name="toolTipText" type="java.lang.String" value="boton para a&#xf1;adir una fecha"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddDateActionPerformed"/>
           </Events>
         </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="gui.tablaFechas.TablaFechas" name="tblFechas">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tblFechas.setRowHeight(30);&#xa;tblFechas.getColumnModel().getColumn(1).setMaxWidth(30);&#xa;tblFechas.getColumnModel().getColumn(2).setMaxWidth(30);"/>
+              </AuxValues>
+            </Component>
+          </SubComponents>
+        </Container>
         <Component class="calendario.DateTextField" name="dtfNewDate">
           <Properties>
             <Property name="text" type="java.lang.String" value="dateTextField1"/>

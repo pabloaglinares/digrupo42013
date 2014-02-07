@@ -120,12 +120,10 @@ public final class Main extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 51, 0));
         jLabel1.setText("Rendimiento:");
-        jLabel1.setToolTipText("label con el texto \"rendimiento\"");
 
         lRendimiento.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lRendimiento.setForeground(new java.awt.Color(102, 51, 0));
         lRendimiento.setText("0");
-        lRendimiento.setToolTipText("Label para el valor numerico del rendimiento");
 
         javax.swing.GroupLayout dpEscritorioLayout = new javax.swing.GroupLayout(dpEscritorio);
         dpEscritorio.setLayout(dpEscritorioLayout);
@@ -152,12 +150,10 @@ public final class Main extends javax.swing.JFrame {
 
         mItinerarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/itinerario.png"))); // NOI18N
         mItinerarios.setText("Itinerarios");
-        mItinerarios.setToolTipText("Pestaña con el texto \"itinerarios\" su shortcut \"Ctrl+Alt+A\"");
 
         miAltaItinerario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         miAltaItinerario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/add.png"))); // NOI18N
         miAltaItinerario.setText("Alta Itinerario...");
-        miAltaItinerario.setToolTipText("Pestaña con el texto \"alta itinerario\"");
         miAltaItinerario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miAltaItinerarioActionPerformed(evt);
@@ -168,7 +164,6 @@ public final class Main extends javax.swing.JFrame {
         miListadoItinerarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         miListadoItinerarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/lista.png"))); // NOI18N
         miListadoItinerarios.setText("Listado Itinerarios...");
-        miListadoItinerarios.setToolTipText("Pestaña con el texto \"lista itinerarios\" y su shortcut \"Ctrl+Alt+L\"");
         miListadoItinerarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miListadoItinerariosActionPerformed(evt);
@@ -180,12 +175,10 @@ public final class Main extends javax.swing.JFrame {
 
         mSesiones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/sesion.png"))); // NOI18N
         mSesiones.setText("Sesiones");
-        mSesiones.setToolTipText("Pestaña con el texto \"sesiones\" su shortcut \"ctrl+Máyus+A\"");
 
         miAltaSesion.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         miAltaSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/add.png"))); // NOI18N
         miAltaSesion.setText("Alta Sesión...");
-        miAltaSesion.setToolTipText("Pestaña con el texto \"alta sesion\"");
         miAltaSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miAltaSesionActionPerformed(evt);
@@ -196,7 +189,6 @@ public final class Main extends javax.swing.JFrame {
         miListadoSesiones.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         miListadoSesiones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/lista.png"))); // NOI18N
         miListadoSesiones.setText("Listado Sesiones...");
-        miListadoSesiones.setToolTipText("Pestaña con el texto \"listado sesiones\" su shortcut \"Ctrl+Máyus+L");
         miListadoSesiones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miListadoSesionesActionPerformed(evt);
@@ -208,10 +200,8 @@ public final class Main extends javax.swing.JFrame {
 
         mInformes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/informe.png"))); // NOI18N
         mInformes.setText("Informes");
-        mInformes.setToolTipText("Pestaña con el texto \"informes");
 
         jMenuItem6.setText("Crear Informes...");
-        jMenuItem6.setToolTipText("Pestaña con el texto \"crear informes\"");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -223,7 +213,6 @@ public final class Main extends javax.swing.JFrame {
 
         mConfiguracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/herramientas.png"))); // NOI18N
         mConfiguracion.setText("Configuracion");
-        mConfiguracion.setToolTipText("Pestaña con el texto \"configuracion\"");
         mConfiguracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mConfiguracionActionPerformed(evt);
@@ -231,7 +220,6 @@ public final class Main extends javax.swing.JFrame {
         });
 
         miEditar.setText("Editar escalador...");
-        miEditar.setToolTipText("Pestaña con el texto \"editar escalador\"");
         miEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miEditarActionPerformed(evt);
@@ -243,17 +231,14 @@ public final class Main extends javax.swing.JFrame {
 
         mAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ayuda1.png"))); // NOI18N
         mAyuda.setText("Ayuda");
-        mAyuda.setToolTipText("Pestaña con el texto \"ayuda\"");
 
         miAyuda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         miAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ayuda2.png"))); // NOI18N
         miAyuda.setText("Ayuda...");
-        miAyuda.setToolTipText("Pestaña con el texto \"ayuda\" y que se puede acceder tambien presionando \"f1\"");
         mAyuda.add(miAyuda);
 
         miAcerca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/acerca.png"))); // NOI18N
         miAcerca.setText("Acerca...");
-        miAcerca.setToolTipText("Pestaña con el texto \"acerca...\"");
         miAcerca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miAcercaActionPerformed(evt);
@@ -264,7 +249,6 @@ public final class Main extends javax.swing.JFrame {
         miSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.CTRL_MASK));
         miSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cerrar.png"))); // NOI18N
         miSalir.setText("Salir");
-        miSalir.setToolTipText("Pestaña con el texto \"salir\" y su shortcut \"ctrl+f4\"");
         miSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miSalirActionPerformed(evt);

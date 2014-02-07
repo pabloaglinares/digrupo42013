@@ -3,7 +3,6 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
     <Property name="title" type="java.lang.String" value="Configuraci&#xf3;n del escalador"/>
-    <Property name="toolTipText" type="java.lang.String" value="Borde con el titulo de la ventana"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -86,35 +85,25 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nombre:"/>
-        <Property name="toolTipText" type="java.lang.String" value="Label del nombre"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Apellidos:"/>
-        <Property name="toolTipText" type="java.lang.String" value="Label de los apellidos"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="text" type="java.lang.String" value="Entrenamiento actual:"/>
-        <Property name="toolTipText" type="java.lang.String" value="Label del entrenamiento actual"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfNombre">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Campo de texto para el nombre del escalador"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfApellidos">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Campo de texto para el apellido del escalador"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btAceptar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Guardar"/>
-        <Property name="toolTipText" type="java.lang.String" value="Boton guardar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAceptarActionPerformed"/>
@@ -123,7 +112,6 @@
     <Component class="javax.swing.JButton" name="btCancelar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
-        <Property name="toolTipText" type="java.lang.String" value="Boton cancelar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCancelarActionPerformed"/>

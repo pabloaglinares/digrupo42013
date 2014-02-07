@@ -47,14 +47,12 @@ public class PanelRangoFechas extends javax.swing.JPanel {
         labelFecha2 = new javax.swing.JLabel();
 
         labelFecha1.setText("Primer día:");
-        labelFecha1.setToolTipText("label con el texto \"primer dia\"");
 
         dtfFecha1.setText("21/01/2014");
 
         dtfFecha2.setText("21/01/2014");
 
         labelFecha2.setText("Último día:");
-        labelFecha2.setToolTipText("label con el texto \"último dia\"");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

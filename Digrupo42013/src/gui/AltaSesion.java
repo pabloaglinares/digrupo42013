@@ -101,7 +101,6 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         dtfFecha = new calendario.DateTextField();
 
         setTitle("Alta/Modif Sesiones");
-        setToolTipText("Borde de la ventana con el titulo de alta/modificacion sesiones");
         setMinimumSize(new java.awt.Dimension(300, 335));
         setPreferredSize(new java.awt.Dimension(300, 335));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -123,17 +122,9 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         });
 
         labelFechaSesion.setText("Fecha Sesión:");
-        labelFechaSesion.setToolTipText("label fecha de sesion");
 
         labelHoraComienzo.setText("Hora Comienzo:");
-        labelHoraComienzo.setToolTipText("label hora comienzo");
 
-        tfHoraComienzo.setToolTipText("Campo de texto para la hora de comienzo de la sesion");
-        tfHoraComienzo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfHoraComienzoActionPerformed(evt);
-            }
-        });
         tfHoraComienzo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tfHoraComienzoKeyReleased(evt);
@@ -141,9 +132,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         });
 
         labelHoraFin.setText("Hora Fin:");
-        labelHoraFin.setToolTipText("Label hora fin");
 
-        tfHoraFin.setToolTipText("campo de texto con la hora de finalizacion de la sesion");
         tfHoraFin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tfHoraFinKeyReleased(evt);
@@ -151,15 +140,11 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         });
 
         labelTipoSesion.setText("Tipo Sesión:");
-        labelTipoSesion.setToolTipText("label con el texto tipo de sesion");
 
         cbTipoSesion.setModel(new javax.swing.DefaultComboBoxModel(Sesion.TipoSesion.values()));
-        cbTipoSesion.setToolTipText("Combobox con los tipos de sesion disponibles");
 
         labelDescripcion.setText("Descripción:");
-        labelDescripcion.setToolTipText("label con el texto descripcion");
 
-        tfDescripcion.setToolTipText("campo de texto para la descripcion de  la sesion");
         tfDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tfDescripcionKeyReleased(evt);
@@ -167,7 +152,6 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         });
 
         btVolver.setText("Volver");
-        btVolver.setToolTipText("Boton volver");
         btVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btVolverActionPerformed(evt);
@@ -175,7 +159,6 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         });
 
         btGuardar.setText("Guardar");
-        btGuardar.setToolTipText("Boton guardar");
         btGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btGuardarActionPerformed(evt);
@@ -190,7 +173,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btVolver)
@@ -210,7 +193,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
                             .addComponent(cbTipoSesion, 0, 141, Short.MAX_VALUE)
                             .addComponent(tfDescripcion)
                             .addComponent(dtfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 12, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -297,10 +280,6 @@ public class AltaSesion extends javax.swing.JInternalFrame {
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         bridge.closeAlta();
     }//GEN-LAST:event_formInternalFrameClosed
-
-    private void tfHoraComienzoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfHoraComienzoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfHoraComienzoActionPerformed
     private void cleanAll() {
         Arrays.fill(camposCorrectos,0, camposCorrectos.length, false);
         tfHoraComienzo.setText("");

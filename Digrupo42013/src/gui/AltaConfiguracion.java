@@ -84,23 +84,14 @@ private final BridgeConfiguracion bridge = BridgeConfiguracion.CONFIGURACION;
         jLabel5 = new javax.swing.JLabel();
 
         setTitle("Configuración del escalador");
-        setToolTipText("Borde con el titulo de la ventana");
 
         jLabel1.setText("Nombre:");
-        jLabel1.setToolTipText("Label del nombre");
 
         jLabel2.setText("Apellidos:");
-        jLabel2.setToolTipText("Label de los apellidos");
 
         jLabel3.setText("Entrenamiento actual:");
-        jLabel3.setToolTipText("Label del entrenamiento actual");
-
-        tfNombre.setToolTipText("Campo de texto para el nombre del escalador");
-
-        tfApellidos.setToolTipText("Campo de texto para el apellido del escalador");
 
         btAceptar.setText("Guardar");
-        btAceptar.setToolTipText("Boton guardar");
         btAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAceptarActionPerformed(evt);
@@ -108,7 +99,6 @@ private final BridgeConfiguracion bridge = BridgeConfiguracion.CONFIGURACION;
         });
 
         btCancelar.setText("Cancelar");
-        btCancelar.setToolTipText("Boton cancelar");
         btCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCancelarActionPerformed(evt);

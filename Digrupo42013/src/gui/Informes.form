@@ -12,7 +12,6 @@
   </NonVisualComponents>
   <Properties>
     <Property name="title" type="java.lang.String" value="Crear informes"/>
-    <Property name="toolTipText" type="java.lang.String" value="Borde de la ventana con el titulo crear informes"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -43,9 +42,6 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JTabbedPane" name="pSesionesFecha">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Grupo de ventanas para crear informes"/>
-      </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
@@ -109,13 +105,11 @@
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fecha inicio:"/>
-                <Property name="toolTipText" type="java.lang.String" value="label con el texto &quot;fecha inicio&quot;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btVolver1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Volver"/>
-                <Property name="toolTipText" type="java.lang.String" value="Boton volver"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVolver1ActionPerformed"/>
@@ -124,7 +118,6 @@
             <Component class="javax.swing.JButton" name="btCrear2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear informe"/>
-                <Property name="toolTipText" type="java.lang.String" value="boton crear informe"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCrear2ActionPerformed"/>
@@ -133,7 +126,6 @@
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fecha fin:"/>
-                <Property name="toolTipText" type="java.lang.String" value="Label con el texto &quot;fecha fin&quot;"/>
               </Properties>
             </Component>
             <Component class="calendario.DateTextField" name="dateTextField1">
@@ -208,7 +200,6 @@
             <Component class="javax.swing.JButton" name="btVolver2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Volver"/>
-                <Property name="toolTipText" type="java.lang.String" value="Boton volver"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVolver2ActionPerformed"/>
@@ -217,7 +208,6 @@
             <Component class="javax.swing.JButton" name="btCrear1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear informe"/>
-                <Property name="toolTipText" type="java.lang.String" value="Boton crear informe"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCrear1ActionPerformed"/>
@@ -226,13 +216,11 @@
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fecha inicio:"/>
-                <Property name="toolTipText" type="java.lang.String" value="label con el texto &quot;fecha de inicio&quot;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fecha fin:"/>
-                <Property name="toolTipText" type="java.lang.String" value="label con el texto &quot;fecha fin&quot;"/>
               </Properties>
             </Component>
             <Component class="calendario.DateTextField" name="dateTextField3">
@@ -310,7 +298,6 @@
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Elige el mes y el a&#xf1;o:"/>
-                <Property name="toolTipText" type="java.lang.String" value="label con el texto elige mes y a&#xf1;o"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="cbMes">
@@ -331,13 +318,11 @@
                     <StringItem index="11" value="Diciembre"/>
                   </StringArray>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Combobox con los meses"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btVolver3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Volver"/>
-                <Property name="toolTipText" type="java.lang.String" value="Boton volver"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVolver3ActionPerformed"/>
@@ -346,7 +331,6 @@
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear Informe"/>
-                <Property name="toolTipText" type="java.lang.String" value="Boton de crear informe"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
@@ -358,9 +342,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfAnno">
-              <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="Campo de texto para el a&#xf1;o"/>
-              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfAnnoKeyTyped"/>
               </Events>
@@ -370,7 +351,6 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/resources/right.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="imagen de correcto"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -444,7 +424,6 @@
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tipo de sesi&#xf3;n:"/>
-                <Property name="toolTipText" type="java.lang.String" value="label con el texto tipo de sesion"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="cbTipoSesion">
@@ -457,7 +436,6 @@
                     <StringItem index="3" value="Roca"/>
                   </StringArray>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Combobox con los tipos de sesion"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbTipoSesionActionPerformed"/>
@@ -466,7 +444,6 @@
             <Component class="javax.swing.JButton" name="btVolver4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Volver"/>
-                <Property name="toolTipText" type="java.lang.String" value="Boton volver"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVolver4ActionPerformed"/>
@@ -475,7 +452,6 @@
             <Component class="javax.swing.JButton" name="btCrear3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear informe"/>
-                <Property name="toolTipText" type="java.lang.String" value="Boton crear informe"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCrear3ActionPerformed"/>
@@ -484,7 +460,6 @@
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fecha inicio:"/>
-                <Property name="toolTipText" type="java.lang.String" value="label fecha de inicio"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lRight1">
@@ -492,7 +467,6 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/resources/right.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="imagen de correcto"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
@@ -595,7 +569,6 @@
             <Component class="javax.swing.JButton" name="btVolver5">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Volver"/>
-                <Property name="toolTipText" type="java.lang.String" value="Boton volver"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVolver5ActionPerformed"/>
@@ -604,7 +577,6 @@
             <Component class="javax.swing.JButton" name="btCrear5">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear Informe"/>
-                <Property name="toolTipText" type="java.lang.String" value="Boton crear informe"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCrear5ActionPerformed"/>
@@ -613,7 +585,6 @@
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Dificultad:"/>
-                <Property name="toolTipText" type="java.lang.String" value="label con el texto &quot;dificultad&quot;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="cbDificultad1">
@@ -632,7 +603,6 @@
                     <StringItem index="9" value="9"/>
                   </StringArray>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Combobox numerico para la dificultad"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbDificultad1ActionPerformed"/>
@@ -648,7 +618,6 @@
                     <StringItem index="3" value="c"/>
                   </StringArray>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Combobox alfabetico para la dificultad"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbDificultad2ActionPerformed"/>
@@ -661,7 +630,6 @@
                 </Property>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="+"/>
-                <Property name="toolTipText" type="java.lang.String" value="Boton de grupo con el simbolo &quot;+&quot;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rbMenos">
@@ -670,7 +638,6 @@
                   <ComponentRef name="grupo"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="-"/>
-                <Property name="toolTipText" type="java.lang.String" value="Boton de grupo con el simbolo &quot;-&quot;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lRight9">
@@ -678,7 +645,6 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/resources/right.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="imagen de correcto"/>
               </Properties>
             </Component>
           </SubComponents>

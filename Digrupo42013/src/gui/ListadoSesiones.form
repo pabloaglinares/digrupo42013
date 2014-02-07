@@ -4,7 +4,6 @@
   <Properties>
     <Property name="resizable" type="boolean" value="true"/>
     <Property name="title" type="java.lang.String" value="Listado sesiones"/>
-    <Property name="toolTipText" type="java.lang.String" value="Borde de la ventana con titulo &quot;listado sesiones&quot;"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[575, 380]"/>
     </Property>
@@ -35,8 +34,11 @@
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="598" max="32767" attributes="0"/>
-              <Component id="btVolver" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="btVolver" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" max="32767" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -46,7 +48,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jTabbedPane1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="222" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane2" pref="182" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btVolver" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
           </Group>
@@ -57,16 +61,40 @@
     <Component class="javax.swing.JButton" name="btVolver">
       <Properties>
         <Property name="text" type="java.lang.String" value="Volver"/>
-        <Property name="toolTipText" type="java.lang.String" value="Boton volver"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVolverActionPerformed"/>
       </Events>
     </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="gui.tablasesion.TablaSesiones" name="tbListado">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="*/">
+              <Connection code="null" type="code"/>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0"/>
+            </Property>
+            <Property name="rowHeight" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="tbListado.getColumnModel().getColumn(0).setMaxWidth(100);&#xa;tbListado.getColumnModel().getColumn(0).setPreferredWidth(100);&#xa;tbListado.getColumnModel().getColumn(1).setMaxWidth(100);&#xa;tbListado.getColumnModel().getColumn(1).setPreferredWidth(100);&#xa;tbListado.getColumnModel().getColumn(2).setMaxWidth(75);&#xa;tbListado.getColumnModel().getColumn(2).setPreferredWidth(75);&#xa;tbListado.getColumnModel().getColumn(3).setMaxWidth(75);&#xa;tbListado.getColumnModel().getColumn(3).setPreferredWidth(75);&#xa;tbListado.getColumnModel().getColumn(4).setPreferredWidth(150);&#xa;tbListado.getColumnModel().getColumn(5).setMaxWidth(35);&#xa;tbListado.getColumnModel().getColumn(5).setPreferredWidth(35);&#xa;tbListado.getColumnModel().getColumn(6).setMaxWidth(35);&#xa;tbListado.getColumnModel().getColumn(6).setPreferredWidth(35);">
+              <Connection code="30" type="code"/>
+            </Property>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="/*"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
     <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="JTabbedPane con el titulo &quot;listar todas&quot; "/>
-      </Properties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jTabbedPane1StateChanged"/>
       </Events>
@@ -74,9 +102,6 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
         <Container class="javax.swing.JPanel" name="pnlVacio">
-          <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="jPanel donde se listaran todas las sesiones"/>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Listar todas">
@@ -98,6 +123,27 @@
             </DimensionLayout>
           </Layout>
         </Container>
+        <Component class="gui.PanelRangoFechas" name="pnlRangoFechas">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="pnlRangoFechas.addCambioFechaListener(new CambioFechaListener(){&#xa;@Override&#xa;            public void onCambioFecha() {&#xa;                bridge.loadByRange(pnlRangoFechas.getFecha1(), pnlRangoFechas.getFecha2());&#xa;            }&#xa;});"/>
+          </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Listar por fecha">
+                <Property name="tabTitle" type="java.lang.String" value="Listar por fecha"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="gui.PanelTipoSesion" name="pnlTipoSesion">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Listar por tipo">
+                <Property name="tabTitle" type="java.lang.String" value="Listar por tipo"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

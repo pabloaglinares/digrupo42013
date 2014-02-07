@@ -34,7 +34,6 @@ private final BridgeSesion bridge = BridgeSesion.BRIDGE;
         cbTipoSesion = new javax.swing.JComboBox();
 
         cbTipoSesion.setModel(new javax.swing.DefaultComboBoxModel(Sesion.TipoSesion.values()));
-        cbTipoSesion.setToolTipText("ComboBox con el tipo de sesion");
         cbTipoSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoSesionActionPerformed(evt);
