@@ -7,7 +7,15 @@
 package gui;
 
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  *
@@ -35,7 +43,7 @@ public class Informes extends javax.swing.JInternalFrame {
         lRight9.setVisible(false);
     }
     
-  
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -509,6 +517,27 @@ public class Informes extends javax.swing.JInternalFrame {
         if (lRight1.isVisible()){
             
             //Introducir aquí el código para generar informes
+             Connection connection = null;
+        try
+        {
+            Class.forName("org.hsqldb.jdbcDriver");
+            connection = DriverManager.getConnection("jdbc:hsqldb:../../db/escalador.db", "sa","");
+             Map parametros = new HashMap();
+            parametros.put("fechainicio", dateTextField5);
+            parametros.put("fechafin",dateTextField6);
+            JasperPrint print = JasperFillManager.fillReport("../../informes/consulta4.jasper", parametros,connection);
+            JasperExportManager.exportReportToPdfFile(print,"../../informesgenerados/"+dateTextField5.toString()+dateTextField6.toString()+".pdf");
+             
+        }
+        catch (Throwable e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+      
+            try {if (connection !=null) connection.close();} catch(Throwable e){};
+        }
             
             this.hide();
             
@@ -529,6 +558,27 @@ public class Informes extends javax.swing.JInternalFrame {
          if (lRight4.isVisible()){
             
             //Introducir aquí el código para generar informes
+              Connection connection = null;
+        try
+        {
+            Class.forName("org.hsqldb.jdbcDriver");
+            connection = DriverManager.getConnection("jdbc:hsqldb:../../db/escalador.db", "sa","");
+             Map parametros = new HashMap();
+            parametros.put("anio", tfAnno);
+            parametros.put("mes",cbMes);
+            JasperPrint print = JasperFillManager.fillReport("../../informes/consulta3.jasper", parametros,connection);
+            JasperExportManager.exportReportToPdfFile(print,"../../informesgenerados/"+tfAnno.getText()+cbMes.getSelectedItem().toString()+".pdf");
+             
+        }
+        catch (Throwable e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+      
+            try {if (connection !=null) connection.close();} catch(Throwable e){};
+        }
             
             this.hide();
             
@@ -540,6 +590,30 @@ public class Informes extends javax.swing.JInternalFrame {
     private void btCrear2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrear2ActionPerformed
       
             //Introducir aquí el código para generar informes
+        Connection connection = null;
+        try
+        {
+            Class.forName("org.hsqldb.jdbcDriver");
+            connection = DriverManager.getConnection("jdbc:hsqldb:./db/escalador.db", "sa","");
+             Map parametros = new HashMap();
+            Timestamp ini= new Timestamp(dateTextField1.getDate().getTime());
+            Timestamp fin= new Timestamp(dateTextField2.getDate().getTime());
+            parametros.put("fechainicio", ini);
+            parametros.put("fechafin", fin);
+            JasperPrint print = JasperFillManager.fillReport("./informes/consulta1.jasper", parametros,connection);
+            JasperExportManager.exportReportToPdfFile(print,"./informesgenerados/itinerarios.pdf");
+             
+        }
+        catch (Throwable e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+      
+            try {if (connection !=null) connection.close();} catch(Throwable e){};
+        }
+      
             
             this.hide();
     }//GEN-LAST:event_btCrear2ActionPerformed
@@ -555,6 +629,29 @@ public class Informes extends javax.swing.JInternalFrame {
     private void btCrear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrear1ActionPerformed
             
             //Introducir aquí el código para generar informes
+         Connection connection = null;
+        try
+        {
+            Class.forName("org.hsqldb.jdbcDriver");
+            connection = DriverManager.getConnection("jdbc:hsqldb:./db/escalador.db", "sa","");
+             Map parametros = new HashMap();
+              Timestamp ini= new Timestamp(dateTextField3.getDate().getTime());
+            Timestamp fin= new Timestamp(dateTextField4.getDate().getTime());
+            parametros.put("fechainicio", ini);
+            parametros.put("fechafin",fin);
+            JasperPrint print = JasperFillManager.fillReport("./informes/consulta2.jasper", parametros,connection);
+            JasperExportManager.exportReportToPdfFile(print,"./informesgenerados/sesiones.pdf");
+             
+        }
+        catch (Throwable e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+      
+            try {if (connection !=null) connection.close();} catch(Throwable e){};
+        }
             
             this.hide();
     }//GEN-LAST:event_btCrear1ActionPerformed
@@ -575,6 +672,33 @@ public class Informes extends javax.swing.JInternalFrame {
         if (lRight9.isVisible()){
             
             //Introducir aquí el código para generar informes
+             Connection connection = null;
+            //cambiar esta ventana para introducir fechas
+        try
+        {
+            Class.forName("org.hsqldb.jdbcDriver");
+            connection = DriverManager.getConnection("jdbc:hsqldb:./db/escalador.db", "sa","");
+             Map parametros = new HashMap();
+             //cambiar al nuevo campo fechas
+              Timestamp ini= new Timestamp(dateTextField3.getDate().getTime());
+            Timestamp fin= new Timestamp(dateTextField4.getDate().getTime());
+            parametros.put("fechainicio", ini);
+            parametros.put("fechafin", fin);
+            JasperPrint print = JasperFillManager.fillReport("./informes/consulta5.jasper", parametros,connection);
+            JasperExportManager.exportReportToPdfFile(print,"./informesgenerados/"+dateTextField3.toString()+dateTextField4.toString()+".pdf");
+             
+        }
+        catch (Throwable e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+      
+            try {if (connection !=null) connection.close();} catch(Throwable e){};
+        }
+            
+            this.hide();
             
             this.hide();
             
