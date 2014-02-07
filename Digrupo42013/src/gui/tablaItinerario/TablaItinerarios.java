@@ -44,15 +44,17 @@ public class TablaItinerarios extends JTable {
             public void mouseClicked(MouseEvent e) {
                 int row = TablaItinerarios.this.getSelectedRow();
                 int col = TablaItinerarios.this.getSelectedColumn();
+                Itinerario it = TablaItinerarios.this.model.getItinerario(row);
                 switch (col) {
                     case 3: //Si se ha pinchado en el botón borrar
-                        ItinerarioDAO.ITINERARIO_DAO.deleteItinerario(TablaItinerarios.this.model.getItinerario(row));
+                        ItinerarioDAO.ITINERARIO_DAO.deleteItinerario(it);
                         TablaItinerarios.this.model.deleteItinerario(row);
                         break;
                     case 4: //Si se ha pinchado en editar
-                        bridge.opneForUpdateItinerario(TablaItinerarios.this.model.getItinerario(row));
+                        bridge.opneForUpdateItinerario(it);
                         break;
                     default:
+                        bridge.showItinerario(it);
                     //aquí va mostrar la pantalla de detalles
                 }
             }
