@@ -2,7 +2,7 @@
 	<tocitem text="Menu principal" target="portada">
 				<tocitem text="Alta/modifica Itinerario" target="altaitinerarios"/>
 				<tocitem text="Listado Itinerario" target="listadoitinerarios"/>
-				<tocitem text="Detalle Itinerario" target="detalleitinerario"/>
+				<tocitem text="Detalle Itinerario" target="detalleitinerarios"/>
 				<tocitem text="Alta/modifica Sesiones" target="altasesiones"/>	
 				<tocitem text="Listado Sesiones" target="listadosesiones"/>
 				<tocitem text="Generacion Informes" target="informes"/>
