@@ -34,13 +34,13 @@ public class Informes extends javax.swing.JInternalFrame {
         this.setClosable(true);   
         this.setMaximizable(true);
        
-        lRight1.setVisible(false);
+       // lRight1.setVisible(false);
        
         lRight4.setVisible(false);
         
      
         
-        lRight9.setVisible(false);
+        //lRight9.setVisible(false);
     }
     
 
@@ -79,25 +79,20 @@ public class Informes extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         tfAnno = new javax.swing.JTextField();
         lRight4 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        cbTipoSesion = new javax.swing.JComboBox();
-        btVolver4 = new javax.swing.JButton();
-        btCrear3 = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        lRight1 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        dateTextField5 = new calendario.DateTextField();
-        dateTextField6 = new calendario.DateTextField();
         jPanel5 = new javax.swing.JPanel();
         btVolver5 = new javax.swing.JButton();
         btCrear5 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        cbDificultad1 = new javax.swing.JComboBox();
-        cbDificultad2 = new javax.swing.JComboBox();
-        rbMas = new javax.swing.JRadioButton();
-        rbMenos = new javax.swing.JRadioButton();
-        lRight9 = new javax.swing.JLabel();
+        dateTextField8 = new calendario.DateTextField();
+        jLabel11 = new javax.swing.JLabel();
+        dateTextField7 = new calendario.DateTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        btVolver4 = new javax.swing.JButton();
+        btCrear3 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        dateTextField5 = new calendario.DateTextField();
+        dateTextField6 = new calendario.DateTextField();
 
         tfFechaInicio3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -161,7 +156,7 @@ public class Informes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(dateTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(pItinerariosFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVolver1)
                     .addComponent(btCrear2))
@@ -224,7 +219,7 @@ public class Informes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(dateTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVolver2)
                     .addComponent(btCrear1))
@@ -296,7 +291,7 @@ public class Informes extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(tfAnno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lRight4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVolver3)
                     .addComponent(jButton2))
@@ -305,14 +300,66 @@ public class Informes extends javax.swing.JInternalFrame {
 
         pSesionesFecha.addTab("Entrenamiento semanal", jPanel3);
 
-        jLabel7.setText("Tipo de sesión:");
-
-        cbTipoSesion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Elige un tipo", "Físico", "Rocódromo", "Roca" }));
-        cbTipoSesion.addActionListener(new java.awt.event.ActionListener() {
+        btVolver5.setText("Volver");
+        btVolver5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTipoSesionActionPerformed(evt);
+                btVolver5ActionPerformed(evt);
             }
         });
+
+        btCrear5.setText("Crear Informe");
+        btCrear5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCrear5ActionPerformed(evt);
+            }
+        });
+
+        dateTextField8.setText("dateTextField6");
+
+        jLabel11.setText("Fecha fin:");
+
+        dateTextField7.setText("dateTextField5");
+
+        jLabel12.setText("Fecha inicio:");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(197, Short.MAX_VALUE)
+                .addComponent(btCrear5)
+                .addGap(18, 18, 18)
+                .addComponent(btVolver5)
+                .addContainerGap())
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dateTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel12)
+                .addGap(11, 11, 11)
+                .addComponent(dateTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dateTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btVolver5)
+                    .addComponent(btCrear5))
+                .addContainerGap())
+        );
+
+        pSesionesFecha.addTab("Itinerarios: dificultad", jPanel5);
 
         btVolver4.setText("Volver");
         btVolver4.addActionListener(new java.awt.event.ActionListener() {
@@ -329,8 +376,6 @@ public class Informes extends javax.swing.JInternalFrame {
         });
 
         jLabel8.setText("Fecha inicio:");
-
-        lRight1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/right.png"))); // NOI18N
 
         jLabel10.setText("Fecha fin:");
 
@@ -354,24 +399,13 @@ public class Informes extends javax.swing.JInternalFrame {
                     .addComponent(dateTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel7)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(cbTipoSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lRight1))
                     .addComponent(jLabel8))
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lRight1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbTipoSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(60, 60, 60)
                 .addComponent(jLabel8)
                 .addGap(11, 11, 11)
                 .addComponent(dateTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -379,7 +413,7 @@ public class Informes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dateTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVolver4)
                     .addComponent(btCrear3))
@@ -387,101 +421,6 @@ public class Informes extends javax.swing.JInternalFrame {
         );
 
         pSesionesFecha.addTab("Sesiones: tipo", jPanel4);
-
-        btVolver5.setText("Volver");
-        btVolver5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVolver5ActionPerformed(evt);
-            }
-        });
-
-        btCrear5.setText("Crear Informe");
-        btCrear5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCrear5ActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Dificultad:");
-
-        cbDificultad1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Elige", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
-        cbDificultad1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbDificultad1ActionPerformed(evt);
-            }
-        });
-
-        cbDificultad2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Elige", "a", "b", "c" }));
-        cbDificultad2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbDificultad2ActionPerformed(evt);
-            }
-        });
-
-        grupo.add(rbMas);
-        rbMas.setSelected(true);
-        rbMas.setText("+");
-
-        grupo.add(rbMenos);
-        rbMenos.setText("-");
-
-        lRight9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/right.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(cbDificultad1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbDificultad2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btCrear5)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rbMas)
-                            .addComponent(rbMenos))
-                        .addGap(18, 18, 18)
-                        .addComponent(lRight9)
-                        .addGap(10, 10, 10)))
-                .addGap(18, 18, 18)
-                .addComponent(btVolver5)
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(jLabel2)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cbDificultad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbDificultad2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(rbMas)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rbMenos))))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(lRight9)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btVolver5)
-                    .addComponent(btCrear5))
-                .addContainerGap())
-        );
-
-        pSesionesFecha.addTab("Itinerarios: dificultad", jPanel5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -501,20 +440,12 @@ public class Informes extends javax.swing.JInternalFrame {
         this.hide();
     }//GEN-LAST:event_btVolver3ActionPerformed
 
-    private void cbTipoSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoSesionActionPerformed
-        if (cbTipoSesion.getSelectedItem() == "Roca" || cbTipoSesion.getSelectedItem() == "Físico" || cbTipoSesion.getSelectedItem() == "Rocódromo"){
-            lRight1.setVisible(true);
-        } else {
-            lRight1.setVisible(false);
-        }
-    }//GEN-LAST:event_cbTipoSesionActionPerformed
-
     private void btVolver4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolver4ActionPerformed
         this.hide();
     }//GEN-LAST:event_btVolver4ActionPerformed
 
     private void btCrear3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrear3ActionPerformed
-        if (lRight1.isVisible()){
+       // if (lRight1.isVisible()){
             
             //Introducir aquí el código para generar informes
              Connection connection = null;
@@ -526,7 +457,7 @@ public class Informes extends javax.swing.JInternalFrame {
             parametros.put("fechainicio", dateTextField5);
             parametros.put("fechafin",dateTextField6);
             JasperPrint print = JasperFillManager.fillReport("../../informes/consulta4.jasper", parametros,connection);
-            JasperExportManager.exportReportToPdfFile(print,"../../informesgenerados/"+dateTextField5.toString()+dateTextField6.toString()+".pdf");
+            JasperExportManager.exportReportToPdfFile(print,"../../informesgenerados/sesionestipo.pdf");
              
         }
         catch (Throwable e)
@@ -541,9 +472,9 @@ public class Informes extends javax.swing.JInternalFrame {
             
             this.hide();
             
-        } else {
-            JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
-        }
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
+//        }
     }//GEN-LAST:event_btCrear3ActionPerformed
 
     private void tfAnnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfAnnoKeyTyped
@@ -555,7 +486,8 @@ public class Informes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tfAnnoKeyTyped
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         if (lRight4.isVisible()){
+       //// entrenamientosemanal
+        if (lRight4.isVisible()){
             
             //Introducir aquí el código para generar informes
               Connection connection = null;
@@ -567,7 +499,7 @@ public class Informes extends javax.swing.JInternalFrame {
             parametros.put("anio", tfAnno);
             parametros.put("mes",cbMes);
             JasperPrint print = JasperFillManager.fillReport("../../informes/consulta3.jasper", parametros,connection);
-            JasperExportManager.exportReportToPdfFile(print,"../../informesgenerados/"+tfAnno.getText()+cbMes.getSelectedItem().toString()+".pdf");
+            JasperExportManager.exportReportToPdfFile(print,"../../informesgenerados/entrenamientosemanal.pdf");
              
         }
         catch (Throwable e)
@@ -588,7 +520,7 @@ public class Informes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btCrear2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrear2ActionPerformed
-      
+     // itinerarios
             //Introducir aquí el código para generar informes
         Connection connection = null;
         try
@@ -627,7 +559,7 @@ public class Informes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btVolver2ActionPerformed
 
     private void btCrear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrear1ActionPerformed
-            
+            //sesiones
             //Introducir aquí el código para generar informes
          Connection connection = null;
         try
@@ -660,16 +592,8 @@ public class Informes extends javax.swing.JInternalFrame {
         this.hide();
     }//GEN-LAST:event_btVolver5ActionPerformed
 
-    private void cbDificultad2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDificultad2ActionPerformed
-         if (!"Elige".equals(cbDificultad1.getSelectedItem()) && !"Elige".equals(cbDificultad2.getSelectedItem())){
-            lRight9.setVisible(true);
-        } else {
-            lRight9.setVisible(false);
-        }
-    }//GEN-LAST:event_cbDificultad2ActionPerformed
-
     private void btCrear5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrear5ActionPerformed
-        if (lRight9.isVisible()){
+        //if (lRight9.isVisible()){
             
             //Introducir aquí el código para generar informes
              Connection connection = null;
@@ -680,12 +604,12 @@ public class Informes extends javax.swing.JInternalFrame {
             connection = DriverManager.getConnection("jdbc:hsqldb:./db/escalador.db", "sa","");
              Map parametros = new HashMap();
              //cambiar al nuevo campo fechas
-              Timestamp ini= new Timestamp(dateTextField3.getDate().getTime());
-            Timestamp fin= new Timestamp(dateTextField4.getDate().getTime());
+              Timestamp ini= new Timestamp(dateTextField7.getDate().getTime());
+            Timestamp fin= new Timestamp(dateTextField8.getDate().getTime());
             parametros.put("fechainicio", ini);
             parametros.put("fechafin", fin);
             JasperPrint print = JasperFillManager.fillReport("./informes/consulta5.jasper", parametros,connection);
-            JasperExportManager.exportReportToPdfFile(print,"./informesgenerados/"+dateTextField3.toString()+dateTextField4.toString()+".pdf");
+            JasperExportManager.exportReportToPdfFile(print,"./informesgenerados/itinerariosdificultad.pdf");
              
         }
         catch (Throwable e)
@@ -702,18 +626,10 @@ public class Informes extends javax.swing.JInternalFrame {
             
             this.hide();
             
-        } else {
-            JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
-        }
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
+//        }
     }//GEN-LAST:event_btCrear5ActionPerformed
-
-    private void cbDificultad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDificultad1ActionPerformed
-         if (!"Elige".equals(cbDificultad1.getSelectedItem()) && !"Elige".equals(cbDificultad2.getSelectedItem())){
-            lRight9.setVisible(true);
-        } else {
-            lRight9.setVisible(false);
-        }
-    }//GEN-LAST:event_cbDificultad1ActionPerformed
 
     private void tfFechaInicio2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfFechaInicio2KeyTyped
        
@@ -730,39 +646,34 @@ public class Informes extends javax.swing.JInternalFrame {
     private javax.swing.JButton btVolver3;
     private javax.swing.JButton btVolver4;
     private javax.swing.JButton btVolver5;
-    private javax.swing.JComboBox cbDificultad1;
-    private javax.swing.JComboBox cbDificultad2;
     private javax.swing.JComboBox cbMes;
-    private javax.swing.JComboBox cbTipoSesion;
     private calendario.DateTextField dateTextField1;
     private calendario.DateTextField dateTextField2;
     private calendario.DateTextField dateTextField3;
     private calendario.DateTextField dateTextField4;
     private calendario.DateTextField dateTextField5;
     private calendario.DateTextField dateTextField6;
+    private calendario.DateTextField dateTextField7;
+    private calendario.DateTextField dateTextField8;
     private javax.swing.ButtonGroup grupo;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JLabel lRight1;
     private javax.swing.JLabel lRight4;
-    private javax.swing.JLabel lRight9;
     private javax.swing.JPanel pItinerariosFecha;
     private javax.swing.JTabbedPane pSesionesFecha;
-    private javax.swing.JRadioButton rbMas;
-    private javax.swing.JRadioButton rbMenos;
     private javax.swing.JTextField tfAnno;
     private javax.swing.JTextField tfFechaInicio3;
     // End of variables declaration//GEN-END:variables
