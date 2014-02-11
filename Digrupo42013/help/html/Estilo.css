@@ -2,7 +2,7 @@
 
 body{background-color: rgb(255,255,255);
 Font-Family: Segoe UI,Times New Roman, Arial;
-Font-size: 14px;
+Font-size: 12px;
 letter-spacing: 2px;
 }
 
@@ -23,7 +23,7 @@ padding: 3px;
 
 h3{background-color: rgb(230,230,230);
 margin-bottom: 7px;
-Font-size: 15px;
+Font-size: 13px;
 color: rgb(70,70,70);
 font-weight: bold;
 letter-spacing: 2px;
@@ -33,7 +33,7 @@ padding: 2px;
 
 h3.type2{background-color: rgb(180,180,180);
 margin-bottom: 7px;
-Font-size: 15px;
+Font-size: 13px;
 color: rgb(70,70,70);
 font-weight: bold;
 letter-spacing: 2px;
@@ -45,7 +45,7 @@ padding: 2px;
 p{text-indent: 15px;
 padding: 5px;
 text-align: justify;
-} 
+}
 
 /*Estilo opcional*/
 strong.rojo{font-weight: bold;
@@ -58,14 +58,6 @@ color: rgb(220,170,7);
 
 strong.verde{font-weight: bold;
 color: rgb(7,170,7);
-}
-
-/*Imagen*/
-img { 
-border: 1px solid green; 
-Width : 100px; 
-height : 100px; 
-margin-left : 50%;
 }
 
 /*Otros*/
