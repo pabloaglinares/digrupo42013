@@ -1,0 +1,10 @@
+﻿<map version="1.0">
+		<mapID target="portada" url="html/portada.html"/>
+		<mapID target="altaitinerarios" url="html/altaitinerarios.html"/>
+		<mapID target="listadoitinerarios" url="html/listadoitinerarios.html"/>
+		<mapID target="detalleitinerario" url="html/detalleitinerario.html"/>
+		<mapID target="altasesiones" url="html/altasesiones.html"/>
+		<mapID target="listadosesiones" url="html/listadosesiones.html"/>
+		<mapID target="informes" url="html/informes.html"/>
+        <mapID target="configuracion" url="html/configuracion.html"/>
+</map>
