@@ -452,14 +452,14 @@ public class Informes extends javax.swing.JInternalFrame {
         try
         {
             Class.forName("org.hsqldb.jdbcDriver");
-            connection = DriverManager.getConnection("jdbc:hsqldb:../../db/escalador.db", "sa","");
+            connection = DriverManager.getConnection("jdbc:hsqldb:./db/escalador.db", "sa","");
              Map parametros = new HashMap();
             Timestamp ini= new Timestamp(dateTextField5.getDate().getTime());
             Timestamp fin= new Timestamp(dateTextField6.getDate().getTime());
             parametros.put("fechainicio", ini);
             parametros.put("fechafin", fin);
-            JasperPrint print = JasperFillManager.fillReport("../../informes/consulta4.jasper", parametros,connection);
-            JasperExportManager.exportReportToPdfFile(print,"../../informesgenerados/sesionestipo.pdf");
+            JasperPrint print = JasperFillManager.fillReport("./informes/consulta4.jasper", parametros,connection);
+            JasperExportManager.exportReportToPdfFile(print,"./informesgenerados/sesionestipo.pdf");
              
         }
         catch (Throwable e)
@@ -496,13 +496,13 @@ public class Informes extends javax.swing.JInternalFrame {
         try
         {
             Class.forName("org.hsqldb.jdbcDriver");
-            connection = DriverManager.getConnection("jdbc:hsqldb:../../db/escalador.db", "sa","");
+            connection = DriverManager.getConnection("jdbc:hsqldb:./db/escalador.db", "sa","");
             Map parametros = new HashMap();
             Timestamp fecha= new Timestamp (Integer.valueOf(tfAnno.getText()),cbMes.getSelectedIndex()+1,1,1,0,0,0);
             parametros.put("anio", fecha);
             parametros.put("mes",fecha);
-            JasperPrint print = JasperFillManager.fillReport("../../informes/consulta3.jasper", parametros,connection);
-            JasperExportManager.exportReportToPdfFile(print,"../../informesgenerados/entrenamientosemanal.pdf");
+            JasperPrint print = JasperFillManager.fillReport("./informes/consulta3.jasper", parametros,connection);
+            JasperExportManager.exportReportToPdfFile(print,"./informesgenerados/entrenamientosemanal.pdf");
              
         }
         catch (Throwable e)
