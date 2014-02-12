@@ -454,8 +454,10 @@ public class Informes extends javax.swing.JInternalFrame {
             Class.forName("org.hsqldb.jdbcDriver");
             connection = DriverManager.getConnection("jdbc:hsqldb:../../db/escalador.db", "sa","");
              Map parametros = new HashMap();
-            parametros.put("fechainicio", dateTextField5);
-            parametros.put("fechafin",dateTextField6);
+            Timestamp ini= new Timestamp(dateTextField5.getDate().getTime());
+            Timestamp fin= new Timestamp(dateTextField6.getDate().getTime());
+            parametros.put("fechainicio", ini);
+            parametros.put("fechafin", fin);
             JasperPrint print = JasperFillManager.fillReport("../../informes/consulta4.jasper", parametros,connection);
             JasperExportManager.exportReportToPdfFile(print,"../../informesgenerados/sesionestipo.pdf");
              
@@ -495,9 +497,10 @@ public class Informes extends javax.swing.JInternalFrame {
         {
             Class.forName("org.hsqldb.jdbcDriver");
             connection = DriverManager.getConnection("jdbc:hsqldb:../../db/escalador.db", "sa","");
-             Map parametros = new HashMap();
-            parametros.put("anio", tfAnno);
-            parametros.put("mes",cbMes);
+            Map parametros = new HashMap();
+            Timestamp fecha= new Timestamp (Integer.valueOf(tfAnno.getText()),cbMes.getSelectedIndex()+1,1,1,0,0,0);
+            parametros.put("anio", fecha);
+            parametros.put("mes",fecha);
             JasperPrint print = JasperFillManager.fillReport("../../informes/consulta3.jasper", parametros,connection);
             JasperExportManager.exportReportToPdfFile(print,"../../informesgenerados/entrenamientosemanal.pdf");
              
@@ -567,7 +570,7 @@ public class Informes extends javax.swing.JInternalFrame {
             Class.forName("org.hsqldb.jdbcDriver");
             connection = DriverManager.getConnection("jdbc:hsqldb:./db/escalador.db", "sa","");
              Map parametros = new HashMap();
-              Timestamp ini= new Timestamp(dateTextField3.getDate().getTime());
+            Timestamp ini= new Timestamp(dateTextField3.getDate().getTime());
             Timestamp fin= new Timestamp(dateTextField4.getDate().getTime());
             parametros.put("fechainicio", ini);
             parametros.put("fechafin",fin);
@@ -604,7 +607,7 @@ public class Informes extends javax.swing.JInternalFrame {
             connection = DriverManager.getConnection("jdbc:hsqldb:./db/escalador.db", "sa","");
              Map parametros = new HashMap();
              //cambiar al nuevo campo fechas
-              Timestamp ini= new Timestamp(dateTextField7.getDate().getTime());
+            Timestamp ini= new Timestamp(dateTextField7.getDate().getTime());
             Timestamp fin= new Timestamp(dateTextField8.getDate().getTime());
             parametros.put("fechainicio", ini);
             parametros.put("fechafin", fin);
