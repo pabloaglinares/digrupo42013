@@ -52,6 +52,7 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(700, 380));
 
         btVolver.setText("Volver");
+        btVolver.setToolTipText("Botón para volver");
         btVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btVolverActionPerformed(evt);
@@ -61,6 +62,7 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
         /*
         tbListado.setModel(null);
         */
+        tbListado.setToolTipText("Carga los datos de las sesiones");
         tbListado.setRowHeight(30);
         tbListado.getColumnModel().getColumn(0).setMaxWidth(100);
         tbListado.getColumnModel().getColumn(0).setPreferredWidth(100);

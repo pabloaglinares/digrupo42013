@@ -98,12 +98,19 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfNombre">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Inserte el nombre"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfApellidos">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Inserte los apellidos"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btAceptar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Guardar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Bot&#xf3;n para guardar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAceptarActionPerformed"/>
@@ -112,6 +119,7 @@
     <Component class="javax.swing.JButton" name="btCancelar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Bot&#xf3;n para cancelar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCancelarActionPerformed"/>
@@ -121,11 +129,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="dateTextField1"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dtfFecha1.setToolTipText(&quot;Inserte la fecha inicial en formato dd/MM/yyyy&quot;);"/>
+      </AuxValues>
     </Component>
     <Component class="calendario.DateTextField" name="dtfFecha2">
       <Properties>
         <Property name="text" type="java.lang.String" value="dateTextField2"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dtfFecha2.setToolTipText(&quot;Inserte la fecha fin en formato dd/MM/yyyy&quot;);"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>

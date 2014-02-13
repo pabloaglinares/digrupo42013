@@ -120,6 +120,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfHoraComienzo">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Inserte la hora en comienzo HH:mm"/>
+      </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfHoraComienzoKeyReleased"/>
       </Events>
@@ -130,6 +133,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfHoraFin">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Inserte la hora fin en formato HH:mm"/>
+      </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfHoraFinKeyReleased"/>
       </Events>
@@ -144,6 +150,7 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new javax.swing.DefaultComboBoxModel(Sesion.TipoSesion.values())" type="code"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Eliga entre Fisico, Rocodromo o Roca"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox()"/>
@@ -155,6 +162,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfDescripcion">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Inserte la descripci&#xf3;n"/>
+      </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfDescripcionKeyReleased"/>
       </Events>
@@ -182,6 +192,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="dateTextField1"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dtfFecha.setToolTipText(&quot;Inserte la fecha sesi&#xf3;n en formato dd/MM/yyyy&quot;);"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

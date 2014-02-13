@@ -3,17 +3,17 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="anio" class="java.sql.Timestamp">
+	<parameter name="anio" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="mes" class="java.sql.Timestamp">
+	<parameter name="mes" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[select count(week(s.fh_inicio))as semana,year(s.fh_inicio)as year, sum(hour(s.fh_fin)-hour(s.fh_inicio))as totalhoras
 ,month(s.fh_inicio) as mes
 from sesion s
-where year(s.fh_inicio)=year($P{anio}) and month(s.fh_inicio)=month($P{mes})
+where year(s.fh_inicio)=$P{anio} and month(s.fh_inicio)=$P{mes}
 group by week(s.fh_inicio)
 order by week(s.fh_inicio) DESC]]>
 	</queryString>

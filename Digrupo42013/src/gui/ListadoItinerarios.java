@@ -56,6 +56,7 @@ private BridgeItinerario bridge = BridgeItinerario.BRIDGE;
         setMinimumSize(new java.awt.Dimension(575, 380));
 
         btVolver.setText("Volver");
+        btVolver.setToolTipText("Botón volver");
         btVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btVolverActionPerformed(evt);
@@ -66,6 +67,7 @@ private BridgeItinerario bridge = BridgeItinerario.BRIDGE;
         tbListado.getColumnModel().getColumn(2).setMaxWidth(100);
         tbListado.getColumnModel().getColumn(3).setMaxWidth(30);
         tbListado.getColumnModel().getColumn(4).setMaxWidth(30);
+        tbListado.setToolTipText("Carga los datos de los itinerarios");
         jScrollPane2.setViewportView(tbListado);
 
         tbpFiltroBusqueda.addChangeListener(new javax.swing.event.ChangeListener() {

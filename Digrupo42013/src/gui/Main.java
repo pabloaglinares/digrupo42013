@@ -150,10 +150,12 @@ public final class Main extends javax.swing.JFrame {
 
         mItinerarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/itinerario.png"))); // NOI18N
         mItinerarios.setText("Itinerarios");
+        mItinerarios.setToolTipText("Menú de gestión itinerarios.");
 
         miAltaItinerario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         miAltaItinerario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/add.png"))); // NOI18N
         miAltaItinerario.setText("Alta Itinerario...");
+        miAltaItinerario.setToolTipText("");
         miAltaItinerario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miAltaItinerarioActionPerformed(evt);
@@ -164,6 +166,7 @@ public final class Main extends javax.swing.JFrame {
         miListadoItinerarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         miListadoItinerarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/lista.png"))); // NOI18N
         miListadoItinerarios.setText("Listado Itinerarios...");
+        miListadoItinerarios.setToolTipText("");
         miListadoItinerarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miListadoItinerariosActionPerformed(evt);
@@ -175,10 +178,12 @@ public final class Main extends javax.swing.JFrame {
 
         mSesiones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/sesion.png"))); // NOI18N
         mSesiones.setText("Sesiones");
+        mSesiones.setToolTipText("Menú de gestión sesiones");
 
         miAltaSesion.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         miAltaSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/add.png"))); // NOI18N
         miAltaSesion.setText("Alta Sesión...");
+        miAltaSesion.setToolTipText("");
         miAltaSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miAltaSesionActionPerformed(evt);
@@ -200,6 +205,7 @@ public final class Main extends javax.swing.JFrame {
 
         mInformes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/informe.png"))); // NOI18N
         mInformes.setText("Informes");
+        mInformes.setToolTipText("Menú de gestión de informes");
 
         jMenuItem6.setText("Crear Informes...");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
@@ -213,6 +219,7 @@ public final class Main extends javax.swing.JFrame {
 
         mConfiguracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/herramientas.png"))); // NOI18N
         mConfiguracion.setText("Configuracion");
+        mConfiguracion.setToolTipText("Configuración");
         mConfiguracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mConfiguracionActionPerformed(evt);
@@ -231,6 +238,7 @@ public final class Main extends javax.swing.JFrame {
 
         mAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ayuda1.png"))); // NOI18N
         mAyuda.setText("Ayuda");
+        mAyuda.setToolTipText("Ayuda");
 
         miAyuda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         miAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ayuda2.png"))); // NOI18N
