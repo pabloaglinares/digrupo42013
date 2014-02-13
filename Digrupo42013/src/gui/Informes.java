@@ -498,9 +498,8 @@ public class Informes extends javax.swing.JInternalFrame {
             Class.forName("org.hsqldb.jdbcDriver");
             connection = DriverManager.getConnection("jdbc:hsqldb:./db/escalador.db", "sa","");
             Map parametros = new HashMap();
-            Timestamp fecha= new Timestamp (Integer.valueOf(tfAnno.getText()),cbMes.getSelectedIndex()+1,1,1,0,0,0);
-            parametros.put("anio", fecha);
-            parametros.put("mes",fecha);
+            parametros.put("anio", Integer.valueOf(tfAnno.getText()));
+            parametros.put("mes",Integer.valueOf(cbMes.getSelectedIndex())+1);
             JasperPrint print = JasperFillManager.fillReport("./informes/consulta3.jasper", parametros,connection);
             JasperExportManager.exportReportToPdfFile(print,"./informesgenerados/entrenamientosemanal.pdf");
              
