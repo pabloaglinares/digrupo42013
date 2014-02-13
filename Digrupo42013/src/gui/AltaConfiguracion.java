@@ -91,7 +91,12 @@ private final BridgeConfiguracion bridge = BridgeConfiguracion.CONFIGURACION;
 
         jLabel3.setText("Entrenamiento actual:");
 
+        tfNombre.setToolTipText("Inserte el nombre");
+
+        tfApellidos.setToolTipText("Inserte los apellidos");
+
         btAceptar.setText("Guardar");
+        btAceptar.setToolTipText("Botón para guardar");
         btAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAceptarActionPerformed(evt);
@@ -99,6 +104,7 @@ private final BridgeConfiguracion bridge = BridgeConfiguracion.CONFIGURACION;
         });
 
         btCancelar.setText("Cancelar");
+        btCancelar.setToolTipText("Botón para cancelar");
         btCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCancelarActionPerformed(evt);
