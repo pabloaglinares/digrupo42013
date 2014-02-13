@@ -31,10 +31,6 @@ public enum BridgeSesion {
     private Sesion.TipoSesion tipo;
     private int currentPSesion;
 
-    public void setMain(Main main) {
-        this.main = main;
-    }
-
     /**
      * Asigna la pestaña actual
      *
@@ -91,8 +87,10 @@ public enum BridgeSesion {
 
     /**
      * Abre la ventana de alta de sesiones para crear una nueva sesión
+     * @param main
      */
-    public void openToInsertNewSesion() {
+    public void openToInsertNewSesion(Main main) {
+        this.main = main;
         showAlta();
         alta.setModoAlta(true);
     }
@@ -113,8 +111,10 @@ public enum BridgeSesion {
     }
     /**
      * Muestra la pantalla de listado de sesiones
+     * @param main
      */
-    public void openListadoSesiones() {
+    public void openListadoSesiones(Main main) {
+        this.main = main;
         ListadoSesiones listadosesiones = new ListadoSesiones();
         main.getDpEscritorio().add(listadosesiones);
         listadosesiones.show();

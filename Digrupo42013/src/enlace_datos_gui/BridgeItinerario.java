@@ -35,15 +35,22 @@ public enum BridgeItinerario {
     private Date date2;
     private int pItinerario;
     private File oldImg;
-    
-    public void openListado(){
+    /**
+     * Abre la ventana de listado de itinerarios
+     * @param main 
+     */
+    public void openListado(Main main){
+        this.main = main;
         listado = new ListadoItinerarios();
         main.getDpEscritorio().add(listado);
         listado.show();
-        tabla = listado.getTbListado();
     }
-    
-    public void openForInsertNewITinerario() {
+    /**
+     * Abre la ventana de alta de itinerarios
+     * @param main 
+     */
+    public void openForInsertNewITinerario(Main main) {
+        this.main = main;
         showAlta();
         alta.checkAll();
         alta.setModoAlta(true);
@@ -113,16 +120,13 @@ public enum BridgeItinerario {
     public void closeAlta() {
         alta = null;
     }
-    public void closeLista() {
-        
-    }
     /**
-     * Asigna la referencia a la página principal
-     *
-     * @param main
+     * Cierra la ventana de listado
      */
-    public void setMain(Main main) {
-        this.main = main;
+    public void closeLista() {
+        listado.dispose();
+        tabla = null;
+        listado = null;
     }
 
     /**
@@ -254,7 +258,11 @@ public enum BridgeItinerario {
             ((ItinerariosTableModel) tabla.getModel()).setItinerarios(dao.getItinerariosByFechaRange(date1, date2));
         }
     }
-
+    /**
+     * Carga los detalles en la ventana de detalles
+     * @param it
+     * @return 
+     */
     public String loadDetalis(Itinerario it) {
         /*
         string 1 nombre

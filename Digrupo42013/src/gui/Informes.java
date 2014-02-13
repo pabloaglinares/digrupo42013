@@ -3,48 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package gui;
 
-
+import calendario.DateTextField;
+import enlace_datos_gui.BridgeInformes;
 import enlace_datos_gui.CheckCampo;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.Map;
-import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Gemo
  */
 public class Informes extends javax.swing.JInternalFrame {
-
+    private final BridgeInformes bridge = BridgeInformes.INFORMES;
     /**
      * Creates new form Informes
      */
     public Informes() {
         initComponents();
-        
-        this.setIconifiable(true);   
-        this.setResizable(true);  
-        this.setClosable(true);   
-        this.setMaximizable(true);
-       
-       // lRight1.setVisible(false);
-       
-        lRight4.setVisible(false);
-        
-     
-        
-        //lRight9.setVisible(false);
-    }
-    
 
+        this.setIconifiable(true);
+        this.setResizable(true);
+        this.setClosable(true);
+        this.setMaximizable(true);
+        lRight4.setVisible(false);
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,14 +47,10 @@ public class Informes extends javax.swing.JInternalFrame {
         pSesionesFecha = new javax.swing.JTabbedPane();
         pItinerariosFecha = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        btVolver1 = new javax.swing.JButton();
-        btCrear2 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         dateTextField1 = new calendario.DateTextField();
         dateTextField2 = new calendario.DateTextField();
         jPanel2 = new javax.swing.JPanel();
-        btVolver2 = new javax.swing.JButton();
-        btCrear1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         dateTextField3 = new calendario.DateTextField();
@@ -75,25 +58,21 @@ public class Informes extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         cbMes = new javax.swing.JComboBox();
-        btVolver3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         tfAnno = new javax.swing.JTextField();
         lRight4 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        btVolver5 = new javax.swing.JButton();
-        btCrear5 = new javax.swing.JButton();
         dateTextField8 = new calendario.DateTextField();
         jLabel11 = new javax.swing.JLabel();
         dateTextField7 = new calendario.DateTextField();
         jLabel12 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        btVolver4 = new javax.swing.JButton();
-        btCrear3 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         dateTextField5 = new calendario.DateTextField();
         dateTextField6 = new calendario.DateTextField();
+        btCrear = new javax.swing.JButton();
+        btVolver = new javax.swing.JButton();
 
         tfFechaInicio3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -108,22 +87,6 @@ public class Informes extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Fecha inicio:");
 
-        btVolver1.setText("Volver");
-        btVolver1.setToolTipText("Botón para volver");
-        btVolver1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVolver1ActionPerformed(evt);
-            }
-        });
-
-        btCrear2.setText("Crear informe");
-        btCrear2.setToolTipText("Botón para crear informe");
-        btCrear2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCrear2ActionPerformed(evt);
-            }
-        });
-
         jLabel9.setText("Fecha fin:");
 
         dateTextField1.setText("dateTextField1");
@@ -137,21 +100,13 @@ public class Informes extends javax.swing.JInternalFrame {
         pItinerariosFechaLayout.setHorizontalGroup(
             pItinerariosFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pItinerariosFechaLayout.createSequentialGroup()
+                .addGap(58, 58, 58)
                 .addGroup(pItinerariosFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pItinerariosFechaLayout.createSequentialGroup()
-                        .addContainerGap(199, Short.MAX_VALUE)
-                        .addComponent(btCrear2)
-                        .addGap(18, 18, 18)
-                        .addComponent(btVolver1))
-                    .addGroup(pItinerariosFechaLayout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addGroup(pItinerariosFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel3)
-                            .addComponent(dateTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 259, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel3)
+                    .addComponent(dateTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
         pItinerariosFechaLayout.setVerticalGroup(
             pItinerariosFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,28 +119,10 @@ public class Informes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(dateTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-                .addGroup(pItinerariosFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btVolver1)
-                    .addComponent(btCrear2))
-                .addContainerGap())
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pSesionesFecha.addTab("Itinerarios: fecha", pItinerariosFecha);
-
-        btVolver2.setText("Volver");
-        btVolver2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVolver2ActionPerformed(evt);
-            }
-        });
-
-        btCrear1.setText("Crear informe");
-        btCrear1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCrear1ActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Fecha inicio:");
 
@@ -202,21 +139,13 @@ public class Informes extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(199, Short.MAX_VALUE)
-                        .addComponent(btCrear1)
-                        .addGap(18, 18, 18)
-                        .addComponent(btVolver2))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel1)
-                            .addComponent(dateTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel1)
+                    .addComponent(dateTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,11 +158,7 @@ public class Informes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(dateTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btVolver2)
-                    .addComponent(btCrear1))
-                .addContainerGap())
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pSesionesFecha.addTab("Sesiones: fecha", jPanel2);
@@ -242,22 +167,6 @@ public class Informes extends javax.swing.JInternalFrame {
 
         cbMes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
         cbMes.setToolTipText("Eliga el mes");
-
-        btVolver3.setText("Volver");
-        btVolver3.setToolTipText("Botón para volver");
-        btVolver3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVolver3ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Crear Informe");
-        jButton2.setToolTipText("Botón crear informe");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         jLabel6.setText("/");
 
@@ -286,13 +195,7 @@ public class Informes extends javax.swing.JInternalFrame {
                         .addComponent(tfAnno, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lRight4)))
-                .addContainerGap(110, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(btVolver3)
-                .addContainerGap())
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,30 +208,10 @@ public class Informes extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(tfAnno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lRight4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btVolver3)
-                    .addComponent(jButton2))
-                .addContainerGap())
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         pSesionesFecha.addTab("Entrenamiento semanal", jPanel3);
-
-        btVolver5.setText("Volver");
-        btVolver5.setToolTipText("Botón para volver");
-        btVolver5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVolver5ActionPerformed(evt);
-            }
-        });
-
-        btCrear5.setText("Crear Informe");
-        btCrear5.setToolTipText("Botón crear informe");
-        btCrear5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCrear5ActionPerformed(evt);
-            }
-        });
 
         dateTextField8.setText("dateTextField6");
         dateTextField8.setToolTipText("Inserte la fecha final en formato dd/MM/yyyy");
@@ -344,12 +227,6 @@ public class Informes extends javax.swing.JInternalFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(197, Short.MAX_VALUE)
-                .addComponent(btCrear5)
-                .addGap(18, 18, 18)
-                .addComponent(btVolver5)
-                .addContainerGap())
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,7 +234,7 @@ public class Informes extends javax.swing.JInternalFrame {
                     .addComponent(dateTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
                     .addComponent(jLabel12))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,30 +247,10 @@ public class Informes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dateTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btVolver5)
-                    .addComponent(btCrear5))
-                .addContainerGap())
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pSesionesFecha.addTab("Itinerarios: dificultad", jPanel5);
-
-        btVolver4.setText("Volver");
-        btVolver4.setToolTipText("Botón para volver");
-        btVolver4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVolver4ActionPerformed(evt);
-            }
-        });
-
-        btCrear3.setText("Crear informe");
-        btCrear3.setToolTipText("Botón para crear informe");
-        btCrear3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCrear3ActionPerformed(evt);
-            }
-        });
 
         jLabel8.setText("Fecha inicio:");
 
@@ -409,12 +266,6 @@ public class Informes extends javax.swing.JInternalFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btCrear3)
-                .addGap(18, 18, 18)
-                .addComponent(btVolver4)
-                .addContainerGap())
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,7 +273,7 @@ public class Informes extends javax.swing.JInternalFrame {
                     .addComponent(dateTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
                     .addComponent(jLabel8))
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -435,237 +286,134 @@ public class Informes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dateTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btVolver4)
-                    .addComponent(btCrear3))
-                .addContainerGap())
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pSesionesFecha.addTab("Sesiones: tipo", jPanel4);
+
+        btCrear.setText("Crear informe");
+        btCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCrearActionPerformed(evt);
+            }
+        });
+
+        btVolver.setText("Volver");
+        btVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVolverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pSesionesFecha)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btVolver)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btCrear)
+                .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btCrear, btVolver});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pSesionesFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pSesionesFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btCrear)
+                    .addComponent(btVolver))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btVolver3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolver3ActionPerformed
-        this.hide();
-    }//GEN-LAST:event_btVolver3ActionPerformed
-
-    private void btVolver4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolver4ActionPerformed
-        this.hide();
-    }//GEN-LAST:event_btVolver4ActionPerformed
-
-    private void btCrear3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrear3ActionPerformed
-       // if (lRight1.isVisible()){
-            
-            //Introducir aquí el código para generar informes
-             Connection connection = null;
-        try
-        {
-            Class.forName("org.hsqldb.jdbcDriver");
-            connection = DriverManager.getConnection("jdbc:hsqldb:./db/escalador.db", "sa","");
-             Map parametros = new HashMap();
-            Timestamp ini= new Timestamp(dateTextField5.getDate().getTime());
-            Timestamp fin= new Timestamp(dateTextField6.getDate().getTime());
-            parametros.put("fechainicio", ini);
-            parametros.put("fechafin", fin);
-            JasperPrint print = JasperFillManager.fillReport("./informes/consulta4.jasper", parametros,connection);
-            JasperExportManager.exportReportToPdfFile(print,"./informesgenerados/sesionestipo.pdf");
-             
-        }
-        catch (Throwable e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
-      
-            try {if (connection !=null) connection.close();} catch(Throwable e){};
-        }
-            
-            this.hide();
-            
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
-//        }
-    }//GEN-LAST:event_btCrear3ActionPerformed
-
     private void tfAnnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfAnnoKeyTyped
-        lRight4.setVisible(CheckCampo.YEAR.isCampoOk(tfAnno.getText()+evt.getKeyChar()));
+        lRight4.setVisible(CheckCampo.YEAR.isCampoOk(tfAnno.getText() + evt.getKeyChar()));
     }//GEN-LAST:event_tfAnnoKeyTyped
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       //// entrenamientosemanal
-        if (lRight4.isVisible()){
-            
-            //Introducir aquí el código para generar informes
-              Connection connection = null;
-        try
-        {
-            Class.forName("org.hsqldb.jdbcDriver");
-            connection = DriverManager.getConnection("jdbc:hsqldb:./db/escalador.db", "sa","");
-            Map parametros = new HashMap();
-            parametros.put("anio", Integer.valueOf(tfAnno.getText()));
-            parametros.put("mes",Integer.valueOf(cbMes.getSelectedIndex())+1);
-            JasperPrint print = JasperFillManager.fillReport("./informes/consulta3.jasper", parametros,connection);
-            JasperExportManager.exportReportToPdfFile(print,"./informesgenerados/entrenamientosemanal.pdf");
-             
-        }
-        catch (Throwable e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
-      
-            try {if (connection !=null) connection.close();} catch(Throwable e){};
-        }
-            
-            this.hide();
-            
-        } else {
-            JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolverActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btVolverActionPerformed
 
-    private void btCrear2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrear2ActionPerformed
-     // itinerarios
-            //Introducir aquí el código para generar informes
-        Connection connection = null;
-        try
-        {
-            Class.forName("org.hsqldb.jdbcDriver");
-            connection = DriverManager.getConnection("jdbc:hsqldb:./db/escalador.db", "sa","");
-             Map parametros = new HashMap();
-            Timestamp ini= new Timestamp(dateTextField1.getDate().getTime());
-            Timestamp fin= new Timestamp(dateTextField2.getDate().getTime());
-            parametros.put("fechainicio", ini);
-            parametros.put("fechafin", fin);
-            JasperPrint print = JasperFillManager.fillReport("./informes/consulta1.jasper", parametros,connection);
-            JasperExportManager.exportReportToPdfFile(print,"./informesgenerados/itinerarios.pdf");
-             
-        }
-        catch (Throwable e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
-      
-            try {if (connection !=null) connection.close();} catch(Throwable e){};
-        }
-      
-            
-            this.hide();
-    }//GEN-LAST:event_btCrear2ActionPerformed
+    private void btCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearActionPerformed
+      bridge.onCrear();
+    }//GEN-LAST:event_btCrearActionPerformed
 
-    private void btVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolver1ActionPerformed
-        this.hide();
-    }//GEN-LAST:event_btVolver1ActionPerformed
+    public JTabbedPane getpSesionesFecha() {
+        return pSesionesFecha;
+    }
 
-    private void btVolver2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolver2ActionPerformed
-        this.hide();
-    }//GEN-LAST:event_btVolver2ActionPerformed
+    
+    public JButton getBtCrear() {
+        return btCrear;
+    }
 
-    private void btCrear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrear1ActionPerformed
-            //sesiones
-            //Introducir aquí el código para generar informes
-         Connection connection = null;
-        try
-        {
-            Class.forName("org.hsqldb.jdbcDriver");
-            connection = DriverManager.getConnection("jdbc:hsqldb:./db/escalador.db", "sa","");
-             Map parametros = new HashMap();
-            Timestamp ini= new Timestamp(dateTextField3.getDate().getTime());
-            Timestamp fin= new Timestamp(dateTextField4.getDate().getTime());
-            parametros.put("fechainicio", ini);
-            parametros.put("fechafin",fin);
-            JasperPrint print = JasperFillManager.fillReport("./informes/consulta2.jasper", parametros,connection);
-            JasperExportManager.exportReportToPdfFile(print,"./informesgenerados/sesiones.pdf");
-             
-        }
-        catch (Throwable e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
-      
-            try {if (connection !=null) connection.close();} catch(Throwable e){};
-        }
-            
-            this.hide();
-    }//GEN-LAST:event_btCrear1ActionPerformed
+   
 
-    private void btVolver5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolver5ActionPerformed
-        this.hide();
-    }//GEN-LAST:event_btVolver5ActionPerformed
+    public JButton getBtVolver() {
+        return btVolver;
+    }
 
-    private void btCrear5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrear5ActionPerformed
-        //if (lRight9.isVisible()){
-            
-            //Introducir aquí el código para generar informes
-             Connection connection = null;
-            //cambiar esta ventana para introducir fechas
-        try
-        {
-            Class.forName("org.hsqldb.jdbcDriver");
-            connection = DriverManager.getConnection("jdbc:hsqldb:./db/escalador.db", "sa","");
-             Map parametros = new HashMap();
-             //cambiar al nuevo campo fechas
-            Timestamp ini= new Timestamp(dateTextField7.getDate().getTime());
-            Timestamp fin= new Timestamp(dateTextField8.getDate().getTime());
-            parametros.put("fechainicio", ini);
-            parametros.put("fechafin", fin);
-            JasperPrint print = JasperFillManager.fillReport("./informes/consulta5.jasper", parametros,connection);
-            JasperExportManager.exportReportToPdfFile(print,"./informesgenerados/itinerariosdificultad.pdf");
-             
-        }
-        catch (Throwable e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
-      
-            try {if (connection !=null) connection.close();} catch(Throwable e){};
-        }
-            
-            this.hide();
-            
-            this.hide();
-            
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
-//        }
-    }//GEN-LAST:event_btCrear5ActionPerformed
+
+    public JComboBox getCbMes() {
+        return cbMes;
+    }
+
+    public DateTextField getDateTextField1() {
+        return dateTextField1;
+    }
+
+    public DateTextField getDateTextField2() {
+        return dateTextField2;
+    }
+
+    public DateTextField getDateTextField3() {
+        return dateTextField3;
+    }
+
+    public DateTextField getDateTextField4() {
+        return dateTextField4;
+    }
+
+    public DateTextField getDateTextField5() {
+        return dateTextField5;
+    }
+
+    public DateTextField getDateTextField6() {
+        return dateTextField6;
+    }
+
+    public DateTextField getDateTextField7() {
+        return dateTextField7;
+    }
+
+    public DateTextField getDateTextField8() {
+        return dateTextField8;
+    }
+
+    public JTextField getTfAnno() {
+        return tfAnno;
+    }
+
+    public JTextField getTfFechaInicio3() {
+        return tfFechaInicio3;
+    }
 
     private void tfFechaInicio2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfFechaInicio2KeyTyped
-       
+
     }//GEN-LAST:event_tfFechaInicio2KeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btCrear1;
-    private javax.swing.JButton btCrear2;
-    private javax.swing.JButton btCrear3;
-    private javax.swing.JButton btCrear5;
-    private javax.swing.JButton btVolver1;
-    private javax.swing.JButton btVolver2;
-    private javax.swing.JButton btVolver3;
-    private javax.swing.JButton btVolver4;
-    private javax.swing.JButton btVolver5;
+    private javax.swing.JButton btCrear;
+    private javax.swing.JButton btVolver;
     private javax.swing.JComboBox cbMes;
     private calendario.DateTextField dateTextField1;
     private calendario.DateTextField dateTextField2;
@@ -676,7 +424,6 @@ public class Informes extends javax.swing.JInternalFrame {
     private calendario.DateTextField dateTextField7;
     private calendario.DateTextField dateTextField8;
     private javax.swing.ButtonGroup grupo;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

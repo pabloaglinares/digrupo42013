@@ -115,7 +115,7 @@ public class Acerca extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptarActionPerformed
-        this.hide();
+        this.dispose();
     }//GEN-LAST:event_btAceptarActionPerformed
 
 

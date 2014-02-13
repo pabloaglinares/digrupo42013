@@ -134,8 +134,7 @@ private BridgeItinerario bridge = BridgeItinerario.BRIDGE;
      * @param evt 
      */
     private void btVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolverActionPerformed
-        bridge.delTablaItinerarios();
-        this.dispose();
+        bridge.closeLista();
     }//GEN-LAST:event_btVolverActionPerformed
     
     private void tbpFiltroBusquedaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tbpFiltroBusquedaStateChanged

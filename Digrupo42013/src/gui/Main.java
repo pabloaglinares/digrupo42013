@@ -6,11 +6,12 @@
 package gui;
 
 import datos.UtilesBD;
+import enlace_datos_gui.BridgeConfiguracion;
+import enlace_datos_gui.BridgeInformes;
 import enlace_datos_gui.BridgeItinerario;
 import enlace_datos_gui.BridgeRendimiento;
 import enlace_datos_gui.BridgeSesion;
 import gui.main.ImagenFondo;
-import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
@@ -34,7 +35,8 @@ public final class Main extends javax.swing.JFrame {
     private final BridgeRendimiento bridgeRendimiento = BridgeRendimiento.RENDIMIENTO;
     private final BridgeSesion bridgeSesion = BridgeSesion.BRIDGE;
     private final BridgeItinerario bridgeItinerario = BridgeItinerario.BRIDGE;
-
+    private final BridgeConfiguracion bridgeConfiguracion = BridgeConfiguracion.CONFIGURACION;
+    private final BridgeInformes bridgeInformes = BridgeInformes.INFORMES;
     /**
      * Creates new form Main
      */
@@ -44,10 +46,9 @@ public final class Main extends javax.swing.JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         enlazarLaAyuda();
+
         bridgeRendimiento.setLblRendimiento(lRendimiento);
         bridgeRendimiento.setRendimiento();//Asigna el rendimiento
-        bridgeSesion.setMain(Main.this);
-        bridgeItinerario.setMain(Main.this);
 
     }
 
@@ -220,11 +221,6 @@ public final class Main extends javax.swing.JFrame {
         mConfiguracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/herramientas.png"))); // NOI18N
         mConfiguracion.setText("Configuracion");
         mConfiguracion.setToolTipText("Configuración");
-        mConfiguracion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mConfiguracionActionPerformed(evt);
-            }
-        });
 
         miEditar.setText("Editar escalador...");
         miEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -287,12 +283,11 @@ public final class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_miSalirActionPerformed
 
     private void miAltaItinerarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAltaItinerarioActionPerformed
-        bridgeItinerario.openForInsertNewITinerario();
+        bridgeItinerario.openForInsertNewITinerario(this);
     }//GEN-LAST:event_miAltaItinerarioActionPerformed
 
     private void miAltaSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAltaSesionActionPerformed
-        bridgeSesion.openToInsertNewSesion();
-
+        bridgeSesion.openToInsertNewSesion(this);
     }//GEN-LAST:event_miAltaSesionActionPerformed
 
     private void miAcercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAcercaActionPerformed
@@ -302,28 +297,19 @@ public final class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_miAcercaActionPerformed
 
     private void miListadoItinerariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListadoItinerariosActionPerformed
-        bridgeItinerario.openListado();
+        bridgeItinerario.openListado(this);
     }//GEN-LAST:event_miListadoItinerariosActionPerformed
 
     private void miListadoSesionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListadoSesionesActionPerformed
-        bridgeSesion.openListadoSesiones();
+        bridgeSesion.openListadoSesiones(this);
     }//GEN-LAST:event_miListadoSesionesActionPerformed
 
-    private void mConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConfiguracionActionPerformed
-
-    }//GEN-LAST:event_mConfiguracionActionPerformed
-
     private void miEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEditarActionPerformed
-        AltaConfiguracion config = new AltaConfiguracion();
-        dpEscritorio.add(config);
-        config.show();
+        bridgeConfiguracion.openConfiguracion(this);
     }//GEN-LAST:event_miEditarActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        Informes informes = new Informes();
-        dpEscritorio.add(informes);
-        informes.show();
-
+        bridgeInformes.openInformes(this);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**

@@ -112,9 +112,6 @@
             <Property name="text" type="java.lang.String" value="Configuracion"/>
             <Property name="toolTipText" type="java.lang.String" value="Configuraci&#xf3;n"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mConfiguracionActionPerformed"/>
-          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="miEditar">
               <Properties>
