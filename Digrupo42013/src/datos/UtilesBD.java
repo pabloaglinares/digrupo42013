@@ -1,5 +1,6 @@
 package datos;
 
+import datos.daos.ConfiguracionDAO;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -237,7 +239,7 @@ public enum UtilesBD {
      * @return
      */
     private float calcPtosPorSesiones() {
-        String sql = "SELECT SUM(datediff('ss', fh_inicio,fh_fin))/3600 "
+        String sql = "SELECT SUM(datediff('ss', fh_inicio,?))/3600 "
                 + "FROM Sesion WHERE fh_inicio BETWEEN "
                 + "(SELECT fecha1 FROM configuracion WHERE p_configuracion = 0) "
                 + "AND (SELECT fecha2 FROM configuracion WHERE p_configuracion = 0)";
@@ -256,7 +258,7 @@ public enum UtilesBD {
         float num = calcFloat(sql);
         sql = "SELECT (WEEK(fecha2) - WEEK(fecha1)) AS nWeek FROM Configuracion";
         float n2 = calcFloat(sql);
-        num = n2 != 0? num/n2: 0;
+        num = n2 != 0 ? num / n2 : 0;
         num *= 0.25F;
         num = num > 5 ? 5 : num;
         return num;
@@ -273,6 +275,7 @@ public enum UtilesBD {
         float n = 0F;
         getConnection();
         try (PreparedStatement pst = connection.prepareStatement(sql)) {
+            
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 n = rs.getInt(1);
@@ -294,6 +297,10 @@ public enum UtilesBD {
         float ptos = 0F;
         getConnection();
         try (PreparedStatement pst = connection.prepareStatement(sql)) {
+            Date current = new Date();
+            Date lastDate = ConfiguracionDAO.CONFIGURACION_DAO.getConfiguracion().getFecha2Intervalo();
+            long time = current.after(lastDate) ? lastDate.getTime() : current.getTime();
+            pst.setTimestamp(1, new Timestamp(time));
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 ptos = rs.getFloat(1) * weight;

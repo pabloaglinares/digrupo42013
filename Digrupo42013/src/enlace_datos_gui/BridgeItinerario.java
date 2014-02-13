@@ -5,6 +5,7 @@ import datos.daos.ItinerarioDAO;
 import datos.pojos.Itinerario;
 import gui.AltaItinerario;
 import gui.DetallesItinerario;
+import gui.ListadoItinerarios;
 import gui.Main;
 import gui.tablaItinerario.ItinerariosTableModel;
 import gui.tablaItinerario.TablaItinerarios;
@@ -26,6 +27,7 @@ public enum BridgeItinerario {
     private AltaItinerario alta;
     private Main main;
     private BridgeRendimiento bridgeRendimiento = BridgeRendimiento.RENDIMIENTO;
+    private ListadoItinerarios listado;
     private TablaItinerarios tabla;
     private ItinerarioDAO dao = ItinerarioDAO.ITINERARIO_DAO;
     private int currentTab = 0;
@@ -33,6 +35,14 @@ public enum BridgeItinerario {
     private Date date2;
     private int pItinerario;
     private File oldImg;
+    
+    public void openListado(){
+        listado = new ListadoItinerarios();
+        main.getDpEscritorio().add(listado);
+        listado.show();
+        tabla = listado.getTbListado();
+    }
+    
     public void openForInsertNewITinerario() {
         showAlta();
         alta.checkAll();
@@ -96,14 +106,16 @@ public enum BridgeItinerario {
         main.getDpEscritorio().add(alta);
         alta.show();
     }
-
+    
     /**
      * Cierra la ventana de alta
      */
     public void closeAlta() {
         alta = null;
     }
-
+    public void closeLista() {
+        
+    }
     /**
      * Asigna la referencia a la página principal
      *

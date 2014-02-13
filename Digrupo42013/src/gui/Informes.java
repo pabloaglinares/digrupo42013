@@ -7,6 +7,7 @@
 package gui;
 
 
+import enlace_datos_gui.CheckCampo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Timestamp;
@@ -480,11 +481,7 @@ public class Informes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btCrear3ActionPerformed
 
     private void tfAnnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfAnnoKeyTyped
-         if (!"".equals(tfAnno.getText())){
-            lRight4.setVisible(true);
-        } else {
-            lRight4.setVisible(false);
-        }
+        lRight4.setVisible(CheckCampo.YEAR.isCampoOk(tfAnno.getText()+evt.getKeyChar()));
     }//GEN-LAST:event_tfAnnoKeyTyped
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

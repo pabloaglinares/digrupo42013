@@ -16,6 +16,10 @@ public enum CheckCampo {
      */
     HORA_MINUTO("[0-23]?[0-9]:[0-5][0-9]"),
     /**
+     * Para comprobar campos de año
+     */
+    YEAR("\\d{4}"),
+    /**
      * Para comprobar campos de tipo date en
      * formato día/mes/año
      */

@@ -294,9 +294,7 @@ public final class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_miAcercaActionPerformed
 
     private void miListadoItinerariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListadoItinerariosActionPerformed
-        ListadoItinerarios listado = new ListadoItinerarios();
-        dpEscritorio.add(listado);
-        listado.show();
+        bridgeItinerario.openListado();
     }//GEN-LAST:event_miListadoItinerariosActionPerformed
 
     private void miListadoSesionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListadoSesionesActionPerformed

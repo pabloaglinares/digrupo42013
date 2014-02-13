@@ -7,6 +7,7 @@ package gui;
 
 import calendario.CambioFechaListener;
 import enlace_datos_gui.BridgeItinerario;
+import gui.tablaItinerario.TablaItinerarios;
 import javax.swing.JTabbedPane;
 
 
@@ -26,6 +27,10 @@ private BridgeItinerario bridge = BridgeItinerario.BRIDGE;
         bridge.addTablaItinerario(tbListado);
         bridge.loadAllItinerario();
         
+    }
+
+    public TablaItinerarios getTbListado() {
+        return tbListado;
     }
 
     
@@ -127,7 +132,8 @@ private BridgeItinerario bridge = BridgeItinerario.BRIDGE;
      * @param evt 
      */
     private void btVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolverActionPerformed
-         this.hide();
+        bridge.delTablaItinerarios();
+        this.dispose();
     }//GEN-LAST:event_btVolverActionPerformed
     
     private void tbpFiltroBusquedaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tbpFiltroBusquedaStateChanged
