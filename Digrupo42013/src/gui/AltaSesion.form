@@ -192,6 +192,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="dateTextField1"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dtfFecha.setToolTipText(&quot;Inserte la fecha sesi&#xf3;n en formato dd/MM/yyyy&quot;);"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

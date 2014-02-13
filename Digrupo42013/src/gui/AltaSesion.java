@@ -171,6 +171,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         btGuardar.setEnabled(false);
 
         dtfFecha.setText("dateTextField1");
+        dtfFecha.setToolTipText("Inserte la fecha sesión en formato dd/MM/yyyy");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
