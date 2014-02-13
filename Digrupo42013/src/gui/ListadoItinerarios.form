@@ -64,6 +64,7 @@
     <Component class="javax.swing.JButton" name="btVolver">
       <Properties>
         <Property name="text" type="java.lang.String" value="Volver"/>
+        <Property name="toolTipText" type="java.lang.String" value="Bot&#xf3;n volver"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVolverActionPerformed"/>
@@ -77,6 +78,9 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Component class="gui.tablaItinerario.TablaItinerarios" name="tbListado">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Carga los datos de los itinerarios"/>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tbListado.setRowHeight(25);&#xa;tbListado.getColumnModel().getColumn(2).setMaxWidth(100);&#xa;tbListado.getColumnModel().getColumn(3).setMaxWidth(30);&#xa;tbListado.getColumnModel().getColumn(4).setMaxWidth(30);"/>
           </AuxValues>

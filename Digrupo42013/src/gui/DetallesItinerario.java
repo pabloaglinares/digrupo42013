@@ -46,12 +46,14 @@ public class DetallesItinerario extends javax.swing.JInternalFrame {
         edpImagen.setEditable(false);
         edpImagen.setContentType("text/html"); // NOI18N
         edpImagen.setText("");
+        edpImagen.setToolTipText("Carga los detalles del itinerario");
         edpImagen.setMaximumSize(new java.awt.Dimension(324, 324));
         edpImagen.setMinimumSize(new java.awt.Dimension(324, 324));
         edpImagen.setPreferredSize(new java.awt.Dimension(324, 324));
         jScrollPane2.setViewportView(edpImagen);
 
         btnVolver.setText("Volver");
+        btnVolver.setToolTipText("Botón para volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);

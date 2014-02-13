@@ -12,6 +12,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="title" type="java.lang.String" value="Crear informes"/>
+    <Property name="toolTipText" type="java.lang.String" value="Informe itinerario por fecha"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -42,6 +43,9 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JTabbedPane" name="pSesionesFecha">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
@@ -110,6 +114,7 @@
             <Component class="javax.swing.JButton" name="btVolver1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Volver"/>
+                <Property name="toolTipText" type="java.lang.String" value="Bot&#xf3;n para volver"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVolver1ActionPerformed"/>
@@ -118,6 +123,7 @@
             <Component class="javax.swing.JButton" name="btCrear2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear informe"/>
+                <Property name="toolTipText" type="java.lang.String" value="Bot&#xf3;n para crear informe"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCrear2ActionPerformed"/>
@@ -132,11 +138,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="dateTextField1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dateTextField1.setToolTipText(&quot;Inserte la fecha inicial en formato dd/MM/yyyy&quot;);"/>
+              </AuxValues>
             </Component>
             <Component class="calendario.DateTextField" name="dateTextField2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="dateTextField2"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dateTextField2.setToolTipText(&quot;Inserte la fecha final en formato dd/MM/yyyy&quot;);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -227,11 +239,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="dateTextField3"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dateTextField3.setToolTipText(&quot;Inserte la fecha inicio en formato dd/MM/yyyy&quot;);"/>
+              </AuxValues>
             </Component>
             <Component class="calendario.DateTextField" name="dateTextField4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="dateTextField4"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dateTextField4.setToolTipText(&quot;Inserte la fecha final en formato dd/MM/yyyy&quot;);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -318,11 +336,13 @@
                     <StringItem index="11" value="Diciembre"/>
                   </StringArray>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Eliga el mes"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btVolver3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Volver"/>
+                <Property name="toolTipText" type="java.lang.String" value="Bot&#xf3;n para volver"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVolver3ActionPerformed"/>
@@ -331,6 +351,7 @@
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear Informe"/>
+                <Property name="toolTipText" type="java.lang.String" value="Bot&#xf3;n crear informe"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
@@ -342,6 +363,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfAnno">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Pon el a&#xf1;o"/>
+              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfAnnoKeyTyped"/>
               </Events>
@@ -411,6 +435,7 @@
             <Component class="javax.swing.JButton" name="btVolver5">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Volver"/>
+                <Property name="toolTipText" type="java.lang.String" value="Bot&#xf3;n para volver"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVolver5ActionPerformed"/>
@@ -419,6 +444,7 @@
             <Component class="javax.swing.JButton" name="btCrear5">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear Informe"/>
+                <Property name="toolTipText" type="java.lang.String" value="Bot&#xf3;n crear informe"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCrear5ActionPerformed"/>
@@ -428,6 +454,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="dateTextField6"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dateTextField8.setToolTipText(&quot;Inserte la fecha final en formato dd/MM/yyyy&quot;);"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
@@ -438,6 +467,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="dateTextField5"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dateTextField7.setToolTipText(&quot;Inserte la fecha inicio en formato dd/MM/yyyy&quot;);"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
               <Properties>
@@ -502,6 +534,7 @@
             <Component class="javax.swing.JButton" name="btVolver4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Volver"/>
+                <Property name="toolTipText" type="java.lang.String" value="Bot&#xf3;n para volver"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVolver4ActionPerformed"/>
@@ -510,6 +543,7 @@
             <Component class="javax.swing.JButton" name="btCrear3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear informe"/>
+                <Property name="toolTipText" type="java.lang.String" value="Bot&#xf3;n para crear informe"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCrear3ActionPerformed"/>
@@ -529,11 +563,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="dateTextField5"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dateTextField5.setToolTipText(&quot;Inserte la fecha inicio en formato dd/MM/yyyy&quot;);"/>
+              </AuxValues>
             </Component>
             <Component class="calendario.DateTextField" name="dateTextField6">
               <Properties>
                 <Property name="text" type="java.lang.String" value="dateTextField6"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dateTextField6.setToolTipText(&quot;Inserte la fecha final en formato dd/MM/yyyy&quot;);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

@@ -101,10 +101,14 @@ public class Informes extends javax.swing.JInternalFrame {
         });
 
         setTitle("Crear informes");
+        setToolTipText("Informe itinerario por fecha");
+
+        pSesionesFecha.setToolTipText("");
 
         jLabel3.setText("Fecha inicio:");
 
         btVolver1.setText("Volver");
+        btVolver1.setToolTipText("Botón para volver");
         btVolver1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btVolver1ActionPerformed(evt);
@@ -112,6 +116,7 @@ public class Informes extends javax.swing.JInternalFrame {
         });
 
         btCrear2.setText("Crear informe");
+        btCrear2.setToolTipText("Botón para crear informe");
         btCrear2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCrear2ActionPerformed(evt);
@@ -121,8 +126,10 @@ public class Informes extends javax.swing.JInternalFrame {
         jLabel9.setText("Fecha fin:");
 
         dateTextField1.setText("dateTextField1");
+        dateTextField1.setToolTipText("Inserte la fecha inicial en formato dd/MM/yyyy");
 
         dateTextField2.setText("dateTextField2");
+        dateTextField2.setToolTipText("Inserte la fecha final en formato dd/MM/yyyy");
 
         javax.swing.GroupLayout pItinerariosFechaLayout = new javax.swing.GroupLayout(pItinerariosFecha);
         pItinerariosFecha.setLayout(pItinerariosFechaLayout);
@@ -156,7 +163,7 @@ public class Informes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(dateTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addGroup(pItinerariosFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVolver1)
                     .addComponent(btCrear2))
@@ -184,8 +191,10 @@ public class Informes extends javax.swing.JInternalFrame {
         jLabel4.setText("Fecha fin:");
 
         dateTextField3.setText("dateTextField3");
+        dateTextField3.setToolTipText("Inserte la fecha inicio en formato dd/MM/yyyy");
 
         dateTextField4.setText("dateTextField4");
+        dateTextField4.setToolTipText("Inserte la fecha final en formato dd/MM/yyyy");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -219,7 +228,7 @@ public class Informes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(dateTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVolver2)
                     .addComponent(btCrear1))
@@ -231,8 +240,10 @@ public class Informes extends javax.swing.JInternalFrame {
         jLabel5.setText("Elige el mes y el año:");
 
         cbMes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
+        cbMes.setToolTipText("Eliga el mes");
 
         btVolver3.setText("Volver");
+        btVolver3.setToolTipText("Botón para volver");
         btVolver3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btVolver3ActionPerformed(evt);
@@ -240,6 +251,7 @@ public class Informes extends javax.swing.JInternalFrame {
         });
 
         jButton2.setText("Crear Informe");
+        jButton2.setToolTipText("Botón crear informe");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -248,6 +260,7 @@ public class Informes extends javax.swing.JInternalFrame {
 
         jLabel6.setText("/");
 
+        tfAnno.setToolTipText("Pon el año");
         tfAnno.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfAnnoKeyTyped(evt);
@@ -291,7 +304,7 @@ public class Informes extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(tfAnno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lRight4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVolver3)
                     .addComponent(jButton2))
@@ -301,6 +314,7 @@ public class Informes extends javax.swing.JInternalFrame {
         pSesionesFecha.addTab("Entrenamiento semanal", jPanel3);
 
         btVolver5.setText("Volver");
+        btVolver5.setToolTipText("Botón para volver");
         btVolver5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btVolver5ActionPerformed(evt);
@@ -308,6 +322,7 @@ public class Informes extends javax.swing.JInternalFrame {
         });
 
         btCrear5.setText("Crear Informe");
+        btCrear5.setToolTipText("Botón crear informe");
         btCrear5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCrear5ActionPerformed(evt);
@@ -315,10 +330,12 @@ public class Informes extends javax.swing.JInternalFrame {
         });
 
         dateTextField8.setText("dateTextField6");
+        dateTextField8.setToolTipText("Inserte la fecha final en formato dd/MM/yyyy");
 
         jLabel11.setText("Fecha fin:");
 
         dateTextField7.setText("dateTextField5");
+        dateTextField7.setToolTipText("Inserte la fecha inicio en formato dd/MM/yyyy");
 
         jLabel12.setText("Fecha inicio:");
 
@@ -352,7 +369,7 @@ public class Informes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dateTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVolver5)
                     .addComponent(btCrear5))
@@ -362,6 +379,7 @@ public class Informes extends javax.swing.JInternalFrame {
         pSesionesFecha.addTab("Itinerarios: dificultad", jPanel5);
 
         btVolver4.setText("Volver");
+        btVolver4.setToolTipText("Botón para volver");
         btVolver4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btVolver4ActionPerformed(evt);
@@ -369,6 +387,7 @@ public class Informes extends javax.swing.JInternalFrame {
         });
 
         btCrear3.setText("Crear informe");
+        btCrear3.setToolTipText("Botón para crear informe");
         btCrear3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCrear3ActionPerformed(evt);
@@ -380,8 +399,10 @@ public class Informes extends javax.swing.JInternalFrame {
         jLabel10.setText("Fecha fin:");
 
         dateTextField5.setText("dateTextField5");
+        dateTextField5.setToolTipText("Inserte la fecha inicio en formato dd/MM/yyyy");
 
         dateTextField6.setText("dateTextField6");
+        dateTextField6.setToolTipText("Inserte la fecha final en formato dd/MM/yyyy");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -413,7 +434,7 @@ public class Informes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dateTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btVolver4)
                     .addComponent(btCrear3))
@@ -430,7 +451,7 @@ public class Informes extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pSesionesFecha, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(pSesionesFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
         );
 
         pack();

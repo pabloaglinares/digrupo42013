@@ -61,6 +61,7 @@ public class ListadoSesiones extends javax.swing.JInternalFrame {
         /*
         tbListado.setModel(null);
         */
+        tbListado.setToolTipText("Carga los datos de las sesiones");
         tbListado.setRowHeight(30);
         tbListado.getColumnModel().getColumn(0).setMaxWidth(100);
         tbListado.getColumnModel().getColumn(0).setPreferredWidth(100);

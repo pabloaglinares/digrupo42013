@@ -265,6 +265,7 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         jScrollPane3.setViewportView(tblFechas);
 
         dtfNewDate.setText("dateTextField1");
+        dtfNewDate.setToolTipText("Inserte la fecha de resolucion para añadir los itinerarios");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
