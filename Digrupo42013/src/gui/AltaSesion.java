@@ -125,6 +125,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
 
         labelHoraComienzo.setText("Hora Comienzo:");
 
+        tfHoraComienzo.setToolTipText("Inserte la hora en comienzo HH:mm");
         tfHoraComienzo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tfHoraComienzoKeyReleased(evt);
@@ -133,6 +134,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
 
         labelHoraFin.setText("Hora Fin:");
 
+        tfHoraFin.setToolTipText("Inserte la hora fin en formato HH:mm");
         tfHoraFin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tfHoraFinKeyReleased(evt);
@@ -142,9 +144,11 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         labelTipoSesion.setText("Tipo Sesión:");
 
         cbTipoSesion.setModel(new javax.swing.DefaultComboBoxModel(Sesion.TipoSesion.values()));
+        cbTipoSesion.setToolTipText("Eliga entre Fisico, Rocodromo o Roca");
 
         labelDescripcion.setText("Descripción:");
 
+        tfDescripcion.setToolTipText("Inserte la descripción");
         tfDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tfDescripcionKeyReleased(evt);
