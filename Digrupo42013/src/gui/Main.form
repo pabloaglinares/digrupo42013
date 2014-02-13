@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="menu">
       <SubComponents>
@@ -10,6 +10,7 @@
               <Image iconType="3" name="/resources/itinerario.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Itinerarios"/>
+            <Property name="toolTipText" type="java.lang.String" value="Men&#xfa; de gesti&#xf3;n itinerarios."/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="miAltaItinerario">
@@ -21,6 +22,7 @@
                   <Image iconType="3" name="/resources/add.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Alta Itinerario..."/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAltaItinerarioActionPerformed"/>
@@ -35,6 +37,7 @@
                   <Image iconType="3" name="/resources/lista.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Listado Itinerarios..."/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miListadoItinerariosActionPerformed"/>
@@ -48,6 +51,7 @@
               <Image iconType="3" name="/resources/sesion.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Sesiones"/>
+            <Property name="toolTipText" type="java.lang.String" value="Men&#xfa; de gesti&#xf3;n sesiones"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="miAltaSesion">
@@ -59,6 +63,7 @@
                   <Image iconType="3" name="/resources/add.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Alta Sesi&#xf3;n..."/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAltaSesionActionPerformed"/>
@@ -86,6 +91,7 @@
               <Image iconType="3" name="/resources/informe.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Informes"/>
+            <Property name="toolTipText" type="java.lang.String" value="Men&#xfa; de gesti&#xf3;n de informes"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
@@ -104,6 +110,7 @@
               <Image iconType="3" name="/resources/herramientas.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Configuracion"/>
+            <Property name="toolTipText" type="java.lang.String" value="Configuraci&#xf3;n"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mConfiguracionActionPerformed"/>
@@ -125,6 +132,7 @@
               <Image iconType="3" name="/resources/ayuda1.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Ayuda"/>
+            <Property name="toolTipText" type="java.lang.String" value="Ayuda"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="miAyuda">
