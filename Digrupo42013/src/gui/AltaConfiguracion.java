@@ -112,8 +112,10 @@ private final BridgeConfiguracion bridge = BridgeConfiguracion.CONFIGURACION;
         });
 
         dtfFecha1.setText("dateTextField1");
+        dtfFecha1.setToolTipText("Inserte la fecha inicial en formato dd/MM/yyyy");
 
         dtfFecha2.setText("dateTextField2");
+        dtfFecha2.setToolTipText("Inserte la fecha fin en formato dd/MM/yyyy");
 
         jLabel5.setText("-");
 

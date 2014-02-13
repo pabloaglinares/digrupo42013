@@ -129,11 +129,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="dateTextField1"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dtfFecha1.setToolTipText(&quot;Inserte la fecha inicial en formato dd/MM/yyyy&quot;);"/>
+      </AuxValues>
     </Component>
     <Component class="calendario.DateTextField" name="dtfFecha2">
       <Properties>
         <Property name="text" type="java.lang.String" value="dateTextField2"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dtfFecha2.setToolTipText(&quot;Inserte la fecha fin en formato dd/MM/yyyy&quot;);"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
