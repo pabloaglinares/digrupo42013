@@ -98,7 +98,7 @@ order by s.fh_inicio;]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="25" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<textField>
 				<reportElement x="14" y="0" width="100" height="20" uuid="b0c6aed5-1969-439e-ba05-d6e38bced370"/>
 				<textElement textAlignment="Center"/>
@@ -121,13 +121,4 @@ order by s.fh_inicio;]]>
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>

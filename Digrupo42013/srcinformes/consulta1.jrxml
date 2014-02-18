@@ -97,7 +97,7 @@ order by fi.fecha;]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="32" splitType="Stretch">
+		<band height="31" splitType="Stretch">
 			<textField>
 				<reportElement x="24" y="8" width="100" height="20" uuid="8943b961-cbfc-43b6-9774-a2575cbfce75"/>
 				<textElement textAlignment="Center"/>
@@ -120,13 +120,4 @@ order by fi.fecha;]]>
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
