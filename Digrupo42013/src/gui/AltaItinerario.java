@@ -443,7 +443,7 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         edpImagen.setText("<html >"
                 + "<head></head>"
                 + "<body style=\"padding:0;margin:0\">"
-                + "<img src = file:" + imagen.getAbsolutePath() + "  height=\"295\" width=\"340\" style=\"margin:0 0\"/>"
+                + "<img src = \"file:" + imagen.getAbsolutePath() + "\"  height=\"295\" width=\"340\" style=\"margin:0 0\"/>"
                 + "</body>\n</html>\n");
     }
 

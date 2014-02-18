@@ -43,7 +43,6 @@ public class Informes extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         grupo = new javax.swing.ButtonGroup();
-        tfFechaInicio3 = new javax.swing.JTextField();
         pSesionesFecha = new javax.swing.JTabbedPane();
         pItinerariosFecha = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -55,13 +54,13 @@ public class Informes extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         dateTextField3 = new calendario.DateTextField();
         dateTextField4 = new calendario.DateTextField();
-        jPanel3 = new javax.swing.JPanel();
+        pMesYear = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         cbMes = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         tfAnno = new javax.swing.JTextField();
         lRight4 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        pRangoFechasVcal = new javax.swing.JPanel();
         dateTextField8 = new calendario.DateTextField();
         jLabel11 = new javax.swing.JLabel();
         dateTextField7 = new calendario.DateTextField();
@@ -73,12 +72,6 @@ public class Informes extends javax.swing.JInternalFrame {
         dateTextField6 = new calendario.DateTextField();
         btCrear = new javax.swing.JButton();
         btVolver = new javax.swing.JButton();
-
-        tfFechaInicio3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfFechaInicio2KeyTyped(evt);
-            }
-        });
 
         setTitle("Crear informes");
         setToolTipText("Informe itinerario por fecha");
@@ -179,15 +172,15 @@ public class Informes extends javax.swing.JInternalFrame {
 
         lRight4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/right.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout pMesYearLayout = new javax.swing.GroupLayout(pMesYear);
+        pMesYear.setLayout(pMesYearLayout);
+        pMesYearLayout.setHorizontalGroup(
+            pMesYearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pMesYearLayout.createSequentialGroup()
                 .addGap(58, 58, 58)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pMesYearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(pMesYearLayout.createSequentialGroup()
                         .addComponent(cbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
@@ -197,13 +190,13 @@ public class Informes extends javax.swing.JInternalFrame {
                         .addComponent(lRight4)))
                 .addContainerGap(116, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        pMesYearLayout.setVerticalGroup(
+            pMesYearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pMesYearLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pMesYearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(tfAnno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,7 +204,7 @@ public class Informes extends javax.swing.JInternalFrame {
                 .addContainerGap(100, Short.MAX_VALUE))
         );
 
-        pSesionesFecha.addTab("Entrenamiento semanal", jPanel3);
+        pSesionesFecha.addTab("Entrenamiento semanal", pMesYear);
 
         dateTextField8.setText("dateTextField6");
         dateTextField8.setToolTipText("Inserte la fecha final en formato dd/MM/yyyy");
@@ -223,22 +216,22 @@ public class Informes extends javax.swing.JInternalFrame {
 
         jLabel12.setText("Fecha inicio:");
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout pRangoFechasVcalLayout = new javax.swing.GroupLayout(pRangoFechasVcal);
+        pRangoFechasVcal.setLayout(pRangoFechasVcalLayout);
+        pRangoFechasVcalLayout.setHorizontalGroup(
+            pRangoFechasVcalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pRangoFechasVcalLayout.createSequentialGroup()
                 .addGap(58, 58, 58)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pRangoFechasVcalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(dateTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
                     .addComponent(jLabel12))
                 .addContainerGap(271, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+        pRangoFechasVcalLayout.setVerticalGroup(
+            pRangoFechasVcalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pRangoFechasVcalLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addComponent(jLabel12)
                 .addGap(11, 11, 11)
@@ -250,7 +243,7 @@ public class Informes extends javax.swing.JInternalFrame {
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
-        pSesionesFecha.addTab("Itinerarios: dificultad", jPanel5);
+        pSesionesFecha.addTab("Itinerarios: dificultad", pRangoFechasVcal);
 
         jLabel8.setText("Fecha inicio:");
 
@@ -402,13 +395,7 @@ public class Informes extends javax.swing.JInternalFrame {
         return tfAnno;
     }
 
-    public JTextField getTfFechaInicio3() {
-        return tfFechaInicio3;
-    }
-
-    private void tfFechaInicio2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfFechaInicio2KeyTyped
-
-    }//GEN-LAST:event_tfFechaInicio2KeyTyped
+   
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -435,13 +422,12 @@ public class Informes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lRight4;
     private javax.swing.JPanel pItinerariosFecha;
+    private javax.swing.JPanel pMesYear;
+    private javax.swing.JPanel pRangoFechasVcal;
     private javax.swing.JTabbedPane pSesionesFecha;
     private javax.swing.JTextField tfAnno;
-    private javax.swing.JTextField tfFechaInicio3;
     // End of variables declaration//GEN-END:variables
 }

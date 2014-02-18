@@ -65,7 +65,7 @@ public enum BridgeInformes {
         informes.getBtVolver().setEnabled(true);
     }
     /**
-     * Se encarga de crear el primer informe
+     * Se encarga de crear el segundo informe
      */
     private void crearInforme2() {
         try {
@@ -86,7 +86,7 @@ public enum BridgeInformes {
     }
 
     /**
-     * Se encarga de crear el segundo informe
+     * Se encarga de crear el primer informe
      */
     private void crearInforme1() {
         try {
