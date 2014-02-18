@@ -8,6 +8,13 @@ package gui;
 
 import calendario.DateTextField;
 import enlace_datos_gui.BridgeConfiguracion;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
+import javax.help.HelpSetException;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -29,6 +36,8 @@ private final BridgeConfiguracion bridge = BridgeConfiguracion.CONFIGURACION;
         bridge.loadConfiguracion();
         
     }
+    
+     
 
     public DateTextField getDtfFecha1() {
         return dtfFecha1;
