@@ -6,6 +6,7 @@
 package gui;
 
 import datos.UtilesBD;
+import enlace_datos_gui.AyudaUtil;
 import enlace_datos_gui.BridgeConfiguracion;
 import enlace_datos_gui.BridgeInformes;
 import enlace_datos_gui.BridgeItinerario;
@@ -14,15 +15,8 @@ import enlace_datos_gui.BridgeSesion;
 import gui.main.ImagenFondo;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import javax.help.HelpBroker;
-import javax.help.HelpSet;
-import javax.help.HelpSetException;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,6 +31,7 @@ public final class Main extends javax.swing.JFrame {
     private final BridgeItinerario bridgeItinerario = BridgeItinerario.BRIDGE;
     private final BridgeConfiguracion bridgeConfiguracion = BridgeConfiguracion.CONFIGURACION;
     private final BridgeInformes bridgeInformes = BridgeInformes.INFORMES;
+    private final AyudaUtil ayuda = AyudaUtil.AYUDA;
     /**
      * Creates new form Main
      */
@@ -45,7 +40,7 @@ public final class Main extends javax.swing.JFrame {
         dpEscritorio.setBorder(new ImagenFondo());
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
-        enlazarLaAyuda();
+        ayuda.createHelp(Main.this, miAyuda);
 
         bridgeRendimiento.setLblRendimiento(lRendimiento);
         bridgeRendimiento.setRendimiento();//Asigna el rendimiento
@@ -62,27 +57,7 @@ public final class Main extends javax.swing.JFrame {
                 getImage(ClassLoader.getSystemResource("resources/escalador_peq.png"));
         return retValue;
     }
-
-    public void enlazarLaAyuda() {
-        try {
-            // Carga el fichero de ayuda
-            File fichero = new File("help/help_set.hs");
-            URL hsURL = fichero.toURI().toURL();
-            // Crea el HelpSet y el HelpBroker
-            HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
-            HelpBroker hb = helpset.createHelpBroker();
-            // Pone ayuda a item de menu al pulsarlo.
-            hb.enableHelpOnButton(miAyuda, "portada", helpset);
-            hb.enableHelpKey(this.getRootPane(), "portada", helpset);
-
-        } catch (IllegalArgumentException | MalformedURLException | HelpSetException e) {
-            JOptionPane.showMessageDialog(this, "Se ha producido un error "
-                    + "intentando mostrar la ayuda.\n" + e.getMessage(), "Error",
-                    JOptionPane.ERROR_MESSAGE, null);
-
-        }
-    }
-
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -277,7 +252,7 @@ public final class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void miSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_miSalirActionPerformed

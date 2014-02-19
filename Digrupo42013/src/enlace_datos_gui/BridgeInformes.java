@@ -26,7 +26,7 @@ public enum BridgeInformes {
     private Informes informes;
     private Main main;
     private UtilesBD bd = UtilesBD.INSTANCE;
-
+    private AyudaUtil ayuda = AyudaUtil.AYUDA;
     /**
      * Abre la ventana de creación de informes
      *
@@ -35,6 +35,7 @@ public enum BridgeInformes {
     public void openInformes(Main main) {
         this.main = main;
         informes = new Informes();
+        ayuda.asociateF1ToJFrame(informes, AyudaUtil.PantallaAyuda.INFORMES);
         main.getDpEscritorio().add(informes);
         informes.show();
     }

@@ -23,6 +23,7 @@ public enum BridgeSesion {
     private Main main;
     private AltaSesion alta;
     private BridgeRendimiento bridgeRendimiento = BridgeRendimiento.RENDIMIENTO;
+    private AyudaUtil ayuda = AyudaUtil.AYUDA;
     private TablaSesiones tablaSesiones;
     private SesionDAO dao = SesionDAO.SESION_DAO;
     private int currentTab = 0;
@@ -125,6 +126,7 @@ public enum BridgeSesion {
     private void showAlta() {
         if (alta == null) {
             alta = new AltaSesion();
+            ayuda.asociateF1ToJFrame(alta, AyudaUtil.PantallaAyuda.ALTA_SESION);
             main.getDpEscritorio().add(alta);
         }
         alta.show();

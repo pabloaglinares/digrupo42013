@@ -15,6 +15,7 @@ public enum BridgeConfiguracion {
     private Main main;
     private final ConfiguracionDAO dao = ConfiguracionDAO.CONFIGURACION_DAO;
     private BridgeRendimiento bridgeRendimiento = BridgeRendimiento.RENDIMIENTO;
+    private AyudaUtil ayuda = AyudaUtil.AYUDA;
     private AltaConfiguracion alta;
 
     
@@ -25,6 +26,7 @@ public enum BridgeConfiguracion {
     public void openConfiguracion(Main main) {
         this.main = main;
         alta = new AltaConfiguracion();
+        ayuda.asociateF1ToJFrame(alta, AyudaUtil.PantallaAyuda.CONFIGURACION);
         main.getDpEscritorio().add(alta);
         alta.show();
     }

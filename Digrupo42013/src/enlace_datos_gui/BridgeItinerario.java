@@ -27,6 +27,7 @@ public enum BridgeItinerario {
     private AltaItinerario alta;
     private Main main;
     private BridgeRendimiento bridgeRendimiento = BridgeRendimiento.RENDIMIENTO;
+    private AyudaUtil ayuda = AyudaUtil.AYUDA;
     private ListadoItinerarios listado;
     private TablaItinerarios tabla;
     private ItinerarioDAO dao = ItinerarioDAO.ITINERARIO_DAO;
@@ -42,6 +43,7 @@ public enum BridgeItinerario {
     public void openListado(Main main){
         this.main = main;
         listado = new ListadoItinerarios();
+        ayuda.asociateF1ToJFrame(listado, AyudaUtil.PantallaAyuda.LISTADO_ITINERARIO);
         main.getDpEscritorio().add(listado);
         listado.show();
     }
@@ -110,6 +112,7 @@ public enum BridgeItinerario {
      */
     private void showAlta() {
         alta = new AltaItinerario();
+        ayuda.asociateF1ToJFrame(alta, AyudaUtil.PantallaAyuda.ALTA_ITINERARIO);
         main.getDpEscritorio().add(alta);
         alta.show();
     }
@@ -295,6 +298,7 @@ public enum BridgeItinerario {
     public void showItinerario(Itinerario it) {
         DetallesItinerario dt = new DetallesItinerario();
         dt.getEdpImagen().setText(loadDetalis(it));
+        ayuda.asociateF1ToJFrame(dt, AyudaUtil.PantallaAyuda.DETALLE_ITINERARIO);
         main.getDpEscritorio().add(dt);
         dt.setVisible(true);
     }
