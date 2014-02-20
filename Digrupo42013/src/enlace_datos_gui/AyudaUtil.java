@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 package enlace_datos_gui;
 
@@ -14,7 +10,6 @@ import java.net.URL;
 import javax.help.HelpBroker;
 import javax.help.HelpSet;
 import javax.help.HelpSetException;
-import javax.swing.JInternalFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
@@ -75,7 +70,11 @@ public enum AyudaUtil {
     private Main main;
     private HelpBroker hb;
     private HelpSet helpset;
-    
+    /**
+     * Crea la ayuda
+     * @param main
+     * @param miAyuda 
+     */
     public void createHelp(Main main,JMenuItem miAyuda) {
         this.main = main;
         try {

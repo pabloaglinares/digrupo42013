@@ -7,7 +7,6 @@ package gui;
 
 import calendario.CambioFechaListener;
 import enlace_datos_gui.BridgeSesion;
-import gui.tablasesion.SesionTableModel;
 import javax.swing.JTabbedPane;
 
 public class ListadoSesiones extends javax.swing.JInternalFrame {

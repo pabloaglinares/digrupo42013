@@ -6,7 +6,6 @@
 
 package gui;
 
-import enlace_datos_gui.BridgeItinerario;
 import javax.swing.JEditorPane;
 
 /**

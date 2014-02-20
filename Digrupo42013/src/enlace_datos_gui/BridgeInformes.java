@@ -3,6 +3,7 @@ package enlace_datos_gui;
 import datos.UtilesBD;
 import gui.Informes;
 import gui.Main;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.Timestamp;
 import java.util.HashMap;
@@ -69,20 +70,11 @@ public enum BridgeInformes {
      * Se encarga de crear el segundo informe
      */
     private void crearInforme2() {
-        try {
-            Connection connection = bd.getConnection();
-            Map parametros = new HashMap();
-            Timestamp ini = new Timestamp(informes.getDateTextField3().getDate().getTime());
-            Timestamp fin = new Timestamp(informes.getDateTextField4().getDate().getTime());
-            parametros.put("fechainicio", ini);
-            parametros.put("fechafin", fin);
-            JasperPrint print = JasperFillManager.fillReport("./informes/consulta2.jasper", parametros, connection);
-            JasperExportManager.exportReportToPdfFile(print, "./informesgenerados/sesiones.pdf");
-            JOptionPane.showMessageDialog(informes, "Informe creado", "", JOptionPane.INFORMATION_MESSAGE);
-        } catch (JRException ex) {
-            JOptionPane.showMessageDialog(informes, "No se pudo crear el informe", "Error", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(BridgeInformes.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Timestamp ini = new Timestamp(informes.getDateTextField3().getDate().getTime());
+        Timestamp fin = new Timestamp(informes.getDateTextField4().getDate().getTime());
+        String jasper = "./informes/consulta2.jasper";
+        String pdf ="./informesgenerados/sesiones.pdf";
+        creaInformeRangoFechas(ini, fin, jasper, pdf);
 
     }
 
@@ -90,51 +82,59 @@ public enum BridgeInformes {
      * Se encarga de crear el primer informe
      */
     private void crearInforme1() {
-        try {
-            Connection connection = bd.getConnection();
-            Map parametros = new HashMap();
-            Timestamp ini = new Timestamp(informes.getDateTextField1().getDate().getTime());
-            Timestamp fin = new Timestamp(informes.getDateTextField2().getDate().getTime());
-            parametros.put("fechainicio", ini);
-            parametros.put("fechafin", fin);
-            JasperPrint print = JasperFillManager.fillReport("./informes/consulta1.jasper", parametros, connection);
-            JasperExportManager.exportReportToPdfFile(print, "./informesgenerados/itinerarios.pdf");
-            JOptionPane.showMessageDialog(informes, "Informe creado", "", JOptionPane.INFORMATION_MESSAGE);
-        } catch (JRException ex) {
-            JOptionPane.showMessageDialog(informes, "No se pudo crear el informe", "Error", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(BridgeInformes.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Timestamp ini = new Timestamp(informes.getDateTextField1().getDate().getTime());
+        Timestamp fin = new Timestamp(informes.getDateTextField2().getDate().getTime());
+        String jasper = "./informes/consulta1.jasper";
+        String pdf =  "./informesgenerados/itinerarios.pdf";
+        creaInformeRangoFechas(ini, fin, jasper, pdf);
     }
     /**
      * Se encarga de crear el quinto informe
      */
     private void crearInforme5() {
-        try {
-            Connection connection = bd.getConnection();
-            Map parametros = new HashMap();
-            Timestamp ini = new Timestamp(informes.getDateTextField5().getDate().getTime());
-            Timestamp fin = new Timestamp(informes.getDateTextField6().getDate().getTime());
-            parametros.put("fechainicio", ini);
-            parametros.put("fechafin", fin);
-            JasperPrint print = JasperFillManager.fillReport("./informes/consulta4.jasper", parametros, connection);
-            JasperExportManager.exportReportToPdfFile(print, "./informesgenerados/sesionestipo.pdf");
-            JOptionPane.showMessageDialog(informes, "Informe creado", "", JOptionPane.INFORMATION_MESSAGE);
-        } catch (JRException ex) {
-            JOptionPane.showMessageDialog(informes, "No se pudo crear el informe", "Error", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(BridgeInformes.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String jasper = "./informes/consulta4.jasper";
+        Timestamp ini = new Timestamp(informes.getDateTextField5().getDate().getTime());
+        Timestamp fin = new Timestamp(informes.getDateTextField6().getDate().getTime());
+        String destino = "./informesgenerados/sesionestipo.pdf";
+        creaInformeRangoFechas(ini, fin, jasper, destino);
+    }
+    /**
+     * Crea un informe que necesita dos fechas como parámetros
+     * @param ini
+     * @param fin
+     * @param jasper
+     * @param destino
+     * @throws HeadlessException 
+     */
+    private void creaInformeRangoFechas(Timestamp ini, Timestamp fin, String jasper, String destino) throws HeadlessException {
+        Map parametros = new HashMap();
+        parametros.put("fechainicio", ini);
+        parametros.put("fechafin", fin);
+        creaInformeBasico(jasper, parametros, destino);
     }
     /**
      * Se encarga de crear el tercer informe
      */
     private void crearInforme3() {
+        String jasper = "./informes/consulta3.jasper";
+        String pdf = "./informesgenerados/entrenamientosemanal.pdf";
+        Map parametros = new HashMap();
+        parametros.put("anio", Integer.valueOf(informes.getTfAnno().getText()));
+        parametros.put("mes", Integer.valueOf(informes.getCbMes().getSelectedIndex()) + 1);
+        creaInformeBasico(jasper, parametros, pdf);
+    }
+    /**
+     * Contiene las sentencias necesarias para crear un informe
+     * @param jasper
+     * @param parametros
+     * @param pdf
+     * @throws HeadlessException 
+     */
+    private void creaInformeBasico(String jasper, Map parametros, String pdf) throws HeadlessException {
         try {
             Connection connection = bd.getConnection();
-            Map parametros = new HashMap();
-            parametros.put("anio", Integer.valueOf(informes.getTfAnno().getText()));
-            parametros.put("mes", Integer.valueOf(informes.getCbMes().getSelectedIndex()) + 1);
-            JasperPrint print = JasperFillManager.fillReport("./informes/consulta3.jasper", parametros, connection);
-            JasperExportManager.exportReportToPdfFile(print, "./informesgenerados/entrenamientosemanal.pdf");
+            JasperPrint print = JasperFillManager.fillReport(jasper, parametros, connection);
+            JasperExportManager.exportReportToPdfFile(print, pdf);
             JOptionPane.showMessageDialog(informes, "Informe creado", "", JOptionPane.INFORMATION_MESSAGE);
         } catch (JRException ex) {
             Logger.getLogger(BridgeInformes.class.getName()).log(Level.SEVERE, null, ex);
@@ -145,20 +145,10 @@ public enum BridgeInformes {
      * Se encarga de crear el cuarto informe
      */
     private void crearInforme4() {
-        try {
-            Connection connection = bd.getConnection();
-            Map parametros = new HashMap();
-            //cambiar al nuevo campo fechas
-            Timestamp ini = new Timestamp(informes.getDateTextField7().getDate().getTime());
-            Timestamp fin = new Timestamp(informes.getDateTextField8().getDate().getTime());
-            parametros.put("fechainicio", ini);
-            parametros.put("fechafin", fin);
-            JasperPrint print = JasperFillManager.fillReport("./informes/consulta5.jasper", parametros, connection);
-            JasperExportManager.exportReportToPdfFile(print, "./informesgenerados/itinerariosdificultad.pdf");
-            JOptionPane.showMessageDialog(informes, "Informe creado", "", JOptionPane.INFORMATION_MESSAGE);
-        } catch (JRException ex) {
-            Logger.getLogger(BridgeInformes.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(informes, "No se pudo crear el informe", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        String jasper = "./informes/consulta5.jasper";
+        String pdf = "./informesgenerados/itinerariosdificultad.pdf";
+        Timestamp ini = new Timestamp(informes.getDateTextField7().getDate().getTime());
+        Timestamp fin = new Timestamp(informes.getDateTextField8().getDate().getTime());
+        creaInformeRangoFechas(ini, fin, jasper, pdf);
     }
 }
