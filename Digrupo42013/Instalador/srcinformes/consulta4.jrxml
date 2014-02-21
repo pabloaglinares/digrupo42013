@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="consulta4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6b6b0121-ba83-499c-9f78-1d50ccdfc72e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechainicio" class="java.sql.Timestamp">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechafin" class="java.sql.Timestamp">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select s.*,ts.tipo
+from sesion s, tiposesion ts
+where ts.p_tipo=s.a_tipo and s.fh_inicio >=$P{fechainicio} and s.fh_fin <=$P{fechafin}
+order by s.a_tipo,s.fh_inicio;]]>
+	</queryString>
+	<field name="P_SESION" class="java.lang.Integer"/>
+	<field name="FH_INICIO" class="java.sql.Timestamp"/>
+	<field name="FH_FIN" class="java.sql.Timestamp"/>
+	<field name="DESCRIPCION" class="java.lang.String"/>
+	<field name="A_TIPO" class="java.lang.Integer"/>
+	<field name="TIPO" class="java.lang.String"/>
+	<group name="tiposesion">
+		<groupExpression><![CDATA[$F{A_TIPO}]]></groupExpression>
+		<groupHeader>
+			<band height="66">
+				<staticText>
+					<reportElement x="41" y="46" width="100" height="20" uuid="57908282-2dfc-486f-8b0b-48c0ad5ff993"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[DESCRIPCION]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="230" y="46" width="100" height="20" uuid="a478baf0-5fc4-45d7-96c1-ace0d74c6fa5"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ INICIO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="402" y="46" width="100" height="20" uuid="eb0f67df-b5bd-4170-b80f-e127ce243cb4"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[FIN]]></text>
+				</staticText>
+				<line>
+					<reportElement x="231" y="37" width="100" height="1" uuid="85667e1a-c82e-4cbc-ba02-50460b071122"/>
+				</line>
+				<line>
+					<reportElement x="1" y="61" width="555" height="1" uuid="0a86901f-823b-42fd-bba2-45554294a1a6"/>
+				</line>
+				<staticText>
+					<reportElement x="231" y="6" width="100" height="20" uuid="06ba6dcb-2e17-413f-a0e7-ee4bb4a5424c"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[TIPO DE SESION]]></text>
+				</staticText>
+				<line>
+					<reportElement x="231" y="25" width="100" height="1" uuid="13705a3b-cf5c-4268-9ecc-6479400e9843"/>
+				</line>
+				<textField>
+					<reportElement x="231" y="25" width="100" height="20" uuid="d99780d6-de7c-475b-bce3-ade19b9a255d"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{TIPO}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="555" height="20" uuid="a0f6c2b2-ddcc-4d98-9ea7-d8ef40cca393"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sesiones Agrupadas Por Tipo Entre :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="21" width="83" height="20" uuid="bc10feb6-fb73-470a-be05-a00f3ea58d62"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechainicio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="21" width="555" height="20" uuid="ce788938-d472-4b5c-a3eb-5aa4dbb56768"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Y]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="290" y="21" width="83" height="20" uuid="338e1ecc-8487-432c-8228-cf1bb1150af3"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechafin}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="41" width="555" height="1" uuid="6e0bc6af-6ac2-4709-9eb9-c9ca06c03c29"/>
+			</line>
+		</band>
+	</title>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="41" y="0" width="100" height="20" uuid="5cc4cddb-8b93-4f51-8234-8f6abc7d6305"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{DESCRIPCION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="231" y="0" width="100" height="20" uuid="718eb5ca-d1d1-4c81-b2c1-47eb08a9d3f6"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{FH_INICIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="402" y="0" width="100" height="20" uuid="61e815aa-bf1f-41c5-b705-c701d839740d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{FH_FIN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
