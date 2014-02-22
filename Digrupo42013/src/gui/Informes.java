@@ -55,6 +55,7 @@ public class Informes extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(380, 175));
 
         btCrear.setText("Crear informe");
+        btCrear.setToolTipText("Botón para crear informe");
         btCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCrearActionPerformed(evt);
@@ -62,6 +63,7 @@ public class Informes extends javax.swing.JInternalFrame {
         });
 
         btVolver.setText("Volver");
+        btVolver.setToolTipText("Botón para volver");
         btVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btVolverActionPerformed(evt);
@@ -69,6 +71,7 @@ public class Informes extends javax.swing.JInternalFrame {
         });
 
         cbInformes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Itinerario Semanal", "Dificultad de Itinerarios", "Fecha de Itinerarios", "Tipo de Sesiones", "Fecha de Sesiones" }));
+        cbInformes.setToolTipText("ComboBox para mostrar el tipo de cada informe");
         cbInformes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbInformesActionPerformed(evt);
