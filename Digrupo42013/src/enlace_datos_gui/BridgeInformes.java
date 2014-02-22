@@ -3,7 +3,10 @@ package enlace_datos_gui;
 import datos.UtilesBD;
 import gui.Informes;
 import gui.Main;
+import java.awt.Desktop;
 import java.awt.HeadlessException;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Timestamp;
 import java.util.HashMap;
@@ -28,6 +31,7 @@ public enum BridgeInformes {
     private Main main;
     private UtilesBD bd = UtilesBD.INSTANCE;
     private AyudaUtil ayuda = AyudaUtil.AYUDA;
+
     /**
      * Abre la ventana de creación de informes
      *
@@ -40,78 +44,58 @@ public enum BridgeInformes {
         main.getDpEscritorio().add(informes);
         informes.show();
     }
+
     /**
-     * Se encarga de crear el informe que proceda en función de la pestaña activa
+     * Se encarga de crear el informe que proceda en función de la pestaña
+     * activa
      */
     public void onCrear() {
         informes.getBtCrear().setEnabled(false);
+        informes.getBtCrear().setText("Creando");
         informes.getBtVolver().setEnabled(false);
-        switch(informes.getpSesionesFecha().getSelectedIndex()) {
+        informes.getBtVolver().setText("Creando");
+        switch (informes.getCbInformes().getSelectedIndex()) {
             case 0:
-                crearInforme1();
+                crearInforme3();
                 break;
             case 1:
-                crearInforme2();
+                crearInforme5();
                 break;
             case 2:
-                crearInforme3();
+                crearInforme1();
                 break;
             case 3:
                 crearInforme4();
                 break;
             case 4:
-                crearInforme5();
+                crearInforme2();
                 break;
         }
         informes.getBtCrear().setEnabled(true);
+        informes.getBtCrear().setText("Crear informe");
         informes.getBtVolver().setEnabled(true);
-    }
-    /**
-     * Se encarga de crear el segundo informe
-     */
-    private void crearInforme2() {
-        Timestamp ini = new Timestamp(informes.getDateTextField3().getDate().getTime());
-        Timestamp fin = new Timestamp(informes.getDateTextField4().getDate().getTime());
-        String jasper = "./informes/consulta2.jasper";
-        String pdf ="./informesgenerados/sesiones.pdf";
-        creaInformeRangoFechas(ini, fin, jasper, pdf);
-
+        informes.getBtVolver().setText("Volver");
     }
 
     /**
      * Se encarga de crear el primer informe
      */
     private void crearInforme1() {
-        Timestamp ini = new Timestamp(informes.getDateTextField1().getDate().getTime());
-        Timestamp fin = new Timestamp(informes.getDateTextField2().getDate().getTime());
         String jasper = "./informes/consulta1.jasper";
-        String pdf =  "./informesgenerados/itinerarios.pdf";
-        creaInformeRangoFechas(ini, fin, jasper, pdf);
+        String pdf = "./informesgenerados/itinerarios.pdf";
+        creaInformeRangoFechas(jasper, pdf);
     }
+
     /**
-     * Se encarga de crear el quinto informe
+     * Se encarga de crear el segundo informe
      */
-    private void crearInforme5() {
-        String jasper = "./informes/consulta4.jasper";
-        Timestamp ini = new Timestamp(informes.getDateTextField5().getDate().getTime());
-        Timestamp fin = new Timestamp(informes.getDateTextField6().getDate().getTime());
-        String destino = "./informesgenerados/sesionestipo.pdf";
-        creaInformeRangoFechas(ini, fin, jasper, destino);
+    private void crearInforme2() {
+        String jasper = "./informes/consulta2.jasper";
+        String pdf = "./informesgenerados/sesiones.pdf";
+        creaInformeRangoFechas(jasper, pdf);
+
     }
-    /**
-     * Crea un informe que necesita dos fechas como parámetros
-     * @param ini
-     * @param fin
-     * @param jasper
-     * @param destino
-     * @throws HeadlessException 
-     */
-    private void creaInformeRangoFechas(Timestamp ini, Timestamp fin, String jasper, String destino) throws HeadlessException {
-        Map parametros = new HashMap();
-        parametros.put("fechainicio", ini);
-        parametros.put("fechafin", fin);
-        creaInformeBasico(jasper, parametros, destino);
-    }
+
     /**
      * Se encarga de crear el tercer informe
      */
@@ -119,36 +103,82 @@ public enum BridgeInformes {
         String jasper = "./informes/consulta3.jasper";
         String pdf = "./informesgenerados/entrenamientosemanal.pdf";
         Map parametros = new HashMap();
-        parametros.put("anio", Integer.valueOf(informes.getTfAnno().getText()));
-        parametros.put("mes", Integer.valueOf(informes.getCbMes().getSelectedIndex()) + 1);
+        parametros.put("anio", Integer.valueOf(informes.getPnSemana().getTfAnno().getText()));
+        parametros.put("mes", Integer.valueOf(informes.getPnSemana().getCbMes().getSelectedIndex()) + 1);
         creaInformeBasico(jasper, parametros, pdf);
     }
+
+    /**
+     * Se encarga de crear el cuarto informe
+     */
+    private void crearInforme4() {
+        String jasper = "./informes/consulta4.jasper";
+        String pdf = "./informesgenerados/itinerariosdificultad.pdf";
+        creaInformeRangoFechas(jasper, pdf);
+    }
+
+    /**
+     * Se encarga de crear el quinto informe
+     */
+    private void crearInforme5() {
+        String jasper = "./informes/consulta5.jasper";
+
+        String destino = "./informesgenerados/sesionestipo.pdf";
+        creaInformeRangoFechas(jasper, destino);
+    }
+
+    /**
+     * Crea un informe que necesita dos fechas como parámetros
+     *
+     * @param ini
+     * @param fin
+     * @param jasper
+     * @param destino
+     * @throws HeadlessException
+     */
+    private void creaInformeRangoFechas(String jasper, String destino) throws HeadlessException {
+        Timestamp ini = new Timestamp(informes.getPnFechas().getFecha1().getTime());
+        Timestamp fin = new Timestamp(informes.getPnFechas().getFecha2().getTime());
+        Map parametros = new HashMap();
+        parametros.put("fechainicio", ini);
+        parametros.put("fechafin", fin);
+        creaInformeBasico(jasper, parametros, destino);
+    }
+
     /**
      * Contiene las sentencias necesarias para crear un informe
+     *
      * @param jasper
      * @param parametros
      * @param pdf
-     * @throws HeadlessException 
+     * @throws HeadlessException
      */
     private void creaInformeBasico(String jasper, Map parametros, String pdf) throws HeadlessException {
         try {
             Connection connection = bd.getConnection();
             JasperPrint print = JasperFillManager.fillReport(jasper, parametros, connection);
             JasperExportManager.exportReportToPdfFile(print, pdf);
-            JOptionPane.showMessageDialog(informes, "Informe creado", "", JOptionPane.INFORMATION_MESSAGE);
+           // JOptionPane.showMessageDialog(informes, "Informe creado", "", JOptionPane.INFORMATION_MESSAGE);
+            openInforme(pdf);
+
         } catch (JRException ex) {
             Logger.getLogger(BridgeInformes.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(informes, "No se pudo crear el informe", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     /**
-     * Se encarga de crear el cuarto informe
+     * Se encarga de mostrar el informe que se le pase como parámetro
+     * @param informe 
      */
-    private void crearInforme4() {
-        String jasper = "./informes/consulta5.jasper";
-        String pdf = "./informesgenerados/itinerariosdificultad.pdf";
-        Timestamp ini = new Timestamp(informes.getDateTextField7().getDate().getTime());
-        Timestamp fin = new Timestamp(informes.getDateTextField8().getDate().getTime());
-        creaInformeRangoFechas(ini, fin, jasper, pdf);
+    private void openInforme(String informe) {
+        if (Desktop.isDesktopSupported()) {
+            try {
+                File myFile = new File(informe);
+                Desktop.getDesktop().open(myFile);
+            } catch (IOException ex) {
+                //No hay aplicaciones predefinidas para abrir pdf
+            }
+        } else {
+        }
     }
 }
