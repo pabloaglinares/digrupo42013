@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -54,22 +55,26 @@ public enum BridgeInformes {
         informes.getBtCrear().setText("Creando");
         informes.getBtVolver().setEnabled(false);
         informes.getBtVolver().setText("Creando");
-        switch (informes.getCbInformes().getSelectedIndex()) {
-            case 0:
-                crearInforme3();
-                break;
-            case 1:
-                crearInforme5();
-                break;
-            case 2:
-                crearInforme1();
-                break;
-            case 3:
-                crearInforme4();
-                break;
-            case 4:
-                crearInforme2();
-                break;
+        JFileChooser fc = new JFileChooser(new File("informes"));
+        if (fc.showSaveDialog(main) == JFileChooser.APPROVE_OPTION) {
+            
+            switch (informes.getCbInformes().getSelectedIndex()) {
+                case 0:
+                    crearInforme3(fc.getSelectedFile());
+                    break;
+                case 1:
+                    crearInforme5(fc.getSelectedFile());
+                    break;
+                case 2:
+                    crearInforme1(fc.getSelectedFile());
+                    break;
+                case 3:
+                    crearInforme4(fc.getSelectedFile());
+                    break;
+                case 4:
+                    crearInforme2(fc.getSelectedFile());
+                    break;
+            }
         }
         informes.getBtCrear().setEnabled(true);
         informes.getBtCrear().setText("Crear informe");
@@ -80,51 +85,51 @@ public enum BridgeInformes {
     /**
      * Se encarga de crear el primer informe
      */
-    private void crearInforme1() {
-        String jasper = "./informes/consulta1.jasper";
+    private void crearInforme1(File dst) {
+        String jasper = getClass().getClassLoader().getResource("resources/informes/consulta1.jasper").getFile();
         String pdf = "./informesgenerados/itinerarios.pdf";
-        creaInformeRangoFechas(jasper, pdf);
+        creaInformeRangoFechas(jasper, dst.getAbsolutePath());
     }
 
     /**
      * Se encarga de crear el segundo informe
      */
-    private void crearInforme2() {
-        String jasper = "./informes/consulta2.jasper";
+    private void crearInforme2(File dst) {
+        String jasper = getClass().getClassLoader().getResource("resources/informes/consulta2.jasper").getFile();
         String pdf = "./informesgenerados/sesiones.pdf";
-        creaInformeRangoFechas(jasper, pdf);
+        creaInformeRangoFechas(jasper, dst.getAbsolutePath());
 
     }
 
     /**
      * Se encarga de crear el tercer informe
      */
-    private void crearInforme3() {
-        String jasper = "./informes/consulta3.jasper";
+    private void crearInforme3(File dst) {
+        String jasper = getClass().getClassLoader().getResource("resources/informes/consulta3.jasper").getFile();
         String pdf = "./informesgenerados/entrenamientosemanal.pdf";
         Map parametros = new HashMap();
         parametros.put("anio", Integer.valueOf(informes.getPnSemana().getTfAnno().getText()));
         parametros.put("mes", Integer.valueOf(informes.getPnSemana().getCbMes().getSelectedIndex()) + 1);
-        creaInformeBasico(jasper, parametros, pdf);
+        creaInformeBasico(jasper, parametros, dst.getAbsolutePath());
     }
 
     /**
      * Se encarga de crear el cuarto informe
      */
-    private void crearInforme4() {
-        String jasper = "./informes/consulta4.jasper";
+    private void crearInforme4(File dst) {
+        String jasper = getClass().getClassLoader().getResource("resources/informes/consulta4.jasper").getFile();
         String pdf = "./informesgenerados/itinerariosdificultad.pdf";
-        creaInformeRangoFechas(jasper, pdf);
+        creaInformeRangoFechas(jasper, dst.getAbsolutePath());
     }
 
     /**
      * Se encarga de crear el quinto informe
      */
-    private void crearInforme5() {
-        String jasper = "./informes/consulta5.jasper";
+    private void crearInforme5(File dst) {
+        String jasper = getClass().getClassLoader().getResource("resources/informes/consulta5.jasper").getFile();
 
         String destino = "./informesgenerados/sesionestipo.pdf";
-        creaInformeRangoFechas(jasper, destino);
+        creaInformeRangoFechas(jasper, dst.getAbsolutePath());
     }
 
     /**
@@ -158,7 +163,7 @@ public enum BridgeInformes {
             Connection connection = bd.getConnection();
             JasperPrint print = JasperFillManager.fillReport(jasper, parametros, connection);
             JasperExportManager.exportReportToPdfFile(print, pdf);
-           // JOptionPane.showMessageDialog(informes, "Informe creado", "", JOptionPane.INFORMATION_MESSAGE);
+            // JOptionPane.showMessageDialog(informes, "Informe creado", "", JOptionPane.INFORMATION_MESSAGE);
             openInforme(pdf);
 
         } catch (JRException ex) {
@@ -166,9 +171,11 @@ public enum BridgeInformes {
             JOptionPane.showMessageDialog(informes, "No se pudo crear el informe", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     /**
      * Se encarga de mostrar el informe que se le pase como parámetro
-     * @param informe 
+     *
+     * @param informe
      */
     private void openInforme(String informe) {
         if (Desktop.isDesktopSupported()) {
