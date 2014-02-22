@@ -4,6 +4,7 @@ package gui;
 import calendario.DateTextField;
 import enlace_datos_gui.BridgeItinerario;
 import enlace_datos_gui.CheckCampo;
+import gui.tablaFechas.FechasTableModel;
 import gui.tablaFechas.TablaFechas;
 import java.io.File;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Arrays;
 import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
@@ -19,7 +21,7 @@ import javax.swing.JTextField;
  * @author Andrés Traspuesto Lanza
  */
 public class AltaItinerario extends javax.swing.JInternalFrame {
-
+    
     private boolean modoAlta;
     private BridgeItinerario bridge = BridgeItinerario.BRIDGE;
     /**
@@ -260,8 +262,12 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         tblFechas.setToolTipText("Tabla que carga las fechas añadidas");
         jScrollPane3.setViewportView(tblFechas);
 
-        dtfNewDate.setText("dateTextField1");
         dtfNewDate.setToolTipText("Inserte la fecha de resolucion para añadir los itinerarios");
+        dtfNewDate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dtfNewDateMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -343,91 +349,91 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         if (res == JFileChooser.APPROVE_OPTION) {
             imagen = fc.getSelectedFile();
             recargaImagen();
-
+            
         }
     }//GEN-LAST:event_btnLoadImgActionPerformed
-
+    
     public boolean isModoAlta() {
         return modoAlta;
     }
-
+    
     public void setModoAlta(boolean modoAlta) {
         this.modoAlta = modoAlta;
     }
-
+    
     public JComboBox getCbTipoItineracio() {
         return cbTipoItineracio;
     }
-
+    
     public File getImagen() {
         return imagen;
     }
-
+    
     public void setImagen(File imagen) {
         this.imagen = imagen;
         recargaImagen();
     }
-
+    
     public DateTextField getDtfNewDate() {
         return dtfNewDate;
     }
-
+    
     public void setDtfNewDate(DateTextField dtfNewDate) {
         this.dtfNewDate = dtfNewDate;
     }
-
+    
     public JSpinner getSpDificultadLetra() {
         return spDificultadLetra;
     }
-
+    
     public void setSpDificultadLetra(JSpinner spDificultadLetra) {
         this.spDificultadLetra = spDificultadLetra;
     }
-
+    
     public JSpinner getSpDificultadMasMenos() {
         return spDificultadMasMenos;
     }
-
+    
     public void setSpDificultadMasMenos(JSpinner spDificultadMasMenos) {
         this.spDificultadMasMenos = spDificultadMasMenos;
     }
-
+    
     public JSpinner getSpDificultadNumero() {
         return spDificultadNumero;
     }
-
+    
     public void setSpDificultadNumero(JSpinner spDificultadNumero) {
         this.spDificultadNumero = spDificultadNumero;
     }
-
+    
     public TablaFechas getTblFechas() {
         return tblFechas;
     }
-
+    
     public void setTblFechas(TablaFechas tblFechas) {
         this.tblFechas = tblFechas;
     }
-
+    
     public JTextField getTfLocalizacion() {
         return tfLocalizacion;
     }
-
+    
     public void setTfLocalizacion(JTextField tfLocalizacion) {
         this.tfLocalizacion = tfLocalizacion;
     }
-
+    
     public JTextField getTfNombreItinerario() {
         return tfNombreItinerario;
     }
-
+    
     public void setTfNombreItinerario(JTextField tfNombreItinerario) {
         this.tfNombreItinerario = tfNombreItinerario;
     }
-
+    
     public boolean[] getCamposModificados() {
         return camposModificados;
     }
-
+    
     public void setCamposModificados(boolean[] camposModificados) {
         this.camposModificados = camposModificados;
     }
@@ -492,8 +498,12 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tfLocalizacionKeyReleased
 
     private void btnAddDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDateActionPerformed
-        tblFechas.getModel().addDate(dtfNewDate.getDate());
-        camposModificados[4] = true;
+        if (((FechasTableModel) tblFechas.getModel()).containsFecha(dtfNewDate.getDate())) {
+            JOptionPane.showMessageDialog(rootPane, "La fecha ya está registrada", "Error fecha duplicada", JOptionPane.ERROR_MESSAGE);
+        } else {
+            tblFechas.getModel().addDate(dtfNewDate.getDate());
+            camposModificados[4] = true;
+        }
     }//GEN-LAST:event_btnAddDateActionPerformed
 
     private void cbTipoItineracioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTipoItineracioItemStateChanged
@@ -515,6 +525,10 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         bridge.closeAlta();
     }//GEN-LAST:event_formInternalFrameClosed
+
+    private void dtfNewDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dtfNewDateMouseClicked
+        
+    }//GEN-LAST:event_dtfNewDateMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

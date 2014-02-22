@@ -374,9 +374,9 @@
           </SubComponents>
         </Container>
         <Component class="calendario.DateTextField" name="dtfNewDate">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="dateTextField1"/>
-          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dtfNewDateMouseClicked"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dtfNewDate.setToolTipText(&quot;Inserte la fecha de resolucion para a&#xf1;adir los itinerarios&quot;);"/>
           </AuxValues>

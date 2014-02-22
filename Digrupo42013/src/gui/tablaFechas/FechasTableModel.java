@@ -128,5 +128,12 @@ public class FechasTableModel extends AbstractTableModel {
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return false;
     }
-
+    /**
+     * Devuelve true si la fecha ya está en la lista
+     * @param date
+     * @return 
+     */
+    public boolean containsFecha(Date date) {
+        return lista.contains(new WraperFila<>(date));
+    }
 }

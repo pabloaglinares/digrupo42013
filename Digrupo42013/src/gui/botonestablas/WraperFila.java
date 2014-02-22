@@ -1,5 +1,6 @@
 package gui.botonestablas;
 
+import java.util.Objects;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -52,4 +53,26 @@ public class WraperFila<T> {
         return btnEditar;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 43 * hash + Objects.hashCode(this.elemento);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final WraperFila<?> other = (WraperFila<?>) obj;
+        if (!Objects.equals(this.elemento, other.elemento)) {
+            return false;
+        }
+        return true;
+    }
+    
 }
