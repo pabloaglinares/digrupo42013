@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 /**
  * Este singleton es un bridge que enlaza la capa gráfica con la de datos
@@ -77,6 +78,7 @@ public enum BridgeItinerario {
         alta.getTblFechas().getModel().setDates(iti.getFechasResolucion());
         alta.setImagen(iti.getPathImagen());
         pItinerario = iti.getpItinerario();
+        alta.setModoAlta(false);
         oldImg = iti.getPathImagen();
     }
 
@@ -188,7 +190,8 @@ public enum BridgeItinerario {
                 alta.getTfLocalizacion().getText(), alta.getCbTipoItineracio().getSelectedItem().toString(), dificultad, alta.getImagen());
         it.addAllFechas(alta.getTblFechas().getModel().getAllDates());
         if (alta.isModoAlta()) {
-            dao.insertItinerario(it);
+            if(!dao.insertItinerario(it))JOptionPane.showMessageDialog(alta, "No se pudo guardar el itinerario tal vez ya esté registrado", 
+                    "Error no se pudo guardar", JOptionPane.ERROR_MESSAGE);
         } else {
             it.setpItinerario(pItinerario);
             it.setPathImagen(oldImg);

@@ -144,11 +144,12 @@ public enum SesionDAO {
      * Modifica la sesion en la base de datos
      *
      * @param sesion
+     * @return 
      */
-    public void updateSesion(Sesion sesion) {
+    public boolean updateSesion(Sesion sesion) {
         String sql = "UPDATE Sesion SET fh_inicio = ?, fh_fin = ?, a_tipo = ?,"
                 + " descripcion = ? WHERE p_sesion = ?";
-        executeUpdateOnSesion(sql, sesion);
+        return executeUpdateOnSesion(sql, sesion);
     }
     
     /*
@@ -161,11 +162,12 @@ public enum SesionDAO {
      * Inserta la Sesion en la base de datos
      *
      * @param sesion
+     * @return 
      */
-    public void insertSesion(Sesion sesion) {
+    public boolean insertSesion(Sesion sesion) {
         String sql = "INSERT INTO Sesion (fh_inicio, fh_fin, a_tipo, descripcion)"
                 + " VALUES(?,?,?,?)";
-        executeUpdateOnSesion(sql, sesion);
+        return executeUpdateOnSesion(sql, sesion);
     }
     
     
@@ -175,8 +177,9 @@ public enum SesionDAO {
      *
      * @param sesion
      */
-    private void executeUpdateOnSesion(String sql, Sesion sesion) {
+    private boolean executeUpdateOnSesion(String sql, Sesion sesion) {
         Connection connection = utiles.getConnection();
+        boolean inserted = false;
         try (PreparedStatement pst = connection.prepareStatement(sql)) {
             pst.setTimestamp(1, new Timestamp(sesion.getFecha_hora1().getTime()));
             pst.setTimestamp(2, new Timestamp(sesion.getFecha_hora2().getTime()));
@@ -185,11 +188,12 @@ public enum SesionDAO {
             if (sesion.getpSesion() > 0) {
                 pst.setInt(5, sesion.getpSesion());
             }
-            pst.executeUpdate();
+            inserted = pst.executeUpdate() != 0;
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
         }
         utiles.saveData();
+        return inserted;
     }
     
     /**

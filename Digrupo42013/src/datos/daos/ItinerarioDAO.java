@@ -220,14 +220,15 @@ public enum ItinerarioDAO {
      *
      * @param itinerario
      */
-    public void insertItinerario(Itinerario itinerario) {
+    public boolean insertItinerario(Itinerario itinerario) {
         String sql = "INSERT INTO Itinerario (nombre, localizacion, tipo, dificultad, imagen)"
                 + " VALUES(?,?,?,?,?)";
         File imgFile;
-        if (itinerario.getPathImagen() != null) {
+        boolean inserted = false;
+        if (itinerario.getPathImagen() != null && !itinerario.getPathImagen().getName().equals("sinImagen.jpg")) {
             imgFile = utiles.getFileImagen(itinerario.getPathImagen());
         } else {
-            imgFile = new File("imagenes/sinImagen.jpg");
+            imgFile = new File(getClass().getClassLoader().getResource("resources/sinImagen.jpg").getFile());
         }
         try (PreparedStatement pst = utiles.getConnection().prepareStatement(sql)) {
             pst.setString(1, itinerario.getNombre());
@@ -235,11 +236,12 @@ public enum ItinerarioDAO {
             pst.setString(3, itinerario.getTipo());
             pst.setString(4, itinerario.getDifucultad());
             pst.setString(5, imgFile.getName());
-            pst.executeUpdate();
+            inserted = pst.executeUpdate() > 0;
+            if(!inserted) return false;
             itinerario.setpItinerario(getLastItinerario());
             //Si hay fecha de resolución del itinerario la almaceno
             if (!itinerario.getFechasResolucion().isEmpty()) {
-                insertaFechaItinerario(itinerario, itinerario.getFechasResolucion().get(0));
+                insertAllFechasItinerario(itinerario);
             }
             if (itinerario.getPathImagen() != null) {
                 utiles.guardaArchivoImagen(itinerario.getPathImagen(), imgFile);
@@ -249,6 +251,7 @@ public enum ItinerarioDAO {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
         }
         utiles.saveData();
+        return inserted;
     }
 
     /**
@@ -385,7 +388,12 @@ public enum ItinerarioDAO {
             itinerario.setTipo(rs.getString("tipo"));
             itinerario.setDifucultad(rs.getString("dificultad"));
             itinerario.setpItinerario(rs.getInt("p_itinerario"));
-            itinerario.setPathImagen(new File("imagenes" + File.separatorChar + rs.getString("imagen")));
+            String img = rs.getString("imagen");
+            if (img.equalsIgnoreCase("sinImagen.jpg")){
+                itinerario.setPathImagen(new File(getClass().getClassLoader().getResource("resources/sinImagen.jpg").getFile()));
+            } else {
+                itinerario.setPathImagen(new File("db"+File.separatorChar+"imagenes" + File.separatorChar + img));
+            }
             cargaFechasItinerario(itinerario);
             itinerarios.add(itinerario);
         }

@@ -18,7 +18,7 @@ import javax.swing.JTextField;
  *
  * @author David
  */
-public class AltaSesion extends javax.swing.JInternalFrame {
+public final class AltaSesion extends javax.swing.JInternalFrame {
 
     /**
      * Este array almacena el estado de los campos, que será true si el
@@ -292,6 +292,7 @@ public class AltaSesion extends javax.swing.JInternalFrame {
         tfDescripcion.setText("");
         cbTipoSesion.setSelectedIndex(0);
         dtfFecha.setDate(new Date());
+        checkAll();
     }
     /**
      * Comprueba si todos los campos son correctos

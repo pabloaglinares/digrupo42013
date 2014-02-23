@@ -29,7 +29,8 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
      * contiene true si la localización es válida
      */
     private boolean[] camposOk = new boolean[2];
-    private File imagen = new File("imagenes/sinImagen.jpg");
+    private File imagen;
+            //new File("db"+File.separatorChar+"imagenes"+File.separatorChar+"sinImagen.jpg");
     /**
      * <ul>
      * <li>0: nombre</li>
@@ -46,6 +47,8 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
      * Creates new form ModificacionItinerario
      */
     public AltaItinerario() {
+            this.imagen = new File(getClass().getClassLoader().getResource("resources/sinImagen.jpg").getFile());
+            System.out.println(imagen.getAbsolutePath());
         initComponents();
     }
 
@@ -268,6 +271,7 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
                 dtfNewDateMouseClicked(evt);
             }
         });
+        dtfNewDate.setDate(new Date());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -280,7 +284,7 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(dtfNewDate, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dtfNewDate, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAddDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -454,7 +458,7 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
      */
     private void cleanAll() {
         Arrays.fill(camposOk, false);
-        imagen = new File("imagenes/sinImagen.jpg");
+        imagen = new File(getClass().getClassLoader().getResource("resources/sinImagen.jpg").getFile());
         recargaImagen();
         tfLocalizacion.setText("");
         tfNombreItinerario.setText("");

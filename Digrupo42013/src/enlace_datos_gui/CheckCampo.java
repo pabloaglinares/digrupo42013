@@ -61,7 +61,6 @@ public enum CheckCampo {
      * @return 
      */
     public boolean isCampoOk(String str) {
-        System.out.println(patron+" encaja? "+str+" = "+str.matches(patron));
         return str.matches(patron);
     }
     

@@ -323,7 +323,7 @@
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="dtfNewDate" min="-2" pref="82" max="-2" attributes="0"/>
+                          <Component id="dtfNewDate" min="-2" pref="90" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnAddDate" max="32767" attributes="0"/>
                       </Group>
@@ -379,6 +379,7 @@
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dtfNewDate.setToolTipText(&quot;Inserte la fecha de resolucion para a&#xf1;adir los itinerarios&quot;);"/>
+            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="dtfNewDate.setDate(new Date());"/>
           </AuxValues>
         </Component>
       </SubComponents>

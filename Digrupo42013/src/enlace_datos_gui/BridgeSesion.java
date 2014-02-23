@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
 
 /**
  * Este singleton es un bridge que enlaza la capa gráfica con la de datos Sesion
@@ -76,7 +77,11 @@ public enum BridgeSesion {
         Sesion s = new Sesion(fh_1, fh_2, alta.getTfDescripcion().getText(),
                 (Sesion.TipoSesion) alta.getCbTipoSesion().getSelectedItem());
         if(alta.isModoAlta()) {
-            dao.insertSesion(s);
+            if(!dao.insertSesion(s)){
+                JOptionPane.showMessageDialog(tablaSesiones, "No se pudo guardar la sesión tal vez ya existe una sesión en el "
+                    + "intervalo de tiempo introducido", "Error no se pudo guardar", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         } else {
             s.setpSesion(currentPSesion);
             dao.updateSesion(s);

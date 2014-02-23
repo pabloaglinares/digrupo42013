@@ -1,6 +1,5 @@
 package datos;
 
-import datos.daos.ConfiguracionDAO;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -42,12 +41,14 @@ public enum UtilesBD {
             Class.forName("org.hsqldb.jdbcDriver");
             if (new File("db" + File.separatorChar + "escalador.db.script").exists()) {
                 //Si la base de datos ya existe conecta
-                connection = DriverManager.getConnection("jdbc:hsqldb:file:db" + File.separatorChar + "escalador.db;ifexists=true;shutdown=true", "sa", "");
+                connection = DriverManager.getConnection("jdbc:hsqldb:file:db" 
+                        + File.separatorChar + "escalador.db;ifexists=true;shutdown=true", "sa", "");
 
             } else {
                 //Si la base de datos no existe la crea
-                connection = DriverManager.getConnection("jdbc:hsqldb:file:db" + File.separatorChar + "escalador.db;shutdown=true", "sa", "");
-                createTables();
+                connection = DriverManager.getConnection("jdbc:hsqldb:file:db" 
+                        + File.separatorChar + "escalador.db;shutdown=true", "sa", "");
+                createTables(connection,"db"+File.separatorChar+"imagenes");
 
             }
         } catch (ClassNotFoundException | SQLException ex) {
@@ -62,7 +63,8 @@ public enum UtilesBD {
      */
     public Connection getConnection() {
         try {
-            connection = DriverManager.getConnection("jdbc:hsqldb:file:db" + File.separatorChar + "escalador.db;ifexists=true;shutdown=true", "sa", "");
+            connection = DriverManager.getConnection("jdbc:hsqldb:file:db" 
+                    + File.separatorChar + "escalador.db;ifexists=true;shutdown=true", "sa", "");
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -71,9 +73,11 @@ public enum UtilesBD {
 
     /**
      * La finalidad de este método es crear las tablas de la base de datos.
+     * @param bd
+     * @param carpetaImagenes
      */
-    public void createTables() {
-        try (Statement st = connection.createStatement()) {
+    public void createTables(Connection bd, String carpetaImagenes) {
+        try (Statement st = bd.createStatement()) {
             String sql = "CREATE TABLE TipoSesion(\n"
                     + "p_tipo INTEGER IDENTITY,\n"
                     + "tipo VARCHAR(12), \n"
@@ -126,7 +130,7 @@ public enum UtilesBD {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
         }
         //Creo el directorio para almacenar las imágenes si no existe
-        File path = new File("imagenes");
+        File path = new File(carpetaImagenes);
         if (!path.exists()) {
             path.mkdir();
         }
@@ -147,10 +151,11 @@ public enum UtilesBD {
     /**
      * Método que calcula el rendimiento del usuario
      *
+     * @param db
      * @return
      */
-    public float calculaRendimiento() {
-        return calcPtosPorSesiones() + calcPtosPorItinerario();
+    public float calculaRendimiento(Connection db) {
+        return calcPtosPorSesiones(db) + calcPtosPorItinerario(db);
     }
 
     /**
@@ -194,13 +199,13 @@ public enum UtilesBD {
      */
     public File getFileImagen(File pathImagen) {
         File aux;
-        if (pathImagen.equals(new File("imagenes/sinImagen.jpg"))) {
-            aux = pathImagen;
+        if (pathImagen.equals(new File(getClass().getClassLoader().getResource("resources/sinImagen.jpg").getFile()))) {
+            aux = null;
         } else {
-            aux = new File("imagenes" + File.separatorChar + "_0" + pathImagen.getName());
+            aux = new File("db"+File.separatorChar+"imagenes" + File.separatorChar + "_0" + pathImagen.getName());
             int i = 1;
             while (aux.exists()) {
-                aux = new File("imagenes" + File.separatorChar + "_" + (i++) + pathImagen.getName());
+                aux = new File("db"+File.separatorChar+"imagenes" + File.separatorChar + "_" + (i++) + pathImagen.getName());
             }
         }
         return aux;
@@ -213,7 +218,7 @@ public enum UtilesBD {
      * @param dst
      */
     public void guardaArchivoImagen(File src, File dst) {
-        if (!src.equals(new File("imagenes/sinImagen.jpg"))) { //Solo guarda la imagen si se ha seleccionado una
+        if (!src.getName().equalsIgnoreCase("sinImagen.jpg")) { //Solo guarda la imagen si se ha seleccionado una
             try (FileInputStream fis = new FileInputStream(src);
                     FileOutputStream fos = new FileOutputStream(dst)) {
                 byte[] buffer = new byte[1024];
@@ -238,67 +243,18 @@ public enum UtilesBD {
      * @param cfg
      * @return
      */
-    private float calcPtosPorSesiones() {
-        String sql = "SELECT SUM(datediff('ss', fh_inicio,?))/3600 "
-                + "FROM Sesion WHERE fh_inicio BETWEEN "
+    private float calcPtosPorSesiones(Connection db) {
+        String sql = "SELECT SUM(datediff('hh', fh_inicio,fh_fin)) "
+                + "FROM Sesion WHERE fh_inicio >= "
                 + "(SELECT fecha1 FROM configuracion WHERE p_configuracion = 0) "
-                + "AND (SELECT fecha2 FROM configuracion WHERE p_configuracion = 0)";
+                + "AND fh_fin <= ?";
         float weight = 0.5F;
-        return getPoints(sql, weight);
-    }
-
-    /**
-     * Calcula los puntos debidos al número medio de itinerarios resuelto por
-     * semana
-     *
-     * @return
-     */
-    private float calcPtosPorItinerario() {
-        String sql = "SELECT count(*) from FechaItinerario";
-        float num = calcFloat(sql);
-        sql = "SELECT (WEEK(fecha2) - WEEK(fecha1)) AS nWeek FROM Configuracion";
-        float n2 = calcFloat(sql);
-        num = n2 != 0 ? num / n2 : 0;
-        num *= 0.25F;
-        num = num > 5 ? 5 : num;
-        return num;
-    }
-
-    /**
-     * Devuelve un float a partir de una consulta sql que solo puede devolver un
-     * único resultado que será numérico
-     *
-     * @param sql
-     * @return
-     */
-    private float calcFloat(String sql) {
-        float n = 0F;
-        getConnection();
-        try (PreparedStatement pst = connection.prepareStatement(sql)) {
-            
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                n = rs.getInt(1);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return n;
-    }
-
-    /**
-     * Calcula los puntos correspondientes al valor devuelto por la consulta
-     *
-     * @param sql
-     * @param weight
-     * @return
-     */
-    private float getPoints(String sql, float weight) {
         float ptos = 0F;
-        getConnection();
-        try (PreparedStatement pst = connection.prepareStatement(sql)) {
+        try {
+            PreparedStatement pst = db.prepareStatement(sql);
             Date current = new Date();
-            Date lastDate = ConfiguracionDAO.CONFIGURACION_DAO.getConfiguracion().getFecha2Intervalo();
+            Date lastDate = getLastDate(db);
+            if(lastDate == null) return 0;
             long time = current.after(lastDate) ? lastDate.getTime() : current.getTime();
             pst.setTimestamp(1, new Timestamp(time));
             ResultSet rs = pst.executeQuery();
@@ -310,6 +266,58 @@ public enum UtilesBD {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ptos;
+    }
+
+    /**
+     * Calcula los puntos debidos al número medio de itinerarios resuelto por
+     * semana
+     *
+     * @return
+     */
+    private float calcPtosPorItinerario(Connection db) {
+        float n1 = 0;
+        float n2 = 0;
+        try {
+            Date current = new Date();
+            Date lastDate = getLastDate(db);
+            if(lastDate == null) return 0;
+            long time = current.after(lastDate) ? lastDate.getTime() : current.getTime();
+            String sql = "SELECT count(*) from FechaItinerario f, configuracion c WHERE "
+                    + "f.fecha BETWEEN c.fecha1 AND ?";
+            PreparedStatement pst = db.prepareStatement(sql);
+            pst.setTimestamp(1, new Timestamp(time));
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                n1 = rs.getFloat(1);
+                System.out.println("n1 = "+n1);
+            }
+            sql = "SELECT DATEDIFF('dd',fecha1,?)/7 AS nWeek FROM Configuracion";
+            pst = db.prepareStatement(sql);
+            pst.setTimestamp(1, new Timestamp(time));
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                n2 = rs.getFloat(1);
+                System.out.println("n2 = "+n2);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        n1 = n2 != 0 ? n1 / n2 : 0;
+        n1 *= 0.25F;
+        n1 = n1 > 5 ? 5 : n1;
+        return n1;
+    }
+
+
+
+    private Date getLastDate(Connection db) throws SQLException {
+        String sql = "SELECT fecha2 FROM configuracion WHERE p_configuracion = 0";
+        PreparedStatement pst = db.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+        if (!rs.next()) {
+            return null;
+        }
+        return rs.getDate(1);
     }
 
 }
