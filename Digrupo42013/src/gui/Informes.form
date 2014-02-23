@@ -70,6 +70,7 @@
     <Component class="javax.swing.JButton" name="btCrear">
       <Properties>
         <Property name="text" type="java.lang.String" value="Crear informe"/>
+        <Property name="toolTipText" type="java.lang.String" value="Bot&#xf3;n para crear informe"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCrearActionPerformed"/>
@@ -78,6 +79,7 @@
     <Component class="javax.swing.JButton" name="btVolver">
       <Properties>
         <Property name="text" type="java.lang.String" value="Volver"/>
+        <Property name="toolTipText" type="java.lang.String" value="Bot&#xf3;n para volver"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVolverActionPerformed"/>
@@ -94,6 +96,7 @@
             <StringItem index="4" value="Fecha de Sesiones"/>
           </StringArray>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="ComboBox para mostrar el tipo de cada informe"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbInformesActionPerformed"/>
