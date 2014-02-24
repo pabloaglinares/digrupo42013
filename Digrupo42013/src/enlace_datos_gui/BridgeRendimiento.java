@@ -31,7 +31,7 @@ public enum BridgeRendimiento {
      * Escribe el rendimiento en el label correspondiente
      */
     public void setRendimiento() {
-        lblRendimiento.setText(String.format("%.2f", utiles.calculaRendimiento(utiles.getConnection())));
+        lblRendimiento.setText(String.format("%.2f", utiles.calculaRendimiento()));
     }
     
 }

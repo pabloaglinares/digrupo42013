@@ -27,10 +27,16 @@ import java.util.logging.Logger;
 public enum UtilesBD {
 
     INSTANCE;
-    private Connection connection; //conexión con la base de datos
 
     private final static SimpleDateFormat sdfYMD_hms = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private final static SimpleDateFormat sdfYMD = new SimpleDateFormat("yyyy-MM-dd");
+    private final String BASE_DATOS = "jdbc:hsqldb:file:db" + File.separatorChar + "escalador.db;";
+    private final String USUARIO = "sa";
+    private final String PASS = "";
+    private final String EXIST = "ifexists=true;";
+    private final String SHUTDOWN = "shutdown=true";
+    private final String FILE_SCRIPT = "db" + File.separatorChar + "escalador.db.script";
+    private final String DIR_IMAGENES = "db" + File.separatorChar + "imagenes";
 
     /**
      * Constructor del singleton encargado de la lógica de interacción con la
@@ -39,19 +45,10 @@ public enum UtilesBD {
     UtilesBD() {
         try {
             Class.forName("org.hsqldb.jdbcDriver");
-            if (new File("db" + File.separatorChar + "escalador.db.script").exists()) {
-                //Si la base de datos ya existe conecta
-                connection = DriverManager.getConnection("jdbc:hsqldb:file:db" 
-                        + File.separatorChar + "escalador.db;ifexists=true;shutdown=true", "sa", "");
-
-            } else {
-                //Si la base de datos no existe la crea
-                connection = DriverManager.getConnection("jdbc:hsqldb:file:db" 
-                        + File.separatorChar + "escalador.db;shutdown=true", "sa", "");
-                createTables(connection,"db"+File.separatorChar+"imagenes");
-
+            if (!new File(FILE_SCRIPT).exists()) { //Si la base de datos no existe la crea
+                createTables(BASE_DATOS + SHUTDOWN, USUARIO, PASS, DIR_IMAGENES);
             }
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -62,22 +59,38 @@ public enum UtilesBD {
      * @return
      */
     public Connection getConnection() {
+        return getConnection(BASE_DATOS + EXIST + SHUTDOWN, USUARIO, PASS);
+    }
+
+    /**
+     * Devuelve una conexión a la base de datos
+     *
+     * @param baseDatos
+     * @param usr
+     * @param pass
+     * @return
+     */
+    public Connection getConnection(String baseDatos, String usr, String pass) {
+        Connection db = null;
         try {
-            connection = DriverManager.getConnection("jdbc:hsqldb:file:db" 
-                    + File.separatorChar + "escalador.db;ifexists=true;shutdown=true", "sa", "");
+            db = DriverManager.getConnection(baseDatos, usr, pass);
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return connection;
+        return db;
     }
 
     /**
      * La finalidad de este método es crear las tablas de la base de datos.
-     * @param bd
+     *
+     * @param baseDatos
+     * @param usr
+     * @param pass
      * @param carpetaImagenes
      */
-    public void createTables(Connection bd, String carpetaImagenes) {
-        try (Statement st = bd.createStatement()) {
+    public void createTables(String baseDatos, String usr, String pass, String carpetaImagenes) {
+        try (Connection bd = getConnection(baseDatos, usr, pass);
+                Statement st = bd.createStatement()) {
             String sql = "CREATE TABLE TipoSesion(\n"
                     + "p_tipo INTEGER IDENTITY,\n"
                     + "tipo VARCHAR(12), \n"
@@ -138,24 +151,47 @@ public enum UtilesBD {
 
     /**
      * Se encarga de salvar el contenido en memoria de la BD en el archivo de BD
+     *
+     * @param baseDatos
+     * @param usr
+     * @param pass
      */
-    public void saveData() {
-        getConnection();
+    public void saveData(String baseDatos, String usr, String pass) {
+        Connection db = getConnection(baseDatos, usr, pass);
         try {
-            connection.createStatement().execute("shutdown");
+            db.createStatement().execute("shutdown");
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     /**
+     * Se encarga de salvar el contenido en memoria de la BD en el archivo de BD
+     *
+     */
+    public void saveData() {
+        saveData(BASE_DATOS, USUARIO, PASS);
+    }
+
+    /**
      * Método que calcula el rendimiento del usuario
      *
-     * @param db
+     * @param usr
+     * @param baseDatos
+     * @param pass
      * @return
      */
-    public float calculaRendimiento(Connection db) {
-        return calcPtosPorSesiones(db) + calcPtosPorItinerario(db);
+    public float calculaRendimiento(String baseDatos, String usr, String pass) {
+        return calcPtosPorSesiones(baseDatos, usr, pass) + calcPtosPorItinerario(baseDatos, usr, pass);
+    }
+
+    /**
+     * Método que calcula el rendimiento del usuario
+     *
+     * @return
+     */
+    public float calculaRendimiento() {
+        return calculaRendimiento(BASE_DATOS, USUARIO, PASS);
     }
 
     /**
@@ -202,10 +238,10 @@ public enum UtilesBD {
         if (pathImagen.equals(new File(getClass().getClassLoader().getResource("resources/sinImagen.jpg").getFile()))) {
             aux = null;
         } else {
-            aux = new File("db"+File.separatorChar+"imagenes" + File.separatorChar + "_0" + pathImagen.getName());
+            aux = new File(DIR_IMAGENES + File.separatorChar + "_0" + pathImagen.getName());
             int i = 1;
             while (aux.exists()) {
-                aux = new File("db"+File.separatorChar+"imagenes" + File.separatorChar + "_" + (i++) + pathImagen.getName());
+                aux = new File(DIR_IMAGENES + File.separatorChar + "_" + (i++) + pathImagen.getName());
             }
         }
         return aux;
@@ -243,18 +279,21 @@ public enum UtilesBD {
      * @param cfg
      * @return
      */
-    private float calcPtosPorSesiones(Connection db) {
+    private float calcPtosPorSesiones(String baseDatos, String usr, String pass) {
         String sql = "SELECT SUM(datediff('hh', fh_inicio,fh_fin)) "
                 + "FROM Sesion WHERE fh_inicio >= "
                 + "(SELECT fecha1 FROM configuracion WHERE p_configuracion = 0) "
                 + "AND fh_fin <= ?";
         float weight = 0.5F;
         float ptos = 0F;
-        try {
+        float n2 = 0F;
+        try (Connection db = getConnection(baseDatos, usr, pass)) {
             PreparedStatement pst = db.prepareStatement(sql);
             Date current = new Date();
-            Date lastDate = getLastDate(db);
-            if(lastDate == null) return 0;
+            Date lastDate = getLastDate(baseDatos, usr, pass);
+            if (lastDate == null) {
+                return 0;
+            }
             long time = current.after(lastDate) ? lastDate.getTime() : current.getTime();
             pst.setTimestamp(1, new Timestamp(time));
             ResultSet rs = pst.executeQuery();
@@ -262,10 +301,17 @@ public enum UtilesBD {
                 ptos = rs.getFloat(1) * weight;
                 ptos = ptos > 5 ? 5 : ptos;
             }
+            sql = "SELECT DATEDIFF('dd',fecha1,?)/7 AS nWeek FROM Configuracion";
+            pst = db.prepareStatement(sql);
+            pst.setTimestamp(1, new Timestamp(time));
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                n2 = rs.getFloat(1);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return ptos;
+        return n2 == 0 ? 0 : ptos / n2 > 5 ? 5 : ptos / n2;
     }
 
     /**
@@ -274,22 +320,24 @@ public enum UtilesBD {
      *
      * @return
      */
-    private float calcPtosPorItinerario(Connection db) {
-        float n1 = 0;
-        float n2 = 0;
-        try {
+    private float calcPtosPorItinerario(String baseDatos, String usr, String pass) {
+        float n1 = 0F;
+        float n2 = 0F;
+        try (Connection db = getConnection(baseDatos, usr, pass)) {
             Date current = new Date();
-            Date lastDate = getLastDate(db);
-            if(lastDate == null) return 0;
+            Date lastDate = getLastDate(baseDatos, usr, pass);
+            if (lastDate == null) {
+                return 0;
+            }
             long time = current.after(lastDate) ? lastDate.getTime() : current.getTime();
-            String sql = "SELECT count(*) from FechaItinerario f, configuracion c WHERE "
+            String sql = "SELECT count(*) from FechaItinerario f, Configuracion c WHERE "
                     + "f.fecha BETWEEN c.fecha1 AND ?";
+            System.out.println("Current "+current+" last "+lastDate);
             PreparedStatement pst = db.prepareStatement(sql);
             pst.setTimestamp(1, new Timestamp(time));
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                n1 = rs.getFloat(1);
-                System.out.println("n1 = "+n1);
+                n1 = rs.getInt(1);
             }
             sql = "SELECT DATEDIFF('dd',fecha1,?)/7 AS nWeek FROM Configuracion";
             pst = db.prepareStatement(sql);
@@ -297,7 +345,6 @@ public enum UtilesBD {
             rs = pst.executeQuery();
             if (rs.next()) {
                 n2 = rs.getFloat(1);
-                System.out.println("n2 = "+n2);
             }
         } catch (SQLException ex) {
             Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
@@ -307,17 +354,26 @@ public enum UtilesBD {
         n1 = n1 > 5 ? 5 : n1;
         return n1;
     }
-
-
-
-    private Date getLastDate(Connection db) throws SQLException {
+    /**
+     * Devuelve la última fecha del intervalo de la configuración
+     * @param baseDatos
+     * @param usr
+     * @param pass
+     * @return
+     * @throws SQLException 
+     */
+    private Date getLastDate(String baseDatos, String usr, String pass) throws SQLException {
         String sql = "SELECT fecha2 FROM configuracion WHERE p_configuracion = 0";
-        PreparedStatement pst = db.prepareStatement(sql);
-        ResultSet rs = pst.executeQuery();
-        if (!rs.next()) {
-            return null;
+        Timestamp date;
+        try (Connection db = getConnection(baseDatos, usr, pass)) {
+            PreparedStatement pst = db.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            if (!rs.next()) {
+                return null;
+            }
+            date = rs.getTimestamp(1);
         }
-        return rs.getDate(1);
+        return new Date(date.getTime());
     }
 
 }

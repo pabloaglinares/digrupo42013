@@ -7,14 +7,12 @@ package datos;
 
 import java.io.File;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +25,12 @@ import junit.framework.TestCase;
 public class UtilesBDTest extends TestCase {
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-
+    private final String BASE_DATOS = "jdbc:hsqldb:file:test" + File.separatorChar + "db" + File.separatorChar + "escalador;";
+    private final String EXIST = "ifexists=true;";
+    private final String SHUTDOWN = "shutdown=true";
+    private final String USUARIO = "sa";
+    private final String PASS="";
+    UtilesBD utilBD = UtilesBD.INSTANCE;
     public UtilesBDTest(String testName) {
         super(testName);
     }
@@ -36,12 +39,13 @@ public class UtilesBDTest extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
         borraBD();
+        utilBD.createTables(BASE_DATOS+SHUTDOWN, USUARIO, PASS,"test/db/imagenes");
     }
 
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
-        borraBD();
+       // borraBD();
     }
 
     private void borraBD() {
@@ -53,30 +57,6 @@ public class UtilesBDTest extends TestCase {
         }
     }
 
-    /**
-     * Devuelve la conexión a la BD, que si no existe es creada
-     *
-     * @return
-     */
-    private Connection getConnection() {
-        Connection db = null;
-        try {
-            Class.forName("org.hsqldb.jdbcDriver");
-            if (new File("test" + File.separatorChar + "db" + File.separatorChar + "escalador.script").exists()) {
-                //Si la base de datos ya existe conecta
-                db = DriverManager.getConnection("jdbc:hsqldb:file:test" + File.separatorChar + "db" + File.separatorChar + "escalador;ifexists=true;shutdown=true", "sa", "");
-
-            } else {
-                //Si la base de datos no existe la crea
-                db = DriverManager.getConnection("jdbc:hsqldb:file:" + "test" + File.separatorChar + "db" + File.separatorChar + "escalador;shutdown=true", "sa", "");
-                UtilesBD.INSTANCE.createTables(db, "test" + File.separatorChar + "db" + File.separatorChar + "imagenes");
-
-            }
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return db;
-    }
 
     /**
      * Inserta la configuración
@@ -87,11 +67,13 @@ public class UtilesBDTest extends TestCase {
      * @throws SQLException
      * @throws ParseException
      */
-    private void insertaConfiguracion(Connection db, Timestamp t1, Timestamp t2) throws SQLException, ParseException {
-        PreparedStatement pst = db.prepareStatement("INSERT INTO Configuracion (nombre, apellidos, fecha1, fecha2) values (' ',' ',?,?)");
-        pst.setTimestamp(1, t1);
-        pst.setTimestamp(2, t2);
-        pst.execute();
+    private void insertaConfiguracion(Timestamp t1, Timestamp t2) throws SQLException, ParseException {
+        try (Connection db = utilBD.getConnection(BASE_DATOS + EXIST + SHUTDOWN, USUARIO, PASS)) {
+            PreparedStatement pst = db.prepareStatement("INSERT INTO Configuracion (nombre, apellidos, fecha1, fecha2) values (' ',' ',?,?)");
+            pst.setTimestamp(1, t1);
+            pst.setTimestamp(2, t2);
+            pst.execute();
+        }
     }
 
     /**
@@ -103,11 +85,15 @@ public class UtilesBDTest extends TestCase {
      * @param t2
      * @throws SQLException
      */
-    private void insertSesion(Connection db, String sql, Timestamp t1, Timestamp t2) throws SQLException {
-        PreparedStatement pst = db.prepareStatement(sql);
-        pst.setTimestamp(1, t1);
-        pst.setTimestamp(2, t2);
-        pst.execute();
+    private void insertSesion(Timestamp t1, Timestamp t2) throws SQLException {
+        try (Connection db = utilBD.getConnection(BASE_DATOS + EXIST + SHUTDOWN, USUARIO, PASS)) {
+            String sql = "INSERT INTO Sesion (fh_inicio, fh_fin, a_tipo, descripcion)"
+                    + " VALUES(?,?,0,'nada')";
+            PreparedStatement pst = db.prepareStatement(sql);
+            pst.setTimestamp(1, t1);
+            pst.setTimestamp(2, t2);
+            pst.execute();
+        }
     }
 
     /**
@@ -117,13 +103,21 @@ public class UtilesBDTest extends TestCase {
      * @param db
      * @param fechas
      */
-    private void insertaFechasItinerario(Connection db, List<Timestamp> fechas) {
-        String sql = "INSERT INTO FechaItinerario (a_itinerario, fecha) "
-                + "VALUES (0,?)";
+    private void insertaFechasItinerario(List<Timestamp> fechas) throws SQLException {
+        String sql1 = "INSERT INTO Itinerario (nombre, localizacion, tipo, dificultad, imagen)"
+                + " VALUES('asdfa','asdfva',1,'sa','asd')";
+        String sql2 = "INSERT INTO FechaItinerario (a_itinerario, fecha) "
+                + "VALUES (?,?)";
+        try(Connection db = utilBD.getConnection(BASE_DATOS + EXIST + SHUTDOWN, USUARIO, PASS);
+                PreparedStatement pst1 = db.prepareStatement(sql1)){
+            pst1.executeUpdate();
+        }
         for (Timestamp fecha : fechas) {
-            try (PreparedStatement pst = db.prepareStatement(sql)) {
-                pst.setTimestamp(1, new Timestamp(fecha.getTime()));
-                pst.executeUpdate();
+            try (Connection db = utilBD.getConnection(BASE_DATOS + EXIST + SHUTDOWN, USUARIO, PASS);
+                    PreparedStatement pst2 = db.prepareStatement(sql2)) {
+                pst2.setInt(1, 0);
+                pst2.setTimestamp(2, fecha);
+                pst2.executeUpdate();
             } catch (SQLException ex) {
                 Logger.getLogger(UtilesBD.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -136,18 +130,15 @@ public class UtilesBDTest extends TestCase {
     public void testCalculaRendimientoSoloSesiones() {
         try {
             System.out.println("calcula rendimiento de 4h de sesiones dentro de un intervalo de 3 semanas");
-            String sql = "INSERT INTO Sesion (fh_inicio, fh_fin, a_tipo, descripcion)"
-                    + " VALUES(?,?,0,'nada')";
-            Connection db = getConnection();
-            insertSesion(db, sql, new Timestamp(sdf.parse("11/02/2014 13:00").getTime()), new Timestamp(sdf.parse("11/02/2014 14:00").getTime()));
-            insertSesion(db, sql, new Timestamp(sdf.parse("12/02/2014 13:00").getTime()), new Timestamp(sdf.parse("12/02/2014 14:00").getTime()));
-            insertSesion(db, sql, new Timestamp(sdf.parse("13/02/2014 13:00").getTime()), new Timestamp(sdf.parse("13/02/2014 14:00").getTime()));
-            insertSesion(db, sql, new Timestamp(sdf.parse("14/02/2014 13:00").getTime()), new Timestamp(sdf.parse("14/02/2014 14:00").getTime()));
-            insertaConfiguracion(db, new Timestamp(sdf.parse("1/02/2014 13:00").getTime()), new Timestamp(sdf.parse("28/02/2014 14:00").getTime()));
-            float expResult = 2.0F;
-            float result = UtilesBD.INSTANCE.calculaRendimiento(getConnection());
-            assertEquals(expResult, result, 0.00001);
-            db.close();
+            insertaConfiguracion(new Timestamp(sdf.parse("1/02/2014 13:00").getTime()), new Timestamp(sdf.parse("28/02/2014 14:00").getTime()));
+
+            insertSesion(new Timestamp(sdf.parse("11/02/2014 13:00").getTime()), new Timestamp(sdf.parse("11/02/2014 14:00").getTime()));
+            insertSesion(new Timestamp(sdf.parse("12/02/2014 13:00").getTime()), new Timestamp(sdf.parse("12/02/2014 14:00").getTime()));
+            insertSesion(new Timestamp(sdf.parse("13/02/2014 13:00").getTime()), new Timestamp(sdf.parse("13/02/2014 14:00").getTime()));
+            insertSesion(new Timestamp(sdf.parse("14/02/2014 13:00").getTime()), new Timestamp(sdf.parse("14/02/2014 14:00").getTime()));
+            float expResult = 4*0.5F/3;
+            float result = UtilesBD.INSTANCE.calculaRendimiento(BASE_DATOS+EXIST+SHUTDOWN,USUARIO,PASS);
+            assertEquals(expResult, result, 0.005);
         } catch (SQLException | ParseException ex) {
             Logger.getLogger(UtilesBDTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -159,49 +150,100 @@ public class UtilesBDTest extends TestCase {
     public void testCalculaRendimientoCeroSesiones() {
         try {
             System.out.println("calcula rendimiento de 0h de sesiones dentro de un intervalo de 3 semanas");
-            String sql = "INSERT INTO Sesion (fh_inicio, fh_fin, a_tipo, descripcion)"
-                    + " VALUES(?,?,0,'nada')";
-            Connection db = getConnection();
-            insertSesion(db, sql, new Timestamp(sdf.parse("11/02/2013 13:00").getTime()), new Timestamp(sdf.parse("11/02/2013 14:00").getTime()));
-            insertSesion(db, sql, new Timestamp(sdf.parse("12/02/2013 13:00").getTime()), new Timestamp(sdf.parse("12/02/2013 14:00").getTime()));
-            insertSesion(db, sql, new Timestamp(sdf.parse("13/02/2013 13:00").getTime()), new Timestamp(sdf.parse("13/02/2013 14:00").getTime()));
-            insertSesion(db, sql, new Timestamp(sdf.parse("14/02/2013 13:00").getTime()), new Timestamp(sdf.parse("14/02/2013 14:00").getTime()));
-            insertaConfiguracion(db, new Timestamp(sdf.parse("1/02/2014 13:00").getTime()), new Timestamp(sdf.parse("28/02/2014 14:00").getTime()));
+            insertSesion(new Timestamp(sdf.parse("11/02/2013 13:00").getTime()), new Timestamp(sdf.parse("11/02/2013 14:00").getTime()));
+            insertSesion(new Timestamp(sdf.parse("12/02/2013 13:00").getTime()), new Timestamp(sdf.parse("12/02/2013 14:00").getTime()));
+            insertSesion(new Timestamp(sdf.parse("13/02/2013 13:00").getTime()), new Timestamp(sdf.parse("13/02/2013 14:00").getTime()));
+            insertSesion(new Timestamp(sdf.parse("14/02/2013 13:00").getTime()), new Timestamp(sdf.parse("14/02/2013 14:00").getTime()));
+            insertaConfiguracion(new Timestamp(sdf.parse("1/02/2014 13:00").getTime()), new Timestamp(sdf.parse("28/02/2014 14:00").getTime()));
             float expResult = 0F;
-            float result = UtilesBD.INSTANCE.calculaRendimiento(getConnection());
-            assertEquals(expResult, result, 0.00001);
-            db.close();
+            float result = UtilesBD.INSTANCE.calculaRendimiento(BASE_DATOS+EXIST+SHUTDOWN,USUARIO,PASS);
+            System.out.println(expResult + "=" + result+"?");
+            assertEquals(expResult, result, 0.005);
         } catch (SQLException | ParseException ex) {
             Logger.getLogger(UtilesBDTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * Compruebo que si no hay datos el rendimiento es cero
      */
     public void testCalculaRendimientoTodoCero() {
         System.out.println("Comprueba que si no hay nada sale 0");
         float expResult = 0F;
-        float result = UtilesBD.INSTANCE.calculaRendimiento(getConnection());
-        assertEquals(expResult, result, 0.00001);
+        float result = UtilesBD.INSTANCE.calculaRendimiento(BASE_DATOS+EXIST+SHUTDOWN,USUARIO,PASS);
+        System.out.println(expResult+"="+result+"?");
+        assertEquals(expResult, result, 0.005);
     }
-    
+    /**
+     * Compruebo que cuadra el cálculo cuando hay 5 resoluciones de itinerario en 5 semanas
+     */
     public void testCalculaRendimiento5FechasEnIntervalo5Semanas() {
         try {
-            Connection db = getConnection();
-            insertaConfiguracion(db, new Timestamp(sdf.parse("24/01/2013 13:00").getTime()), new Timestamp(sdf.parse("28/02/2013 14:00").getTime()));
-            List<Timestamp>fechas = new ArrayList<>();
+            System.out.println("Calcula rendimiento solo con itinerarios en 5 fechas en 5 semanas");
+            insertaConfiguracion(new Timestamp(sdf.parse("24/01/2013 13:00").getTime()), new Timestamp(sdf.parse("28/02/2013 14:00").getTime()));
+            List<Timestamp> fechas = new ArrayList<>();
             fechas.add(new Timestamp(sdf.parse("11/02/2013 13:00").getTime()));
             fechas.add(new Timestamp(sdf.parse("12/02/2013 13:00").getTime()));
             fechas.add(new Timestamp(sdf.parse("13/02/2013 13:00").getTime()));
             fechas.add(new Timestamp(sdf.parse("14/02/2013 13:00").getTime()));
             fechas.add(new Timestamp(sdf.parse("15/02/2013 13:00").getTime()));
-            float expResult = 0.25f;
-            float result = UtilesBD.INSTANCE.calculaRendimiento(getConnection());
-            assertEquals(expResult, result, 0.00001);
-            db.close();
+            insertSesion(new Timestamp(sdf.parse("11/02/2013 13:00").getTime()), new Timestamp(sdf.parse("11/02/2013 14:00").getTime()));
+            insertSesion(new Timestamp(sdf.parse("12/02/2013 13:00").getTime()), new Timestamp(sdf.parse("12/02/2013 14:00").getTime()));
+            insertSesion(new Timestamp(sdf.parse("13/02/2013 13:00").getTime()), new Timestamp(sdf.parse("13/02/2013 14:00").getTime()));
+            insertSesion(new Timestamp(sdf.parse("14/02/2013 13:00").getTime()), new Timestamp(sdf.parse("14/02/2013 14:00").getTime()));
+            insertaFechasItinerario(fechas);
+            float expResult = 0.25f + 4*0.5F/5;
+            float result = UtilesBD.INSTANCE.calculaRendimiento(BASE_DATOS,USUARIO,PASS);
+            System.out.println(expResult+"="+result+"?");
+            assertEquals(expResult, result, 0.005);
         } catch (SQLException | ParseException ex) {
             Logger.getLogger(UtilesBDTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * Compruebo que si el intervalo configurado no tiene semanas no devuelve una
+     * indeterminación
+     */
+    public void testCalculaRendimiento5Itinerarios0semanas() {
+        try {
+            System.out.println("Calcula rendimiento solo con itinerarios en 5 fechas en 0 semanas");
+            insertaConfiguracion(new Timestamp(sdf.parse("24/01/2013 13:00").getTime()), new Timestamp(sdf.parse("24/01/2013 13:00").getTime()));
+            List<Timestamp> fechas = new ArrayList<>();
+            fechas.add(new Timestamp(sdf.parse("11/02/2013 13:00").getTime()));
+            fechas.add(new Timestamp(sdf.parse("12/02/2013 13:00").getTime()));
+            fechas.add(new Timestamp(sdf.parse("13/02/2013 13:00").getTime()));
+            fechas.add(new Timestamp(sdf.parse("14/02/2013 13:00").getTime()));
+            fechas.add(new Timestamp(sdf.parse("15/02/2013 13:00").getTime()));
+            insertaFechasItinerario(fechas);
+            float expResult = 0f;
+            float result = UtilesBD.INSTANCE.calculaRendimiento(BASE_DATOS,USUARIO,PASS);
+            System.out.println(expResult+"="+result+"?");
+            assertEquals(expResult, result, 0.005);
+        } catch (SQLException | ParseException ex) {
+            Logger.getLogger(UtilesBDTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    /**
+     * Compruebo que si las fechas de resolución de itinerarios están fuera de
+     * rango no las cuenta
+     */
+    public void testCalculaRendimiento5ItinerariosFueraDeFechas() {
+        try {
+            System.out.println("Calcula rendimiento solo con itinerarios en 5 fechas fuera de rango");
+            insertaConfiguracion(new Timestamp(sdf.parse("24/03/2013 13:00").getTime()), new Timestamp(sdf.parse("24/06/2013 13:00").getTime()));
+            List<Timestamp> fechas = new ArrayList<>();
+            fechas.add(new Timestamp(sdf.parse("11/02/2013 13:00").getTime()));
+            fechas.add(new Timestamp(sdf.parse("12/02/2013 13:00").getTime()));
+            fechas.add(new Timestamp(sdf.parse("13/02/2013 13:00").getTime()));
+            fechas.add(new Timestamp(sdf.parse("14/02/2013 13:00").getTime()));
+            fechas.add(new Timestamp(sdf.parse("15/02/2013 13:00").getTime()));
+            insertaFechasItinerario(fechas);
+            float expResult = 0f;
+            float result = UtilesBD.INSTANCE.calculaRendimiento(BASE_DATOS,USUARIO,PASS);
+            System.out.println(expResult+"="+result+"?");
+            assertEquals(expResult, result, 0.005);
+        } catch (SQLException | ParseException ex) {
+            Logger.getLogger(UtilesBDTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
