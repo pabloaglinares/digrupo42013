@@ -4,9 +4,11 @@ package enlace_datos_gui;
 
 import gui.Main;
 import java.awt.Component;
-import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.help.HelpBroker;
 import javax.help.HelpSet;
 import javax.help.HelpSetException;
@@ -79,8 +81,7 @@ public enum AyudaUtil {
         this.main = main;
         try {
             // Carga el fichero de ayuda
-            File fichero = new File("help/help_set.hs");
-            URL hsURL = fichero.toURI().toURL();
+            URL hsURL = getClass().getClassLoader().getResource("help/help_set.hs").toURI().toURL();
             // Crea el HelpSet y el HelpBroker
             helpset = new HelpSet(getClass().getClassLoader(), hsURL);
             hb = helpset.createHelpBroker();
@@ -90,9 +91,12 @@ public enum AyudaUtil {
 
         } catch (IllegalArgumentException | MalformedURLException | HelpSetException e) {
             JOptionPane.showMessageDialog(main, "Se ha producido un error "
-                    + "intentando mostrar la ayuda.\n" + e.getMessage(), "Error",
+                    + "intentando mostrar la ayuda.\n", "Error",
                     JOptionPane.ERROR_MESSAGE, null);
+            Logger.getLogger(AyudaUtil.class.getName()).log(Level.SEVERE, null, e);
 
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(AyudaUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     /**
