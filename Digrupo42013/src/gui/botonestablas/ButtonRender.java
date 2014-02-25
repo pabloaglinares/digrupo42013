@@ -1,6 +1,7 @@
 package gui.botonestablas;
 
 import java.awt.Component;
+import java.net.URLClassLoader;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -16,7 +17,8 @@ public class ButtonRender extends JButton implements TableCellRenderer{
 
     public ButtonRender(String img) {
         this.img = img;
-        setIcon(new ImageIcon(img));
+        URLClassLoader urlLoader=(URLClassLoader)this.getClass().getClassLoader();
+        setIcon(new ImageIcon(urlLoader.findResource(img)));
         setBorderPainted(false);
         setContentAreaFilled(false);
         setOpaque(true);

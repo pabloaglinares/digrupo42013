@@ -1,8 +1,1 @@
-The application to conduct a training management system 
-high performance for climbers. 
-The objective of the application is the monitoring 
-all training sessions for climbers 
-both physical training sessions, 
-sessions on the rock climbing wall sessions.
-
-
+The application to conduct a training management system high performance for climbers. The objective of the application is the monitoring all training sessions for climbers both physical training sessions, sessions on the rock climbing wall sessions.

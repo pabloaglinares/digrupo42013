@@ -31,11 +31,11 @@ public class TablaFechas extends JTable{
         model = new FechasTableModel(cabeceras, filas);
         this.setModel(model);
         //Determino quién debe encargarse de mostrar las celdas con botones
-        URL borrar = getClass().getClassLoader().getResource("resources/borrar.png");
-        URL editar = getClass().getClassLoader().getResource("resources/editar.png");
+        String borrar = "resources/borrar.png";
+        String editar ="resources/editar.png";
         //Determino quién debe encargarse de mostrar las celdas con botones
-        getColumnModel().getColumn(1).setCellRenderer(new ButtonRender(borrar.getFile()));
-        getColumnModel().getColumn(2).setCellRenderer(new ButtonRender(editar.getFile()));
+        getColumnModel().getColumn(1).setCellRenderer(new ButtonRender(borrar));
+        getColumnModel().getColumn(2).setCellRenderer(new ButtonRender(editar));
         this.addMouseListener(new MouseInputAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

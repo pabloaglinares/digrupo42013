@@ -1,10 +1,1 @@
-La aplicación a realizar es un sistema de gestión de entrenamiento 
-para escaladores de alto rendimiento. 
-El objetivo de la aplicación es la monitorización 
-de todas las sesiones de entrenamiento para escaladores, 
-tanto sesiones de entrenamiento físico, 
-sesiones en el rocódromo y sesiones en roca. 
-
-
-
-
+La aplicaciï¿½n a realizar es un sistema de gestiï¿½n de entrenamiento para escaladores de alto rendimiento. El objetivo de la aplicaciï¿½n es la monitorizaciï¿½n de todas las sesiones de entrenamiento para escaladores, tanto sesiones de entrenamiento fï¿½sico, sesiones en el rocï¿½dromo y sesiones en roca. 

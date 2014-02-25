@@ -1,16 +1,1 @@
-Copyright (C) <2014> <Andrés, Benjamin, Gema, Alvaro, David> 
-
-     This program is free software: you can redistribute it and / or modify 
-     under the terms of the GNU General Public License as published 
-     by the Free Software Foundation, either version 3 
-     of the License, or (at your option) any later version. 
-
-     This program is distributed in the hope that it will be useful, but 
-     WITHOUT ANY WARRANTY; without even the implied warranty 
-     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
-     Please refer to the GNU General Public License for 
-     more detailed information. 
-
-     You should have received a copy of the GNU General Public License 
-     along with this program. 
-     Otherwise, see <http://www.gnu.org/licenses/>.
+Copyright (C) <2014> <Andrï¿½s, Benjamin, Gema, Alvaro, David> ï¿½ï¿½ï¿½ï¿½ This program is free software: you can redistribute it and / or modify ï¿½ï¿½ï¿½ï¿½ under the terms of the GNU General Public License as published ï¿½ï¿½ï¿½ï¿½ by the Free Software Foundation, either version 3 ï¿½ï¿½ï¿½ï¿½ of the License, or (at your option) any later version. ï¿½ï¿½ï¿½ï¿½ This program is distributed in the hope that it will be useful, but ï¿½ï¿½ï¿½ï¿½ WITHOUT ANY WARRANTY; without even the implied warranty ï¿½ï¿½ï¿½ï¿½ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. ï¿½ï¿½ï¿½ï¿½ Please refer to the GNU General Public License for ï¿½ï¿½ï¿½ï¿½ more detailed information. ï¿½ï¿½ï¿½ï¿½ You should have received a copy of the GNU General Public License ï¿½ï¿½ï¿½ï¿½ along with this program. ï¿½ï¿½ï¿½ï¿½ Otherwise, see <http://www.gnu.org/licenses/>.

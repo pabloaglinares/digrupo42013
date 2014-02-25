@@ -34,11 +34,11 @@ public class TablaItinerarios extends JTable {
 
         this.setModel(model);
         //Determino quién debe encargarse de mostrar las celdas con botones
-        URL borrar = getClass().getClassLoader().getResource("resources/borrar.png");
-        URL editar = getClass().getClassLoader().getResource("resources/editar.png");
+         String borrar = "resources/borrar.png";
+        String editar ="resources/editar.png";
         //Determino quién debe encargarse de mostrar las celdas con botones
-        getColumnModel().getColumn(3).setCellRenderer(new ButtonRender(borrar.getFile()));
-        getColumnModel().getColumn(4).setCellRenderer(new ButtonRender(editar.getFile()));
+        getColumnModel().getColumn(3).setCellRenderer(new ButtonRender(borrar));
+        getColumnModel().getColumn(4).setCellRenderer(new ButtonRender(editar));
         this.addMouseListener(new MouseInputAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

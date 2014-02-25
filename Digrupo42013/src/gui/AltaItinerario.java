@@ -1,4 +1,3 @@
-
 package gui;
 
 import calendario.DateTextField;
@@ -7,9 +6,13 @@ import enlace_datos_gui.CheckCampo;
 import gui.tablaFechas.FechasTableModel;
 import gui.tablaFechas.TablaFechas;
 import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -21,7 +24,7 @@ import javax.swing.JTextField;
  * @author Andrés Traspuesto Lanza
  */
 public class AltaItinerario extends javax.swing.JInternalFrame {
-    
+
     private boolean modoAlta;
     private BridgeItinerario bridge = BridgeItinerario.BRIDGE;
     /**
@@ -29,8 +32,7 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
      * contiene true si la localización es válida
      */
     private boolean[] camposOk = new boolean[2];
-    private File imagen;
-            //new File("db"+File.separatorChar+"imagenes"+File.separatorChar+"sinImagen.jpg");
+    private String imagen;
     /**
      * <ul>
      * <li>0: nombre</li>
@@ -47,8 +49,7 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
      * Creates new form ModificacionItinerario
      */
     public AltaItinerario() {
-            this.imagen = new File(getClass().getClassLoader().getResource("resources/sinImagen.jpg").getFile());
-            System.out.println(imagen.getAbsolutePath());
+        imagen = "resources/sinImagen.jpg";
         initComponents();
     }
 
@@ -266,11 +267,6 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         jScrollPane3.setViewportView(tblFechas);
 
         dtfNewDate.setToolTipText("Inserte la fecha de resolucion para añadir los itinerarios");
-        dtfNewDate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dtfNewDateMouseClicked(evt);
-            }
-        });
         dtfNewDate.setDate(new Date());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -351,93 +347,93 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
         JFileChooser fc = new JFileChooser();
         int res = fc.showOpenDialog(this);
         if (res == JFileChooser.APPROVE_OPTION) {
-            imagen = fc.getSelectedFile();
+            imagen = fc.getSelectedFile().getAbsolutePath();
             recargaImagen();
-            
+
         }
     }//GEN-LAST:event_btnLoadImgActionPerformed
-    
+
     public boolean isModoAlta() {
         return modoAlta;
     }
-    
+
     public void setModoAlta(boolean modoAlta) {
         this.modoAlta = modoAlta;
     }
-    
+
     public JComboBox getCbTipoItineracio() {
         return cbTipoItineracio;
     }
-    
+
     public File getImagen() {
-        return imagen;
+        return new File(imagen);
     }
-    
+
     public void setImagen(File imagen) {
-        this.imagen = imagen;
+        this.imagen = imagen.getAbsolutePath();
         recargaImagen();
     }
-    
+
     public DateTextField getDtfNewDate() {
         return dtfNewDate;
     }
-    
+
     public void setDtfNewDate(DateTextField dtfNewDate) {
         this.dtfNewDate = dtfNewDate;
     }
-    
+
     public JSpinner getSpDificultadLetra() {
         return spDificultadLetra;
     }
-    
+
     public void setSpDificultadLetra(JSpinner spDificultadLetra) {
         this.spDificultadLetra = spDificultadLetra;
     }
-    
+
     public JSpinner getSpDificultadMasMenos() {
         return spDificultadMasMenos;
     }
-    
+
     public void setSpDificultadMasMenos(JSpinner spDificultadMasMenos) {
         this.spDificultadMasMenos = spDificultadMasMenos;
     }
-    
+
     public JSpinner getSpDificultadNumero() {
         return spDificultadNumero;
     }
-    
+
     public void setSpDificultadNumero(JSpinner spDificultadNumero) {
         this.spDificultadNumero = spDificultadNumero;
     }
-    
+
     public TablaFechas getTblFechas() {
         return tblFechas;
     }
-    
+
     public void setTblFechas(TablaFechas tblFechas) {
         this.tblFechas = tblFechas;
     }
-    
+
     public JTextField getTfLocalizacion() {
         return tfLocalizacion;
     }
-    
+
     public void setTfLocalizacion(JTextField tfLocalizacion) {
         this.tfLocalizacion = tfLocalizacion;
     }
-    
+
     public JTextField getTfNombreItinerario() {
         return tfNombreItinerario;
     }
-    
+
     public void setTfNombreItinerario(JTextField tfNombreItinerario) {
         this.tfNombreItinerario = tfNombreItinerario;
     }
-    
+
     public boolean[] getCamposModificados() {
         return camposModificados;
     }
-    
+
     public void setCamposModificados(boolean[] camposModificados) {
         this.camposModificados = camposModificados;
     }
@@ -446,11 +442,26 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
      * Redibuja la imagen
      */
     private void recargaImagen() {
-        edpImagen.setText("<html >"
-                + "<head></head>"
-                + "<body style=\"padding:0;margin:0\">"
-                + "<img src = \"file:" + imagen.getAbsolutePath() + "\"  height=\"295\" width=\"340\" style=\"margin:0 0\"/>"
-                + "</body>\n</html>\n");
+        if (imagen.equalsIgnoreCase("resources/sinImagen.jpg")) {
+            try {
+                URLClassLoader urlLoader = (URLClassLoader) this.getClass().getClassLoader();
+
+                edpImagen.setText("<html >"
+                        + "<head></head>"
+                        + "<body style=\"padding:0;margin:0\">"
+                        + "<img src = \"" + urlLoader.findResource(imagen).toURI() + "\"  height=\"295\" width=\"340\" style=\"margin:0 0\"/>"
+                        + "</body>\n</html>\n");
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(AltaItinerario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            edpImagen.setText("<html >"
+                        + "<head></head>"
+                        + "<body style=\"padding:0;margin:0\">"
+                        + "<img src = \"file:" +imagen+ "\"  height=\"295\" width=\"340\" style=\"margin:0 0\"/>"
+                        + "</body>\n</html>\n");
+        }
+
     }
 
     /**
@@ -458,7 +469,7 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
      */
     private void cleanAll() {
         Arrays.fill(camposOk, false);
-        imagen = new File(getClass().getClassLoader().getResource("resources/sinImagen.jpg").getFile());
+        imagen = "resources/sinImagen.jpg";
         recargaImagen();
         tfLocalizacion.setText("");
         tfNombreItinerario.setText("");
@@ -529,10 +540,6 @@ public class AltaItinerario extends javax.swing.JInternalFrame {
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         bridge.closeAlta();
     }//GEN-LAST:event_formInternalFrameClosed
-
-    private void dtfNewDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dtfNewDateMouseClicked
-        
-    }//GEN-LAST:event_dtfNewDateMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

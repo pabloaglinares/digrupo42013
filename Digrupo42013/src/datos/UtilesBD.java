@@ -332,7 +332,6 @@ public enum UtilesBD {
             long time = current.after(lastDate) ? lastDate.getTime() : current.getTime();
             String sql = "SELECT count(*) from FechaItinerario f, Configuracion c WHERE "
                     + "f.fecha BETWEEN c.fecha1 AND ?";
-            System.out.println("Current "+current+" last "+lastDate);
             PreparedStatement pst = db.prepareStatement(sql);
             pst.setTimestamp(1, new Timestamp(time));
             ResultSet rs = pst.executeQuery();

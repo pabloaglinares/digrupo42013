@@ -1,16 +1,1 @@
-Copyright (C) <2014>  <Andrés, Benjamin, Gema, Alvaro, David>
-
-    Este programa es software libre: usted puede redistribuirlo y/o modificarlo 
-    bajo los términos de la Licencia Pública General GNU publicada 
-    por la Fundación para el Software Libre, ya sea la versión 3 
-    de la Licencia, o (a su elección) cualquier versión posterior.
-
-    Este programa se distribuye con la esperanza de que sea útil, pero 
-    SIN GARANTÍA ALGUNA; ni siquiera la garantía implícita 
-    MERCANTIL o de APTITUD PARA UN PROPÓSITO DETERMINADO. 
-    Consulte los detalles de la Licencia Pública General GNU para obtener 
-    una información más detallada. 
-
-    Debería haber recibido una copia de la Licencia Pública General GNU 
-    junto a este programa. 
-    En caso contrario, consulte <http://www.gnu.org/licenses/>.
+Copyright (C) <2014>  <Andrï¿½s, Benjamin, Gema, Alvaro, David>    Este programa es software libre: usted puede redistribuirlo y/o modificarlo     bajo los tï¿½rminos de la Licencia Pï¿½blica General GNU publicada     por la Fundaciï¿½n para el Software Libre, ya sea la versiï¿½n 3     de la Licencia, o (a su elecciï¿½n) cualquier versiï¿½n posterior.    Este programa se distribuye con la esperanza de que sea ï¿½til, pero     SIN GARANTï¿½A ALGUNA; ni siquiera la garantï¿½a implï¿½cita     MERCANTIL o de APTITUD PARA UN PROPï¿½SITO DETERMINADO.     Consulte los detalles de la Licencia Pï¿½blica General GNU para obtener     una informaciï¿½n mï¿½s detallada.     Deberï¿½a haber recibido una copia de la Licencia Pï¿½blica General GNU     junto a este programa.     En caso contrario, consulte <http://www.gnu.org/licenses/>.

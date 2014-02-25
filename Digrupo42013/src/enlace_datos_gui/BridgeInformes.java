@@ -7,6 +7,7 @@ import java.awt.Desktop;
 import java.awt.HeadlessException;
 import java.io.File;
 import java.io.IOException;
+import java.net.URLClassLoader;
 import java.sql.Connection;
 import java.sql.Timestamp;
 import java.util.HashMap;
@@ -86,18 +87,15 @@ public enum BridgeInformes {
      * Se encarga de crear el primer informe
      */
     private void crearInforme1(File dst) {
-        String jasper = getClass().getClassLoader().getResource("resources/informes/consulta1.jasper").getFile();
-        String pdf = "./informesgenerados/itinerarios.pdf";
-        creaInformeRangoFechas(jasper, dst.getAbsolutePath());
+        
+        creaInformeRangoFechas("resources/informes/consulta1.jasper", dst.getAbsolutePath());
     }
 
     /**
      * Se encarga de crear el segundo informe
      */
     private void crearInforme2(File dst) {
-        String jasper = getClass().getClassLoader().getResource("resources/informes/consulta2.jasper").getFile();
-        String pdf = "./informesgenerados/sesiones.pdf";
-        creaInformeRangoFechas(jasper, dst.getAbsolutePath());
+        creaInformeRangoFechas("resources/informes/consulta2.jasper", dst.getAbsolutePath());
 
     }
 
@@ -105,31 +103,24 @@ public enum BridgeInformes {
      * Se encarga de crear el tercer informe
      */
     private void crearInforme3(File dst) {
-        String jasper = getClass().getClassLoader().getResource("resources/informes/consulta3.jasper").getFile();
-        String pdf = "./informesgenerados/entrenamientosemanal.pdf";
         Map parametros = new HashMap();
         parametros.put("anio", Integer.valueOf(informes.getPnSemana().getTfAnno().getText()));
         parametros.put("mes", Integer.valueOf(informes.getPnSemana().getCbMes().getSelectedIndex()) + 1);
-        creaInformeBasico(jasper, parametros, dst.getAbsolutePath());
+        creaInformeBasico("resources/informes/consulta3.jasper", parametros, dst.getAbsolutePath());
     }
 
     /**
      * Se encarga de crear el cuarto informe
      */
     private void crearInforme4(File dst) {
-        String jasper = getClass().getClassLoader().getResource("resources/informes/consulta4.jasper").getFile();
-        String pdf = "./informesgenerados/itinerariosdificultad.pdf";
-        creaInformeRangoFechas(jasper, dst.getAbsolutePath());
+        creaInformeRangoFechas("resources/informes/consulta4.jasper", dst.getAbsolutePath());
     }
 
     /**
      * Se encarga de crear el quinto informe
      */
     private void crearInforme5(File dst) {
-        String jasper = getClass().getClassLoader().getResource("resources/informes/consulta5.jasper").getFile();
-
-        String destino = "./informesgenerados/sesionestipo.pdf";
-        creaInformeRangoFechas(jasper, dst.getAbsolutePath());
+        creaInformeRangoFechas("resources/informes/consulta5.jasper", dst.getAbsolutePath());
     }
 
     /**
@@ -161,7 +152,8 @@ public enum BridgeInformes {
     private void creaInformeBasico(String jasper, Map parametros, String pdf) throws HeadlessException {
         try {
             Connection connection = bd.getConnection();
-            JasperPrint print = JasperFillManager.fillReport(jasper, parametros, connection);
+            URLClassLoader urlLoader=(URLClassLoader)this.getClass().getClassLoader();
+            JasperPrint print = JasperFillManager.fillReport(urlLoader.getResourceAsStream(jasper), parametros, connection);
             JasperExportManager.exportReportToPdfFile(print, pdf);
             // JOptionPane.showMessageDialog(informes, "Informe creado", "", JOptionPane.INFORMATION_MESSAGE);
             openInforme(pdf);
