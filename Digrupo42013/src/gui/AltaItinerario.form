@@ -362,16 +362,6 @@
           </AuxValues>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="gui.tablaFechas.TablaFechas" name="tblFechas">
-              <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="Tabla que carga las fechas a&#xf1;adidas"/>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tblFechas.setRowHeight(30);&#xa;tblFechas.getColumnModel().getColumn(1).setMaxWidth(30);&#xa;tblFechas.getColumnModel().getColumn(2).setMaxWidth(30);"/>
-              </AuxValues>
-            </Component>
-          </SubComponents>
         </Container>
         <Component class="calendario.DateTextField" name="dtfNewDate">
           <AuxValues>
