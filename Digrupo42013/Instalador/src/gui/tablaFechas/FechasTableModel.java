@@ -43,6 +43,7 @@ public class FechasTableModel extends AbstractTableModel {
      * @param dates
      */
     public void setDates(Iterable<Date> dates) {
+        lista = new ArrayList<>();
         for (Date date : dates) {
             lista.add(new WraperFila<>(date));
         }

@@ -10,8 +10,12 @@ import gui.Main;
 import gui.tablaItinerario.ItinerariosTableModel;
 import gui.tablaItinerario.TablaItinerarios;
 import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URLClassLoader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -282,7 +286,7 @@ public enum BridgeItinerario {
                 + "<body bgcolor=#e4f4cf padding=0 margin=0>\n"
                 + "  <h1 align=center>%1$s</h1>"
                 + "  <table><tr>"
-                + "<td><img width=350 height=300 src ='file:%5$s' style='float:left'/></td>"
+                + "<td><img width=350 height=300 src ='%5$s' style='float:left'/></td>"
                 + "<td valign='top'>El itinerario<b> %1$s</b> que esta localizado en <b>%2$s</b>  y cuya dificultad  "
                 + "según el sistema francés tiene el valor <b>%3$s</b> "
                 +"se ha logrado resolver en las siguientes fechas:</p><ul>%4$s</ul><td>"
@@ -292,7 +296,18 @@ public enum BridgeItinerario {
         StringBuilder sbFechas = new StringBuilder();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         for(Date date: it.getFechasResolucion()) sbFechas.append("<li>").append(sdf.format(date)).append("</li>");
-        return String.format(html, it.getNombre(),it.getLocalizacion(),it.getDifucultad(),sbFechas.toString(),it.getPathImagen().getAbsolutePath());
+        String sol="";
+        if(it.getPathImagen().getName().equalsIgnoreCase("sinImagen.jpg")){
+            URLClassLoader urlLoader=(URLClassLoader)this.getClass().getClassLoader();
+            try {
+                sol = String.format(html, it.getNombre(),it.getLocalizacion(),it.getDifucultad(),sbFechas.toString(),urlLoader.findResource("resources/sinImagen.jpg").toURI());
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(BridgeItinerario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            sol = String.format(html, it.getNombre(),it.getLocalizacion(),it.getDifucultad(),sbFechas.toString(),"file:"+it.getPathImagen().getAbsolutePath());
+        }
+        return sol;
     }
     /**
      * Muestra la pantalla de detalles de itinerario
