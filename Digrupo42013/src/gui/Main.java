@@ -37,7 +37,7 @@ public final class Main extends javax.swing.JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         ayuda.createHelp(Main.this, miAyuda);
-
+        
         bridgeRendimiento.setLblRendimiento(lRendimiento);
         bridgeRendimiento.setRendimiento();//Asigna el rendimiento
 

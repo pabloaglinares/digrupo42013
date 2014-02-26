@@ -11,16 +11,16 @@
      applications="no"
      startMenu="no"
      startup="no"
-     target="$INSTALL_PATH/bin/DIgrupo42013.jar"
-     commandLine="" 
-     initialState="noShow"
-     iconFile="$INSTALL_PATH/icono.ico"
+     target="/usr/bin/java"
+     commandLine=" -jar $INSTALL_PATH/bin/Digrupo42013.jar"
+     initialState="normal"
+     iconfile="$INSTALL_PATH/icono.ico"
      iconIndex="0"
-     workingDirectory=""
+     workingDirectory="$INSTALL_PATH"
      type="Application"
      encoding="UTF-8"
-     description="Escalador">  
-   </shortcut>
+     description="Escalador"/> 
+
 
 <shortcut
      name="Desinstalar escalador"
@@ -37,7 +37,7 @@
      workingDirectory=""
      type="Application"
      encoding="UTF-8"
-     description="Escalador uninstaller"> 
-   </shortcut>
+     description="Escalador uninstaller"/> 
+
 
 </shortcuts>

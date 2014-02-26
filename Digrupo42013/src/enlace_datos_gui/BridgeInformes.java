@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URLClassLoader;
 import java.sql.Connection;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -77,6 +78,7 @@ public enum BridgeInformes {
                     break;
             }
         }
+        limpiar();
         informes.getBtCrear().setEnabled(true);
         informes.getBtCrear().setText("Crear informe");
         informes.getBtVolver().setEnabled(true);
@@ -179,5 +181,12 @@ public enum BridgeInformes {
             }
         } else {
         }
+    }
+    private void limpiar() {
+        informes.getPnFechas().getFecha1().setTime(new Date().getTime());
+        informes.getPnFechas().getFecha2().setTime(new Date().getTime());
+        informes.getPnSemana().getCbMes().setSelectedIndex(0);
+        informes.getPnSemana().getTfAnno().setText("");
+        
     }
 }

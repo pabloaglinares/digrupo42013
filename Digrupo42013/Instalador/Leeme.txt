@@ -1,1 +1,6 @@
-La aplicaci贸n a realizar es un sistema de gesti贸n de entrenamiento para escaladores de alto rendimiento. El objetivo de la aplicaci贸n es la monitorizaci贸n de todas las sesiones de entrenamiento para escaladores, tanto sesiones de entrenamiento f铆sico, sesiones en el roc贸dromo y sesiones en roca. 
+La aplicaci髇 a realizar es un sistema de gesti髇 de entrenamiento
+para escaladores de alto rendimiento. 
+El objetivo de la aplicaci髇 es la monitorizaci髇 de todas las 
+sesiones
+de entrenamiento para escaladores, tanto sesiones de 
+entrenamiento f韘ico, sesiones en el roc骴romo y sesiones en roca.

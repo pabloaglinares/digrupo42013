@@ -1,1 +1,1 @@
-/usr/local/escalador
+/home/escalador

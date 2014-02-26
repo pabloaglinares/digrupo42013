@@ -10,6 +10,7 @@
         Información acerca de la aplicación.
     -->
     <info>
+	<run-privileged condition="izpack.windowsinstall.vista|izpack.windowsinstall.7"/>
         <appname>Escalador</appname>
         <appversion>1.0</appversion>
         <authors>
@@ -43,24 +44,24 @@
     -->
     <resources>
 		<!-- Texto mostrado en el panel LicencePanel -->
-        <res id="LicencePanel.licence_spa" src="Licencia_spa.txt"/>
-		<res id="LicencePanel.licence_eng" src="Licencia_eng.txt"/>
+        <res id="LicencePanel.licence_spa" src="Licencia_spa.txt"  />
+		<res id="LicencePanel.licence_eng" src="Licencia_eng.txt"  />
 		<!-- Texto mostrado en el panel InfoPanel -->
-        <res id="InfoPanel.info_spa" src="Leeme.txt"/>
-		<res id="InfoPanel.info_eng" src="Leeme_eng.txt"/>
+        <res id="InfoPanel.info_spa" src="Leeme.txt"  />
+		<res id="InfoPanel.info_eng" src="Leeme_eng.txt"  />
 		<!-- Archivos que definen los accesos directos. El primero para Windows, el segundo para Linux -->
 		<res id="shortcutSpec.xml" src="shortcutSpec.xml"/> 
-        <res id="Unix_shortcutSpec.xml" src="Unix_shortcutSpec.xml"/>
+                <res id="Unix_shortcutSpec.xml" src="Unix_shortcutSpec.xml"/>
 
 		<!-- Definición de las rutas por defecto -->
 		<res id="TargetPanel.dir.windows" src="windowsdir.txt"/>
 		<res id="TargetPanel.dir.unix" src="unixdir.txt"/>
+
     </resources>
 
     <!-- Para poder crear accesos directos desde el escritorio en Windows-->
-    <native type="izpack" name="ShellLink.dll" />
+    	<native type="izpack" name="ShellLink.dll" />
 	<native type="izpack" name="ShellLink_x64.dll" />
-
 
     <!-- 
         Indicamos que paneles queremos para nuestro instalador. Se respeta el orden. Existen más (consultar ayuda)
@@ -97,10 +98,13 @@
 	<!-- Archivos base de instalación, los marcamos como de obligatoria instalación -->
         <pack name="Base" required="yes">
             <description>Archivos base</description>
-			<file src="Digrupo42013.jar" targetdir="$INSTALL_PATH/bin"/>
+	    <file src="Digrupo42013.jar" targetdir="$INSTALL_PATH/bin"/>
             <file src="lib" targetdir="$INSTALL_PATH/bin"/>
 	    <file src="informes" targetdir="$INSTALL_PATH/bin"/>
-			
+	    <file src="icono.ico" targetdir="$INSTALL_PATH"/>
+	<fileset dir="images" targetdir="$INSTALL_PATH/images">
+	<include name="**"/>
+	</fileset>
         </pack>
 	<!-- En este caso añadimos un directorio completo, cuya instalación no es obligatoria -->
         <pack name="Docs" required="no">
