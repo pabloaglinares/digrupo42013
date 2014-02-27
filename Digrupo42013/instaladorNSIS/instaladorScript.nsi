@@ -36,10 +36,10 @@
  Section "programa"
     setOutPath $INSTDIR
 	
-	File Digrupo42013.jar
+	File ..\dist\Digrupo42013.jar
 	File licencia.txt
 	File escalador.ico
-	File /r lib
+	File /r ..\dist\lib
 	
     WriteUninstaller "$INSTDIR\uninstall.exe"
 	
